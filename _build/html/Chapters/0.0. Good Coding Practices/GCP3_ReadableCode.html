@@ -1,0 +1,937 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>GCP 3 - Writing readable code &#8212; Environmental Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/0.0. Good Coding Practices/GCP3_ReadableCode';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="GCP 4 - Writing our scripts the “right” way" href="GCP4_WritingScripts.html" />
+    <link rel="prev" title="GCP 2 - Describing your code" href="GCP2_DescribingCode.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Environmental Data Science - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Environmental Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    EGN 4930 / EGN 5932C Special Topic: Environmental Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0. Good Coding Practices</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="GCP1_VariableName.html">GCP1 - Selecting “good” variable names</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="GCP2_DescribingCode.html">Describing Code</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Readable Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GCP4_WritingScripts.html">Writing Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GCP5_Assertions.html">Assertions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson2.html">Lesson 2 Getting Started</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Excercise1.html">Exercise 1 - Installing Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson3_PythonBasics1.html">Lesson 3 - Python Basics 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson4_list_solution.html">Lesson 4 - Python Basics 2 - Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson5_formatting.html">Lesson 5 - Python Basics 3 - Formatting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson6_Loops.html">Lesson 6 - Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson7_conditional_statements.html">Lesson 7 - Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson8_functions.html">Lesson 8 - Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson9_modules.html">Lesson 9 - Script Files and Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Exercise3.html">Exercise 3 - Python Programming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 4. Pandas for Tabular Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Lesson10_pandas.html">Lessons 10 - 14 - Pandas Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Exercise4.html">Exercise 4 - Pandas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Artificial intelligence (AI) Coding Assistance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/OpenAI_API_Key_for_Jupyter_AI_Extension.html">OpenAI API key for Jupyter AI extension (Optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/AIcoding.html">Lesson 15 AI coding assistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/Exercise_5_API_Key_Module.html">Exercise 5 - API-Key Module (Optional)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Data Science Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Workflow.html">Lessons 16 - Data Science Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Exercise6.html">Exercise 6 - AQI Data Preparation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. NumPy for Scientific Computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/numpy.html">Lessons 18-19 - NumPy Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/exercise7.html">Exercise 7 - NumPy - Air quality data analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8. Matplotlib for Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/matplotlib.html">Lesson 20 - 21 - Matplotlib Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/exercise8.html">Exercise 8 Matplotlib - Air quality data visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/climate.html">Lesson 24 - Climate Data - CMIP6 and Remote Sensing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/xarray.html">Lesson 25-27 - Xarray basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/cartopy.html">Lesson 28 - CartoPy basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/Exercise9.html">Exercise 9 - Sea surface height and red tides (Optional, Advanced)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">10. Introduction to Google Earth Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.0-%20Intro%20to%20GEE.html">Lesson 30 - Intro to Google Earth Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.1-%20JavaScript%20API%20vs.%20Python%20API.html">Lesson 31 - JavaScript API vs. Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html">Lesson 32 - Using Google Earth Engine in a Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/geemap1.html">Exercise 10 -  GeeMap, GEE, and Sentinel-2 Data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Chapters/0.0. Good Coding Practices/GCP3_ReadableCode.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapters/0.0. Good Coding Practices/GCP3_ReadableCode.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/0.0. Good Coding Practices/GCP3_ReadableCode.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>GCP 3 - Writing readable code</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-code-vs-readable-code">1. Working code vs readable code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pep-8-style-guide">2. The PEP 8 Style Guide</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-line-length">2.1 Maximum line length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indentation">2.2 Indentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#whitespace-and-binary-operators">2.3 Whitespace and binary operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#avoid-extraneous-whitespace">2.4 Avoid extraneous whitespace</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-one-statement-per-line">2.5 Write one statement per line</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-readability-versus-code-length">2.6 Code readability versus code length?</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#list-comprehensions-as-an-example">List comprehensions as an example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="gcp-3-writing-readable-code">
+<h1>GCP 3 - Writing readable code<a class="headerlink" href="#gcp-3-writing-readable-code" title="Link to this heading">#</a></h1>
+<p>This file is adopted with modifications from <a class="reference external" href="https://geo-python-site.readthedocs.io/en/latest/notebooks/L3/gcp-3-pep8.html">GCP 3 - Writing readable code
+</a> by <a class="reference external" href="https://geo-python-site.readthedocs.io/en/latest/index.html">Geo-python</a></p>
+<p><a class="reference external" href="https://mybinder.org/v2/gh/aselshall/eds/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+<p>This lesson on good programming practices focuses on writing code that is easy to read. We have already discussed good practices regarding variable naming and describing your code using comments, which are also part of writing readable code. Here we focus on how to format the actual python code to make it more readable.</p>
+<section id="working-code-vs-readable-code">
+<h2>1. Working code vs readable code<a class="headerlink" href="#working-code-vs-readable-code" title="Link to this heading">#</a></h2>
+<p>As you noticed, Python forces us to indent our code when writing for loops and conditional statements. Without the indentation, the code won’t work at all, or then it will not work as you would want it to work.</p>
+<p>However, there are many cases in which you are able to write code that runs without errors, but you (or others!) might have a hard time reading it and understanding what the code actually does.</p>
+<p>Ideally, our python code would be understandable both for the computer and for humans reading it. <a class="reference external" href="https://en.wikipedia.org/wiki/Coding_conventions">Coding conventions</a> are a set of generally agreed ways of writing programming code in a specific programming language. Coding conventions help programmers to write code that is consistent and easy to read. Consistency and readability are important for sharing your code with others, and also for helping your own brain to follow along!</p>
+<p><img alt="xkcd: Code Quality" src="https://imgs.xkcd.com/comics/code_quality.png" /><br/>
+Source: <a class="reference external" href="https://xkcd.com/1513/">https://xkcd.com/1513/</a></p>
+</section>
+<section id="the-pep-8-style-guide">
+<h2>2. The PEP 8 Style Guide<a class="headerlink" href="#the-pep-8-style-guide" title="Link to this heading">#</a></h2>
+<blockquote class="epigraph">
+<div><p>Readability counts.</p>
+<p class="attribution">—<a class="reference external" href="https://www.python.org/dev/peps/pep-0020/">The Zen of Python</a></p>
+</div></blockquote>
+<p><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">The PEP 8 Style Guide for Python Code</a> gives coding conventions that help us write code that is readable (by humans!) and consistent with code written by others.</p>
+<p>PEP 8 goes far beyond the scope of what we have learned so far during this course, and we recommend that you re-visit the guidelines every now and then when learning new things. Here, we will summarize some highlights that you can start applying to your code right away!</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#2.1-Maximum-line-length"><span class="xref myst">Maximum line length</span></a></p></li>
+<li><p><a class="reference internal" href="#2.2-Indentation"><span class="xref myst">Indentation</span></a></p></li>
+<li><p><a class="reference internal" href="#2.3-Whitespace-and-binary-operators"><span class="xref myst">Whitespace and binary operators</span></a></p></li>
+<li><p><a class="reference internal" href="#2.4-Avoid-extraneous-whitespace"><span class="xref myst">Avoid extraneous whitespace</span></a></p></li>
+<li><p><a class="reference internal" href="#2.5-Write-one-statement-per-line"><span class="xref myst">Write one statement per line</span></a></p></li>
+</ul>
+<p>Let us go over them one by one.</p>
+<section id="maximum-line-length">
+<h3>2.1 Maximum line length<a class="headerlink" href="#maximum-line-length" title="Link to this heading">#</a></h3>
+<p>PEP 8 guides us to limit all lines to <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#maximum-line-length">79 characters max</a>. Comments (multi-line or single line) should be limited to 72 characters.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The character limit according to PEP 8 is 79 characters, but often a slightly longer line (up to 90 characters) will not affect readability.</p>
+</div>
+<p>One of the guiding principles of Python is that <a class="reference external" href="https://www.python.org/dev/peps/pep-0020/#id3">Simple is better than complex</a>, but sometimes you might end up having a line of code that exceeds 79 characters, for example, when defining lists.</p>
+<p>Python is able to interpret the code correctly from multiple lines within parentheses, brackets and braces.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implicit line continuation inside brackets</span>
+
+<span class="n">us_cities</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Detroit&quot;</span><span class="p">,</span> <span class="s2">&quot;Chicago&quot;</span><span class="p">,</span> <span class="s2">&quot;Denver&quot;</span><span class="p">,</span> <span class="s2">&quot;Boston&quot;</span><span class="p">,</span> 
+            <span class="s2">&quot;Portland&quot;</span><span class="p">,</span> <span class="s2">&quot;San Francisco&quot;</span><span class="p">,</span> <span class="s2">&quot;Houston&quot;</span><span class="p">,</span> <span class="s2">&quot;Orlando&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The backslash character (<code class="docutils literal notranslate"><span class="pre">\</span></code>) might be required to break a line when using more complicated statements such as the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement or with <code class="docutils literal notranslate"><span class="pre">print</span></code> function. You can find more examples in the <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#maximum-line-length">PEP 8 documentation</a>.</p>
+</section>
+<section id="indentation">
+<h3>2.2 Indentation<a class="headerlink" href="#indentation" title="Link to this heading">#</a></h3>
+<p>Indentation is an essential part of the Python code layout. As we already learned, for loops and conditional statements will not work correctly without consistent indentation. PEP 8 advices us to use <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#indentation">4 spaces per indentation level</a>.</p>
+<p>Let’s have a look at an example with <code class="docutils literal notranslate"><span class="pre">if</span></code> statements. The indented line tells Python what to do <em>if</em> the condition is <code class="docutils literal notranslate"><span class="pre">True</span></code>. Notice the 4 spaces in the indentation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather</span> <span class="o">=</span> <span class="s2">&quot;Rain&quot;</span>
+<span class="n">wind</span> <span class="o">=</span> <span class="s2">&quot;Windy&quot;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">weather</span> <span class="o">==</span> <span class="s2">&quot;Rain&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">wind</span> <span class="o">==</span> <span class="s2">&quot;Windy&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Just stay at home&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Just stay at home
+</pre></div>
+</div>
+</div>
+</div>
+<p>Following PEP 8, it is also possible to break the conditional expression into multiple lines if needed. Notice the extra parentheses.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">((</span><span class="n">weather</span> <span class="o">==</span> <span class="s2">&quot;Rain&quot;</span><span class="p">)</span> 
+    <span class="ow">and</span> <span class="p">(</span><span class="n">wind</span> <span class="o">==</span> <span class="s2">&quot;Windy&quot;</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Just stay at home&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Just stay at home
+</pre></div>
+</div>
+</div>
+</div>
+<p>To increase readability of this if statement, we could add extra indetation to the continuation line of the conditional statement.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">((</span><span class="n">weather</span> <span class="o">==</span> <span class="s2">&quot;Rain&quot;</span><span class="p">)</span> 
+        <span class="ow">and</span> <span class="p">(</span><span class="n">wind</span> <span class="o">==</span> <span class="s2">&quot;Windy&quot;</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Just stay at home&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Just stay at home
+</pre></div>
+</div>
+</div>
+</div>
+<p>In our case, the first option with the conditional expression on a single line is probably best, as it is not that long after all.</p>
+<p>In addition, indentation is needed when breaking one command into multiple lines, such as in our example with the list <code class="docutils literal notranslate"><span class="pre">us_cities</span></code> above. In that case we used the implied line continuation inside the brackets. Following the PEP 8 indentation guidelines, we can define <code class="docutils literal notranslate"><span class="pre">us_cities</span></code> also using a <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#fn-hi">hanging indent</a>. Note that there is no value on the first line of a list formatted this way.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hanging indentation:</span>
+<span class="n">us_cities</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Detroit&quot;</span><span class="p">,</span> <span class="s2">&quot;Chicago&quot;</span><span class="p">,</span> <span class="s2">&quot;Denver&quot;</span><span class="p">,</span> <span class="s2">&quot;Boston&quot;</span><span class="p">,</span> 
+    <span class="s2">&quot;Portland&quot;</span><span class="p">,</span> <span class="s2">&quot;San Francisco&quot;</span><span class="p">,</span> <span class="s2">&quot;Houston&quot;</span><span class="p">,</span> <span class="s2">&quot;Orlando&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="whitespace-and-binary-operators">
+<h3>2.3 Whitespace and binary operators<a class="headerlink" href="#whitespace-and-binary-operators" title="Link to this heading">#</a></h3>
+<p>According to PEP 8 we should <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#other-recommendations">surround binary operators with single space on either side</a>.</p>
+<p>We should do this always with:</p>
+<ul class="simple">
+<li><p>assignment (<code class="docutils literal notranslate"><span class="pre">=</span></code>)</p></li>
+<li><p>augmented assignment (<code class="docutils literal notranslate"><span class="pre">+=</span></code>, <code class="docutils literal notranslate"><span class="pre">-=</span></code> etc.)</p></li>
+<li><p>comparisons (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">in</span></code>, <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">in</span></code>, <code class="docutils literal notranslate"><span class="pre">is</span></code>, <code class="docutils literal notranslate"><span class="pre">is</span> <span class="pre">not</span></code>)</p></li>
+<li><p>booleans (<code class="docutils literal notranslate"><span class="pre">and</span></code>, <code class="docutils literal notranslate"><span class="pre">or</span></code>, <code class="docutils literal notranslate"><span class="pre">not</span></code>)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># yes</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># no</span>
+<span class="n">i</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+<span class="n">i</span> <span class="o">+=</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If using operators with different priorities, you can also do this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># yes</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="avoid-extraneous-whitespace">
+<h3>2.4 Avoid extraneous whitespace<a class="headerlink" href="#avoid-extraneous-whitespace" title="Link to this heading">#</a></h3>
+<p>We should also <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#whitespace-in-expressions-and-statements">avoid having a space between the function name and parentheses when calling a function</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># yes</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># no</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="write-one-statement-per-line">
+<h3>2.5 Write one statement per line<a class="headerlink" href="#write-one-statement-per-line" title="Link to this heading">#</a></h3>
+<p>For readability it is advised to <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#other-recommendations">avoid writing multiple statements on the same line</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># yes</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello
+world
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># no</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello
+world
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># yes</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="k">if</span> <span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">temperature</span><span class="si">}</span><span class="s2"> is greater than 25&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># no</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="k">if</span> <span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">temperature</span><span class="si">}</span><span class="s2"> is greater than 25&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="code-readability-versus-code-length">
+<h3>2.6 Code readability versus code length?<a class="headerlink" href="#code-readability-versus-code-length" title="Link to this heading">#</a></h3>
+<p>You often have to find a balance between code readability and code length when writing efficient and readable code. <a class="reference external" href="https://docs.python.org/3/reference/compound_stmts.html#compound-statements">Compound statements</a> are a way of writing multiple statements on the same line to make the code shorter, but perhaps they are also more difficult to read. Thus, <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#other-recommendations">PEP 8 recommends avoiding compound statements in general</a>. However, sometimes squeezing multiple statements might your best option - you you just have to judge for yourself which option makes the code more readable and use for that.</p>
+<section id="list-comprehensions-as-an-example">
+<h4>List comprehensions as an example<a class="headerlink" href="#list-comprehensions-as-an-example" title="Link to this heading">#</a></h4>
+<p>One puzzling example regarding this guideline is the use of list comprehensions when defining lists. <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">List comprehensions</a> are a useful approach for creating lists in a concise way. We are not covering list comprehensions in class and I added it for you one one of the lessons for your in information. Anyway, here is a short example from the <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html">Python documentation</a>. In some cases, list comprehensions might make your code more readable and concise. In other cases, you might end up writing an excessively long statement which is difficult to read. Let’s have a look at two options that produce the same output:</p>
+<p><strong>Option A</strong>: This for loop iterates over a range, squares all values and appends them to a list</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>squares = []
+for x in range(10):
+    squares.append(x**2)
+</pre></div>
+</div>
+<p><strong>Option B</strong>: Square all values in the range using a list comprehension</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>squares = [x**2 for x in range(10)]
+</pre></div>
+</div>
+<p>Both approaches are fine, and you are free to choose the option that you think makes the code more readable.</p>
+<p>Sometimes you write a short code that you might not even understand it later</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Multiple lists </span>
+<span class="n">model</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">]</span>
+<span class="n">launched</span><span class="o">=</span><span class="p">[</span><span class="mi">1983</span><span class="p">,</span><span class="mi">1984</span><span class="p">,</span><span class="mi">1984</span><span class="p">,</span><span class="mi">1984</span><span class="p">]</span>
+<span class="n">discontinued</span><span class="o">=</span><span class="p">[</span><span class="mi">1986</span><span class="p">,</span> <span class="mi">1985</span><span class="p">,</span> <span class="mi">1984</span><span class="p">,</span> <span class="mi">1986</span><span class="p">]</span>
+
+<span class="c1">#Dictionary keys and values</span>
+<span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">,</span><span class="s1">&#39;launched&#39;</span><span class="p">,</span><span class="s1">&#39;discontinued&#39;</span><span class="p">]</span>
+<span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="n">model</span><span class="p">,</span> <span class="n">launched</span><span class="p">,</span><span class="n">discontinued</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Here is with list comprehension</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span><span class="n">values</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">keys</span><span class="p">)}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;model&#39;: [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;], &#39;launched&#39;: [1983, 1984, 1984, 1984], &#39;discontinued&#39;: [1986, 1985, 1984, 1986]}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Here is with a loop</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">keys</span><span class="p">):</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;model&#39;: [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;], &#39;launched&#39;: [1983, 1984, 1984, 1984], &#39;discontinued&#39;: [1986, 1985, 1984, 1986]}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters\0.0. Good Coding Practices"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="GCP2_DescribingCode.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">GCP 2 - Describing your code</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="GCP4_WritingScripts.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">GCP 4 - Writing our scripts the “right” way</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-code-vs-readable-code">1. Working code vs readable code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pep-8-style-guide">2. The PEP 8 Style Guide</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-line-length">2.1 Maximum line length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indentation">2.2 Indentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#whitespace-and-binary-operators">2.3 Whitespace and binary operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#avoid-extraneous-whitespace">2.4 Avoid extraneous whitespace</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-one-statement-per-line">2.5 Write one statement per line</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-readability-versus-code-length">2.6 Code readability versus code length?</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#list-comprehensions-as-an-example">List comprehensions as an example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed Elshall & Thalia Valle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

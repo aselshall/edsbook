@@ -1,0 +1,2141 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lessons 10 - 14 : Pandas Primer &#8212; Environmental Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/ 4. Pandas for Tabular Data/Lesson10_pandas';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Exercise 4 - Pandas" href="Exercise4.html" />
+    <link rel="prev" title="Exercise 3 - Python Programming" href="../3.%20Python%20Programming/Exercise3.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Environmental Data Science - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Environmental Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    EGN 4930 / EGN 5932C Special Topic: Environmental Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0. Good Coding Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP1_VariableName.html">GCP1 - Selecting “good” variable names</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP2_DescribingCode.html">Describing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP3_ReadableCode.html">Readable Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP4_WritingScripts.html">Writing Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP5_Assertions.html">Assertions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson2.html">Lesson 2 Getting Started</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Excercise1.html">Exercise 1 - Installing Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson3_PythonBasics1.html">Lesson 3 - Python Basics 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson4_list_solution.html">Lesson 4 - Python Basics 2 - Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson5_formatting.html">Lesson 5 - Python Basics 3 - Formatting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson6_Loops.html">Lesson 6 - Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson7_conditional_statements.html">Lesson 7 - Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson8_functions.html">Lesson 8 - Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson9_modules.html">Lesson 9 - Script Files and Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Exercise3.html">Exercise 3 - Python Programming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 4. Pandas for Tabular Data</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lessons 10 - 14 - Pandas Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise4.html">Exercise 4 - Pandas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Artificial intelligence (AI) Coding Assistance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/OpenAI_API_Key_for_Jupyter_AI_Extension.html">OpenAI API key for Jupyter AI extension (Optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/AIcoding.html">Lesson 15 AI coding assistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/Exercise_5_API_Key_Module.html">Exercise 5 - API-Key Module (Optional)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Data Science Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Workflow.html">Lessons 16 - Data Science Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Exercise6.html">Exercise 6 - AQI Data Preparation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. NumPy for Scientific Computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/numpy.html">Lessons 18-19 - NumPy Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/exercise7.html">Exercise 7 - NumPy - Air quality data analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8. Matplotlib for Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/matplotlib.html">Lesson 20 - 21 - Matplotlib Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/exercise8.html">Exercise 8 Matplotlib - Air quality data visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/climate.html">Lesson 24 - Climate Data - CMIP6 and Remote Sensing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/xarray.html">Lesson 25-27 - Xarray basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/cartopy.html">Lesson 28 - CartoPy basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/Exercise9.html">Exercise 9 - Sea surface height and red tides (Optional, Advanced)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">10. Introduction to Google Earth Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.0-%20Intro%20to%20GEE.html">Lesson 30 - Intro to Google Earth Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.1-%20JavaScript%20API%20vs.%20Python%20API.html">Lesson 31 - JavaScript API vs. Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html">Lesson 32 - Using Google Earth Engine in a Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/geemap1.html">Exercise 10 -  GeeMap, GEE, and Sentinel-2 Data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Chapters/ 4. Pandas for Tabular Data/Lesson10_pandas.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapters/ 4. Pandas for Tabular Data/Lesson10_pandas.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/ 4. Pandas for Tabular Data/Lesson10_pandas.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lessons 10 - 14 : Pandas Primer</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cheat-sheets">Cheat Sheets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">1. Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">2. Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-terminologies">3. Basic terminologies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-pandas-by-an-example">4. Learning Pandas by an example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collecting-weather-data">4.1 Collecting weather data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-a-csv-file">4.2 Importing a <code class="docutils literal notranslate"><span class="pre">csv</span></code> file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#displaying-a-dataframe">4.3 Displaying a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#display-dataframe">4.3.1 Display DataFrame</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#display-the-size-of-dataframe">4.3.2 Display the size of DataFrame</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#display-different-date-types-in-your-dataframe">4.3.3 Display different date types in your DataFrame</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#change-data-type-in-your-dataframe">4.3.4 Change data type in your DataFrame</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-columns-by-column-labels">4.4 Filter columns by column labels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-rows-by-a-keyword">4.5 Filter rows by a keyword</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#showing-unique-values-in-a-column">Showing unique values in a column</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-rows-by-a-specific-value">4.6 Filter rows by a specific value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-datetime-column-as-the-dataframe-index">4.7 Make a datetime column as the DataFrame index</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#check-the-index">Check the index</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-statistics">4.8 Descriptive statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling-of-time-series-data">4.9 Resampling of time-series data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby">4.10 Groupby</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby-for-categorical-data">4.10.1 Groupby for categorical data</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-with-loc-and-iloc">4.11 Slicing with loc and iloc</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-with-loc">4.11.1 Slicing with <code class="docutils literal notranslate"><span class="pre">loc</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#special-case-for-a-datetime-index">Special case for a datetime index</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-with-iloc">4.11.2 Slicing with <code class="docutils literal notranslate"><span class="pre">iloc</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dicing">4.12 Dicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-and-dicing-together">4.13 Slicing and dicing together</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#challange-your-understanding">Challange your understanding</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ask-a-llm-opitional">Ask a LLM (opitional)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subsetting-using-datetime-column">4.14 Subsetting using Datetime Column</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#test-your-understanding">Test your understanding</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#another-example-with-llm-opitional">Another example with LLM (<em>opitional</em>)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-comprehensive-example-advanced">A comprehensive example (<em>advanced</em>)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-plots-of-your-data">4.15 Quick Plots of Your Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#line-plot">4.15.1 Line plot</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-plot">4.15.2 Histogram plot</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#box-plot">4.15.3 Box plot</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#customize-your-plot">4.15.4 Customize your Plot</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-operations-to-a-dataframe">4.16 Applying operations to a DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterating-over-rows-opitional">4.17 Iterating over rows (<em>opitional</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-and-load-your-dataframe">4.18 Save and load your DataFrame</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#save-a-dataframe-as-csv-file">4.18.1 Save a DataFrame as <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#read-a-csv-files-into-dataframes">4.18.2 Read a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files into DataFrames</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-next">What’s Next?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-and-references">Resources and References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <center><img src="https://github.com/pandas-dev/pandas/raw/main/web/pandas/static/img/pandas.svg" alt="pandas Logo" style="width: 800px;"/></center>
+<section class="tex2jax_ignore mathjax_ignore" id="lessons-10-14-pandas-primer">
+<h1>Lessons 10 - 14 : Pandas Primer<a class="headerlink" href="#lessons-10-14-pandas-primer" title="Link to this heading">#</a></h1>
+<p>This lesson is modified from <a class="reference external" href="https://foundations.projectpythia.org/core/pandas/pandas.html">Introduction to Pandas</a> by <a class="reference external" href="https://projectpythia.org">Project Pythia</a>, and from  <a class="reference external" href="https://geo-Python-site.readthedocs.io/en/latest/notebooks/L5/exploring-data-using-pandas.html">Exploring data using Pandas</a>, <a class="reference external" href="https://geo-Python-site.readthedocs.io/en/latest/notebooks/L5/processing-data-with-pandas.html">Processing data with Pandas</a>, <a class="reference external" href="https://geo-Python-site.readthedocs.io/en/latest/notebooks/L6/advanced-data-processing-with-pandas.html">Processing data with Pandas II</a> by <a class="reference external" href="https://geo-Python-site.readthedocs.io/en/latest/index.html">Geo-Python</a></p>
+<p><a class="reference external" href="https://mybinder.org/v2/gh/aselshall/eds/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>From the <a class="reference external" href="https://pandas.pydata.org/">official documentation</a>, Pandas “is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language.” Pandas is a powerful library for working with tabular data. You can think of it as a programmable spreadsheet. By the end of this lesson you will be able to:</p>
+<ul class="simple">
+<li><p>install and import Pandas</p></li>
+<li><p>import a csv file with Pandas</p></li>
+<li><p>use Pandas for exploratory data analysis</p></li>
+<li><p>filter and query through data to perform data analysis</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="cheat-sheets">
+<h2>Cheat Sheets<a class="headerlink" href="#cheat-sheets" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Basic: <a class="reference external" href="https://assets.datacamp.com/blog_assets/PandasPythonForDataScience.pdf">1-page cheat sheet by Data Camp</a></p></li>
+<li><p>Advanced: <a class="reference external" href="https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf">2-page cheat sheet by Pandas Developers</a></p></li>
+<li><p>Comprehensive: <a class="reference external" href="https://www.webpages.uidaho.edu/~stevel/cheatsheets/Pandas%20DataFrame%20Notes_12pages.pdf">12-page cheat sheet by Lee at Univ of Idaho</a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="installation">
+<h2>1. Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>If you are using anaconda, you do not need to install Pandas. If you just installed Python only, then need to install these common packages such as Pandas and numpy. You can <a class="reference external" href="https://pandas.pydata.org/docs/getting_started/install.html">Install panda</a> using pip</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pandas</span>
+</pre></div>
+</div>
+<p>Before you type to above command in a new code cell, you can update your pip and install a dependancy.</p>
+<p>Just run these cells one by one. After each the installation is complete, make sure to restart the kernel from the menu <code class="docutils literal notranslate"><span class="pre">Kernel</span></code>:<code class="docutils literal notranslate"><span class="pre">Restart</span> <span class="pre">Kernel...</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pip install --upgrade pip</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pip install pyarrow</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pip install pandas</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You need to install these once. Then you can comment the installation command (as they are already commented above) or delete these cells to avoid repeating this ever time your run this notebook.</p>
+</section>
+<section id="imports">
+<h2>2. Imports<a class="headerlink" href="#imports" title="Link to this heading">#</a></h2>
+<p>You will often see the nickname <code class="docutils literal notranslate"><span class="pre">pd</span></code> used as an abbreviation for Pandas in the import statement, just like <code class="docutils literal notranslate"><span class="pre">numpy</span></code> is often imported as <code class="docutils literal notranslate"><span class="pre">np</span></code>.</p>
+<p>Note as a good coding practice, we generally import all the packages that we will need in the first cell in our notebook. However, we are importing Pandas here in the middle of our notebook for educational purpose.</p>
+</section>
+<section id="basic-terminologies">
+<h2>3. Basic terminologies<a class="headerlink" href="#basic-terminologies" title="Link to this heading">#</a></h2>
+<p>The Pandas <a class="reference external" href="https://Pandas.pydata.org/docs/user_guide/dsintro.html#dataframe"><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></a> and The Pandas <a class="reference external" href="https://Pandas.pydata.org/docs/user_guide/dsintro.html#series"><code class="docutils literal notranslate"><span class="pre">Series</span></code></a> are <strong>labeled</strong> data structures.</p>
+<p>The Pandas <a class="reference external" href="https://Pandas.pydata.org/docs/user_guide/dsintro.html#dataframe"><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></a> (a 2-dimensional data structure) is used for storing and mainpulating table-like data (data with rows and columns) in Python. You can think of a Pandas DataFrame as a programmable spreadsheet.</p>
+<p><img alt="dataframe schematic" src="https://github.com/Pandas-dev/Pandas/raw/main/doc/source/_static/schemas/01_table_dataframe.svg" /><br />
+The first column in dark gray, referred to as an <code class="docutils literal notranslate"><span class="pre">index</span></code>, contains information characterizing each row.<br />
+The first row in dark gray, referred to as <code class="docutils literal notranslate"><span class="pre">header</span></code>, contains the column lablels</p>
+<p>The Pandas <a class="reference external" href="https://Pandas.pydata.org/docs/user_guide/dsintro.html#series"><code class="docutils literal notranslate"><span class="pre">Series</span></code></a> (a 1-dimensional data structure) is used for storing and manipulating a sequence of values. Pandas Series is kind of like a list, but more clever. One row or one column in a Pandas DataFrame is actually a Pandas Series.</p>
+<p><img alt="Pandas Series" src="https://github.com/Pandas-dev/Pandas/raw/main/doc/source/_static/schemas/01_table_series.svg" /></p>
+</section>
+<section id="learning-pandas-by-an-example">
+<h2>4. Learning Pandas by an example<a class="headerlink" href="#learning-pandas-by-an-example" title="Link to this heading">#</a></h2>
+<p>Let us learn Pandas by an example. This is mainly to</p>
+<ul class="simple">
+<li><p>gain an understanding of how to effectively use the library in your own projects</p></li>
+<li><p>showcase the wide range of capabilities</p></li>
+<li><p>accelerate the learning process</p></li>
+</ul>
+<p>The idea here is to empower you to adapt these tools to various data analysis tasks.</p>
+<section id="collecting-weather-data">
+<h3>4.1 Collecting weather data<a class="headerlink" href="#collecting-weather-data" title="Link to this heading">#</a></h3>
+<p>Let us go to <a class="reference external" href="https://www.ncdc.noaa.gov/cdo-web">NOAA</a> to collect weather data for Fort Myers area from Jan 1, 2020 to Dec 31, 2023. Go to <a class="reference external" href="https://www.ncdc.noaa.gov/cdo-web/datasets">Browse Datasets</a> and then select <a class="reference external" href="https://www.ncei.noaa.gov/cdo-web/search?datasetid=NORMAL_DLY">Normals Daily: Search Tool</a>. Then make the following selections:</p>
+<ul class="simple">
+<li><p>Select Weather Observation Type/Dataset :  Daily Summaries</p></li>
+<li><p>Select Date Range : 2020-01-01 to 2023-12-31</p></li>
+<li><p>Search For : Cities</p></li>
+<li><p>Enter a Search Term : Fort Myers</p></li>
+</ul>
+<p>Then add to cart ‘Fort Myers, FL US’ and checkout your data as ‘Custom GHCN-Daily CSV’.</p>
+<p>On your checkout select the following</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Station Name</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Geographic Location</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Include Data Flags</p></li>
+</ul>
+<p>Show All / Hide All | Select All / Deselect All</p>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Precipitation</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Air Temperature</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Wind</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Weather Type</p></li>
+</ul>
+<p>Then submit your order. Wait for a minute or so until your data is ready. Download your data. It is always a good idea to download the data documentation to get a better understanding of your data.</p>
+</section>
+<section id="importing-a-csv-file">
+<h3>4.2 Importing a <code class="docutils literal notranslate"><span class="pre">csv</span></code> file<a class="headerlink" href="#importing-a-csv-file" title="Link to this heading">#</a></h3>
+<p>We start by reading in some data in comma-separated value (<code class="docutils literal notranslate"><span class="pre">.csv</span></code>) format.</p>
+<p>Once we have a valid path to a data file that Pandas knows how to read, we can open it with:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">dataframe_name</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;filepath/your_file.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read a csv file with Pandas</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="displaying-a-dataframe">
+<h3>4.3 Displaying a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code><a class="headerlink" href="#displaying-a-dataframe" title="Link to this heading">#</a></h3>
+<section id="display-dataframe">
+<h4>4.3.1 Display DataFrame<a class="headerlink" href="#display-dataframe" title="Link to this heading">#</a></h4>
+<p>If you are using a Jupyter notebook, do not use <code class="docutils literal notranslate"><span class="pre">print(df)</span></code>. Jupyter can display a nicely rendered table by just typing your dataframe_name or <code class="docutils literal notranslate"><span class="pre">display(dataframename)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Display your DataFrame</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In order to flood your screen, Jupyter did not print the whole table to screen. You can play with what you want to view. For example, try playing with these dataframe methods <code class="docutils literal notranslate"><span class="pre">df.head()</span></code>, <code class="docutils literal notranslate"><span class="pre">df.head(3)</span></code>, <code class="docutils literal notranslate"><span class="pre">df.tail(8)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show the first few columns in your DataFrame</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show the first three rows in your DataFrame</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Show the last few rows in your DataFrame</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="display-the-size-of-dataframe">
+<h4>4.3.2 Display the size of DataFrame<a class="headerlink" href="#display-the-size-of-dataframe" title="Link to this heading">#</a></h4>
+<p>You can learn about the number of rows and column in a dataFrame using <code class="docutils literal notranslate"><span class="pre">df.shape</span></code>, number of rows <code class="docutils literal notranslate"><span class="pre">df.shape[0]</span></code> and numbers of columns <code class="docutils literal notranslate"><span class="pre">df.shape[1]</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Show number of rows and columns in your DataFrame</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Show number of rows in your DataFrame</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Show number of columns in your DataFrame</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="display-different-date-types-in-your-dataframe">
+<h4>4.3.3 Display different date types in your DataFrame<a class="headerlink" href="#display-different-date-types-in-your-dataframe" title="Link to this heading">#</a></h4>
+<p>Let’s check the datatype of columns ‘PRCP’, ‘STATION’, and ‘DATE” using <code class="docutils literal notranslate"><span class="pre">df['column_label'].dtypes</span></code> or <code class="docutils literal notranslate"><span class="pre">df.column_label.dtypes</span></code></p>
+<p>The data type dtype(‘O’) indicates that the Pandas column contains objects, typically strings, rather than numerical or datetime values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Data type for column PRCP </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Data type for column STATION </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Data type for column DATE</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="change-data-type-in-your-dataframe">
+<h4>4.3.4 Change data type in your DataFrame<a class="headerlink" href="#change-data-type-in-your-dataframe" title="Link to this heading">#</a></h4>
+<p>Pandas did not recognize <code class="docutils literal notranslate"><span class="pre">DATE</span></code> as datetime format. To convert a column in a Pandas DataFrame to datetime format, you can use the</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">column_name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>function. Here’s how you can do it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert format of DATE to datetime format</span>
+
+
+<span class="c1">#Data type for column DATE using .dtypes</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+    Changing date types in Pandas is not uncommon because sometime Pandas cannot automatically format your data as you expect it, so you need to convert the data format manually as we did above.</a>
+</div></section>
+</section>
+<section id="filter-columns-by-column-labels">
+<h3>4.4 Filter columns by column labels<a class="headerlink" href="#filter-columns-by-column-labels" title="Link to this heading">#</a></h3>
+<p>My data has 24 columns and I want to focus only on these columns</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column Label</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>STATION</p></td>
+<td><p>Station identification code (17 characters).</p></td>
+</tr>
+<tr class="row-odd"><td><p>NAME</p></td>
+<td><p>Name of the station (usually city/airport name, max 50 characters).</p></td>
+</tr>
+<tr class="row-even"><td><p>DATE</p></td>
+<td><p>Year of the record (4 digits) followed by month (2 digits) and day (2 digits).</p></td>
+</tr>
+<tr class="row-odd"><td><p>PRCP</p></td>
+<td><p>Precipitation (mm or inches as per user preference, inches to hundredths on Daily Form pdf file)</p></td>
+</tr>
+<tr class="row-even"><td><p>TMAX</p></td>
+<td><p>Maximum temperature (Fahrenheit or Celsius as per user preference, Fahrenheit to tenths on Daily Form pdf file)</p></td>
+</tr>
+<tr class="row-odd"><td><p>TMIN</p></td>
+<td><p>Minimum temperature (Fahrenheit or Celsius as per user preference, Fahrenheit to tenths on Daily Form pdf file)</p></td>
+</tr>
+<tr class="row-even"><td><p>AWND</p></td>
+<td><p>Average daily wind speed (meters per second or miles per hour as per user preference)</p></td>
+</tr>
+</tbody>
+</table>
+<p>You can use the statement <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">df[selected_columns]</span></code> to select and update the DataFrame df to contain only the columns specified in the list selected_columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List of column names to focus on</span>
+<span class="n">selected_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;STATION&#39;</span><span class="p">,</span> <span class="s1">&#39;NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;DATE&#39;</span><span class="p">,</span> <span class="s1">&#39;PRCP&#39;</span><span class="p">,</span><span class="s1">&#39;TMAX&#39;</span><span class="p">,</span> <span class="s1">&#39;TMIN&#39;</span><span class="p">,</span> <span class="s1">&#39;AWND&#39;</span><span class="p">]</span>
+
+<span class="c1"># Filter the DataFrame to include only the selected columns</span>
+
+
+<span class="c1"># Display new DataFrame</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="filter-rows-by-a-keyword">
+<h3>4.5 Filter rows by a keyword<a class="headerlink" href="#filter-rows-by-a-keyword" title="Link to this heading">#</a></h3>
+<p>I only want stations at airports. You can filter a DataFrame based on whether a particular column contains a specific string using</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">keywords</span><span class="p">)</span><span class="err">`</span>
+</pre></div>
+</div>
+<p>method in Pandas.</p>
+<p>In other words, I want to see which rows in the column <code class="docutils literal notranslate"><span class="pre">df['NAME']</span></code> that contains the keyword ‘Airport’, and only retain these rows and filter out all other rows. Here is how to do this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify the keyword you want to filter for in the &#39;NAME&#39; column</span>
+<span class="n">keyword</span> <span class="o">=</span> <span class="s1">&#39;AIRPORT&#39;</span>
+
+<span class="c1">#Use Pandas method str.contains() to create a boolean mask, </span>
+<span class="c1"># which is `True` for rows where the `NAME` column contains the specified keyword.</span>
+
+
+<span class="c1"># Display your mask for understanding</span>
+
+
+<span class="c1"># Use this mask to filter the DataFrame; that is to update it with the desired condition</span>
+
+
+<span class="c1"># Print the resulting DataFrame</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="showing-unique-values-in-a-column">
+<h4>Showing unique values in a column<a class="headerlink" href="#showing-unique-values-in-a-column" title="Link to this heading">#</a></h4>
+<p>How many stations do I have in that column after updating my DataFrame with that keyword?</p>
+<p>To find unique values in a specific column, in this case, the <code class="docutils literal notranslate"><span class="pre">NAME</span></code> column of a DataFrame, you can use the <code class="docutils literal notranslate"><span class="pre">.unique()</span></code> method in Pandas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Display unique station names in &#39;NAME&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Display unique station IDs in &#39;STATION&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="filter-rows-by-a-specific-value">
+<h3>4.6 Filter rows by a specific value<a class="headerlink" href="#filter-rows-by-a-specific-value" title="Link to this heading">#</a></h3>
+<p>If you want to filter your DataFrame to only include rows where the <code class="docutils literal notranslate"><span class="pre">STATION</span></code> column has the value ‘USW00012835’, you can also use boolean indexing.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;STATION&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;USW00012835&#39;</span>
+</pre></div>
+</div>
+<p>Let us do this here and let use save this a new DataFrame <code class="docutils literal notranslate"><span class="pre">one_station</span></code> by using <code class="docutils literal notranslate"><span class="pre">.copy()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Use Pandas create a boolean mask with name station_mask </span>
+<span class="c1">#for all rows that the column `STAINION` has value of &#39;USW00012835&#39;</span>
+
+<span class="c1"># Use the station_mask  to filter DataFrame for rows where &#39;Station&#39; is &#39;USW00012835&#39; and save it to a new DataFrame &#39;one_station&#39;</span>
+
+
+<span class="c1"># Print the resulting DataFrame</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+    When using <code>.copy()</code>, you explicitly create a new DataFrame ensuring that modifications to new DataFrame do not affect the original DataFrame <code>df</code>. In other words, you clearly tell Pandas that you want an independent copy of the data and not just a different view.
+</div><p>Now I have the data for one station for my study period. While my header is informative, my index is not informative. We generally make date-time as our index as shown next.</p>
+</section>
+<section id="make-a-datetime-column-as-the-dataframe-index">
+<h3>4.7 Make a datetime column as the DataFrame index<a class="headerlink" href="#make-a-datetime-column-as-the-dataframe-index" title="Link to this heading">#</a></h3>
+<p>To make the <code class="docutils literal notranslate"><span class="pre">DATE</span></code> column as the index of your DataFrame, you can use:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note: inplace=True argument will modify the DataFrame directly, instead of creating a new one</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date_Column_Name&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>However, before we set our <code class="docutils literal notranslate"><span class="pre">DATE</span></code> column as our index column, let us change its format to datetime format. We already did this conversion <a class="reference internal" href="#4.3.4-Change-data-type-in-your-DataFrame"><span class="xref myst">above</span></a>, but let us do it again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert the &quot;DATE&quot; column to datetime format using pd.to_datetime()</span>
+
+
+<span class="c1"># Set the &quot;DATE&quot; column as the index of your DataFrame</span>
+
+
+<span class="c1">#Display your DataFrame with `DATE` as index</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+    Pandas may or may not understand the format of <code>DATE</code> column as date. Thus, it is generally a good practice to convert the column to datetime format before setting it as the index, especially if you plan to perform time-based operations later on. If the column is not in datetime format, some time-related functionalities may not work correctly.
+</div>
+<section id="check-the-index">
+<h4>Check the index<a class="headerlink" href="#check-the-index" title="Link to this heading">#</a></h4>
+<p>Now let us see how the index change of our original DataFrame <code class="docutils literal notranslate"><span class="pre">df.index</span></code> and the one we just modified <code class="docutils literal notranslate"><span class="pre">one_station.index</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Index of the original DataFrame df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Index of the DataFrame one_station after we changed its index to be the DATE column</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also show the range of your index with <code class="docutils literal notranslate"><span class="pre">.index.min()</span></code> and <code class="docutils literal notranslate"><span class="pre">.index.max()</span></code> methods.</p>
+<p>Try it out:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#print min index value in DataFrame df</span>
+
+<span class="c1">#Print max index value in DataFrame df</span>
+
+<span class="c1">#print min index value in DataFrame one_station</span>
+
+
+<span class="c1">#Print max index value in DataFrame one_station</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+    You might be wondering why the index of <code>df</code> is not starting from <code>0</code>. That is because we already have removed some rows from it, so the retained rows retain their original index values. If you do not want this, you can reset your index using  <code>df = df.reset_index()</code>. 
+</div>
+<p>Try looking at the label of column by using: <code class="docutils literal notranslate"><span class="pre">one_station.columns</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Print column labels in DataFrame one_station</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="descriptive-statistics">
+<h3>4.8 Descriptive statistics<a class="headerlink" href="#descriptive-statistics" title="Link to this heading">#</a></h3>
+<p>Pandas DataFrames contain useful methods for getting summary statistics. Available methods include <code class="docutils literal notranslate"><span class="pre">describe()</span></code>, <code class="docutils literal notranslate"><span class="pre">info()</span></code>, <code class="docutils literal notranslate"><span class="pre">count()</span></code>, <code class="docutils literal notranslate"><span class="pre">mean()</span></code>, <code class="docutils literal notranslate"><span class="pre">median()</span></code>, <code class="docutils literal notranslate"><span class="pre">min()</span></code>, <code class="docutils literal notranslate"><span class="pre">max()</span></code>, and <code class="docutils literal notranslate"><span class="pre">std()</span></code> (the standard deviation). You can also do <code class="docutils literal notranslate"><span class="pre">column_name.describe()</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Descriptive statistics for one_station Dataframe</span>
+<span class="n">one_station</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">26</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#Descriptive statistics for one_station Dataframe</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">one_station</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+
+<span class="ne">NameError</span>: name &#39;one_station&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also do it per column</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Descriptive statistics for the column &#39;PRCP&#39; one_station Dataframe (dot notation)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also use dic notation <code class="docutils literal notranslate"><span class="pre">one_station['PRCP']</span></code> instead of dot notation <code class="docutils literal notranslate"><span class="pre">one_station.PRCP</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Descriptive statistics for the column &#39;PRCP&#39; one_station Dataframe (dic notation)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+     The dot notation will not work if the column name is not a valid variable name (e.g., having space, starting with a number, etc.).
+</div>
+<p>You can do it per a group of columns</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List of columns to show</span>
+<span class="n">columns_group</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PRCP&#39;</span><span class="p">,</span> <span class="s1">&#39;AWND&#39;</span><span class="p">]</span>
+
+<span class="c1">#Descriptive statistics for a selected columns in one_station Dataframe</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="resampling-of-time-series-data">
+<h3>4.9 Resampling of time-series data<a class="headerlink" href="#resampling-of-time-series-data" title="Link to this heading">#</a></h3>
+<p>Remember Pandas is powerful because it is a programmable spreadsheet. For example, can to find the min, max, mean, or median value per month, week, year, or any other criteria. You can use the method of</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;Freqency&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arreegation_method</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Frequency: The target frequency you want to resample to. Pandas supports many frequencies:</p>
+<ul class="simple">
+<li><p>“D” - Calender day</p></li>
+<li><p>“B” - Business day</p></li>
+<li><p>“M” - Monthly frequency</p></li>
+<li><p>“W” - Weekly frequency</p></li>
+<li><p>“h” - Hourly frequency</p></li>
+<li><p>“min” - Minutely frequency</p></li>
+</ul>
+<p>and  many more as shown in <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#dateoffset-objects">Pandas documentation</a>.</p>
+<p>Aggregation Methods: When downsampling, you often want to summarize groups of data using Pandas provided methods such as:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mean()</span></code> - Calculates the mean</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sum()</span></code> - Calculates the sum</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min()</span></code> - Finds the minimum value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max()</span></code> - Finds the maximum value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std()</span></code> - Calculates standard deviation</p></li>
+</ul>
+<p>… and others</p>
+<p>For example, find the max PRCP, TMAX, TMIN and AWND for each week in your dataset</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Max PRCP, TMAX, TMIN and AWND in every week of my dataset using .resample() method</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Find the min PRCP, TMAX, TMIN and AWND in each year in my dataset</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Min PRCP, TMAX, TMIN and AWND in each year .resample() method</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is mainly a quick overview on <code class="docutils literal notranslate"><span class="pre">.resample()</span></code> method. To learn this method in details, check <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#resampling">Pandas user-guide on resampling</a>.</p>
+</section>
+<section id="groupby">
+<h3>4.10 Groupby<a class="headerlink" href="#groupby" title="Link to this heading">#</a></h3>
+<p>While resample is specifically designed to change the frequency of the time series, groupby is a more general-purpose tool for grouping data based on some criteria, which can include time-related criteria but is not limited to time-series data. It can be used with any categorical or numerical criteria for grouping. It’s more flexible and allows for custom aggregation functions.</p>
+<section id="groupby-for-categorical-data">
+<h4>4.10.1 Groupby for categorical data<a class="headerlink" href="#groupby-for-categorical-data" title="Link to this heading">#</a></h4>
+<p>For example, what if we want to find the monthly mean of <code class="docutils literal notranslate"><span class="pre">TMAX</span></code> and <code class="docutils literal notranslate"><span class="pre">TMIN</span></code> for the two weather stations at two airports. Let us first create the DataFrame <code class="docutils literal notranslate"><span class="pre">two_stations</span></code> for these two weather stations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Create a new DataFrame contains only stations at airports</span>
+<span class="n">two_stations</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Convert the &quot;DATE&quot; column to datetime format</span>
+<span class="n">two_stations</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">two_stations</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">])</span>
+
+<span class="c1"># Set the &quot;DATE&quot; column as the index of your DataFrame</span>
+<span class="n">two_stations</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;DATE&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">#Display data for two stations</span>
+<span class="n">two_stations</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see that we have two stations “USW00012894” and “USW00012835”.</p>
+<p>We can to find the monthly mean of our data. However, if you tried to apply a method such as <code class="docutils literal notranslate"><span class="pre">mean()</span></code> or <code class="docutils literal notranslate"><span class="pre">resample()</span></code> as we did before in <a class="reference internal" href="#4.9-Resampling-of-time-series-data"><span class="xref myst">Secion 4.9</span></a> you will get an error</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="ne">TypeError</span><span class="p">:</span> <span class="n">agg</span> <span class="n">function</span> <span class="n">failed</span> <span class="p">[</span><span class="n">how</span><span class="o">-&gt;</span><span class="n">mean</span><span class="p">,</span><span class="n">dtype</span><span class="o">-&gt;</span><span class="nb">object</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>suggesting that that you have non-numeric columns in your DataFrame, and the <code class="docutils literal notranslate"><span class="pre">mean()</span></code> operation is not applicable to those columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#This commented code will give you an error because two_stations has non-numeric data</span>
+<span class="c1">#two_stations.mean()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+      In case you are wonder, why did the <code>.mean()</code> method worked with the <code>one_station</code> DataFrame, but not with <code>two_stations</code> DataFrame even although the <code>one_station</code> also contained non-numeric values in columns <code>NAME</code> and <code>STATION</code>?  In  <code>one_station</code> DataFrame the values in non-numeric columns were not changing because it is only one station. But with <code>two_stations</code> DataFrame the values in the non-numeric columns <code>NAME</code> and <code>STATION</code> are chaning because we have two stations. Thus, we cannot apply the <code>.mean()</code> method. In other words, what is the mean of "USW00012894" and "USW00012835" ?
+</div><p>Thus, before using <code class="docutils literal notranslate"><span class="pre">resample()</span></code> and <code class="docutils literal notranslate"><span class="pre">mean()</span></code>, it’s a good idea to ensure that all columns you’re aggregating are numeric.</p>
+<p>Let us filter out <code class="docutils literal notranslate"><span class="pre">STATION</span></code> and <code class="docutils literal notranslate"><span class="pre">NAME</span></code> that are the non-numeric columns, and only keep the numeric columns that are <code class="docutils literal notranslate"><span class="pre">PRCP</span></code>,	<code class="docutils literal notranslate"><span class="pre">TMAX</span></code>,	<code class="docutils literal notranslate"><span class="pre">TMIN</span></code>, and <code class="docutils literal notranslate"><span class="pre">AWND</span></code>. For filtering out, you can do <code class="docutils literal notranslate"><span class="pre">two_stations[columns_to_keep]</span></code> as we learned <a class="reference internal" href="#4.4-Filter-columns-by-column-labels"><span class="xref myst">before in Section 4.4</span></a>.  Then we can apply the <code class="docutils literal notranslate"><span class="pre">.mean()</span></code> , <code class="docutils literal notranslate"><span class="pre">.resample('Y').mean()</span></code> , or whatever method you need to use.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Select the numeric columns that you want</span>
+<span class="n">columns_to_keep</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;PRCP&#39;</span><span class="p">,</span> <span class="s1">&#39;TMAX&#39;</span><span class="p">,</span> <span class="s1">&#39;TMIN&#39;</span><span class="p">,</span> <span class="s1">&#39;AWND&#39;</span><span class="p">]</span>
+
+<span class="c1">#Apply mean to numeric columns </span>
+<span class="n">two_stations</span><span class="p">[</span><span class="n">columns_to_keep</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The above method works, but using</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">groupby_column</span><span class="p">)[</span><span class="n">columns_to_show</span><span class="p">]</span><span class="o">.</span><span class="n">method_you_need</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>can be more pwoerful because it will show you these values for each category, which is in that case for each station.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Select columns only</span>
+<span class="n">columns_to_keep</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;PRCP&#39;</span><span class="p">,</span> <span class="s1">&#39;TMAX&#39;</span><span class="p">,</span> <span class="s1">&#39;TMIN&#39;</span><span class="p">,</span> <span class="s1">&#39;AWND&#39;</span><span class="p">]</span>
+
+<span class="c1"># For the two_stations DataFrame group by &#39;STATION&#39; then apply .resample(&#39;Y&#39;).mean() to the selected columns only</span>
+<span class="c1"># groupy-&gt; Select columns -&gt; apply method</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Try to do it again, but this time groupby ‘NAME` or both of them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Select columns only</span>
+<span class="n">columns_to_keep</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;PRCP&#39;</span><span class="p">,</span> <span class="s1">&#39;TMAX&#39;</span><span class="p">,</span> <span class="s1">&#39;TMIN&#39;</span><span class="p">,</span> <span class="s1">&#39;AWND&#39;</span><span class="p">]</span>
+
+<span class="c1"># For the two_stations DataFrame group by &#39;STATION&#39; then apply .resample(&#39;Y&#39;).mean() to the selected columns only</span>
+<span class="c1"># groupy-&gt; Select columns -&gt; apply method</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="slicing-with-loc-and-iloc">
+<h3>4.11 Slicing with loc and iloc<a class="headerlink" href="#slicing-with-loc-and-iloc" title="Link to this heading">#</a></h3>
+<p>Slicing is a method used to extract a subset of data from a larger data structure, such as a list, array, or DataFrame, by specifying a range or specific indices.ases.</p>
+<p>The following two ways to access data are preferred by Pandas over other methods:</p>
+<ol class="arabic simple">
+<li><p>For <code class="docutils literal notranslate"><span class="pre">.loc[&quot;row_start&quot;:&quot;row_end&quot;,</span> <span class="pre">&quot;col_start&quot;:&quot;col_end&quot;]</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.loc[]</span></code>: Access data by label.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;row_start&quot;:&quot;row_end&quot;</span></code>: Specify the range of rows by their labels, inclusively.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;col_start&quot;:&quot;col_end&quot;</span></code>: Specify the range of columns by their labels, inclusively.</p></li>
+</ul>
+</li>
+<li><p>For <code class="docutils literal notranslate"><span class="pre">.iloc[row_start:row_end,</span> <span class="pre">col_start:col_end]</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.iloc[]</span></code>: Access data by index position.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">row_start:row_end</span></code>: Specify the range of rows by their index positions, exclusively.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">col_start:col_end</span></code>: Specify the range of columns by their index positions, exclusively.</p></li>
+</ul>
+</li>
+</ol>
+<p>The <code class="docutils literal notranslate"><span class="pre">.loc[]</span></code> method when accessing data by label is inclusive, meaning it includes the specified start and end labels.<br />
+The <code class="docutils literal notranslate"><span class="pre">iloc[]</span></code> method when accessing data by index is exclusive, meaning it includes the start index but excludes the end index.</p>
+<p>The above is a general syntax, but there are some many special cases.ases.</p>
+<section id="slicing-with-loc">
+<h4>4.11.1 Slicing with <code class="docutils literal notranslate"><span class="pre">loc</span></code><a class="headerlink" href="#slicing-with-loc" title="Link to this heading">#</a></h4>
+<p>Let us slice from index label <code class="docutils literal notranslate"><span class="pre">2023-12-30</span></code> to <code class="docutils literal notranslate"><span class="pre">2023-12-31</span></code> and column labels <code class="docutils literal notranslate"><span class="pre">STATION</span></code> to <code class="docutils literal notranslate"><span class="pre">PRCP</span></code>.</p>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+In Pandas, to perform a value-based partial slicing operation, your DataFrame index need to sorted in ascending order. You can do this using <code>.sort_index(inplace=True)</code>.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sort the two_stations DataFrame by the &#39;DATE&#39; index in ascending order</span>
+<span class="n">two_stations</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># View last 5 rows in two_stations DataFrame</span>
+
+<span class="c1"># View  slice from &#39;2023-12-30&#39; to&#39;2023-12-31&#39;, and &#39;from STATION&#39; to &#39;PRCP&#39; using loc (inclusive)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also do <code class="docutils literal notranslate"><span class="pre">'2023-12:30':</span></code> to retrieve all rows from the specified start date <code class="docutils literal notranslate"><span class="pre">2023-12-30</span></code> to the end of the last row. You can also do the same for columns <code class="docutils literal notranslate"><span class="pre">'STATION':</span></code> if needed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># In two_stations DataFrame, view  slice from &#39;2023-12-30&#39; to the last row, and &#39;from STATION&#39; to the last column using loc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also specify what you exactly <code class="docutils literal notranslate"><span class="pre">['NAME','STATION','PRCP']</span></code> need instead of having a range.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># In two_stations DataFrame, view slice from &#39;2023-12-30&#39; to the last row, and for clumns &#39;NAME&#39;,&#39;STATION&#39;, and&#39;PRCP&#39; in that order</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="special-case-for-a-datetime-index">
+<h5>Special case for a datetime index<a class="headerlink" href="#special-case-for-a-datetime-index" title="Link to this heading">#</a></h5>
+<p>If your index is datetime you can even do more, like slicing a certain year.</p>
+<p>For example let us say I want to slice the data of 2023. It is very simple <code class="docutils literal notranslate"><span class="pre">.loc['2023']</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Slice 2023 data in two_stations DataFrame using .loc[]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="slicing-with-iloc">
+<h4>4.11.2 Slicing with <code class="docutils literal notranslate"><span class="pre">iloc</span></code><a class="headerlink" href="#slicing-with-iloc" title="Link to this heading">#</a></h4>
+<p>Do the same with <code class="docutils literal notranslate"><span class="pre">iloc</span></code>, and slice from rows <code class="docutils literal notranslate"><span class="pre">2023-12-30</span></code> to <code class="docutils literal notranslate"><span class="pre">2023-12-31</span></code> and columns <code class="docutils literal notranslate"><span class="pre">STATION</span></code> to <code class="docutils literal notranslate"><span class="pre">PRCP</span></code>.</p>
+<p>First find the shape of this DataFrame to get an idea about the index number for the last four rows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Find the shape of two_stations DataFrame first</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># View  slice from &#39;2023-12-30&#39; to&#39;2023-12-31&#39;, and &#39;from STATION&#39; to &#39;PRCP&#39; using iloc (exclusive) starting from 2918:2922</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also do <code class="docutils literal notranslate"><span class="pre">2918:</span></code> to retrieve all rows from the specified index to the end of the last index.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># View  slice from &#39;2023-12-30&#39; to the last row, and from &#39;STATION&#39; to the last column using iloc (exclusive) starting from 2918</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the above example, since you are starting from index <code class="docutils literal notranslate"><span class="pre">0</span></code> you can just do <code class="docutils literal notranslate"><span class="pre">:</span></code> which will select all columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># View  slice from &#39;2023-12-30&#39; to the last row, and from &#39;STATION&#39; to the last column using iloc (exclusive)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are so many ways for slicing through a DataFrame. For more examples and details, check <a class="reference external" href="https://foundations.projectpythia.org/core/Pandas/Pandas.html">Introduction to Pandas</a> by <a class="reference external" href="https://projectpythia.org">Project Pythia</a>.</p>
+</section>
+</section>
+<section id="dicing">
+<h3>4.12 Dicing<a class="headerlink" href="#dicing" title="Link to this heading">#</a></h3>
+<p>While slicing involves selecting specific rows and columns based on their indices or labels, dicing goes a step further by selecting specific elements based on some condition or criteria. It looks something like this</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># for multiple conditions and multiple columns to show</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">condtions_on_rows</span><span class="p">,</span> <span class="n">columns_to_show</span><span class="p">]</span> 
+</pre></div>
+</div>
+<p>Let us do a simple example investigating extreme values. Find the days where  <code class="docutils literal notranslate"><span class="pre">'TMIN'&lt;=36</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Condition &#39;TMIN&#39;&lt;=36 (dot notation)</span>
+
+
+<span class="c1">#Retriving all data with the above condition</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>What we did in the above example, is a mask with a condition that returns Boolean value True when the condition is met and False otherwise.</p>
+<p>Now let us do another extreme values by have two conditions: <code class="docutils literal notranslate"><span class="pre">'PRCP'&gt;0</span></code> and <code class="docutils literal notranslate"><span class="pre">'TMAX'&gt;=98</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Coditions of &#39;PRCP&#39;&gt;0 and &#39;TMAX&#39;&gt;98 (dot notation)</span>
+
+<span class="c1">#Retriving all data with the above condtions</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>One more argument <code class="docutils literal notranslate"><span class="pre">[&quot;column_to_select1&quot;,</span> <span class="pre">&quot;column_to_select2&quot;,</span> <span class="pre">...]</span></code> are the columns that you want retrive. For example, suppose we want to know the wwind speed and Station ID when these two conditions ‘PRCP’&gt;0 and ‘TMAX’&gt;80 are meet.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Coditions of &#39;PRCP&#39;&gt;0 and &#39;TMAX&#39;&gt;98 (dot notation)</span>
+<span class="n">conditions</span><span class="o">=</span> <span class="p">(</span><span class="n">two_stations</span><span class="o">.</span><span class="n">PRCP</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">two_stations</span><span class="o">.</span><span class="n">TMAX</span><span class="o">&gt;=</span><span class="mi">98</span><span class="p">)</span>
+
+<span class="c1"># Columns to show </span>
+<span class="n">columns_to_show</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;AWND&#39;</span><span class="p">,</span><span class="s1">&#39;STATION&#39;</span><span class="p">]</span>
+
+<span class="c1">#Retriving all data with the above condtions and showing selectec columns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the above examples, we used dot notation, but we can also use dic notation. Check <a class="reference internal" href="#4.8-Descriptive-statistics"><span class="xref myst">Section 4.8</span></a> for more information about the difference between dot and doc notations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Coditions of &#39;PRCP&#39;&gt;0 and &#39;TMAX&#39;&gt;98 (dic notation)</span>
+<span class="n">conditions</span><span class="o">=</span> <span class="p">(</span><span class="n">two_stations</span><span class="p">[</span><span class="s1">&#39;PRCP&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">two_stations</span><span class="p">[</span><span class="s1">&#39;TMAX&#39;</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">98</span><span class="p">)</span>
+
+<span class="c1"># Columns to show </span>
+<span class="n">columns_to_show</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;AWND&#39;</span><span class="p">,</span><span class="s1">&#39;STATION&#39;</span><span class="p">]</span>
+
+<span class="c1">#Retriving all data with the above condtions and showing selectec columns</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="slicing-and-dicing-together">
+<h3>4.13 Slicing and dicing together<a class="headerlink" href="#slicing-and-dicing-together" title="Link to this heading">#</a></h3>
+<p>You can first slice and then dice and vice verse using chain method. For example, <code class="docutils literal notranslate"><span class="pre">df.loc[dice].loc[slice]</span></code>.</p>
+<p>For example, retrive wind and station data with <code class="docutils literal notranslate"><span class="pre">'TMAX'&gt;=96</span></code> and <code class="docutils literal notranslate"><span class="pre">'PRCP'&gt;0</span></code> in <code class="docutils literal notranslate"><span class="pre">2023</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#conditions of &#39;PRCP&#39;&gt;0 and &#39;TMAX&#39;&gt;=96</span>
+<span class="n">conditions</span><span class="o">=</span> <span class="p">(</span><span class="n">two_stations</span><span class="p">[</span><span class="s2">&quot;PRCP&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">two_stations</span><span class="p">[</span><span class="s2">&quot;TMAX&quot;</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">96</span><span class="p">)</span>
+
+<span class="c1">#columns to show</span>
+<span class="n">columns_to_show</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;STATION&#39;</span><span class="p">,</span><span class="s1">&#39;AWND&#39;</span><span class="p">]</span>
+
+<span class="c1"># Dice to my condition and columns to show -&gt; slice to 2023 that is from &#39;2023-01-01&#39; to &#39;2023-12-31&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="challange-your-understanding">
+<h4>Challange your understanding<a class="headerlink" href="#challange-your-understanding" title="Link to this heading">#</a></h4>
+<p>Find the mean wind speed when <code class="docutils literal notranslate"><span class="pre">'TMAX'&gt;=96</span></code> and <code class="docutils literal notranslate"><span class="pre">'PRCP'&gt;0</span></code> in <code class="docutils literal notranslate"><span class="pre">2023</span></code>. This is the same as the above example. But then you need to select column <code class="docutils literal notranslate"><span class="pre">AWND</span></code> using <code class="docutils literal notranslate"><span class="pre">.AWND</span></code>, <code class="docutils literal notranslate"><span class="pre">['AWND']</span></code> , or <code class="docutils literal notranslate"><span class="pre">.loc[:,'AWND'].</span></code>Then do one more chain with the <code class="docutils literal notranslate"><span class="pre">.mean()</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#conditions of &#39;PRCP&#39;&gt;0 and &#39;TMAX&#39;&gt;=96</span>
+<span class="n">conditions</span><span class="o">=</span> <span class="p">(</span><span class="n">two_stations</span><span class="p">[</span><span class="s2">&quot;PRCP&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">two_stations</span><span class="p">[</span><span class="s2">&quot;TMAX&quot;</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">96</span><span class="p">)</span>
+
+<span class="c1">#columns to show</span>
+<span class="n">columns_to_show</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;STATION&#39;</span><span class="p">,</span><span class="s1">&#39;AWND&#39;</span><span class="p">]</span>
+
+<span class="c1"># Approach 1 : .AWMD</span>
+<span class="c1"># Dice to my condition and columns to show -&gt; slice to 2023 </span>
+<span class="c1"># -&gt; select AWMD column -&gt; use mean() method</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also try the two other indexing approaches suggested above</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Approach 2 : [&#39;AWND&#39;]</span>
+<span class="c1"># Dice to my condition and columns to show -&gt; slice to 2023 </span>
+<span class="c1"># -&gt; index to AWMD column -&gt; use mean() method</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Approach 3 : .loc[:, &#39;AWND&#39;]</span>
+<span class="c1"># Dice to my condition and columns to show -&gt; slice to 2023 </span>
+<span class="c1"># -&gt; index to AWMD column -&gt; use mean() method</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ask-a-llm-opitional">
+<h4>Ask a LLM (opitional)<a class="headerlink" href="#ask-a-llm-opitional" title="Link to this heading">#</a></h4>
+<p>Below are three approaches for finding the mean AWMD for the extrem conditions <code class="docutils literal notranslate"><span class="pre">PRCP&gt;</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">TMAX&gt;=96</span></code> in <code class="docutils literal notranslate"><span class="pre">2023</span></code>. Ask a LLM if there are other approaches to find that mean. Here is the prompt that I provided:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Below are three approaches to find that mean of AWND. Can you suggest another approach?
+    ```Python
+    #conditions of &#39;PRCP&#39;&gt;0 and &#39;TMAX&#39;&gt;=96
+    conditions= (two_stations[&quot;PRCP&quot;] &gt; 0) &amp; (two_stations[&quot;TMAX&quot;]&gt;=96)
+    
+    #columns to show
+    columns_to_show= [&#39;STATION&#39;,&#39;AWND&#39;]
+    
+    # Approach 1
+    # Dice to my condition and columns to show -&gt; slice to 2023 
+    # -&gt; index to AWMD column -&gt; use mean() method
+    two_stations.loc[conditions, columns_to_show].loc[&#39;2023-01-01&#39;:&#39;2023-12-31&#39;].AWND.mean()
+    
+    # Approach 2
+    # Dice to my condition and columns to show -&gt; slice to 2023 
+    # -&gt; index to AWMD column -&gt; use mean() method
+    two_stations.loc[conditions, columns_to_show].loc[&#39;2023-01-01&#39;:&#39;2023-12-31&#39;][&#39;AWND&#39;].mean()
+    
+    #Approach 3 
+    # Dice to my condition and columns to show -&gt; slice to 2023 
+    # -&gt; index to AWMD column -&gt; use mean() method
+    two_stations.loc[conditions, columns_to_show].loc[&#39;2023-01-01&#39;:&#39;2023-12-31&#39;].loc[:,&#39;AWND&#39;].mean()
+    ```
+I am writing in Jupyter notebook using the Python 3 (system-wide) kernel.
+</pre></div>
+</div>
+<p>I provided the above prompt to ChatGPT 3.5. Here are the responses that I got:</p>
+<p>ChatGPT 3.5, provided an approach to filter the data and calculate the mean, and suggested to “choose the method that best fits your coding style and preference.”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Approach 4</span>
+<span class="c1"># Use loc to apply conditions, slice to 2023, select the &#39;AWND&#39; column, and calculate the mean directly</span>
+<span class="n">two_stations</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">conditions</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">two_stations</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="mi">2023</span><span class="p">),</span> <span class="s1">&#39;AWND&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>ChatGPT suggested subsetting using Datetime column <code class="docutils literal notranslate"><span class="pre">.index.year</span></code>. This is what we will learn next. However, you can ask your LLM to explain the solution to you.</p>
+</section>
+</section>
+<section id="subsetting-using-datetime-column">
+<h3>4.14 Subsetting using Datetime Column<a class="headerlink" href="#subsetting-using-datetime-column" title="Link to this heading">#</a></h3>
+<p>Slicing as shown in <a class="reference internal" href="#4.11-Slicing-with-loc-and-iloc"><span class="xref myst">Section 4.11</span></a> is a useful technique for subsetting a DataFrame, but there are also other options that can be equally useful.</p>
+<p>Before we start, let us first create a fresh copy of our DataFrame, just to review and remember <a class="reference internal" href="#4.10-Groupby"><span class="xref myst">what we did before</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Create a new DataFrame contains only stations at airports</span>
+<span class="n">two_stations</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Convert the &quot;DATE&quot; column to datetime format</span>
+<span class="n">two_stations</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">two_stations</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">])</span>
+
+<span class="c1"># Set the &quot;DATE&quot; column as the index of your DataFrame</span>
+<span class="n">two_stations</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;DATE&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If your DataFrame uses datetime values for indices, you can select data from only one day using <code class="docutils literal notranslate"><span class="pre">df.index.day</span></code>, one month using <code class="docutils literal notranslate"><span class="pre">df.index.month</span></code>, one year using <code class="docutils literal notranslate"><span class="pre">df.index.year</span></code>, and so on.</p>
+<p>For example, the expression</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">two_stations</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="mi">12</span>
+</pre></div>
+</div>
+<p>will create a boolean mask where each element corresponds to whether the month component of the index of each row is equal to 12. In other words, this expression give True for rows where the month is December (i.e., month number 12) and False for rows where the month is not December. This boolean mask can then be used to filter rows based on the condition that the month is December using for example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">([</span><span class="n">two_stations</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="mi">12</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Let us say that we want to calculate the mean of the <code class="docutils literal notranslate"><span class="pre">TMIN</span></code> and <code class="docutils literal notranslate"><span class="pre">TMAX</span></code> columns for the month of December across all years for our<code class="docutils literal notranslate"><span class="pre">two_stations</span></code> DataFrame. How to approach this task? Here is one strategy</p>
+<ol class="arabic simple">
+<li><p>Filter the rows of the <code class="docutils literal notranslate"><span class="pre">two_stations</span></code> DataFrame based on the condition of the month of December as described above</p></li>
+<li><p>Select the columns <code class="docutils literal notranslate"><span class="pre">TMIN</span></code> and <code class="docutils literal notranslate"><span class="pre">TMAX</span></code> from the DataFrame using <code class="docutils literal notranslate"><span class="pre">[['TMIN','TMAX']]</span></code>, or <code class="docutils literal notranslate"><span class="pre">.loc[:,</span> <span class="pre">['TMIN','TMAX']]</span></code></p></li>
+<li><p>Apply <code class="docutils literal notranslate"><span class="pre">.mean()</span></code> function to the filtered DataFrame</p></li>
+</ol>
+<p>You can also do step 2 column selection before step 1 filtering by month using datetime subset.</p>
+<p>Let us try to test both of them:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Approach 1 Datetime subset -&gt; Select </span>
+<span class="c1">#Subset condition with datetime index: month == 12 (December)</span>
+
+
+<span class="c1">#Subset given my condition -&gt; select columns .loc[:,[&#39;TMIN&#39;,&#39;TMAX&#39;]]-&gt; apply .mean() function </span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="test-your-understanding">
+<h4>Test your understanding<a class="headerlink" href="#test-your-understanding" title="Link to this heading">#</a></h4>
+<p>Redo the above example, but by applying step 2 that is column selections, before step 1 that is filtering for the month of december.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Approach 2 Select -&gt; Datetime subset </span>
+
+<span class="c1">#Subset condition with datetime index is the month == 12 (December)</span>
+<span class="n">condition</span> <span class="o">=</span> <span class="n">two_stations</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="mi">12</span>
+
+<span class="c1"># Select columns .loc[:,[&#39;TMIN&#39;,&#39;TMAX&#39;]] -&gt; Subset given my condition -&gt; apply .mean() function </span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="another-example-with-llm-opitional">
+<h4>Another example with LLM (<em>opitional</em>)<a class="headerlink" href="#another-example-with-llm-opitional" title="Link to this heading">#</a></h4>
+<p>Do a for loop to find the mean TMIN and TMAX from Jan to Dec from 2020-01-01 to 2023-12-31. For each iteration print month, TMIN, and TMAX in a table format. To print in table format you can use install the package <code class="docutils literal notranslate"><span class="pre">tabulate</span></code> that can do this for you. We did not learn this package, but you can ask a LLM to solve this problem for you.</p>
+<p>Here is one prompt:</p>
+<div class="highlight-Note notranslate"><div class="highlight"><pre><span></span>    Do a for loop to find the mean TMIN and TMAX for the study period, using this code 
+    ```Python
+    #Subset to data in month 12 (December) and get the mean TMIN and TMAX in December throughout the study period 
+    two_stations.loc[:,[&#39;TMIN&#39;,&#39;TMAX&#39;]].loc[two_stations.index.month == 12].mean() 
+    ``` 
+    For each iteration print the month name, TMIN, and TMAX in a table format. 
+</pre></div>
+</div>
+<p>This is the solution that I got from ChatGPT 3.5.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Install tabulate if you are using it for the first time by uncommenting the pip install command</span>
+<span class="c1">#pip install tabulate</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ChatGPT 3.5 Solution</span>
+<span class="c1">#Import two modules</span>
+<span class="kn">import</span> <span class="nn">calendar</span>
+<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+
+<span class="c1"># Initialize a list to store the results</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Iterate over each month</span>
+<span class="k">for</span> <span class="n">month</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">):</span>
+
+    <span class="c1">#Subset condition with datetime index is the month == 12 (December)</span>
+    <span class="n">condition</span><span class="o">=</span> <span class="n">two_stations</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="n">month</span>
+    
+    <span class="c1"># Subset data for the current month and calculate mean TMIN and TMAX</span>
+    <span class="n">monthly_data</span> <span class="o">=</span> <span class="n">two_stations</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;TMIN&#39;</span><span class="p">,</span> <span class="s1">&#39;TMAX&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">condition</span><span class="p">,:]</span>
+    <span class="n">mean_TMIN</span> <span class="o">=</span> <span class="n">monthly_data</span><span class="p">[</span><span class="s1">&#39;TMIN&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">mean_TMAX</span> <span class="o">=</span> <span class="n">monthly_data</span><span class="p">[</span><span class="s1">&#39;TMAX&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    
+    <span class="c1"># Get month name</span>
+    <span class="n">month_name</span> <span class="o">=</span> <span class="n">calendar</span><span class="o">.</span><span class="n">month_name</span><span class="p">[</span><span class="n">month</span><span class="p">]</span>
+    
+    <span class="c1"># Append the results to the list</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">month_name</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">mean_TMIN</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">mean_TMAX</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
+
+<span class="c1"># Print results in table format</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Month&quot;</span><span class="p">,</span> <span class="s2">&quot;Mean TMIN&quot;</span><span class="p">,</span> <span class="s2">&quot;Mean TMAX&quot;</span><span class="p">],</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;pretty&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-comprehensive-example-advanced">
+<h4>A comprehensive example (<em>advanced</em>)<a class="headerlink" href="#a-comprehensive-example-advanced" title="Link to this heading">#</a></h4>
+<p>Let us look at an example where we can apply many of the methods that we learned. Let use reslove the above problem without using loops. We can use something that we learned before like  <a class="reference internal" href="#4.10-Groupby"><span class="xref myst">groupby</span></a>. Remember groupby is tool for grouping data based on some criteria, which can include time-related criteria but is not limited to time-series data.</p>
+<p>Here is a solution strategy</p>
+<ol class="arabic simple">
+<li><p>Use something like <code class="docutils literal notranslate"><span class="pre">.index.month</span></code> to find the month number for each row</p></li>
+<li><p>Add the month number for each row as a new column, e.g., ‘month’</p></li>
+<li><p>Select the columns ‘TMIN’, ‘TMAX’, ‘month’: <code class="docutils literal notranslate"><span class="pre">[['TMIN','TMAX',</span> <span class="pre">'month']]</span></code> or <code class="docutils literal notranslate"><span class="pre">.loc[:,</span> <span class="pre">['TMIN','TMAX','month']]</span></code></p></li>
+<li><p>Groupby by ‘month’: <code class="docutils literal notranslate"><span class="pre">.groupby('month')</span></code></p></li>
+<li><p>Apply <code class="docutils literal notranslate"><span class="pre">.mean()</span></code> function</p></li>
+</ol>
+<p>So far we have used the DataFrame as is without adding or removing a column to the DataFrame. Let us now add to <code class="docutils literal notranslate"><span class="pre">two_stations</span></code> a new column ‘month’. The value returned by <code class="docutils literal notranslate"><span class="pre">df.index.month</span></code> is used to obtain the data for this new column:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Add new column &#39;month&#39; with its values obtained from index</span>
+<span class="n">two_stations</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">two_stations</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span>
+
+<span class="c1">#Display new DataFrame</span>
+<span class="n">two_stations</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Select the columns that you want to apply groupby to. Then groupby month and the apply <code class="docutils literal notranslate"><span class="pre">.mean()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select columns -&gt;  Groupby month -&gt; Apply mean to find the mean for each month</span>
+<span class="n">two_stations</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;TMIN&#39;</span><span class="p">,</span><span class="s1">&#39;TMAX&#39;</span><span class="p">,</span><span class="s1">&#39;month&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the above example, I solved the problem in five steps through adding the new column <code class="docutils literal notranslate"><span class="pre">month</span></code> for illustration purpose. You can only solve it in three steps without adding the new column <code class="docutils literal notranslate"><span class="pre">month</span></code> as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select columns -&gt;  Groupby month -&gt; Apply mean to find the mean for each month</span>
+<span class="n">two_stations</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;TMIN&#39;</span><span class="p">,</span><span class="s1">&#39;TMAX&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">two_stations</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>How can you customize your table to look like the table you got in the <a class="reference internal" href="#-Another-example-with-LLM-(*opitional*)"><span class="xref myst">above example with loop</span></a>. I asked ChatGPT 3.5, and here is what I got:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">calendar</span>
+
+<span class="c1"># Select columns, group by month, and apply mean to find the mean for each month</span>
+<span class="n">monthly_means</span> <span class="o">=</span> <span class="n">two_stations</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;TMIN&#39;</span><span class="p">,</span> <span class="s1">&#39;TMAX&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">two_stations</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># Map month numbers to month names</span>
+<span class="n">monthly_means</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">monthly_means</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">calendar</span><span class="o">.</span><span class="n">month_name</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+
+<span class="c1"># Round mean values to two decimal points</span>
+<span class="n">monthly_means</span> <span class="o">=</span> <span class="n">monthly_means</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Rename the columns</span>
+<span class="n">monthly_means</span> <span class="o">=</span> <span class="n">monthly_means</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;TMIN&#39;</span><span class="p">:</span> <span class="s1">&#39;Mean TMIN&#39;</span><span class="p">,</span> <span class="s1">&#39;TMAX&#39;</span><span class="p">:</span> <span class="s1">&#39;Mean TMAX&#39;</span><span class="p">})</span>
+
+<span class="c1"># Print the resulting DataFrame</span>
+<span class="n">display</span><span class="p">(</span><span class="n">monthly_means</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the code above we learned everything expect for <code class="docutils literal notranslate"><span class="pre">.map()</span></code> and <code class="docutils literal notranslate"><span class="pre">lambda</span></code> function. You can ask your LLM to learn more about this. However, if you can understand that much, you have a very good understanding of Pandas and Python in general.</p>
+</section>
+</section>
+<section id="quick-plots-of-your-data">
+<h3>4.15 Quick Plots of Your Data<a class="headerlink" href="#quick-plots-of-your-data" title="Link to this heading">#</a></h3>
+<p>A good way to explore your data is by making a simple plot. Pandas contains its own <code class="docutils literal notranslate"><span class="pre">.plot</span></code> method; this allows us to plot Pandas series without needing <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.</p>
+<section id="line-plot">
+<h4>4.15.1 Line plot<a class="headerlink" href="#line-plot" title="Link to this heading">#</a></h4>
+<p>This is very simply:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">columns_to_plot</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">opitions_as_needed</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this example, we plot the <code class="docutils literal notranslate"><span class="pre">TMAX</span></code> and <code class="docutils literal notranslate"><span class="pre">TMIN</span></code> series of our DataFrame with lin plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Select data to plot: TMAX and TMIN</span>
+<span class="n">data_to_plot</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;TMAX&#39;</span><span class="p">,</span><span class="s1">&#39;TMIN&#39;</span><span class="p">]</span>
+
+<span class="c1">#Plot method: .plot();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+Prompt engineering entails crafting precise prompts to guide a large language model (LLM) to generate desired outputs. Mastering prompt engineering enables effective utilization of LLMs across tasks from problem-solving to creative writing. Learn more with Real Python's tutorial on Prompt Engineering: A Practical Example.
+<p>Prompt engineering involves crafting precise and effective prompts or instructions to guide a large language model (LLM) to generat the desired outputs. Learning prompt engineering, through providing clear guidance and constraints, will help you to effectively harness the capabilities of LLMs for various tasks from creative writing to problem-solving. To learn prompt engineering you can check for example <a href="https://realpython.com/practical-prompt-engineering/">Prompt Engineering: A Practical Example</a> tutorial by Real Python.</p>
+</div></section>
+<section id="histogram-plot">
+<h4>4.15.2 Histogram plot<a class="headerlink" href="#histogram-plot" title="Link to this heading">#</a></h4>
+<p>In the previous example we called <code class="docutils literal notranslate"><span class="pre">.plot()</span></code>, which generated a single line plot. Line plots can be helpful for understanding some types of data, but there are other types of data that can be better understood with different plot types. For example, if you want to see the distribution of your data, you can better do this with a histogram plot.</p>
+<p>Let us do something more advanced than the previous example to build on what we learned before. Let use say we want to see the <code class="docutils literal notranslate"><span class="pre">TMAX</span></code> distributions for years <code class="docutils literal notranslate"><span class="pre">2022</span></code> and <code class="docutils literal notranslate"><span class="pre">2023</span></code>. That is tricky. Let us think about this step-by-step. First we need to create two new columns <code class="docutils literal notranslate"><span class="pre">2022_TMAX</span></code> and <code class="docutils literal notranslate"><span class="pre">2023_TMAX</span></code>, such that <code class="docutils literal notranslate"><span class="pre">2022_TMAX</span></code> will contain <code class="docutils literal notranslate"><span class="pre">TMAX</span></code> data for <code class="docutils literal notranslate"><span class="pre">2022</span></code>, and <code class="docutils literal notranslate"><span class="pre">2023_TMAX</span></code> will contain <code class="docutils literal notranslate"><span class="pre">TMAX</span></code> data for <code class="docutils literal notranslate"><span class="pre">2023</span></code>. Then we can plot the data of these two new columns.</p>
+<p>We have learned how to do this before with <a class="reference internal" href="#-4.11-Slicing-with-loc-and-iloc"><span class="xref myst">Slicing</span></a> and with <a class="reference internal" href="#-4.14-Subsetting-using-Datetime-Column"><span class="xref myst">Subsetting</span></a>. Here is how to do this with <a class="reference internal" href="#-4.11-Slicing-with-loc-and-iloc"><span class="xref myst">Slicing</span></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Slicing data for 2022 and 2023 and adding it to the DataFrame</span>
+<span class="n">one_station</span><span class="p">[</span><span class="s1">&#39;2022_TMAX&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">one_station</span><span class="o">.</span><span class="n">TMAX</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2022&#39;</span><span class="p">]</span>
+<span class="n">one_station</span><span class="p">[</span><span class="s1">&#39;2023_TMAX&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">one_station</span><span class="o">.</span><span class="n">TMAX</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2023&#39;</span><span class="p">]</span>
+
+<span class="c1"># Display updated DataFrame to show the two new columns &#39;2022_TMAX&#39; and &#39;2023_TMAX&#39;</span>
+<span class="n">one_station</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let use delete these two columns and add them again with the subsetting method</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Drop the specified columns from the DataFrame</span>
+<span class="n">one_station</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2022_TMAX&#39;</span><span class="p">,</span> <span class="s1">&#39;2023_TMAX&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now add these two columns back using the subsetting method</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Subsetting 2022 and 2023 data and adding it to the DataFrame</span>
+<span class="n">one_station</span><span class="p">[</span><span class="s1">&#39;2022_TMAX&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">one_station</span><span class="o">.</span><span class="n">TMAX</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">one_station</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="mi">2022</span><span class="p">]</span>
+<span class="n">one_station</span><span class="p">[</span><span class="s1">&#39;2023_TMAX&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">one_station</span><span class="o">.</span><span class="n">TMAX</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">one_station</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="mi">2023</span><span class="p">]</span>
+
+<span class="c1"># Display updated DataFrame to show the two new columns &#39;2022_TMAX&#39; and &#39;2023_TMAX&#39;</span>
+<span class="n">one_station</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we have our data ready for plotting.</p>
+<p>The code for plotting histogram data is slighlty differs from the code for line plot. After calling the <code class="docutils literal notranslate"><span class="pre">.plot</span></code> method, we call an additional method called <code class="docutils literal notranslate"><span class="pre">.hist</span></code>, which converts the plot into a histogram. Also, we are calling <code class="docutils literal notranslate"><span class="pre">.hist</span></code> with two additional opitional parameters. The first parameter <code class="docutils literal notranslate"><span class="pre">alpha</span></code> is for adjusting the transparency. For example, alpha=0.5 sets the transparency level of the plotted histogram to 50%. The parameter <code class="docutils literal notranslate"><span class="pre">bins</span></code> specifies the number of bins used to divide the range of the data into equal intervals for plotting the histogram.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Select data to plot</span>
+<span class="n">data_to_plot</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;2022_TMAX&#39;</span><span class="p">,</span><span class="s1">&#39;2023_TMAX&#39;</span><span class="p">]</span>
+
+<span class="c1">#Histogram method .plot.hist(); with alpha=0.5, bins=20 (alpha parameter for transparency) </span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="box-plot">
+<h4>4.15.3 Box plot<a class="headerlink" href="#box-plot" title="Link to this heading">#</a></h4>
+<p>The histogram plot helped us to look differently at the data. It seems that the two datasets are from the same distribution. To even better understand this data, it may also be helpful to create a box plot. This can be done using the same code, with one change: we call the <code class="docutils literal notranslate"><span class="pre">.box</span></code> method instead of <code class="docutils literal notranslate"><span class="pre">.hist</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Select data to plot</span>
+<span class="n">data_to_plot</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;2022_TMAX&#39;</span><span class="p">,</span><span class="s1">&#39;2023_TMAX&#39;</span><span class="p">]</span>
+
+<span class="c1">#Box method .plot.box();</span>
+<span class="n">one_station</span><span class="p">[</span><span class="n">data_to_plot</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">box</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Just like the histogram plot, this box plot indicates no clear difference in the distributions. Using multiple types of plot in this way can be useful for verifying large datasets. The Pandas plotting methods are capable of creating many different types of plots. To see how to use the plotting methods to generate each type of plot, please review the <a class="reference external" href="https://Pandas.pydata.org/docs/reference/api/Pandas.DataFrame.plot.html">Pandas plot documentation</a>.</p>
+</section>
+<section id="customize-your-plot">
+<h4>4.15.4 Customize your Plot<a class="headerlink" href="#customize-your-plot" title="Link to this heading">#</a></h4>
+<p>The Pandas plotting methods are, in fact, wrappers for similar methods in matplotlib.  This means that you can customize Pandas plots by including keyword arguments to the plotting methods.  These keyword arguments, for the most part, are equivalent to their matplotlib counterparts.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Plain plotting without customization</span>
+<span class="n">one_station</span><span class="p">[[</span><span class="s1">&#39;TMAX&#39;</span><span class="p">,</span><span class="s1">&#39;TMIN&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Here are some customizations that you can do </span>
+<span class="n">one_station</span><span class="p">[[</span><span class="s1">&#39;TMAX&#39;</span><span class="p">,</span> <span class="s1">&#39;TMIN&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">],</span>          <span class="c1"># Set different colors for TMAX and TMIN</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>                  <span class="c1"># Set the width of the lines to 1</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span>                 <span class="c1"># Set the label for the x-axis</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Temperature (deg F)&#39;</span><span class="p">,</span>   <span class="c1"># Set the label for the y-axis</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>                  <span class="c1"># Set the size of the figure to (8, 6) inches</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Max and Min Temperature Over Time&#39;</span><span class="p">,</span>  <span class="c1"># Add a title to the plot</span>
+    <span class="n">grid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>                      <span class="c1"># Do not show gridlines on the plot</span>
+    <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>                    <span class="c1"># Show a legend</span>
+    <span class="n">style</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">],</span>              <span class="c1"># Set solid line for TMAX and TMIN</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>                      <span class="c1"># Set the transparency of the lines to 0.8</span>
+    <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;2020-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-01-01&#39;</span><span class="p">),</span>  <span class="c1"># Set the limits for the x-axis</span>
+    <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>                 <span class="c1"># Set the lower limit for the y-axis to 0</span>
+    <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>                         <span class="c1"># Rotate x-axis labels by 0 degrees</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>                    <span class="c1"># Set font size for labels</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="applying-operations-to-a-dataframe">
+<h3>4.16 Applying operations to a DataFrame<a class="headerlink" href="#applying-operations-to-a-dataframe" title="Link to this heading">#</a></h3>
+<p>One of the most commonly used features in Pandas is the performing of calculations to multiple data values in a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> simultaneously. Let’s first look at a a function that converts temperature values from degrees Fahrenheit  to Celsius.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fahrenheit_to_celsius</span><span class="p">(</span><span class="n">temp_ferh</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts from degrees Fahrenheit to Celsius.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">temp_ferh</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Test your function here be checking freezing point temp_Fehr=32</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us create a new DataFrame for temperature data and apply <code class="docutils literal notranslate"><span class="pre">ferhenirt_to_celsius</span></code> function to convert data from Ferhenirt to Celsius. Then add the new data as two new columns <code class="docutils literal notranslate"><span class="pre">TMAX_C</span></code> and <code class="docutils literal notranslate"><span class="pre">TMIN_C</span></code>. This can take this form:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">new_columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">my_function</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">original_columns</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Also, rename the original <code class="docutils literal notranslate"><span class="pre">TMAX</span></code> to <code class="docutils literal notranslate"><span class="pre">TMAX_F</span></code> and <code class="docutils literal notranslate"><span class="pre">TMIN</span></code> to <code class="docutils literal notranslate"><span class="pre">TMIN_F</span></code>. For renaming you can use the rename function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;old_name1&#39;</span><span class="p">:</span> <span class="s1">&#39;new_name1&#39;</span><span class="p">,</span> <span class="s1">&#39;old_name2&#39;</span><span class="p">:</span> <span class="s1">&#39;new_name2&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Here is how to do this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new DataFrame for temp values TMAX and TMIN</span>
+<span class="n">temp</span><span class="o">=</span><span class="n">one_station</span><span class="p">[[</span><span class="s1">&#39;TMAX&#39;</span><span class="p">,</span><span class="s1">&#39;TMIN&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Convert temp from F to C and save to new columns TMAX_C and TMIN_C</span>
+
+
+<span class="c1">#Change the name of TMAX to TMAX_F and TMIN to TMIN_F</span>
+
+<span class="c1"># Display new DataFrame </span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another way of doing this is to use <code class="docutils literal notranslate"><span class="pre">.apply()</span></code> such that</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">new_columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">original_columns</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">my_function</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Try it out:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new DataFrame for temp values TMAX and TMIN</span>
+<span class="n">temp</span><span class="o">=</span><span class="n">one_station</span><span class="p">[[</span><span class="s1">&#39;TMAX&#39;</span><span class="p">,</span><span class="s1">&#39;TMIN&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Convert temp from F to C and save to new columns TMAX_C and TMIN_C</span>
+
+
+<span class="c1">#Change the name of TMAX to TMAX_F and TMIN to TMIN_F</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;TMAX&#39;</span><span class="p">:</span> <span class="s1">&#39;TMAX_F&#39;</span><span class="p">,</span> <span class="s1">&#39;TMIN&#39;</span><span class="p">:</span> <span class="s1">&#39;TMIN_F&#39;</span><span class="p">})</span>
+
+<span class="c1"># Display new DataFrame </span>
+<span class="n">display</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is just the beginning. You can convert a Pandas DataFrame to numpy array for more advanced array operations. You can do this conversion using the method <code class="docutils literal notranslate"><span class="pre">.values</span></code>.</p>
+<p>Check the type of your DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now use the method <code class="docutils literal notranslate"><span class="pre">temp.values</span></code> and check the type again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will learn later learn Numpy, whihc handles multi-dimensional arrays with extensive collection of mathematical functions, facilitating high-performance numerical computations.</p>
+</section>
+<section id="iterating-over-rows-opitional">
+<h3>4.17 Iterating over rows (<em>opitional</em>)<a class="headerlink" href="#iterating-over-rows-opitional" title="Link to this heading">#</a></h3>
+<p>We can apply a function row at a time using a for loop and the <code class="docutils literal notranslate"><span class="pre">iterrows()</span></code> method. This will allow us to iterate row by row using iterrows() in a for loop to repeat a given process for each row in a Pandas DataFrame. Please note that iterating over rows is a rather inefficient approach, but this is your last resort when the other methods cannot do what you need.</p>
+<p>Let’s start with a simple for loop that goes through each row in our DataFrame</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new DataFrame for temp values TMAX and TMIN</span>
+<span class="n">temp</span><span class="o">=</span><span class="n">one_station</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2023-12-29&#39;</span><span class="p">:</span><span class="s1">&#39;2023-12-31&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;TMAX&#39;</span><span class="p">,</span><span class="s1">&#39;TMIN&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Iterate over the rows</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">temp</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+
+    <span class="c1"># Print the index value</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+    <span class="c1"># Print the row</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;TMAX&#39;</span><span class="p">])</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;TMIN&#39;</span><span class="p">])</span>
+
+    <span class="k">break</span>   <span class="c1">#Break is used to show only the first iteration of the for loop for testing purpose</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now for each value let use apply our <code class="docutils literal notranslate"><span class="pre">fahrenheit_to_celsius</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new DataFrame for temp values TMAX and TMIN</span>
+<span class="n">temp</span><span class="o">=</span><span class="n">one_station</span><span class="p">[[</span><span class="s1">&#39;TMAX&#39;</span><span class="p">,</span><span class="s1">&#39;TMIN&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Iterate over the rows</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">temp</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="c1"># Convert TMAX from Fahrenheit to Celsius</span>
+    <span class="n">temp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="s1">&#39;TMAX_C&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fahrenheit_to_celsius</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;TMAX&#39;</span><span class="p">])</span>
+    <span class="c1"># Convert TMIN from Fahrenheit to Celsius</span>
+    <span class="n">temp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="s1">&#39;TMIN_C&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fahrenheit_to_celsius</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;TMIN&#39;</span><span class="p">])</span>
+
+<span class="c1">#Change the name of TMAX to TMAX_F and TMIN to TMIN_F</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;TMAX&#39;</span><span class="p">:</span> <span class="s1">&#39;TMAX_F&#39;</span><span class="p">,</span> <span class="s1">&#39;TMIN&#39;</span><span class="p">:</span> <span class="s1">&#39;TMIN_F&#39;</span><span class="p">})</span>
+
+<span class="c1"># Display the resulting DataFrame with temperatures converted to Celsius</span>
+<span class="n">display</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="save-and-load-your-dataframe">
+<h3>4.18 Save and load your DataFrame<a class="headerlink" href="#save-and-load-your-dataframe" title="Link to this heading">#</a></h3>
+<p>In this final example, we demonstrate the use of the <code class="docutils literal notranslate"><span class="pre">to_csv</span></code> method to save a DataFrame as a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file. This example also demonstrates the <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> method, which reads <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files into Pandas <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>.</p>
+<section id="save-a-dataframe-as-csv-file">
+<h4>4.18.1 Save a DataFrame as <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file<a class="headerlink" href="#save-a-dataframe-as-csv-file" title="Link to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">to_csv</span></code> method saves a DataFrame as a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file as</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;file_path/file_name.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Try to to save your <code class="docutils literal notranslate"><span class="pre">temp</span></code> DataFrame to ‘temp_data.csv’</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save your temp data in F and C to a CSV file &#39;temp_data.csv&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="read-a-csv-files-into-dataframes">
+<h4>4.18.2 Read a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files into DataFrames<a class="headerlink" href="#read-a-csv-files-into-dataframes" title="Link to this heading">#</a></h4>
+<p>We want to</p>
+<ol class="arabic simple">
+<li><p>read the file as new DataFrame called <code class="docutils literal notranslate"><span class="pre">df_temp</span></code>,</p></li>
+<li><p>set our first column as our index column,</p></li>
+<li><p>and change the format of our index to datetime format.</p></li>
+</ol>
+<p>Let us break it down part by part.</p>
+<p>First, you can use the <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> method reads <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files into Pandas DataFrames</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df_name</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;file_path/file_name.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Second, set the the first column which contain datetime data as our index using:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>which specifies that the first column of the CSV file should be used as the index of the DataFrame. If you want for example to use your third column as the index of your DataFrame, you can do <code class="docutils literal notranslate"><span class="pre">index_col</span> <span class="pre">=</span> <span class="pre">2</span></code> and so on.</p>
+<p>Third, parse any date-like columns as datetime objects using</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">parse_dates</span> <span class="o">=</span> <span class="kc">True</span> 
+</pre></div>
+</div>
+<p>which instructs Pandas to attempt to parse any datetime columns including index in the CSV file as datetime objects.</p>
+<p>Here is how to do this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read file as a new DataFrame &#39;df_temp&#39;, and set first column as index with datetime format</span>
+
+
+<span class="c1">#Display your new DataFrame</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>What we did not learn so far is how to create a DataFrame from a given data rather than reading it from a file. You can learn this on your own. Ask a LLM for example and guide yourself through the learning process.</p>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Pandas is a very powerful tool for working with tabular (i.e., spreadsheet-style) data</p></li>
+<li><p>There are multiple ways of subsetting your Pandas dataframe or series</p></li>
+<li><p>Pandas allows you to refer to subsets of data by label, which generally makes code more readable and more robust</p></li>
+<li><p>Pandas can be helpful for exploratory data analysis, including plotting and basic statistics</p></li>
+<li><p>One can apply calculations to Pandas dataframes and save the output via <code class="docutils literal notranslate"><span class="pre">csv</span></code> files</p></li>
+</ul>
+<section id="what-s-next">
+<h3>What’s Next?<a class="headerlink" href="#what-s-next" title="Link to this heading">#</a></h3>
+<p>To learn Pandas, you do not need to read more, but to practice more. Start working on your homework. When encountering challenges, refer back to this notebook and seek assistance from a LLM.  If the LLM provided a new method that you do not understand, ask for explanation. When you write a code that does not work, ask for debugging. Practice as much as you can to learn this powerful data analysis tool.</p>
+</section>
+</section>
+<section id="resources-and-references">
+<h2>Resources and References<a class="headerlink" href="#resources-and-references" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://Pandas.pydata.org/docs/getting_started/index.html#getting-started">Getting Started with Pandas</a></p></li>
+<li><p><a class="reference external" href="https://Pandas.pydata.org/docs/user_guide/index.html#user-guide">Pandas User Guide</a></p></li>
+<li><p><a class="reference external" href="https://wesmckinney.com/book/">Python for Data Analysis, 3rd Edition</a></p></li>
+<li><p><a class="reference external" href="https://foundations.projectpythia.org/core/pandas/pandas.html">Introduction to Pandas</a> by <a class="reference external" href="https://projectpythia.org">Project Pythia</a>,</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters\ 4. Pandas for Tabular Data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../3.%20Python%20Programming/Exercise3.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><h1 style="color:green; text-align:center;"> Exercise 3 - Python Programming </h1></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Exercise4.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><h1 style="color:green; text-align:center;"> Exercise 4 - Pandas </h1></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cheat-sheets">Cheat Sheets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">1. Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">2. Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-terminologies">3. Basic terminologies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-pandas-by-an-example">4. Learning Pandas by an example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collecting-weather-data">4.1 Collecting weather data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-a-csv-file">4.2 Importing a <code class="docutils literal notranslate"><span class="pre">csv</span></code> file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#displaying-a-dataframe">4.3 Displaying a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#display-dataframe">4.3.1 Display DataFrame</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#display-the-size-of-dataframe">4.3.2 Display the size of DataFrame</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#display-different-date-types-in-your-dataframe">4.3.3 Display different date types in your DataFrame</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#change-data-type-in-your-dataframe">4.3.4 Change data type in your DataFrame</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-columns-by-column-labels">4.4 Filter columns by column labels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-rows-by-a-keyword">4.5 Filter rows by a keyword</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#showing-unique-values-in-a-column">Showing unique values in a column</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-rows-by-a-specific-value">4.6 Filter rows by a specific value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-datetime-column-as-the-dataframe-index">4.7 Make a datetime column as the DataFrame index</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#check-the-index">Check the index</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-statistics">4.8 Descriptive statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling-of-time-series-data">4.9 Resampling of time-series data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby">4.10 Groupby</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby-for-categorical-data">4.10.1 Groupby for categorical data</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-with-loc-and-iloc">4.11 Slicing with loc and iloc</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-with-loc">4.11.1 Slicing with <code class="docutils literal notranslate"><span class="pre">loc</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#special-case-for-a-datetime-index">Special case for a datetime index</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-with-iloc">4.11.2 Slicing with <code class="docutils literal notranslate"><span class="pre">iloc</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dicing">4.12 Dicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-and-dicing-together">4.13 Slicing and dicing together</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#challange-your-understanding">Challange your understanding</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ask-a-llm-opitional">Ask a LLM (opitional)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subsetting-using-datetime-column">4.14 Subsetting using Datetime Column</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#test-your-understanding">Test your understanding</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#another-example-with-llm-opitional">Another example with LLM (<em>opitional</em>)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-comprehensive-example-advanced">A comprehensive example (<em>advanced</em>)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-plots-of-your-data">4.15 Quick Plots of Your Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#line-plot">4.15.1 Line plot</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-plot">4.15.2 Histogram plot</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#box-plot">4.15.3 Box plot</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#customize-your-plot">4.15.4 Customize your Plot</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-operations-to-a-dataframe">4.16 Applying operations to a DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterating-over-rows-opitional">4.17 Iterating over rows (<em>opitional</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-and-load-your-dataframe">4.18 Save and load your DataFrame</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#save-a-dataframe-as-csv-file">4.18.1 Save a DataFrame as <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#read-a-csv-files-into-dataframes">4.18.2 Read a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files into DataFrames</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-next">What’s Next?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-and-references">Resources and References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed Elshall & Thalia Valle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

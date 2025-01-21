@@ -1,0 +1,866 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>GCP 5 - Using assertions &#8212; Environmental Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/0.0. Good Coding Practices/GCP5_Assertions';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Introduction to Environmental Data Science with Python" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson1.html" />
+    <link rel="prev" title="GCP 4 - Writing our scripts the “right” way" href="GCP4_WritingScripts.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Environmental Data Science - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Environmental Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    EGN 4930 / EGN 5932C Special Topic: Environmental Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0. Good Coding Practices</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="GCP1_VariableName.html">GCP1 - Selecting “good” variable names</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="GCP2_DescribingCode.html">Describing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GCP3_ReadableCode.html">Readable Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GCP4_WritingScripts.html">Writing Scripts</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Assertions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson2.html">Lesson 2 Getting Started</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Excercise1.html">Exercise 1 - Installing Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson3_PythonBasics1.html">Lesson 3 - Python Basics 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson4_list_solution.html">Lesson 4 - Python Basics 2 - Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson5_formatting.html">Lesson 5 - Python Basics 3 - Formatting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson6_Loops.html">Lesson 6 - Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson7_conditional_statements.html">Lesson 7 - Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson8_functions.html">Lesson 8 - Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson9_modules.html">Lesson 9 - Script Files and Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Exercise3.html">Exercise 3 - Python Programming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 4. Pandas for Tabular Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Lesson10_pandas.html">Lessons 10 - 14 - Pandas Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Exercise4.html">Exercise 4 - Pandas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Artificial intelligence (AI) Coding Assistance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/OpenAI_API_Key_for_Jupyter_AI_Extension.html">OpenAI API key for Jupyter AI extension (Optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/AIcoding.html">Lesson 15 AI coding assistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/Exercise_5_API_Key_Module.html">Exercise 5 - API-Key Module (Optional)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Data Science Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Workflow.html">Lessons 16 - Data Science Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Exercise6.html">Exercise 6 - AQI Data Preparation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. NumPy for Scientific Computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/numpy.html">Lessons 18-19 - NumPy Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/exercise7.html">Exercise 7 - NumPy - Air quality data analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8. Matplotlib for Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/matplotlib.html">Lesson 20 - 21 - Matplotlib Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/exercise8.html">Exercise 8 Matplotlib - Air quality data visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/climate.html">Lesson 24 - Climate Data - CMIP6 and Remote Sensing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/xarray.html">Lesson 25-27 - Xarray basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/cartopy.html">Lesson 28 - CartoPy basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/Exercise9.html">Exercise 9 - Sea surface height and red tides (Optional, Advanced)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">10. Introduction to Google Earth Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.0-%20Intro%20to%20GEE.html">Lesson 30 - Intro to Google Earth Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.1-%20JavaScript%20API%20vs.%20Python%20API.html">Lesson 31 - JavaScript API vs. Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html">Lesson 32 - Using Google Earth Engine in a Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/geemap1.html">Exercise 10 -  GeeMap, GEE, and Sentinel-2 Data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Chapters/0.0. Good Coding Practices/GCP5_Assertions.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapters/0.0. Good Coding Practices/GCP5_Assertions.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/0.0. Good Coding Practices/GCP5_Assertions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>GCP 5 - Using assertions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assertions">Assertions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-assertions">Multiple assertions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bad-example">A bad example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-better-example">A better example</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-information-about-assertions">More information about assertions</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="gcp-5-using-assertions">
+<h1>GCP 5 - Using assertions<a class="headerlink" href="#gcp-5-using-assertions" title="Link to this heading">#</a></h1>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Finnish university students are encouraged to use the CSC Notebooks platform.<br/>
+<a href="https://notebooks.csc.fi/"><img alt="CSC badge" src="https://img.shields.io/badge/launch-CSC%20notebook-blue.svg" style="vertical-align:text-bottom"></a></p>
+<p>Others can follow the lesson and fill in their student notebooks using Binder.<br/>
+<a href="https://mybinder.org/v2/gh/geo-python/notebooks/master?urlpath=lab/tree/L6/gcp-5-assertions.ipynb"><img alt="Binder badge" src="https://img.shields.io/badge/launch-binder-red.svg" style="vertical-align:text-bottom"></a></p>
+</div>
+<p>The goal of <a class="reference external" href="https://en.wikipedia.org/wiki/Defensive_programming">defensive programming</a> is to try to maximize the reliability and overall quality of a piece of software. For us, this means that we should take steps to handle unexpected input values in our code, and to provide helpful error messages that provide meaningful guidance to the user when a program raises an exception. We can take steps toward writing more reliable software by utilizing a helpful features in Python: Assertions.</p>
+<section id="assertions">
+<h2>Assertions<a class="headerlink" href="#assertions" title="Link to this heading">#</a></h2>
+<p><em>Assertions</em> are a way to assert, or ensure, that the values being used in your scripts are going to be suitable for what the code does. Let’s start by considering the function <code class="docutils literal notranslate"><span class="pre">convert_kph_ms</span></code> that converts wind speeds from kilometers per hour to meters per second. We can define and use our function in the cell below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convert_kph_ms</span><span class="p">(</span><span class="n">speed</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts velocity (speed) in km/hr to m/s&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">speed</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">3600</span>
+
+
+<span class="n">wind_speed_km</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">wind_speed_ms</span> <span class="o">=</span> <span class="n">convert_kph_ms</span><span class="p">(</span><span class="n">wind_speed_km</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A wind speed of </span><span class="si">{</span><span class="n">wind_speed_km</span><span class="si">}</span><span class="s2"> km/hr is </span><span class="si">{</span><span class="n">wind_speed_ms</span><span class="si">}</span><span class="s2"> m/s.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A wind speed of 9 km/hr is 2.5 m/s.
+</pre></div>
+</div>
+</div>
+</div>
+<p>This all seems fine, but you might want to ensure that the values for the wind speed are not negative numbers, since speed is simply the magnitude of the wind velocity, which should always be positive or zero. We can enforce this condition by adding an assertion to our function.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convert_kph_ms</span><span class="p">(</span><span class="n">speed</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts velocity (speed) in km/hr to m/s&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">speed</span> <span class="o">&gt;=</span> <span class="mf">0.0</span>
+    <span class="k">return</span> <span class="n">speed</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">3600</span>
+
+
+<span class="n">wind_speed_km</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">wind_speed_ms</span> <span class="o">=</span> <span class="n">convert_kph_ms</span><span class="p">(</span><span class="n">wind_speed_km</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A wind speed of </span><span class="si">{</span><span class="n">wind_speed_km</span><span class="si">}</span><span class="s2"> km/hr is </span><span class="si">{</span><span class="n">wind_speed_ms</span><span class="si">}</span><span class="s2"> m/s.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A wind speed of 9 km/hr is 2.5 m/s.
+</pre></div>
+</div>
+</div>
+</div>
+<p>OK, so everything still works when using a positive value, but what happens if we now give a negative value for the wind speed? Let’s check!</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wind_speed_km</span> <span class="o">=</span> <span class="o">-</span><span class="mi">27</span>
+<span class="n">wind_speed_ms</span> <span class="o">=</span> <span class="n">convert_kph_ms</span><span class="p">(</span><span class="n">wind_speed_km</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A wind speed of </span><span class="si">{</span><span class="n">wind_speed_km</span><span class="si">}</span><span class="s2"> km/hr is </span><span class="si">{</span><span class="n">wind_speed_ms</span><span class="si">}</span><span class="s2"> m/s.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">wind_speed_km</span> <span class="o">=</span> <span class="o">-</span><span class="mi">27</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">wind_speed_ms</span> <span class="o">=</span> <span class="n">convert_kph_ms</span><span class="p">(</span><span class="n">wind_speed_km</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A wind speed of </span><span class="si">{</span><span class="n">wind_speed_km</span><span class="si">}</span><span class="s2"> km/hr is </span><span class="si">{</span><span class="n">wind_speed_ms</span><span class="si">}</span><span class="s2"> m/s.&quot;</span><span class="p">)</span>
+
+<span class="nn">Cell In[2], line 3,</span> in <span class="ni">convert_kph_ms</span><span class="nt">(speed)</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">convert_kph_ms</span><span class="p">(</span><span class="n">speed</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Converts velocity (speed) in km/hr to m/s&quot;&quot;&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">3</span>     <span class="k">assert</span> <span class="n">speed</span> <span class="o">&gt;=</span> <span class="mf">0.0</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="k">return</span> <span class="n">speed</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">3600</span>
+
+<span class="ne">AssertionError</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<p>OK, so now we get an <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code> when a negative value is provided. This <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code> is produced because of the <code class="docutils literal notranslate"><span class="pre">assert</span></code> statement we entered in the function definition. If the condition listed after <code class="docutils literal notranslate"><span class="pre">assert</span></code> is false, an <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code> is raised.</p>
+<p>This is a definite improvement, however, it would be much better to provide the user with some information about why this assertion exists. Fortunately, we can do this simply by adding some text after the assertion condition.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convert_kph_ms</span><span class="p">(</span><span class="n">speed</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts velocity (speed) in km/hr to m/s&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">speed</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;Wind speed values must be positive or zero&quot;</span>
+    <span class="k">return</span> <span class="n">speed</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">3600</span>
+
+
+<span class="n">wind_speed_km</span> <span class="o">=</span> <span class="o">-</span><span class="mi">27</span>
+<span class="n">wind_speed_ms</span> <span class="o">=</span> <span class="n">convert_kph_ms</span><span class="p">(</span><span class="n">wind_speed_km</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A wind speed of </span><span class="si">{</span><span class="n">wind_speed_km</span><span class="si">}</span><span class="s2"> km/hr is </span><span class="si">{</span><span class="n">wind_speed_ms</span><span class="si">}</span><span class="s2"> m/s.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="k">return</span> <span class="n">speed</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">3600</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">wind_speed_km</span> <span class="o">=</span> <span class="o">-</span><span class="mi">27</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="n">wind_speed_ms</span> <span class="o">=</span> <span class="n">convert_kph_ms</span><span class="p">(</span><span class="n">wind_speed_km</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A wind speed of </span><span class="si">{</span><span class="n">wind_speed_km</span><span class="si">}</span><span class="s2"> km/hr is </span><span class="si">{</span><span class="n">wind_speed_ms</span><span class="si">}</span><span class="s2"> m/s.&quot;</span><span class="p">)</span>
+
+<span class="nn">Cell In[4], line 3,</span> in <span class="ni">convert_kph_ms</span><span class="nt">(speed)</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">convert_kph_ms</span><span class="p">(</span><span class="n">speed</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Converts velocity (speed) in km/hr to m/s&quot;&quot;&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">3</span>     <span class="k">assert</span> <span class="n">speed</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;Wind speed values must be positive or zero&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="k">return</span> <span class="n">speed</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">3600</span>
+
+<span class="ne">AssertionError</span>: Wind speed values must be positive or zero
+</pre></div>
+</div>
+</div>
+</div>
+<p>Nice! Now we see that when the <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code> is raised, the message informs us about why it happened without having to interpret the code. The message also makes it easy to fix our value for <code class="docutils literal notranslate"><span class="pre">wind_speed_km</span></code> to work with the <code class="docutils literal notranslate"><span class="pre">convert_kph_ms</span></code> function.</p>
+<p>More generally, assertions take on the following form:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="o">&lt;</span><span class="n">some</span> <span class="n">condition</span><span class="o">&gt;</span><span class="p">,</span> <span class="s2">&quot;Error message to display&quot;</span>
+</pre></div>
+</div>
+<p>So we start with the <code class="docutils literal notranslate"><span class="pre">assert</span></code> statement, then give a logical test for some condition. If the test is true, nothing happens and the code continues. If not, the code stops and an <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code> is displayed with the text written after the comma on the line containing the <code class="docutils literal notranslate"><span class="pre">assert</span></code> statement.</p>
+<section id="multiple-assertions">
+<h3>Multiple assertions<a class="headerlink" href="#multiple-assertions" title="Link to this heading">#</a></h3>
+<section id="a-bad-example">
+<h4>A bad example<a class="headerlink" href="#a-bad-example" title="Link to this heading">#</a></h4>
+<p>Of course, you may want to have several assertions in a function in order to ensure it works as expected and provides meaningful output. In our case, we might first want to check that the value provided to be converted is a number. If not, we would not be able to convert the units. Let’s add a second assertion to make sure our function is “safe”.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convert_kph_ms</span><span class="p">(</span><span class="n">speed</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts velocity (speed) in km/hr to m/s&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="nb">type</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span>
+    <span class="p">),</span> <span class="s2">&quot;Wind speed values must be numbers&quot;</span>
+    <span class="k">assert</span> <span class="n">speed</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;Wind speed values must be positive or zero&quot;</span>
+    <span class="k">return</span> <span class="n">speed</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">3600</span>
+
+
+<span class="n">wind_speed_km</span> <span class="o">=</span> <span class="s2">&quot;dog&quot;</span>
+<span class="n">wind_speed_ms</span> <span class="o">=</span> <span class="n">convert_kph_ms</span><span class="p">(</span><span class="n">wind_speed_km</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A wind speed of </span><span class="si">{</span><span class="n">wind_speed_km</span><span class="si">}</span><span class="s2"> km/hr is </span><span class="si">{</span><span class="n">wind_speed_ms</span><span class="si">}</span><span class="s2"> m/s.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="k">return</span> <span class="n">speed</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">3600</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">wind_speed_km</span> <span class="o">=</span> <span class="s2">&quot;dog&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">wind_speed_ms</span> <span class="o">=</span> <span class="n">convert_kph_ms</span><span class="p">(</span><span class="n">wind_speed_km</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A wind speed of </span><span class="si">{</span><span class="n">wind_speed_km</span><span class="si">}</span><span class="s2"> km/hr is </span><span class="si">{</span><span class="n">wind_speed_ms</span><span class="si">}</span><span class="s2"> m/s.&quot;</span><span class="p">)</span>
+
+<span class="nn">Cell In[5], line 3,</span> in <span class="ni">convert_kph_ms</span><span class="nt">(speed)</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">convert_kph_ms</span><span class="p">(</span><span class="n">speed</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Converts velocity (speed) in km/hr to m/s&quot;&quot;&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">3</span>     <span class="k">assert</span> <span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>         <span class="nb">type</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="p">),</span> <span class="s2">&quot;Wind speed values must be numbers&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="k">assert</span> <span class="n">speed</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;Wind speed values must be positive or zero&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="k">return</span> <span class="n">speed</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">3600</span>
+
+<span class="ne">AssertionError</span>: Wind speed values must be numbers
+</pre></div>
+</div>
+</div>
+</div>
+<p>OK, so that works. Now, if the user attempts to give a data type that is not <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>, the function will raise an <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code> indicating a number is expected for the function to work. This is fine, but as noted below, there are reasons why you may not want to include assertions of this type in a function.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You might think that it would be useful to use an assertion to check the type of <code class="docutils literal notranslate"><span class="pre">speed</span></code> in our function in order to make sure that you don’t get a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> as occurred in the previous section. It turns out that this is not really a good idea. The reason is that the philosophical idea of a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> is to indicate you have incompatible data types. With that in mind, why would you raise an <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code> to do the same thing?</p>
+</div>
+</section>
+<section id="a-better-example">
+<h4>A better example<a class="headerlink" href="#a-better-example" title="Link to this heading">#</a></h4>
+<p>So we don’t want to check our data type compatibility using assertions, but we can include a second assertion to ensure the maximum of the input wind speed is a reasonable number. In this case, we can asssume that the wind speed being converted was measured on Earth, and thus should be lower than <a class="reference external" href="https://en.wikipedia.org/wiki/Wind_speed#Highest_speed">the fastest wind speed ever measured</a>, 408 km/hr. Let’s add that condition.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convert_kph_ms</span><span class="p">(</span><span class="n">speed</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts velocity (speed) in km/hr to m/s&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">speed</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;Wind speed values must be positive or zero&quot;</span>
+    <span class="k">assert</span> <span class="n">speed</span> <span class="o">&lt;=</span> <span class="mf">408.0</span><span class="p">,</span> <span class="s2">&quot;Wind speed exceeds fastest winds ever measured&quot;</span>
+    <span class="k">return</span> <span class="n">speed</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">3600</span>
+
+
+<span class="n">wind_speed_km</span> <span class="o">=</span> <span class="s2">&quot;409&quot;</span>
+<span class="n">wind_speed_ms</span> <span class="o">=</span> <span class="n">convert_kph_ms</span><span class="p">(</span><span class="n">wind_speed_km</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A wind speed of </span><span class="si">{</span><span class="n">wind_speed_km</span><span class="si">}</span><span class="s2"> km/hr is </span><span class="si">{</span><span class="n">wind_speed_ms</span><span class="si">}</span><span class="s2"> m/s.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="k">return</span> <span class="n">speed</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">3600</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">wind_speed_km</span> <span class="o">=</span> <span class="s2">&quot;409&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">wind_speed_ms</span> <span class="o">=</span> <span class="n">convert_kph_ms</span><span class="p">(</span><span class="n">wind_speed_km</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A wind speed of </span><span class="si">{</span><span class="n">wind_speed_km</span><span class="si">}</span><span class="s2"> km/hr is </span><span class="si">{</span><span class="n">wind_speed_ms</span><span class="si">}</span><span class="s2"> m/s.&quot;</span><span class="p">)</span>
+
+<span class="nn">Cell In[6], line 3,</span> in <span class="ni">convert_kph_ms</span><span class="nt">(speed)</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">convert_kph_ms</span><span class="p">(</span><span class="n">speed</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Converts velocity (speed) in km/hr to m/s&quot;&quot;&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">3</span>     <span class="k">assert</span> <span class="n">speed</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;Wind speed values must be positive or zero&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="k">assert</span> <span class="n">speed</span> <span class="o">&lt;=</span> <span class="mf">408.0</span><span class="p">,</span> <span class="s2">&quot;Wind speed exceeds fastest winds ever measured&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="k">return</span> <span class="n">speed</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">3600</span>
+
+<span class="ne">TypeError</span>: &#39;&gt;=&#39; not supported between instances of &#39;str&#39; and &#39;float&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is a better example for two reasons:</p>
+<ol class="arabic simple">
+<li><p>We now allow a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> when incompatible data types are used in our function, which is a clear and familiar error message.</p></li>
+<li><p>We use assertions to check the values used in the function make sense for its intended use. If we want to help users convert wind speeds on Earth, we provide bounds that make sure they are using reasonable input values. Thus, we help them use our function the correct way.</p></li>
+</ol>
+<p>Combined, these assertions ensure our function handles common mistakes and provide the user with helpful feedback to be able to use the function properly.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>One thing that is important to note about assertions is that although we use them here to check that our function input values are reasonable, this is not generally the suggested use.
+Instead, more advanced programmers recommend using assertions only to test that your code is working properly internally.
+For example, you would use assertions to check for things that should not happen, such as functions that duplicate values in lists when they should not.
+The reason it is not recommended to use assertions for testing user input values or the existence of files is that assertions can be disabled using flags when running a Python program.
+Thus, it is possible they could be ignored entirely.
+This is fine when debugging code, but obviously not desired when users are running your programs.
+If you’re interested in more details, feel free to check out the <a class="reference external" href="https://wiki.python.org/moin/UsingAssertionsEffectively">article on using assertions in the Python wiki</a>.</p>
+</div>
+</section>
+</section>
+<section id="more-information-about-assertions">
+<h3>More information about assertions<a class="headerlink" href="#more-information-about-assertions" title="Link to this heading">#</a></h3>
+<p>More information about assertions can be found on the <a class="reference external" href="https://swcarpentry.github.io/python-novice-inflammation/10-defensive/index.html">Software Carpentry website</a>.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters\0.0. Good Coding Practices"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="GCP4_WritingScripts.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">GCP 4 - Writing our scripts the “right” way</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Environmental Data Science with Python</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assertions">Assertions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-assertions">Multiple assertions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bad-example">A bad example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-better-example">A better example</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-information-about-assertions">More information about assertions</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed Elshall & Thalia Valle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

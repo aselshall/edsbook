@@ -1,0 +1,1126 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Exercise 7 NumPy: Air quality data analysis &#8212; Environmental Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/7. NumPy for Scientific Computing  7. NumPy for Scientific Computing/exercise7';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lesson 20 - 21: Matplotlib Basics" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/matplotlib.html" />
+    <link rel="prev" title="Lessons 18-19: NumPy Basics" href="numpy.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Environmental Data Science - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Environmental Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    EGN 4930 / EGN 5932C Special Topic: Environmental Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0. Good Coding Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP1_VariableName.html">GCP1 - Selecting “good” variable names</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP2_DescribingCode.html">Describing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP3_ReadableCode.html">Readable Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP4_WritingScripts.html">Writing Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP5_Assertions.html">Assertions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson2.html">Lesson 2 Getting Started</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Excercise1.html">Exercise 1 - Installing Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson3_PythonBasics1.html">Lesson 3 - Python Basics 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson4_list_solution.html">Lesson 4 - Python Basics 2 - Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson5_formatting.html">Lesson 5 - Python Basics 3 - Formatting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson6_Loops.html">Lesson 6 - Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson7_conditional_statements.html">Lesson 7 - Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson8_functions.html">Lesson 8 - Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson9_modules.html">Lesson 9 - Script Files and Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Exercise3.html">Exercise 3 - Python Programming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 4. Pandas for Tabular Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Lesson10_pandas.html">Lessons 10 - 14 - Pandas Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Exercise4.html">Exercise 4 - Pandas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Artificial intelligence (AI) Coding Assistance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/OpenAI_API_Key_for_Jupyter_AI_Extension.html">OpenAI API key for Jupyter AI extension (Optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/AIcoding.html">Lesson 15 AI coding assistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/Exercise_5_API_Key_Module.html">Exercise 5 - API-Key Module (Optional)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Data Science Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Workflow.html">Lessons 16 - Data Science Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Exercise6.html">Exercise 6 - AQI Data Preparation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. NumPy for Scientific Computing</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="numpy.html">Lessons 18-19 - NumPy Basics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Exercise 7 - NumPy - Air quality data analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8. Matplotlib for Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/matplotlib.html">Lesson 20 - 21 - Matplotlib Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/exercise8.html">Exercise 8 Matplotlib - Air quality data visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/climate.html">Lesson 24 - Climate Data - CMIP6 and Remote Sensing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/xarray.html">Lesson 25-27 - Xarray basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/cartopy.html">Lesson 28 - CartoPy basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/Exercise9.html">Exercise 9 - Sea surface height and red tides (Optional, Advanced)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">10. Introduction to Google Earth Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.0-%20Intro%20to%20GEE.html">Lesson 30 - Intro to Google Earth Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.1-%20JavaScript%20API%20vs.%20Python%20API.html">Lesson 31 - JavaScript API vs. Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html">Lesson 32 - Using Google Earth Engine in a Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/geemap1.html">Exercise 10 -  GeeMap, GEE, and Sentinel-2 Data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Chapters/7. NumPy for Scientific Computing  7. NumPy for Scientific Computing/exercise7.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapters/7. NumPy for Scientific Computing  7. NumPy for Scientific Computing/exercise7.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/7. NumPy for Scientific Computing  7. NumPy for Scientific Computing/exercise7.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Exercise 7 NumPy: Air quality data analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement">1. Problem statement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-data">2. Prepare data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-data-as-numpy-array">2.1 Read data as Numpy array</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-dates-and-values">2.2 Extract dates and values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-rows-with-nans">2.3 Remove rows with NaNs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-pre-and-post-lockdown-data">2.4 Extracting pre and post-lockdown data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-numppy-arrays-of-dates-and-values-extra">2.5 Save NumpPy arrays of dates and values (<em>extra</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-information">2.6 Additional information</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-values-for-each-parameter-befor-and-after-lockdown">3. Mean values for each parameter befor and after lockdown</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-approach">3.1 Simple approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aqi-approach-optional">3.2 AQI approach (<em>optional</em>)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-aqi-values">3.2.1 Calculate AQI values</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#save-aqi-values-as-numpy-arrays-extra">3.2.2 Save AQI values as NumPy arrays (<em>extra</em>)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-mean-aqi-values-for-each-parameter">3.2.3 Calculate mean AQI values for each parameter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">4. Hypothesis testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">4.1 Introduction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method">4.2 Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results">4.3 Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">4.4 Discussion</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="exercise-7-numpy-air-quality-data-analysis">
+<h1>Exercise 7 NumPy: Air quality data analysis<a class="headerlink" href="#exercise-7-numpy-air-quality-data-analysis" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://mybinder.org/v2/gh/aselshall/eds/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="problem-statement">
+<h2>1. Problem statement<a class="headerlink" href="#problem-statement" title="Link to this heading">#</a></h2>
+<p>This assignment involves analyzing air quality data for the Miami core-based statistical area (CBSA) to evaluate the impact of COVID-19 lockdown orders on air quality in Miami. The analysis will be based on EPA daily air quality data for PM2.5, PM10, NO2, SO2, CO, and O3 from 01-04-2019 to 31-03-2021, covering one year before and after the lockdown order on April 1, 2020. The tasks include:</p>
+<ul class="simple">
+<li><p>Calculating the mean concentrations for these 6 air quality parameters before and after the lockdown order.</p></li>
+<li><p>Conducting hypothesis testing to determine if there is a statistically significant difference in the pre and post data.</p></li>
+</ul>
+<p>To complete this exercise, you will apply the skills learned in the Data Science Workflow and NumPy lessons.</p>
+</section>
+<section id="prepare-data">
+<h2>2. Prepare data<a class="headerlink" href="#prepare-data" title="Link to this heading">#</a></h2>
+<section id="read-data-as-numpy-array">
+<h3>2.1 Read data as Numpy array<a class="headerlink" href="#read-data-as-numpy-array" title="Link to this heading">#</a></h3>
+<p>Read data from ‘aqi_data_Miami.csv’ as NumPy array <code class="docutils literal notranslate"><span class="pre">data</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the CSV file into a NumPy mixed type array with dtype object</span>
+<span class="c1"># Column names: [datetime-empty], &#39;PM2.5&#39;, &#39;PM10&#39;,  &#39;NO2&#39;, &#39;SO2&#39;,  &#39;CO&#39;, &#39;O3&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/aqi_data_Miami.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="c1"># Convert the first column in the NumPy array to datetime format</span>
+
+<span class="c1"># Display data</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="extract-dates-and-values">
+<h3>2.2 Extract dates and values<a class="headerlink" href="#extract-dates-and-values" title="Link to this heading">#</a></h3>
+<p>Extract dates and values from Numpy array <code class="docutils literal notranslate"><span class="pre">data</span></code> as Numpy arrays <code class="docutils literal notranslate"><span class="pre">dates</span></code> and <code class="docutils literal notranslate"><span class="pre">values</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extracting first column as datetime (you can do it in one line)</span>
+
+
+<span class="c1"># Extract numerical values as numbers (you can do it in one line)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="remove-rows-with-nans">
+<h3>2.3 Remove rows with NaNs<a class="headerlink" href="#remove-rows-with-nans" title="Link to this heading">#</a></h3>
+<p>Remove rows with NaN values from <code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">dates</span></code>, and <code class="docutils literal notranslate"><span class="pre">values</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Original dataset information</span>
+
+<span class="c1">#Remove NaNs</span>
+
+<span class="c1">#Cleaned dataset information</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="extracting-pre-and-post-lockdown-data">
+<h3>2.4 Extracting pre and post-lockdown data<a class="headerlink" href="#extracting-pre-and-post-lockdown-data" title="Link to this heading">#</a></h3>
+<p>Extract data based on the lockdown order on April 1, 2020:</p>
+<ul class="simple">
+<li><p>Extract data one year before lockdown as <code class="docutils literal notranslate"><span class="pre">pre_dates</span></code> and <code class="docutils literal notranslate"><span class="pre">pre_values</span></code>,</p></li>
+<li><p>Extract data one year after lockdown as <code class="docutils literal notranslate"><span class="pre">post_dates</span></code> and <code class="docutils literal notranslate"><span class="pre">post_values</span></code>,</p></li>
+<li><p>Extract data one year before and after lockdown combined as <code class="docutils literal notranslate"><span class="pre">pre_post_dates</span></code> and <code class="docutils literal notranslate"><span class="pre">pre_post_values</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define date ranges</span>
+<span class="n">lockdown_start</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2020-04-01&#39;</span><span class="p">)</span>
+<span class="n">one_year_before</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2019-04-01&#39;</span><span class="p">)</span>
+<span class="n">one_year_after</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2021-04-01&#39;</span><span class="p">)</span>
+
+<span class="c1">#Cleaned dataset information</span>
+
+<span class="c1"># Filter the NumPy array based on the date range for pre-post-covid19 data</span>
+
+
+<span class="c1"># Filter the NumPy array based on the date range for pre-covid19 data</span>
+
+
+<span class="c1"># Filter the NumPy array based on the date range for post-covid19 data</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="save-numppy-arrays-of-dates-and-values-extra">
+<h3>2.5 Save NumpPy arrays of dates and values (<em>extra</em>)<a class="headerlink" href="#save-numppy-arrays-of-dates-and-values-extra" title="Link to this heading">#</a></h3>
+<p>Let us save our pre-proceeded data</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pre_dates</span></code> one year datetime data before lockdown</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pre_values</span></code> one year concentration data before lockdown for PM2.5, PM10, NO2, SO2,  CO, O3</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">post_dates</span></code> one year datetime data after lockdown</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">post_values</span></code> one year concentration data after lockdown for PM2.5, PM10, NO2, SO2,  CO, O3</p></li>
+</ul>
+<p>because we will use it in Matplotlib exercise. We do not need to use <code class="docutils literal notranslate"><span class="pre">allow_pickle=True</span></code> argument because these arrays do not have data with mixed types.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save the data arrays to a file </span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;data/pre_dates.npy&#39;</span><span class="p">,</span> <span class="n">pre_dates</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;data/post_dates.npy&#39;</span><span class="p">,</span> <span class="n">post_dates</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;data/pre_values.npy&#39;</span><span class="p">,</span> <span class="n">pre_values</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;data/post_values.npy&#39;</span><span class="p">,</span> <span class="n">post_values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us double check that we can load and use the saved data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the array from file</span>
+<span class="n">pre_dates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data/pre_dates.npy&#39;</span><span class="p">)</span>
+<span class="n">pre_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data/pre_values.npy&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pre_dates:&quot;</span><span class="p">,</span> <span class="n">pre_dates</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">pre_dates</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+      <span class="s2">&quot;pre_values:&quot;</span><span class="p">,</span> <span class="n">pre_values</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">pre_values</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="additional-information">
+<h3>2.6 Additional information<a class="headerlink" href="#additional-information" title="Link to this heading">#</a></h3>
+<p>Here is additional information that can be helpful to our analysis. We can refer to EPA document <a class="reference external" href="https://www.airnow.gov/sites/default/files/2020-05/aqi-technical-assistance-document-sept2018.pdf">EPA 454/B-18-007</a> for concentration breakpoints indicating unhealthy levels for sensitive groups.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define date ranges</span>
+<span class="n">lockdown_start</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2020-04-01&#39;</span><span class="p">)</span>
+<span class="n">one_year_before</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2019-04-01&#39;</span><span class="p">)</span>
+<span class="n">one_year_after</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2021-04-01&#39;</span><span class="p">)</span>
+
+<span class="c1"># Air quality parameter information</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span>        <span class="s1">&#39;PM2.5&#39;</span><span class="p">,</span> <span class="s1">&#39;PM10&#39;</span><span class="p">,</span>  <span class="s1">&#39;NO2&#39;</span><span class="p">,</span> <span class="s1">&#39;SO2&#39;</span><span class="p">,</span>  <span class="s1">&#39;CO&#39;</span><span class="p">,</span> <span class="s1">&#39;O3&#39;</span><span class="p">]</span>
+<span class="n">units</span> <span class="o">=</span> <span class="p">[</span>             <span class="s1">&#39;µg/m³&#39;</span><span class="p">,</span> <span class="s1">&#39;µg/m³&#39;</span><span class="p">,</span> <span class="s1">&#39;ppb&#39;</span><span class="p">,</span> <span class="s1">&#39;ppb&#39;</span><span class="p">,</span> <span class="s1">&#39;ppm&#39;</span><span class="p">,</span> <span class="s1">&#39;ppm&#39;</span><span class="p">]</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">[</span>        <span class="mi">35</span> <span class="p">,</span>      <span class="mi">155</span><span class="p">,</span>    <span class="mi">100</span><span class="p">,</span>   <span class="mi">50</span><span class="p">,</span>     <span class="mi">9</span><span class="p">,</span>  <span class="mf">0.07</span><span class="p">]</span>  <span class="c1"># Unhealthy levels of senitive groups</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="mean-values-for-each-parameter-befor-and-after-lockdown">
+<h2>3. Mean values for each parameter befor and after lockdown<a class="headerlink" href="#mean-values-for-each-parameter-befor-and-after-lockdown" title="Link to this heading">#</a></h2>
+<p>Before proceeding with hypothesis testing, let’s analyze the mean values of each air quality parameter before and after the lockdown.</p>
+<ul class="simple">
+<li><p>For a simple analysis, we can compare the mean concentrations before and after the lockdown for each parameter.</p></li>
+<li><p>For a more sophisticated analysis, an Air Quality Index (AQI) calculation method, to calculate the AQI for quality parameter. Then we can calcuate the mean AQI values before and after the lockdown for each parameter.</p></li>
+</ul>
+<p>Let us try both analyses.</p>
+<section id="simple-approach">
+<h3>3.1 Simple approach<a class="headerlink" href="#simple-approach" title="Link to this heading">#</a></h3>
+<p>We can calculate the Air Quality Index (AQI) for PM2.5, PM10, etc.using an AQI calculation method, which can be complex. For simplicity, let’s just compare the mean concentrations or pre and post lockdown for each parameter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Six air quality parameters</span>
+<span class="n">parameters</span> <span class="o">=</span><span class="p">[</span><span class="s1">&#39;PM2.5&#39;</span><span class="p">,</span><span class="s1">&#39;PM10&#39;</span><span class="p">,</span><span class="s1">&#39;NO2&#39;</span><span class="p">,</span><span class="s1">&#39;SO2&#39;</span><span class="p">,</span><span class="s1">&#39;CO&#39;</span><span class="p">,</span><span class="s1">&#39;O3&#39;</span><span class="p">]</span>
+
+<span class="c1"># Calculate mean concentrations for pre-lockdown and post-lockdown</span>
+
+
+<span class="c1"># Display results in a table form with `parameters` as index,</span>
+<span class="c1"># and first and second column values are `pre_mean` and `post_mean` </span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The means of the pre and post seem similar. Let us confirm this with some statstical analysis. Before we do this, let us try a simple version of the AQI calculation method.</p>
+</section>
+<section id="aqi-approach-optional">
+<h3>3.2 AQI approach (<em>optional</em>)<a class="headerlink" href="#aqi-approach-optional" title="Link to this heading">#</a></h3>
+<section id="calculate-aqi-values">
+<h4>3.2.1 Calculate AQI values<a class="headerlink" href="#calculate-aqi-values" title="Link to this heading">#</a></h4>
+<p>We can compile a concentration breakpoints and their corresponding AQI values for various pollutants <a class="reference external" href="https://www.airnow.gov/sites/default/files/2020-05/aqi-technical-assistance-document-sept2018.pdf">(EPA 454/B-18-007)</a>. Here is an example:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Unit</p></th>
+<th class="head"><p>Good <br>AQI  (0-50)</p></th>
+<th class="head"><p>Moderate <br>AQI  (51-100)</p></th>
+<th class="head"><p>Unhealthy for Sensitive Groups <br>AQI  (101-150)</p></th>
+<th class="head"><p>Unhealthy <br>AQI  (151-200)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PM2.5</p></td>
+<td><p>µg/m³</p></td>
+<td><p>0.0 - 12.0</p></td>
+<td><p>12.1 - 35.4</p></td>
+<td><p>35.5 - 55.4</p></td>
+<td><p>55.5 - 150.4</p></td>
+</tr>
+<tr class="row-odd"><td><p>PM10</p></td>
+<td><p>µg/m³</p></td>
+<td><p>0 - 54</p></td>
+<td><p>55 - 154</p></td>
+<td><p>155 - 254</p></td>
+<td><p>255 - 354</p></td>
+</tr>
+<tr class="row-even"><td><p>NO2</p></td>
+<td><p>ppb</p></td>
+<td><p>0 -  40</p></td>
+<td><p>41 - 100</p></td>
+<td><p>101 - 200</p></td>
+<td><p>201 - 250</p></td>
+</tr>
+<tr class="row-odd"><td><p>SO2</p></td>
+<td><p>ppb</p></td>
+<td><p>0 - 20</p></td>
+<td><p>21 - 50</p></td>
+<td><p>51 - 100</p></td>
+<td><p>101 - 304</p></td>
+</tr>
+<tr class="row-even"><td><p>CO</p></td>
+<td><p>ppm</p></td>
+<td><p>0.0 - 4.4</p></td>
+<td><p>4.5 - 9.4</p></td>
+<td><p>9.5 - 12.4</p></td>
+<td><p>12.5 - 15.4</p></td>
+</tr>
+<tr class="row-odd"><td><p>O3</p></td>
+<td><p>ppm</p></td>
+<td><p>0.000 - 0.054</p></td>
+<td><p>0.055 - 0.07</p></td>
+<td><p>0.071 - 0.085</p></td>
+<td><p>0.086 - 0.115</p></td>
+</tr>
+</tbody>
+</table>
+<p>The “Good” category ranges from 0 to 50 on the AQI, indicating satisfactory air quality. “Moderate” falls between 51 and 100, generally acceptable but may affect sensitive groups. “Unhealthy for Sensitive Groups” is 101-150, suggesting limits on outdoor activities for at-risk individuals. “Unhealthy” is 151-200, signaling adverse health effects for everyone, requiring outdoor limits.</p>
+<p>We can create a dictionary for each pollutant containing its respective concentration breakpoints and corresponding AQI values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Dictionary for breakpoints of 6 parameters</span>
+<span class="n">pollutants</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;PM2.5&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;breakpoints&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">12.1</span><span class="p">,</span> <span class="mf">35.5</span><span class="p">,</span> <span class="mf">55.5</span><span class="p">,</span> <span class="mf">150.4</span><span class="p">]},</span>
+    <span class="s1">&#39;PM10&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;breakpoints&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">155</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">354</span><span class="p">]},</span>
+    <span class="s1">&#39;NO2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;breakpoints&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">250</span><span class="p">]},</span>
+    <span class="s1">&#39;SO2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;breakpoints&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">304</span><span class="p">]},</span>
+    <span class="s1">&#39;CO&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;breakpoints&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">9.5</span><span class="p">,</span> <span class="mf">12.5</span><span class="p">,</span> <span class="mf">15.4</span><span class="p">]},</span>
+    <span class="s1">&#39;O3&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;breakpoints&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.055</span><span class="p">,</span> <span class="mf">0.071</span><span class="p">,</span> <span class="mf">0.086</span><span class="p">,</span> <span class="mf">0.115</span><span class="p">]}}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With linear interpolation we can calcuate the AQI for a given concentration.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_aqi</span><span class="p">(</span><span class="n">pollutant</span><span class="p">,</span> <span class="n">concentration</span><span class="p">):</span>
+    <span class="n">poll_data</span> <span class="o">=</span> <span class="n">pollutants</span><span class="p">[</span><span class="n">pollutant</span><span class="p">]</span>
+    <span class="n">bp</span> <span class="o">=</span> <span class="n">poll_data</span><span class="p">[</span><span class="s1">&#39;breakpoints&#39;</span><span class="p">]</span>
+    <span class="n">aqi</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">151</span><span class="p">,</span><span class="mi">200</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">concentration</span> <span class="o">&lt;=</span> <span class="n">bp</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">aqi_val</span> <span class="o">=</span> <span class="p">((</span><span class="n">aqi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">aqi</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">bp</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">*</span><span class="p">(</span><span class="n">concentration</span><span class="o">-</span><span class="n">bp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span> <span class="n">aqi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">concentration</span> <span class="o">&lt;=</span> <span class="n">bp</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+        <span class="n">aqi_val</span> <span class="o">=</span> <span class="p">((</span><span class="n">aqi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">aqi</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">bp</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="o">*</span><span class="p">(</span><span class="n">concentration</span><span class="o">-</span><span class="n">bp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span> <span class="n">aqi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">concentration</span> <span class="o">&lt;=</span> <span class="n">bp</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+        <span class="n">aqi_val</span> <span class="o">=</span> <span class="p">((</span><span class="n">aqi</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">-</span><span class="n">aqi</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">-</span><span class="n">bp</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span> <span class="o">*</span><span class="p">(</span><span class="n">concentration</span><span class="o">-</span><span class="n">bp</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">+</span> <span class="n">aqi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">aqi_val</span> <span class="o">=</span> <span class="p">((</span><span class="n">aqi</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">-</span><span class="n">aqi</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">-</span><span class="n">bp</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span> <span class="o">*</span><span class="p">(</span><span class="n">concentration</span><span class="o">-</span><span class="n">bp</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="o">+</span> <span class="n">aqi</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        
+    <span class="k">return</span> <span class="n">aqi_val</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we can call this function to calculate AQI value for each sample.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Six air quality parameters</span>
+<span class="n">parameters</span> <span class="o">=</span><span class="p">[</span><span class="s1">&#39;PM2.5&#39;</span><span class="p">,</span><span class="s1">&#39;PM10&#39;</span><span class="p">,</span><span class="s1">&#39;NO2&#39;</span><span class="p">,</span><span class="s1">&#39;SO2&#39;</span><span class="p">,</span><span class="s1">&#39;CO&#39;</span><span class="p">,</span><span class="s1">&#39;O3&#39;</span><span class="p">]</span>
+
+<span class="c1">#Calculate aqi for pre and post data</span>
+<span class="k">for</span> <span class="n">dataset</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;pre&#39;</span><span class="p">,</span> <span class="s1">&#39;post&#39;</span><span class="p">]:</span>
+
+    <span class="c1">#Intiate variable aqi to store calculated aqi values</span>
+    <span class="k">if</span> <span class="n">dataset</span> <span class="o">==</span> <span class="s1">&#39;pre&#39;</span><span class="p">:</span>
+        <span class="n">aqi_data</span> <span class="o">=</span> <span class="n">pre_values</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">dataset</span> <span class="o">==</span> <span class="s1">&#39;post&#39;</span><span class="p">:</span>
+        <span class="n">aqi_data</span> <span class="o">=</span> <span class="n">post_values</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="c1">#Loop through each row and each element in the row to calcuate aqi</span>
+    <span class="k">for</span> <span class="n">row_index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">aqi_data</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">col_index</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+            
+            <span class="c1">#Get parameter name</span>
+            <span class="n">parameter</span><span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="n">col_index</span><span class="p">]</span>
+    
+            <span class="c1">#Pass parameter name and value to calculate_aqi</span>
+            <span class="c1">#Update pre_aqi with the calculated aqi for that parameter and date</span>
+            <span class="n">aqi_data</span><span class="p">[</span><span class="n">row_index</span><span class="p">,</span><span class="n">col_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">calculate_aqi</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span>
+
+    <span class="c1">#Display aqi</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">aqi_data</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">aqi_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">aqi_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    
+    <span class="c1"># Save aqi for pre and post</span>
+    <span class="k">if</span> <span class="n">dataset</span> <span class="o">==</span> <span class="s1">&#39;pre&#39;</span><span class="p">:</span>
+        <span class="n">pre_aqi</span> <span class="o">=</span> <span class="n">aqi_data</span>
+    <span class="k">elif</span> <span class="n">dataset</span> <span class="o">==</span> <span class="s1">&#39;post&#39;</span><span class="p">:</span>
+        <span class="n">post_aqi</span> <span class="o">=</span> <span class="n">aqi_data</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="save-aqi-values-as-numpy-arrays-extra">
+<h4>3.2.2 Save AQI values as NumPy arrays (<em>extra</em>)<a class="headerlink" href="#save-aqi-values-as-numpy-arrays-extra" title="Link to this heading">#</a></h4>
+<p>This step is not needed in this exercise, but we want to use this data in the Matplotlib exercise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save the data arrays to a file </span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;data/pre_aqi.npy&#39;</span><span class="p">,</span> <span class="n">pre_aqi</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;data/post_aqi.npy&#39;</span><span class="p">,</span> <span class="n">post_aqi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Load saved data for double checking.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pre_aqi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data/pre_aqi.npy&#39;</span><span class="p">)</span>
+<span class="n">post_aqi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data/post_aqi.npy&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pre_aqi:&quot;</span><span class="p">,</span> <span class="n">pre_aqi</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">pre_aqi</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;post_aqi:&quot;</span><span class="p">,</span> <span class="n">post_aqi</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">pre_aqi</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculate-mean-aqi-values-for-each-parameter">
+<h4>3.2.3 Calculate mean AQI values for each parameter<a class="headerlink" href="#calculate-mean-aqi-values-for-each-parameter" title="Link to this heading">#</a></h4>
+<p>We calculated the AQI for PM2.5, PM10, etc.. Now let us compare the mean AQI for pre and post lockdown for each parameter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Six air quality parameters</span>
+<span class="n">parameters</span> <span class="o">=</span><span class="p">[</span><span class="s1">&#39;PM2.5&#39;</span><span class="p">,</span><span class="s1">&#39;PM10&#39;</span><span class="p">,</span><span class="s1">&#39;NO2&#39;</span><span class="p">,</span><span class="s1">&#39;SO2&#39;</span><span class="p">,</span><span class="s1">&#39;CO&#39;</span><span class="p">,</span><span class="s1">&#39;O3&#39;</span><span class="p">]</span>
+
+<span class="c1"># Calculate mean concentrations for pre-lockdown and post-lockdown</span>
+<span class="n">pre_aqi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">pre_aqi</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">post_aqi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">post_aqi</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Display results in a table form with `parameters` as index,</span>
+<span class="c1"># and first and second column values are `pre_mean` and `post_mean` </span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Pre Mean AQI&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">pre_aqi</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> 
+                   <span class="s1">&#39;Post Mean AQI&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">post_aqi</span><span class="p">,</span><span class="mi">2</span><span class="p">)},</span> 
+                  <span class="n">index</span><span class="o">=</span><span class="n">parameters</span><span class="p">)</span>
+
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The means of the pre and post seem similar. Let us confirm this with some statstical analysis.</p>
+</section>
+</section>
+</section>
+<section id="hypothesis-testing">
+<h2>4. Hypothesis testing<a class="headerlink" href="#hypothesis-testing" title="Link to this heading">#</a></h2>
+<section id="introduction">
+<h3>4.1 Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h3>
+<p>We analyze one year of air quality data before and after the April 2020 lockdown order in Miami, Florida. The air quality parameters considered are PM2.5, PM10, NO2, SO2, CO, and O3. We employ hypothesis testing for the analysis. To learn about hypothesis testing, you can refer to this <a class="reference external" href="https://cdn.serc.carleton.edu/files/eddie/teaching_materials/vignettes/statvignette06_hyptesting_10_14_2022.v4.ppt">Statistical Vignettes presentation of Project EDDIE</a>.</p>
+<p>Hypothesis testing is a statistical method used to compare sample data and make conclusions about a population. With air quality data before and after a COVID-19 lockdown, we are investigating differences in air quality parameters. We typically set up null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span> and alternative hypothesis <span class="math notranslate nohighlight">\(H_a\)</span>. For instance, for PM2.5 concentration:</p>
+<ul class="simple">
+<li><p>Null hypthesos <span class="math notranslate nohighlight">\(H_0\)</span>: Mean PM2.5 before and after the lockdown are equal.</p></li>
+<li><p>Alternative hyptheis <span class="math notranslate nohighlight">\(H_a\)</span>: Mean PM2.5 before and after the lockdown differ.</p></li>
+</ul>
+<p>Then to determine whether there is a statistically significant difference between the mean PM2.5 concentrations before and after the lockdown we can calculate the test statistic and p-value.</p>
+<ul class="simple">
+<li><p>We choose a statistic test like a t-test or Mann-Whitney U test based on based on the distribution of our data (e.g., whether it is normally distributed).</p></li>
+<li><p>We set the significance level to 0.05, indicating that we are willing to accept a 5% chance of mistakenly rejecting the null hypothesis when it is actually true.</p></li>
+<li><p>If the p-value is below 0.05, we reject the null hypothesis, indicating a significant difference in PM2.5 concentrations pre and post COVID-19 lockdown.</p></li>
+</ul>
+<p>We can repeat the same for the other air quality parameters.</p>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Info</p>
+The t-test is a statistical test used to compare the means of two independent groups, assuming that the data is normally distributed and the variances of the two groups are equal. We can relaxe the variance condtion. For example, in the t-test function <code>ttest_ind</code> in scipy library, we can set <code>equal_var=False</code>. For non-normally distributed data or small samples, the Mann-Whitney U test compares two groups based on ranks by checking if one group tends to have higher values.</div></section>
+<section id="method">
+<h3>4.2 Method<a class="headerlink" href="#method" title="Link to this heading">#</a></h3>
+<p>Hypothesis testing steps for each parameter:</p>
+<ol class="arabic simple">
+<li><p>Hypotheses:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_0\)</span>: No lockdown impact</p></li>
+<li><p><span class="math notranslate nohighlight">\(H_1\)</span>: Lockdown impact present</p></li>
+</ul>
+</li>
+<li><p>Significance Level: Set at 0.05</p></li>
+<li><p>Data Preparation: Organize pre and post data</p></li>
+<li><p>Test Statistic Selection: Choose t-test or Mann-Whitney U test for mean comparison</p></li>
+<li><p>Testing: Use <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> to calculate p-values</p></li>
+<li><p>Interpretation: Reject <span class="math notranslate nohighlight">\(H_0\)</span> if p-value &lt; 0.05, indicating significant lockdown impact on Miami’s air quality</p></li>
+</ol>
+<p>Performing a t-test to assess the statistical significance of mean differences.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Air quality parameters</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PM2.5&#39;</span><span class="p">,</span> <span class="s1">&#39;PM10&#39;</span><span class="p">,</span>  <span class="s1">&#39;NO2&#39;</span><span class="p">,</span> <span class="s1">&#39;SO2&#39;</span><span class="p">,</span>  <span class="s1">&#39;CO&#39;</span><span class="p">,</span> <span class="s1">&#39;O3&#39;</span><span class="p">]</span>
+
+<span class="c1">#Loop for all parameter is pre_data and post_data</span>
+
+
+    <span class="c1"># Step 3 Data prearation</span>
+
+    <span class="c1"># Step 4 Select test</span>
+    <span class="c1">#&quot;Student t-test&quot;,  &quot;Mann-Whitney U test&quot;</span>
+
+    <span class="c1"># Step 5 Perform test</span>
+        <span class="c1"># Perform a t-test for PM2.5</span>
+  
+        <span class="c1"># Perform Mann-Whitney U test</span>
+
+
+    <span class="c1"># Step 6 Check if the result is significant</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Info</p>
+In the example above, we utilized SciPy, a Python library for scientific computing that encompasses tools for optimization, integration, interpolation, linear algebra, statistics, and more. While we have not covered SciPy or statistical tests in this class, a key learning objective is to independently explore and apply new libraries and methods</div></section>
+<section id="results">
+<h3>4.3 Results<a class="headerlink" href="#results" title="Link to this heading">#</a></h3>
+<p>Present your main findings here.</p>
+</section>
+<section id="discussion">
+<h3>4.4 Discussion<a class="headerlink" href="#discussion" title="Link to this heading">#</a></h3>
+<p>Critically discuss your hypthesis testing results here.</p>
+<p>Instruction:</p>
+<ul class="simple">
+<li><p>Discuss p-values showing understanding of the statistical method used</p></li>
+<li><p>Explain expected and unexpected results with references to relevant studies</p></li>
+<li><p>Discuss analysis limitations and suggest areas for further analysis to enhance understanding</p></li>
+<li><p>Ensure a well-organized, coherent response within 150-300 words</p></li>
+<li><p>Use appropriate citations to support arguments</p></li>
+</ul>
+<p>The learning objective of this question is to help you to enhance your critical thinking in data analysis, use of references to support your arguments, and clarity in presenting findings. This shall help you to prepare for your final project.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters\7. NumPy for Scientific Computing  7. NumPy for Scientific Computing"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="numpy.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lessons 18-19: NumPy Basics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/matplotlib.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lesson 20 - 21: Matplotlib Basics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement">1. Problem statement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-data">2. Prepare data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-data-as-numpy-array">2.1 Read data as Numpy array</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-dates-and-values">2.2 Extract dates and values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-rows-with-nans">2.3 Remove rows with NaNs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-pre-and-post-lockdown-data">2.4 Extracting pre and post-lockdown data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-numppy-arrays-of-dates-and-values-extra">2.5 Save NumpPy arrays of dates and values (<em>extra</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-information">2.6 Additional information</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-values-for-each-parameter-befor-and-after-lockdown">3. Mean values for each parameter befor and after lockdown</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-approach">3.1 Simple approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aqi-approach-optional">3.2 AQI approach (<em>optional</em>)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-aqi-values">3.2.1 Calculate AQI values</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#save-aqi-values-as-numpy-arrays-extra">3.2.2 Save AQI values as NumPy arrays (<em>extra</em>)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-mean-aqi-values-for-each-parameter">3.2.3 Calculate mean AQI values for each parameter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">4. Hypothesis testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">4.1 Introduction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method">4.2 Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results">4.3 Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">4.4 Discussion</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed Elshall & Thalia Valle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

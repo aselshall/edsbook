@@ -1,0 +1,1564 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lessons 25-26 : Xarray Basics &#8212; Environmental Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays/xarray';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lesson 28: CartoPy Basics" href="cartopy.html" />
+    <link rel="prev" title="Lessons 24 : Climate Data - CMIP6 and Remote Sensing" href="climate.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Environmental Data Science - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Environmental Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    EGN 4930 / EGN 5932C Special Topic: Environmental Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0. Good Coding Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP1_VariableName.html">GCP1 - Selecting “good” variable names</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP2_DescribingCode.html">Describing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP3_ReadableCode.html">Readable Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP4_WritingScripts.html">Writing Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP5_Assertions.html">Assertions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson2.html">Lesson 2 Getting Started</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Excercise1.html">Exercise 1 - Installing Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson3_PythonBasics1.html">Lesson 3 - Python Basics 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson4_list_solution.html">Lesson 4 - Python Basics 2 - Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson5_formatting.html">Lesson 5 - Python Basics 3 - Formatting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson6_Loops.html">Lesson 6 - Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson7_conditional_statements.html">Lesson 7 - Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson8_functions.html">Lesson 8 - Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson9_modules.html">Lesson 9 - Script Files and Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Exercise3.html">Exercise 3 - Python Programming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 4. Pandas for Tabular Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Lesson10_pandas.html">Lessons 10 - 14 - Pandas Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Exercise4.html">Exercise 4 - Pandas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Artificial intelligence (AI) Coding Assistance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/OpenAI_API_Key_for_Jupyter_AI_Extension.html">OpenAI API key for Jupyter AI extension (Optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/AIcoding.html">Lesson 15 AI coding assistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/Exercise_5_API_Key_Module.html">Exercise 5 - API-Key Module (Optional)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Data Science Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Workflow.html">Lessons 16 - Data Science Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Exercise6.html">Exercise 6 - AQI Data Preparation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. NumPy for Scientific Computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/numpy.html">Lessons 18-19 - NumPy Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/exercise7.html">Exercise 7 - NumPy - Air quality data analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8. Matplotlib for Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/matplotlib.html">Lesson 20 - 21 - Matplotlib Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/exercise8.html">Exercise 8 Matplotlib - Air quality data visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="climate.html">Lesson 24 - Climate Data - CMIP6 and Remote Sensing Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lesson 25-27 - Xarray basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cartopy.html">Lesson 28 - CartoPy basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise9.html">Exercise 9 - Sea surface height and red tides (Optional, Advanced)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">10. Introduction to Google Earth Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.0-%20Intro%20to%20GEE.html">Lesson 30 - Intro to Google Earth Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.1-%20JavaScript%20API%20vs.%20Python%20API.html">Lesson 31 - JavaScript API vs. Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html">Lesson 32 - Using Google Earth Engine in a Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/geemap1.html">Exercise 10 -  GeeMap, GEE, and Sentinel-2 Data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Chapters/9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays/xarray.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapters/9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays/xarray.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays/xarray.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lessons 25-26 : Xarray Basics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-and-import">Installation and import</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-concepts">1. Basic Concepts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#label-dimensions">1.1 Label dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataarray-and-dataset">1.2 DataArray and DataSet</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-dataarray-and-dataset">2. Creating a DataArray and Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-dataarray">2.1 Creating a DataArray</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-dataset-with-one-variable">2.2 Creating a Dataset with one variable</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-dataset-with-multiple-variables">2.3 Creating a Dataset with multiple variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-dataarray-and-dataset">3. Understanding DataArray and DataSet</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinates-and-indexes">2.3.1 Coordinates and indexes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cooridnates-versus-variables">2.3.2 Cooridnates versus variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-with-aligined-coordinates-advanced">2.3.3 Dataset with aligined coordinates (<em>advanced</em>)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-data">4. Exploring Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-data-indexing">4.1 Selecting data (indexing)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-data">4.2 Plotting data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-based-indexing-with-isel">4.3 Integer-based indexing with isel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#label-based-indexing-with-sel">4.4 Label-based indexing with sel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-selection-with-loc-attribute-optional">4.6 Data selection with loc attribute (<em>Optional</em>)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation">5. Computation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transformation">5.1 Data transformation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-aggregation">5.2 Data aggregation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-aggregation-methods">5.2.1 Data aggregation methods</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#resample">5.2.2 Resample</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-interpolation-and-extrapolation">5.3 Data interpolation and extrapolation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combing-data">6. Combing Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combing-data-with-concat">6.1 Combing data with concat</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-data-with-merge">6.2 Combining data with merge</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting-advanced">7. Broadcasting (<em>advanced</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-and-read-data-to-a-netcdf-file">8. Write and read data to a netCDF file</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-to-a-netcdf-file-using-to-netcdf">8.1 Write to a NetCDF file using <code class="docutils literal notranslate"><span class="pre">.to_netcdf</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-a-netcdf-file-using-xr-open-dataset">8.2 Read a NetCDF file using <code class="docutils literal notranslate"><span class="pre">xr.open_dataset</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-multiple-netcdf-files-using-xr-open-mfdataset">8.3 Read multiple netCDF files using <code class="docutils literal notranslate"><span class="pre">xr.open_mfdataset</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-next">What’s next?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-and-references">Resources and references</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <img src=https://docs.xarray.dev/en/stable/_static/Xarray_Logo_RGB_Final.svg width=400 /><section class="tex2jax_ignore mathjax_ignore" id="lessons-25-26-xarray-basics">
+<h1>Lessons 25-26 : Xarray Basics<a class="headerlink" href="#lessons-25-26-xarray-basics" title="Link to this heading">#</a></h1>
+<p>This lesson is modified from <a class="reference external" href="https://foundations.projectpythia.org/core/xarray/xarray-intro.html">Introduction to Xarray</a> by <a class="reference external" href="https://projectpythia.org">Project Pythia</a>, and <a class="reference external" href="https://earth-env-data-science.github.io/lectures/xarray/xarray.html">Xarray Fundamentals</a> by <a class="reference external" href="https://earth-env-data-science.github.io/intro.html">Earth and Environmental Data Science</a>.</p>
+<p><a class="reference external" href="https://mybinder.org/v2/gh/aselshall/eds/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Xarray is a Python library for handling labeled multi-dimensional arrays, commonly used for geospatial data such as climate, oceanographic, and remote sensing data in formats like netCDF. By the end of this lesson, you will be able to:</p>
+<ul class="simple">
+<li><p>explain essential features of Xarray</p></li>
+<li><p>load, manipulate, analyze, and visualize data in netCDF format</p></li>
+<li><p>leverage Xarray for your water and environmental data science projects</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="installation-and-import">
+<h2>Installation and import<a class="headerlink" href="#installation-and-import" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pip install xarray</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pip install cartopy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pip install netCDF4</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">hvplot.xarray</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span> <span class="c1">#  Suppress warnings issued by Cartopy when downloading data files</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;xarray&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="basic-concepts">
+<h2>1. Basic Concepts<a class="headerlink" href="#basic-concepts" title="Link to this heading">#</a></h2>
+<section id="label-dimensions">
+<h3>1.1 Label dimensions<a class="headerlink" href="#label-dimensions" title="Link to this heading">#</a></h3>
+<p>Xarray borrows from pandas. Xarray introduces labels in the form of dimensions, coordinates, and attributes on top of raw NumPy-like arrays, which makes working with arrays simple and clear.</p>
+<p>Let us look at a simple example of a 4D array representing sea surface height (zos) data with dimensions:</p>
+<ul class="simple">
+<li><p>latitude,</p></li>
+<li><p>longitude,</p></li>
+<li><p>depth,</p></li>
+<li><p>time</p></li>
+</ul>
+<p>We can add as many labeled dimensions. We can use Xarray to create a DataArray or DataSet with labeled dimensions and coordinates, and include metadata such as units and a description for better understanding and documentation.</p>
+</section>
+<section id="dataarray-and-dataset">
+<h3>1.2 DataArray and DataSet<a class="headerlink" href="#dataarray-and-dataset" title="Link to this heading">#</a></h3>
+<p>A Dataset holds many DataArrays which potentially can share coordinates. In analogy to pandas:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pandas.Series : pandas.Dataframe :: xarray.DataArray : xarray.Dataset
+</pre></div>
+</div>
+<p><img alt="image.png" src="Chapters/9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays/attachment:8d2e33f1-48dc-4de9-84b6-1ce67fda129b.png" /></p>
+</section>
+</section>
+<section id="creating-a-dataarray-and-dataset">
+<h2>2. Creating a DataArray and Dataset<a class="headerlink" href="#creating-a-dataarray-and-dataset" title="Link to this heading">#</a></h2>
+<section id="creating-a-dataarray">
+<h3>2.1 Creating a DataArray<a class="headerlink" href="#creating-a-dataarray" title="Link to this heading">#</a></h3>
+<p>Xarray handles multidimensional and spatiotemporal data using labeled dimensions and coordinates and maintain metadata. Let us look at a simple example of a 4D array representing sea surface height (zos) data with</p>
+<ul class="simple">
+<li><p>latitude,</p></li>
+<li><p>longitude,</p></li>
+<li><p>depth,</p></li>
+<li><p>date</p></li>
+</ul>
+<p>We will store metadata according to  the <a class="reference external" href="http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#_description_of_the_data">CF Conventions</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create coordinates for the four labeled dimensions</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2024-01-03&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Generating a date range for the data</span>
+<span class="n">depths</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>  <span class="c1"># List of depth values</span>
+<span class="n">latitudes</span> <span class="o">=</span> <span class="p">[</span><span class="mf">24.5</span><span class="p">,</span> <span class="mf">26.5</span><span class="p">,</span> <span class="mf">28.5</span><span class="p">,</span> <span class="mf">30.5</span><span class="p">]</span>  <span class="c1"># latitude values </span>
+<span class="n">longitudes</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">87</span><span class="p">,</span> <span class="o">-</span><span class="mf">84.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">83</span><span class="p">,</span> <span class="o">-</span><span class="mf">81.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">79</span><span class="p">]</span>  <span class="c1"># longitude values </span>
+
+<span class="c1"># Create a 4D Numpy Array representing sea surface height (zos) values  for a 2x3x4x5 grid</span>
+<span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">depths</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">latitudes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">longitudes</span><span class="p">))</span>
+<span class="n">zos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span> <span class="n">size</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">#sea surface height [m]</span>
+
+<span class="c1"># Create a DataArray with zos values</span>
+<span class="c1"># with labeled dimensions and coordinates </span>
+<span class="n">da</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">zos</span><span class="p">,</span>                                    <span class="c1"># zos values</span>
+                  <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">],</span>   <span class="c1"># dimensions</span>
+                  <span class="n">coords</span><span class="o">=</span><span class="p">{</span>                                <span class="c1"># coordinates </span>
+                      <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">dates</span><span class="p">,</span> 
+                      <span class="s1">&#39;depth&#39;</span><span class="p">:</span> <span class="n">depths</span><span class="p">,</span>  
+                      <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="n">latitudes</span><span class="p">,</span> 
+                      <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="n">longitudes</span>
+                  <span class="p">})</span>  
+
+<span class="c1"># Add metadata to the DataArray</span>
+<span class="n">da</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Long Name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sea_surface_height_above_geoid&#39;</span>
+<span class="n">da</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Short Name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;zos&#39;</span>
+<span class="n">da</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Units&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;meters&#39;</span>
+<span class="n">da</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Sea surface height is the height of the sea surface above the geoid, </span><span class="se">\</span>
+<span class="s2">which is an equipotential surface that approximates mean sea level.</span><span class="se">\</span>
+<span class="s2">The sea surface height can be influenced by various factors</span><span class="se">\</span>
+<span class="s2">such as ocean currents, tides, winds, and temperature.&quot;</span>
+
+<span class="c1"># Display DataArray with labeled dimensions and coordinates, and metadata</span>
+<span class="n">display</span><span class="p">(</span><span class="n">da</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="creating-a-dataset-with-one-variable">
+<h3>2.2 Creating a Dataset with one variable<a class="headerlink" href="#creating-a-dataset-with-one-variable" title="Link to this heading">#</a></h3>
+<p>A Dataset holds many DataArrays which potentially can share coordinates. However, we can also create a Dataset with just one variable. Let use the above data to create a DataSet.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create coordinates for the four labels</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Generating a time range for the data</span>
+<span class="n">depths</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>  <span class="c1"># List of depth values</span>
+<span class="n">latitudes</span><span class="o">=</span> <span class="p">[</span><span class="mf">24.5</span><span class="p">,</span> <span class="mf">26.5</span><span class="p">,</span> <span class="mf">28.5</span><span class="p">,</span> <span class="mf">30.5</span><span class="p">]</span>  <span class="c1"># latitude values </span>
+<span class="n">longitudes</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">87</span><span class="p">,</span> <span class="o">-</span><span class="mf">84.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">83</span><span class="p">,</span> <span class="o">-</span><span class="mf">81.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">79</span><span class="p">]</span>  <span class="c1"># longitude values </span>
+
+<span class="c1"># Create a 4D Numpy Array representing values  for a 2x3x4x5 grid</span>
+<span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">depths</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">latitudes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">longitudes</span><span class="p">))</span>
+<span class="n">zos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span> <span class="n">size</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">#sea surface height [m]</span>
+
+<span class="c1"># Create a DataArray with zos values</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;zos&#39;</span><span class="p">:</span> <span class="p">((</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">),</span> <span class="n">zos</span><span class="p">),</span> <span class="c1">#zos values and its dimensions </span>
+    <span class="p">},</span>   
+    <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">dates</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">:</span> <span class="n">depths</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="n">latitudes</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="n">longitudes</span><span class="p">})</span> <span class="c1">#Coordinates</span>
+
+<span class="c1"># Add metadata to the DataArray</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">zos</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Long Name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sea_surface_height_above_geoid&#39;</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">zos</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Short Name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;zos&#39;</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">zos</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Units&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;meters&#39;</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">zos</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Sea surface height is the height of the sea surface above the geoid, </span><span class="se">\</span>
+<span class="s2">which is an equipotential surface that approximates mean sea level.</span><span class="se">\</span>
+<span class="s2">The sea surface height can be influenced by various factors</span><span class="se">\</span>
+<span class="s2">such as ocean currents, tides, winds, and temperature.&quot;</span>
+
+<span class="c1"># Displaying DataSet with labeled dimensions and coordinates, and metadata</span>
+<span class="n">display</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="creating-a-dataset-with-multiple-variables">
+<h3>2.3 Creating a Dataset with multiple variables<a class="headerlink" href="#creating-a-dataset-with-multiple-variables" title="Link to this heading">#</a></h3>
+<p>Let us put together a Dataset with sea surface temperature, and salinty</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create coordinates for the four labels</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Generating a time range for the data</span>
+<span class="n">depths</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>  <span class="c1"># List of depth values</span>
+<span class="n">lat</span><span class="o">=</span> <span class="p">[</span><span class="mf">24.5</span><span class="p">,</span> <span class="mf">26.5</span><span class="p">,</span> <span class="mf">28.5</span><span class="p">,</span> <span class="mf">30.5</span><span class="p">]</span>  <span class="c1"># latitude values </span>
+<span class="n">lon</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">87</span><span class="p">,</span> <span class="o">-</span><span class="mf">84.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">83</span><span class="p">,</span> <span class="o">-</span><span class="mf">81.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">79</span><span class="p">]</span>  <span class="c1"># longitude values </span>
+
+<span class="c1"># Create a 4D Numpy Array representing values  for a 2x3x4x5 grid</span>
+<span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">depths</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">lat</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">lon</span><span class="p">))</span>
+<span class="n">tos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">#sea surface temperature [C]</span>
+<span class="n">sos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">#sea surface salinty (PSU) </span>
+
+
+<span class="c1"># Create a DataArray with zos values</span>
+<span class="n">ds2</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;tos&#39;</span><span class="p">:</span> <span class="p">((</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">),</span> <span class="n">tos</span><span class="p">),</span>   <span class="c1">#tos values and its dimensions </span>
+        <span class="s1">&#39;sos&#39;</span><span class="p">:</span> <span class="p">((</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">),</span> <span class="n">sos</span><span class="p">),</span>   <span class="c1">#sos values and its dimensions </span>
+    <span class="p">},</span>
+    <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">dates</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">:</span> <span class="n">depths</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="n">latitudes</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="n">longitudes</span><span class="p">})</span>
+
+<span class="c1"># Add metadata to the DataArray</span>
+<span class="n">ds2</span><span class="o">.</span><span class="n">tos</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Long Name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sea_surface_temperature&#39;</span>
+<span class="n">ds2</span><span class="o">.</span><span class="n">tos</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Short Name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;tos&#39;</span>
+<span class="n">ds2</span><span class="o">.</span><span class="n">tos</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Units&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Degree Celsius&#39;</span>
+<span class="n">ds2</span><span class="o">.</span><span class="n">sos</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Long Name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sea_surface_salinty&#39;</span>
+<span class="n">ds2</span><span class="o">.</span><span class="n">sos</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Short Name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sos&#39;</span>
+<span class="n">ds2</span><span class="o">.</span><span class="n">sos</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Units&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Practical salinity units (PSU)&#39;</span>
+
+<span class="c1"># Displaying  DataSet with labeled dimensions and coordinates, and metadata</span>
+<span class="n">display</span><span class="p">(</span><span class="n">ds2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="understanding-dataarray-and-dataset">
+<h2>3. Understanding DataArray and DataSet<a class="headerlink" href="#understanding-dataarray-and-dataset" title="Link to this heading">#</a></h2>
+<section id="coordinates-and-indexes">
+<h3>2.3.1 Coordinates and indexes<a class="headerlink" href="#coordinates-and-indexes" title="Link to this heading">#</a></h3>
+<p>The coordinates are used to create <em>indexes</em>, which work similar to a Pandas index.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Accessing the index objects associated with the dimensions of the DataArray</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">indexes</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>DataArrays have coordinates associated with them. For example, <code class="docutils literal notranslate"><span class="pre">lat</span></code> is one such coordinate variable. We can access <code class="docutils literal notranslate"><span class="pre">lat</span></code> coordinate variable from the DataArray <code class="docutils literal notranslate"><span class="pre">ds</span></code> by using <code class="docutils literal notranslate"><span class="pre">ds.lat</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieving the values of the `lat` coordinate from the DataArray `ds`.</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">lat</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="cooridnates-versus-variables">
+<h3>2.3.2 Cooridnates versus variables<a class="headerlink" href="#cooridnates-versus-variables" title="Link to this heading">#</a></h3>
+<p>Data variables can be changed using arithmetic operations or other functions, while the coordinates remain unchanged.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">da</span><span class="o">+</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dataset-with-aligined-coordinates-advanced">
+<h3>2.3.3 Dataset with aligined coordinates (<em>advanced</em>)<a class="headerlink" href="#dataset-with-aligined-coordinates-advanced" title="Link to this heading">#</a></h3>
+<p>Let us assume that we want to add ‘longitude’ coordinate that aligns with the existing ‘latitude’ coordinate in the Dataset. This means that the ‘longitude’ values will be associated with each ‘latitude’.
+longitudes. This is an array-like object containing the actual longitude values corresponding to each latitude coordinate in the Dataset.</p>
+<p>Let us add a coordinate variable ‘longitude’ that will align with the existing ‘latitude’ coordinate, such that the values provided in the longitudes array will be associated with each latitude value in the Dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create coordinates for the four labels</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Generating a time range for the data</span>
+<span class="n">latitudes</span><span class="o">=</span> <span class="p">[</span><span class="mf">24.5</span><span class="p">,</span> <span class="mf">26.5</span><span class="p">,</span> <span class="mf">28.5</span><span class="p">]</span>  <span class="c1"># latitude values </span>
+<span class="n">longitudes</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">87</span><span class="p">,</span> <span class="o">-</span><span class="mf">84.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">83</span><span class="p">]</span>  <span class="c1"># longitude values </span>
+
+<span class="c1"># Create a 4D Numpy Array representing values  for a 2x3x4x5 grid</span>
+<span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">latitudes</span><span class="p">))</span>
+<span class="n">zos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span> <span class="n">size</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">#sea surface height [m]</span>
+
+<span class="c1"># Create a DataArray with zos values</span>
+<span class="n">ds_aliginded</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;zos&#39;</span><span class="p">:</span> <span class="p">((</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;latitude&#39;</span><span class="p">),</span> <span class="n">zos</span><span class="p">)},</span> <span class="c1">#zos values and its dimensions    </span>
+    <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">dates</span><span class="p">,</span> <span class="s1">&#39;latitude&#39;</span><span class="p">:</span> <span class="n">latitudes</span><span class="p">})</span> <span class="c1">#Coordinates</span>
+
+<span class="c1"># Add metadata to the DataArray</span>
+<span class="n">ds_aliginded</span><span class="o">.</span><span class="n">zos</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Longitude coordinates align with the latitude coordinates&quot;</span>
+
+<span class="c1"># Add a new coordinate variable &#39;longitude&#39; to the xarray Dataset &#39;ds&#39;</span>
+<span class="c1"># The new coordinate will be aligned with the existing &#39;latitude&#39; coordinate</span>
+<span class="c1"># The values for the &#39;longitude&#39; coordinate are provided in the &#39;longitudes&#39; array</span>
+<span class="n">ds_aliginded</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span> <span class="n">longitudes</span><span class="p">)</span>
+
+<span class="c1"># Displaying DataSet with labeled dimensions and coordinates, and metadata</span>
+<span class="n">display</span><span class="p">(</span><span class="n">ds_aliginded</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+The 'longitude' variable is specified under the 'latitude' coordinate. That is the 'longitude' values are aligned or linked to each specific 'latitude' value. This kind of hierarchical structure is commonly used in geospatial datasets where longitude and latitude are interrelated.
+</div></section>
+</section>
+<section id="exploring-data">
+<h2>4. Exploring Data<a class="headerlink" href="#exploring-data" title="Link to this heading">#</a></h2>
+<section id="selecting-data-indexing">
+<h3>4.1 Selecting data (indexing)<a class="headerlink" href="#selecting-data-indexing" title="Link to this heading">#</a></h3>
+<p>When indexing a DataArray or Dataset in xarray using the syntax <code class="docutils literal notranslate"><span class="pre">ds[:,:,</span> <span class="pre">...]</span></code> we are selecting data along dimensions, which is equivealent to using the <code class="docutils literal notranslate"><span class="pre">isel()</span></code> method as shown later.</p>
+<p>Let us use indexing <code class="docutils literal notranslate"><span class="pre">ds.zos[:,:,:,:]</span></code> to select ‘zos’ values for the:</p>
+<ul class="simple">
+<li><p>first ‘date’ value,</p></li>
+<li><p>third ‘depth’ level,</p></li>
+<li><p>first three ‘lat’ values,</p></li>
+<li><p>last two ‘lon’ values</p></li>
+</ul>
+<p>and assign this slice to variable <code class="docutils literal notranslate"><span class="pre">subset</span></code>. Here is how to do it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select a subset of the &#39;zos&#39; DataArray from the Dataset &#39;ds&#39;</span>
+<span class="c1"># The subset includes the first time step, the third depth level, </span>
+<span class="c1"># the first 3 latitude values, and the last 2 longitude values.</span>
+
+
+<span class="n">subset</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also retrieve the coordinate values. For example, retieve the lat values for the above selection <code class="docutils literal notranslate"><span class="pre">ds.zos[].lat</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select the latitude values corresponding to the subset obtained from the &#39;zos&#39; DataArray in the Dataset &#39;ds&#39;</span>
+<span class="c1"># The subset includes the first time step, the third depth level, </span>
+<span class="c1"># the first 3 latitude values, and the last 2 longitude values.</span>
+
+
+<span class="n">subset_lat</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plotting-data">
+<h3>4.2 Plotting data<a class="headerlink" href="#plotting-data" title="Link to this heading">#</a></h3>
+<p>Similar to Pandas, Xarray has built-in plotting for quick visualization.</p>
+<p>Let us do a 1d plot zos values along all ‘lat’ values, for the first ‘date’ value, first ‘depth’, and last ‘lon’ value. First we need to select this data as we did above and the call the <code class="docutils literal notranslate"><span class="pre">.plot</span></code> method similar to Pandas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting the values of the &#39;zos&#39; DataArray from the Dataset &#39;ds&#39;</span>
+<span class="c1"># The plot is for the first time step, the first depth level, </span>
+<span class="c1"># all latitude values, and the last longitude value.</span>
+<span class="c1"># Each data point is marked with a red circle marker (&#39;o&#39;).</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us do a 2d plot of zos values along ‘lat’ and ‘lon’ values for the third ‘depth’ level of the second ‘date’ value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting a 2D plot from the &#39;zos&#39; DataArray in the Dataset &#39;ds&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="integer-based-indexing-with-isel">
+<h3>4.3 Integer-based indexing with isel<a class="headerlink" href="#integer-based-indexing-with-isel" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">.sel()</span></code> and <code class="docutils literal notranslate"><span class="pre">.isel()</span></code> methods are powerful for data selection.  The <code class="docutils literal notranslate"><span class="pre">.sel()</span></code> method is used for selection based on labels, while the <code class="docutils literal notranslate"><span class="pre">.isel()</span></code> method is used for selection based on integer positions within the dimensions of the data array. For example, <code class="docutils literal notranslate"><span class="pre">ds.zos.isel(time=0,</span> <span class="pre">lat=slice(0,3))</span></code> selects the first time step and the first three latitude values from DataArray <code class="docutils literal notranslate"><span class="pre">ds.zos</span></code>.</p>
+<p>Let us select the:</p>
+<ul class="simple">
+<li><p>first ‘date’ value,</p></li>
+<li><p>first ‘depth’ level,</p></li>
+<li><p>second to fourth ‘lat’ values</p></li>
+</ul>
+<p>using <code class="docutils literal notranslate"><span class="pre">.isel()</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Selects zos data at depth index 1, date index 0, and latitude indices from 1 to 3</span>
+<span class="c1"># from the xarray dataset `ds` using the intger-based selection method</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+    Slicing along coordinates can be done using the <code>slice</code> method with labels in <code>sel</code> and with integers in <code>isel</code>.
+</div></section>
+<section id="label-based-indexing-with-sel">
+<h3>4.4 Label-based indexing with sel<a class="headerlink" href="#label-based-indexing-with-sel" title="Link to this heading">#</a></h3>
+<p>Now let us select a given index values using <code class="docutils literal notranslate"><span class="pre">.sel(key1='text_value',</span> <span class="pre">key2=num_value,</span> <span class="pre">method='nearest')</span></code> method to show why this method is so powerful.</p>
+<p>Let us select ‘2024-01-01’ and ‘lat’ value 28. We have a problem since our lat coordinats has only ‘26.5’ and ‘28.5’, so our label ‘28’ does not exist. This is not a problem because <code class="docutils literal notranslate"><span class="pre">.sel()</span></code> has the <code class="docutils literal notranslate"><span class="pre">method</span></code> parameter to perform selection methods as follows.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>nearest</p></td>
+<td><p>Selects the nearest valid values to the specified coordinates</p></td>
+</tr>
+<tr class="row-odd"><td><p>ffill</p></td>
+<td><p>Carries the last valid value forward to fill gaps</p></td>
+</tr>
+<tr class="row-even"><td><p>bfill</p></td>
+<td><p>Carries the next valid value backward to fill gaps</p></td>
+</tr>
+</tbody>
+</table>
+<p>You can use these methods in the <code class="docutils literal notranslate"><span class="pre">.sel()</span></code> function based on your analysis need.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># label-based selection to extract &#39;zos&#39; data from the &#39;ds&#39; DataSet.</span>
+<span class="c1"># Select data for the date &#39;2024-01-01&#39;, </span>
+<span class="c1"># and latitude equal to 28 using the &#39;nearest&#39; selection method for interpolation.</span>
+
+<span class="n">ds</span><span class="o">.</span><span class="n">zos</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span>
+    <span class="n">date</span><span class="o">=</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span>   <span class="c1"># Selecting data for the specified date</span>
+    <span class="n">lat</span><span class="o">=</span><span class="mi">28</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span>  <span class="c1"># Selecting latitude nearest to 28 </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When using <code class="docutils literal notranslate"><span class="pre">isel</span></code> for integer-based indexing and <code class="docutils literal notranslate"><span class="pre">sel</span></code> for label-based indexing, we can also:</p>
+<ul class="simple">
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">slice</span></code> method for selecting a range of values</p></li>
+<li><p>Perform approximate selection with methods like <code class="docutils literal notranslate"><span class="pre">nearest</span></code></p></li>
+</ul>
+<p>Let us see an example of creating a subset based on specific latitude and longitude ranges. This is particularly handy when working with global datasets and you need to extract a regional subset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Latitude values of original data&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">lat</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Longitude values of original data&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">lon</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">sliced_ds</span><span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">zos</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span>
+    <span class="n">date</span><span class="o">=</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span>   <span class="c1"># Selecting data for the specified date</span>
+    <span class="n">depth</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>             <span class="c1"># Seecting data for the specified depth</span>
+    <span class="n">lat</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span><span class="mi">30</span><span class="p">),</span>  <span class="n">lon</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">84</span><span class="p">,</span> <span class="o">-</span><span class="mi">81</span><span class="p">)</span> <span class="c1">#Selecting a slice from lat and lon </span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Latitude values of sliced data&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sliced_ds</span><span class="o">.</span><span class="n">lat</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Longitude values of sliced data&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sliced_ds</span><span class="o">.</span><span class="n">lon</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">sliced_ds</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-selection-with-loc-attribute-optional">
+<h3>4.6 Data selection with loc attribute (<em>Optional</em>)<a class="headerlink" href="#data-selection-with-loc-attribute-optional" title="Link to this heading">#</a></h3>
+<p>When extracting data from a DataArray, besides utilizing the <code class="docutils literal notranslate"><span class="pre">.sel()</span></code> method, we have the option to employ the <code class="docutils literal notranslate"><span class="pre">.loc</span></code> attribute. Every DataArray includes a <code class="docutils literal notranslate"><span class="pre">.loc</span></code> attribute, which allows us to choose data by specifying a coordinate value within square brackets similar to NumPy and Pandas. When using the <code class="docutils literal notranslate"><span class="pre">.loc</span></code> attribute, we can specify data slices using a syntax <code class="docutils literal notranslate"><span class="pre">:</span></code>, similar to NumPy and Pandas, or we can use slice function. Both of these slicing techniques are illustrated above.</p>
+<p>Let use use <code class="docutils literal notranslate"><span class="pre">.loc</span></code> to select all ‘date’ values, ‘depth’ from 20 to 30, ‘lat’ of 24.5, and ‘lon’ from -87 to -83.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Selecting data based on Date, depth, latitude, and longitude</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">zos</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="mi">20</span><span class="p">:</span><span class="mi">30</span><span class="p">,</span> <span class="mf">24.5</span><span class="p">,</span> <span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">87</span><span class="p">,</span> <span class="o">-</span><span class="mf">81.5</span><span class="p">)]</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+When using <code>.loc</code>, we can specify the values for each coordinate; however, we cannot specify the dimension names. Thus, we need to provide the dimensions in the correct sequence, and this sequence must be predetermined. Also, similar to Pandas, <code>.loc</code> is inclusive while integer-based indexing <code>da[:,;]</code>` or <code>isel</code> is execlusive.
+</div></section>
+</section>
+<section id="computation">
+<h2>5. Computation<a class="headerlink" href="#computation" title="Link to this heading">#</a></h2>
+<p>Various mathematical and statistical computations can be applied to analyze and manipulate DataArrays or DataSets with tasks such as data transformation, data aggregation, and data interpolation. Here are examples of few computation operations that can be done on the DataArrays and DataSets.</p>
+<section id="data-transformation">
+<h3>5.1 Data transformation<a class="headerlink" href="#data-transformation" title="Link to this heading">#</a></h3>
+<p>DataArrays and DataSets work seamlessly with arithmetic operators and numpy array functions. Here is an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tos_new</span> <span class="o">=</span> <span class="n">ds2</span><span class="o">.</span><span class="n">tos</span> <span class="o">+</span> <span class="mf">273.15</span>
+<span class="n">tos_new</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let use do one more example. Let us change the longitude convention <strong>180°</strong> with Eastern longitudes  from 0° to 180° and Western longitudes from 0° to -180°,  to the longitude convention <strong>360°</strong> from 0° to 360°.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds3</span><span class="o">=</span> <span class="n">ds2</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">ds3</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ds3</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">360</span>
+<span class="n">ds3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also combine multiple xarray datasets in arithemtic operations</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="mf">9.8</span>
+<span class="n">buoyancy</span> <span class="o">=</span> <span class="n">g</span> <span class="o">*</span> <span class="p">(</span><span class="mf">2e-4</span> <span class="o">*</span> <span class="n">ds2</span><span class="o">.</span><span class="n">tos</span> <span class="o">-</span> <span class="mf">7e-4</span> <span class="o">*</span> <span class="n">ds2</span><span class="o">.</span><span class="n">sos</span><span class="p">)</span>
+<span class="n">buoyancy</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">yincrease</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-aggregation">
+<h3>5.2 Data aggregation<a class="headerlink" href="#data-aggregation" title="Link to this heading">#</a></h3>
+<section id="data-aggregation-methods">
+<h4>5.2.1 Data aggregation methods<a class="headerlink" href="#data-aggregation-methods" title="Link to this heading">#</a></h4>
+<p>These are examples of commonly used aggregation methods in Xarray</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aggregation</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">count()</span></code></p></td>
+<td><p>Total number of items</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mean()</span></code>, <code class="docutils literal notranslate"><span class="pre">median()</span></code></p></td>
+<td><p>Mean and median</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">min()</span></code>, <code class="docutils literal notranslate"><span class="pre">max()</span></code></p></td>
+<td><p>Minimum and maximum</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">std()</span></code>, <code class="docutils literal notranslate"><span class="pre">var()</span></code></p></td>
+<td><p>Standard deviation and variance</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">prod()</span></code></p></td>
+<td><p>Compute product of elements</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sum()</span></code></p></td>
+<td><p>Compute sum of elements</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">argmin()</span></code>, <code class="docutils literal notranslate"><span class="pre">argmax()</span></code></p></td>
+<td><p>Find index of minimum and maximum value</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cumsum()</span></code></p></td>
+<td><p>Compute the cumulative sum of elements</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cumprod()</span></code></p></td>
+<td><p>Compute the cumulative product of elements</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cummin()</span></code>, <code class="docutils literal notranslate"><span class="pre">cummax()</span></code></p></td>
+<td><p>Compute the cumulative minimum and maximum values</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">diff()</span></code></p></td>
+<td><p>Compute the difference of elements along a dimension</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">quantile()</span></code></p></td>
+<td><p>Compute the quantile of elements</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mad()</span></code></p></td>
+<td><p>Compute the mean absolute deviation from the mean</p></td>
+</tr>
+</tbody>
+</table>
+<p>Let us, for example, find the mean zos along all depth values</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the mean of the variable &#39;zos&#39; along the &#39;depth&#39; dimension in the DataSet &#39;ds&#39;</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">zos</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;depth&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For example, let us find the mean zoz for the whole area at each date and depth value</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the mean of the variable &#39;zos&#39; along the &#39;lat&#39; and &#39;lon&#39; dimensions in the DataSet &#39;ds&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can calculate the max ‘zos’ values for each depth</p>
+</section>
+<section id="resample">
+<h4>5.2.2 Resample<a class="headerlink" href="#resample" title="Link to this heading">#</a></h4>
+<p>When we receive data in daily or monthly intervals and need to summarize it into monthly or yearly aggregates, we can utilize the <code class="docutils literal notranslate"><span class="pre">.resample</span></code> function similar to what we did in Pandas.</p>
+<p>Here is an example. Where we will combine <code class="docutils literal notranslate"><span class="pre">.mean</span></code> and <code class="docutils literal notranslate"><span class="pre">.resample</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create coordinates for the four labels</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">240</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>  <span class="c1"># Generating a time range for the data with monthly frequency</span>
+<span class="n">latitudes</span><span class="o">=</span> <span class="p">[</span><span class="mf">24.5</span><span class="p">,</span> <span class="mf">26.5</span><span class="p">,</span> <span class="mf">28.5</span><span class="p">,</span> <span class="mf">30.5</span><span class="p">]</span>  <span class="c1"># latitude values </span>
+
+<span class="c1"># Create a 2D Numpy Array representing </span>
+<span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">latitudes</span><span class="p">))</span>
+<span class="n">zos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span> <span class="n">size</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">#sea surface height [m]</span>
+
+<span class="c1"># Create a DataArray with zos values</span>
+<span class="n">ds_monthly</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">({</span><span class="s1">&#39;zos&#39;</span><span class="p">:</span> <span class="p">((</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,),</span> <span class="n">zos</span><span class="p">)},</span> <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">dates</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="n">latitudes</span><span class="p">})</span>
+
+<span class="c1"># Add metadata to the DataArray</span>
+<span class="n">ds_monthly</span><span class="o">.</span><span class="n">zos</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Monthly zos data from 2024 to 2064&quot;</span>
+
+<span class="c1"># Displaying </span>
+<span class="n">display</span><span class="p">(</span><span class="n">ds_monthly</span><span class="p">)</span>
+
+<span class="c1"># Find mean across lat values and plot</span>
+<span class="n">ds_monthly</span><span class="o">.</span><span class="n">zos</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+
+
+<span class="c1"># Create a new DataSet &#39;ds_annually&#39; as a copy of the original DataSet &#39;ds&#39;</span>
+<span class="n">ds_annually</span><span class="o">=</span><span class="n">ds_monthly</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Resample the &#39;pr&#39; variable to calculate annual averages</span>
+<span class="n">ds_annually</span> <span class="o">=</span> <span class="n">ds_monthly</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">ds_annually</span><span class="p">)</span>
+
+<span class="c1"># Find mean across lat values and plot</span>
+<span class="n">ds_annually</span><span class="o">.</span><span class="n">zos</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="data-interpolation-and-extrapolation">
+<h3>5.3 Data interpolation and extrapolation<a class="headerlink" href="#data-interpolation-and-extrapolation" title="Link to this heading">#</a></h3>
+<p>In <a class="reference internal" href="#4.4-Label-based-indexing-with-sel"><span class="xref myst">Section 4.4 Label-based indexing</span></a>, we explored using the <code class="docutils literal notranslate"><span class="pre">nearest</span></code> method to select a value close to a specified coordinate that may not be present in our DataArray. Alternatively, we can interpolate this value using methods like <code class="docutils literal notranslate"><span class="pre">interp</span></code>.</p>
+<p>We can an interpolate or extrapolate values along dimensions using functions like <code class="docutils literal notranslate"><span class="pre">interp</span></code> or <code class="docutils literal notranslate"><span class="pre">reindex</span></code>. We can use <code class="docutils literal notranslate"><span class="pre">interp</span></code>to interpolate data along a specified dimension using linear interpolation, cubic interpolation, or other methods.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>linear</p></td>
+<td><p>Performs linear interpolation to estimate values at the specified coordinates</p></td>
+</tr>
+<tr class="row-odd"><td><p>cubic</p></td>
+<td><p>Performs cubic interpolation to estimate values at the specified coordinates</p></td>
+</tr>
+<tr class="row-even"><td><p>nearest</p></td>
+<td><p>Performs quadratic interpolation to estimate values at the specified coordinates</p></td>
+</tr>
+</tbody>
+</table>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">reindex</span></code> to change the index of the data along one or more dimensions, potentially adding or removing indices. Typically, <code class="docutils literal notranslate"><span class="pre">interp</span></code> is used when we want to interpolate data values along a specific dimension to fill in  values or create a smoother representation of the data. The <code class="docutils literal notranslate"><span class="pre">reindex</span></code> is more commonly used when we want to align the indices of multiple DataArrays or Datasets, potentially filling missing values with NaNs or other fill values.</p>
+<p>For example, we can interpolate ‘zos’ values at:</p>
+<ul class="simple">
+<li><p>‘lat’ of 27,</p></li>
+<li><p>‘lon’ of -84,</p></li>
+<li><p>‘date’ of 2024-01-01,</p></li>
+<li><p>‘depth’ of 10</p></li>
+</ul>
+<p>and return the results as a NumPy array instead of a DataArray. Our data already contains ‘date’ of 2024-01-01, ‘depth’ of 10 so we need to interpolate for ‘lat’ and ‘lon’ values</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Interpolate &#39;zos&#39; data in the &#39;ds&#39; DataSet for latitude 27 and longitude -84 using .interp</span>
+<span class="c1"># then select data for depth of 30 meters using .sel</span>
+<span class="c1"># Return results as a NumPy array instead of a DataArray </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+    The attribute <code>.values</code> extracts the values of the resulting DataArray as a NumPy array.
+</div><p>Now let use combine everything together that is:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.sel</span></code> for label-based indexing,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">slice</span></code> to create a subset based on specific ‘lat’ and ‘lat’ ranges</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">linear</span></code> to interpolate for a depth value of 11</p></li>
+</ul>
+<p>and plot our new slice. Note the zos values in this slice is different than the previous slice in
+<a class="reference internal" href="#4.4-Label-based-indexing-with-sel"><span class="xref myst">Section 4.4 Label-based indexing</span></a>, because it is at a slightly different depth.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">zos</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span>     <span class="c1">#Select a date</span>
+           <span class="n">lat</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span><span class="mi">30</span><span class="p">),</span>      <span class="c1">#Select a lat slice</span>
+           <span class="n">lon</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">84</span><span class="p">,</span> <span class="o">-</span><span class="mi">81</span><span class="p">)</span>    <span class="c1">#Select a long slice</span>
+          <span class="p">)</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">depth</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span><span class="s1">&#39;linear&#39;</span>  <span class="c1">#Interpolate at depth 11</span>
+                  <span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>These are just a few examples of the operations we can perform. The xarray library provides a wide range of functionalities for working with labeled multi-dimensional data like this.</p>
+</section>
+</section>
+<section id="combing-data">
+<h2>6. Combing Data<a class="headerlink" href="#combing-data" title="Link to this heading">#</a></h2>
+<p>There are various methods to combine arrays. Here are a few:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">xr.concat</span></code>: Concatenates arrays along specified dimensions, creating a larger array with shared dimensions (e.g., combining two zos arrays with different date values).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xr.merge</span></code>: Combines distinct arrays (e.g., zos and tos) into one dataset by aligning them based on their coordinates, accommodating varying dimensions or coordinates.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xr.combine_nested</span></code>: Merges arrays into a dataset while preserving their nested structure, simplifying handling of hierarchical data layouts.</p></li>
+</ul>
+<p>You can learn these functions and similar ones as needed. Here are a few examples to illustrate them.</p>
+<section id="combing-data-with-concat">
+<h3>6.1 Combing data with concat<a class="headerlink" href="#combing-data-with-concat" title="Link to this heading">#</a></h3>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">xr.concat</span></code> function to combine data along a common dimension.</p>
+<p>For example,</p>
+<ul class="simple">
+<li><p>the <code class="docutils literal notranslate"><span class="pre">da</span></code> DataArray has ‘zos’ data for ‘2024-01-03’ and ‘2024-01-04’ along the ‘date’ dimension,</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">ds</span></code> DataSet has  ‘zos’ data for ‘2024-01-01’ and ‘2024-01-02’ along the ‘date’ dimension.</p></li>
+</ul>
+<p>Let use combine this data to have an extended DataArray from ‘2024-01-01’ and ‘2024-01-04’ using <code class="docutils literal notranslate"><span class="pre">xr.concat</span></code> function. After we combine the data we will use <code class="docutils literal notranslate"><span class="pre">.sortby()</span></code> method to sort the dates in ascending order.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Concatenate &#39;da&#39; and &#39;ds.zos&#39; along the &#39;date&#39; dimension, then sort the result by &#39;date&#39;</span>
+<span class="n">ds_date_extended</span><span class="o">=</span><span class="n">xr</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">ds</span><span class="o">.</span><span class="n">zos</span><span class="p">,</span> <span class="n">da</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sortby</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
+
+<span class="n">ds_date_extended</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculating and plotting the zos mean along the &#39;lat&#39;, &#39;lon&#39;, and depth dimensions</span>
+<span class="n">ds_date_extended</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">,</span><span class="s1">&#39;depth&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition alert alert-warning">
+    <p class="admonition-title" style="font-weight:bold">Warning</p>
+   Xarray will not check the values of the coordinates before <code>concat</code>. It will just stick everything together into a new array. This can result overlapping data.
+</div></section>
+<section id="combining-data-with-merge">
+<h3>6.2 Combining data with merge<a class="headerlink" href="#combining-data-with-merge" title="Link to this heading">#</a></h3>
+<p>We can merge both DataArrays and Datasets. If the data are not aligned, they will be aligned before merge.</p>
+<p>For example, let us combine</p>
+<ul class="simple">
+<li><p>‘zos’ data from the <code class="docutils literal notranslate"><span class="pre">ds_date_extended</span></code> DataSet that has four date values</p></li>
+<li><p>with the ‘tos’ and ‘sos’ data from the <code class="docutils literal notranslate"><span class="pre">ds2</span></code> DataSet that has two date values.</p></li>
+</ul>
+<p>This will result in a DataSet with ‘zos’, ‘tos’, and ‘sos’ data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Merging two datasets, ds_date_extended and ds2, using xr.merge</span>
+<span class="n">ds3</span><span class="o">=</span><span class="n">xr</span><span class="o">.</span><span class="n">merge</span><span class="p">([</span><span class="n">ds_date_extended</span><span class="p">,</span> <span class="n">ds2</span><span class="p">])</span>
+
+<span class="n">ds3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>NaN will be assigned to any missing values in the resulting dataset (i.e., ‘tos’ and ‘sos’ with no corresponding ‘zos’ values). We can plot mean values <code class="docutils literal notranslate"><span class="pre">ds3.sos</span></code> across time to check this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Calculate the mean of &#39;sos&#39; data along the dimensions &#39;lat&#39;, &#39;lon&#39;, and &#39;depth&#39; </span>
+<span class="c1"># in the dataset ds3, and plots the result</span>
+<span class="n">ds3</span><span class="o">.</span><span class="n">sos</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">,</span><span class="s1">&#39;depth&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can alo specify the join options in <code class="docutils literal notranslate"><span class="pre">merge</span></code>. For example, we can select a slice before we apply the <code class="docutils literal notranslate"><span class="pre">merge</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># After selecting data for dates &#39;2024-01-01&#39; and &#39;2024-01-02&#39; </span>
+<span class="c1"># and depths in the range of 10 to 30 from each dataset,</span>
+<span class="c1"># merge two xarray datasets, ds_date_extended and ds2, </span>
+
+<span class="n">xr</span><span class="o">.</span><span class="n">merge</span><span class="p">([</span>
+    <span class="n">ds_date_extended</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">depth</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">date</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-01-02&#39;</span><span class="p">]),</span>  <span class="c1">#Select this slice of data</span>
+    <span class="n">ds2</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">depth</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">date</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-01-02&#39;</span><span class="p">])</span>  <span class="c1">#Select this slice of data</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="broadcasting-advanced">
+<h2>7. Broadcasting (<em>advanced</em>)<a class="headerlink" href="#broadcasting-advanced" title="Link to this heading">#</a></h2>
+<p>Broadcasting in xarray allows for operations between arrays with different shapes by automatically aligning dimensions. This feature simplifies the handling of data with varying dimensions, enabling seamless computation and manipulation across multiple arrays without the need for manual alignment or iteration.</p>
+<p>This topic is beyond the scope of this lesson. If you are curious, I added a broadcasting example in Exerecise 9.</p>
+</section>
+<section id="write-and-read-data-to-a-netcdf-file">
+<h2>8. Write and read data to a netCDF file<a class="headerlink" href="#write-and-read-data-to-a-netcdf-file" title="Link to this heading">#</a></h2>
+<p>NetCDF is a file format widely used in scientific and engineering fields to store multidimensional data efficiently. Let us explore how to write our DataArray to a netCDF file for data preservation and learn to read data from existing netCDF files for analysis.</p>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Info</p>
+<strong>NetCDF</strong>, which stands for <strong>Network Common Data Form</strong>, is a set of software libraries and data formats for array-oriented scientific data. NetCDF is commonly used in the geoscience, climate, and meteorology fields, among others, to store and distribute gridded data. NetCDF data is stored in a self-describing format, meaning that it includes metadata along with the actual data, making it easier for users to understand the data. 
+</div><section id="write-to-a-netcdf-file-using-to-netcdf">
+<h3>8.1 Write to a NetCDF file using <code class="docutils literal notranslate"><span class="pre">.to_netcdf</span></code><a class="headerlink" href="#write-to-a-netcdf-file-using-to-netcdf" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">.to_netcdf</span></code> method is useful for exporting data structures in xarray to NetCDF file format.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write the DataArray to a netCDF file</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="s1">&#39;Data/ds/zos.nc&#39;</span><span class="p">)</span>
+<span class="n">ds2</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="s1">&#39;Data/ds/tos_sos.nc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="read-a-netcdf-file-using-xr-open-dataset">
+<h3>8.2 Read a NetCDF file using <code class="docutils literal notranslate"><span class="pre">xr.open_dataset</span></code><a class="headerlink" href="#read-a-netcdf-file-using-xr-open-dataset" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">xr.open_dataset</span></code> method is used to open a single NetCDF file as an xarray Dataset.
+It is suitable for working with a single dataset stored in a single file. It returns an xarray Dataset object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the netCDF file back into a Dataset</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;Data/ds/zos.nc&#39;</span><span class="p">)</span>
+
+<span class="c1"># Displaying the temperature_data DataArray with labeled dimensions, coordinates, and metadata</span>
+<span class="n">display</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+
+<span class="c1"># Close the file after reading the data</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="read-multiple-netcdf-files-using-xr-open-mfdataset">
+<h3>8.3 Read multiple netCDF files using <code class="docutils literal notranslate"><span class="pre">xr.open_mfdataset</span></code><a class="headerlink" href="#read-multiple-netcdf-files-using-xr-open-mfdataset" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">xr.open_mfdataset</span></code> is used to open multiple NetCDF files as a single xarray Dataset.
+It is useful when you have a dataset spread across multiple files (e.g., one file per time step) and you want to combine them into a single logical dataset. It returns an xarray Dataset object that combines the data from all the input files.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use xr.open_mfdataset with the file paths of the two datasets</span>
+<span class="n">ds_combined</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_mfdataset</span><span class="p">(</span><span class="s2">&quot;Data/ds/*.nc&quot;</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="s2">&quot;by_coords&quot;</span><span class="p">)</span>
+
+<span class="c1"># Displaying the temperature_data DataArray with labeled dimensions, coordinates, and metadata</span>
+<span class="n">display</span><span class="p">(</span><span class="n">ds_combined</span><span class="p">)</span>
+
+<span class="c1"># Close the file after reading the data</span>
+<span class="n">ds_combined</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>Xarray extends Pandas’ labeled-data features for N-dimensional data, making it popular for analyzing gridded datasets. It enables easy access to metadata in NetCDF files, simplifying code writing and readability.</p>
+<section id="what-s-next">
+<h3>What’s next?<a class="headerlink" href="#what-s-next" title="Link to this heading">#</a></h3>
+<p>If you want to use Xarray you can learn about these topics:</p>
+<ul class="simple">
+<li><p>Remote data access with OPeNDAP, which facilitates accessing data stored remotely on servers. It allows for efficient retrieval of specific subsets of data without downloading the entire dataset, making it ideal for working with large datasets.</p></li>
+<li><p>Advanced visualization with Cartopy, which we will learn next.</p></li>
+</ul>
+</section>
+</section>
+<section id="resources-and-references">
+<h2>Resources and references<a class="headerlink" href="#resources-and-references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Most basic questions and issues with Xarray can be resolved with help from the material in the <a class="reference external" href="http://xarray.pydata.org/en/stable/">Xarray documentation</a>. Some of the most popular sections include <a class="reference external" href="http://xarray.pydata.org/en/stable/getting-started-guide/why-xarray.html">Why Xarray</a>,  <a class="reference external" href="http://xarray.pydata.org/en/stable/getting-started-guide/quick-overview.html#">Quick overview</a>, and <a class="reference external" href="http://xarray.pydata.org/en/stable/gallery.html">Example gallery</a></p></li>
+<li><p>Another resource you may find useful is this <a class="reference external" href="https://xarray-contrib.github.io/xarray-tutorial/">Xarray Tutorial collection</a>, created from content hosted on GitHub.</p></li>
+<li><p>Nasa <a class="reference external" href="https://github.com/nasa/gesdisc-tutorials">Gesdisc-Tutorials</a> contain a lot of examples and case studies</p></li>
+<li><p>Python Tutorial Seminar Series - <a class="reference external" href="https://youtu.be/Ss4ryKukhi4">Xarray Part 1</a> and <a class="reference external" href="https://youtu.be/2H_4drBwORY">Xarray Part 2</a> provide recordings introducing the Python Package <code class="docutils literal notranslate"><span class="pre">xarray</span></code>.</p></li>
+<li><p>Project Pythia <a class="reference external" href="https://foundations.projectpythia.org/core/xarray.html">Notebooks on Xarray</a> contains tutorials on using Xarray.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters\9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="climate.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lessons 24 : Climate Data - CMIP6 and Remote Sensing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cartopy.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lesson 28: CartoPy Basics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-and-import">Installation and import</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-concepts">1. Basic Concepts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#label-dimensions">1.1 Label dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataarray-and-dataset">1.2 DataArray and DataSet</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-dataarray-and-dataset">2. Creating a DataArray and Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-dataarray">2.1 Creating a DataArray</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-dataset-with-one-variable">2.2 Creating a Dataset with one variable</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-dataset-with-multiple-variables">2.3 Creating a Dataset with multiple variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-dataarray-and-dataset">3. Understanding DataArray and DataSet</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinates-and-indexes">2.3.1 Coordinates and indexes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cooridnates-versus-variables">2.3.2 Cooridnates versus variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-with-aligined-coordinates-advanced">2.3.3 Dataset with aligined coordinates (<em>advanced</em>)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-data">4. Exploring Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-data-indexing">4.1 Selecting data (indexing)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-data">4.2 Plotting data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-based-indexing-with-isel">4.3 Integer-based indexing with isel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#label-based-indexing-with-sel">4.4 Label-based indexing with sel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-selection-with-loc-attribute-optional">4.6 Data selection with loc attribute (<em>Optional</em>)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation">5. Computation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transformation">5.1 Data transformation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-aggregation">5.2 Data aggregation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-aggregation-methods">5.2.1 Data aggregation methods</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#resample">5.2.2 Resample</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-interpolation-and-extrapolation">5.3 Data interpolation and extrapolation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combing-data">6. Combing Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combing-data-with-concat">6.1 Combing data with concat</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-data-with-merge">6.2 Combining data with merge</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting-advanced">7. Broadcasting (<em>advanced</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-and-read-data-to-a-netcdf-file">8. Write and read data to a netCDF file</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-to-a-netcdf-file-using-to-netcdf">8.1 Write to a NetCDF file using <code class="docutils literal notranslate"><span class="pre">.to_netcdf</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-a-netcdf-file-using-xr-open-dataset">8.2 Read a NetCDF file using <code class="docutils literal notranslate"><span class="pre">xr.open_dataset</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-multiple-netcdf-files-using-xr-open-mfdataset">8.3 Read multiple netCDF files using <code class="docutils literal notranslate"><span class="pre">xr.open_mfdataset</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-next">What’s next?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-and-references">Resources and references</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed Elshall & Thalia Valle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

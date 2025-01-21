@@ -1,0 +1,882 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lesson 5: Python Basics 3 - Formatting &#8212; Environmental Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/2. Python Basics/Lesson5_formatting';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lesson 6: Python Programming 1 - Loops" href="../3.%20Python%20Programming/Lesson6_Loops.html" />
+    <link rel="prev" title="Lesson 4: Python Basics 2 - Lists" href="Lesson4_list_solution.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Environmental Data Science - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Environmental Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    EGN 4930 / EGN 5932C Special Topic: Environmental Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0. Good Coding Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP1_VariableName.html">GCP1 - Selecting “good” variable names</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP2_DescribingCode.html">Describing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP3_ReadableCode.html">Readable Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP4_WritingScripts.html">Writing Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP5_Assertions.html">Assertions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson2.html">Lesson 2 Getting Started</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Excercise1.html">Exercise 1 - Installing Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Python Basics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Lesson3_PythonBasics1.html">Lesson 3 - Python Basics 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson4_list_solution.html">Lesson 4 - Python Basics 2 - Lists</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lesson 5 - Python Basics 3 - Formatting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson6_Loops.html">Lesson 6 - Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson7_conditional_statements.html">Lesson 7 - Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson8_functions.html">Lesson 8 - Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson9_modules.html">Lesson 9 - Script Files and Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Exercise3.html">Exercise 3 - Python Programming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 4. Pandas for Tabular Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Lesson10_pandas.html">Lessons 10 - 14 - Pandas Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Exercise4.html">Exercise 4 - Pandas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Artificial intelligence (AI) Coding Assistance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/OpenAI_API_Key_for_Jupyter_AI_Extension.html">OpenAI API key for Jupyter AI extension (Optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/AIcoding.html">Lesson 15 AI coding assistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/Exercise_5_API_Key_Module.html">Exercise 5 - API-Key Module (Optional)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Data Science Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Workflow.html">Lessons 16 - Data Science Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Exercise6.html">Exercise 6 - AQI Data Preparation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. NumPy for Scientific Computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/numpy.html">Lessons 18-19 - NumPy Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/exercise7.html">Exercise 7 - NumPy - Air quality data analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8. Matplotlib for Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/matplotlib.html">Lesson 20 - 21 - Matplotlib Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/exercise8.html">Exercise 8 Matplotlib - Air quality data visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/climate.html">Lesson 24 - Climate Data - CMIP6 and Remote Sensing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/xarray.html">Lesson 25-27 - Xarray basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/cartopy.html">Lesson 28 - CartoPy basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/Exercise9.html">Exercise 9 - Sea surface height and red tides (Optional, Advanced)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">10. Introduction to Google Earth Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.0-%20Intro%20to%20GEE.html">Lesson 30 - Intro to Google Earth Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.1-%20JavaScript%20API%20vs.%20Python%20API.html">Lesson 31 - JavaScript API vs. Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html">Lesson 32 - Using Google Earth Engine in a Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/geemap1.html">Exercise 10 -  GeeMap, GEE, and Sentinel-2 Data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Chapters/2. Python Basics/Lesson5_formatting.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapters/2. Python Basics/Lesson5_formatting.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/2. Python Basics/Lesson5_formatting.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><h1 style="color:green; text-align:center;">Lesson 5: Python Basics 3 - Formatting </h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-different-data-types-work-together">1. Making different data types work together</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reminder-data-types-and-their-compatibility">1.1 Reminder: Data types and their compatibility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-data-from-one-type-to-another">1.2 Converting data from one type to another</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-text-and-numbers">1.3 Combining text and numbers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-text-and-numbers">2. Working with text (and numbers)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-string-formatting">2.1 f-String formatting</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#test-your-understanding">Test your understanding</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#format-approach-no-longer-recommended">2.2 <code class="docutils literal notranslate"><span class="pre">.format()</span></code> approach (no longer recommended)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operator-approach-no-longer-recommended">2.3 <code class="docutils literal notranslate"><span class="pre">%</span></code> operator approach (no longer recommended)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-information-about-formatting-text-and-numbers">2.4 More information about formatting text and numbers</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lesson-5-python-basics-3-formatting">
+<h1><h1 style="color:green; text-align:center;">Lesson 5: Python Basics 3 - Formatting </h1><a class="headerlink" href="#lesson-5-python-basics-3-formatting" title="Link to this heading">#</a></h1>
+<p>This lesson is modified from <a class="reference external" href="https://geo-python-site.readthedocs.io/en/latest/notebooks/L2/Python-basic-elements.html">Basic elements of Python</a> from <a class="reference external" href="https://geo-python-site.readthedocs.io/en/latest/index.html">geo-python</a>.</p>
+<p><a class="reference external" href="https://mybinder.org/v2/gh/aselshall/eds/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+<section id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this lesson, you will be able to</p>
+<ul class="simple">
+<li><p>work with both text and numbers togehter</p></li>
+<li><p>format text and numbers in python</p></li>
+<li><p>use f-formatting to print text with numbers with decimal, scientific notation, and percentage</p></li>
+</ul>
+</section>
+<section id="making-different-data-types-work-together">
+<h2>1. Making different data types work together<a class="headerlink" href="#making-different-data-types-work-together" title="Link to this heading">#</a></h2>
+<p>In the previous lesson we learned how to determine a variable’s <a class="reference internal" href="#def"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">type</span></code></span></a>. Here we will learn how to enable data of different types to work together.</p>
+<section id="reminder-data-types-and-their-compatibility">
+<h3>1.1 Reminder: Data types and their compatibility<a class="headerlink" href="#reminder-data-types-and-their-compatibility" title="Link to this heading">#</a></h3>
+<p>We can explore the different types of data stored in variables using the <code class="docutils literal notranslate"><span class="pre">type()</span></code> function.
+Let’s use the cells below to check the data types of the variables <code class="docutils literal notranslate"><span class="pre">station_name</span></code>, <code class="docutils literal notranslate"><span class="pre">station_id</span></code>, and <code class="docutils literal notranslate"><span class="pre">station_lat</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">station_name</span> <span class="o">=</span> <span class="s2">&quot;Immokalee&quot;</span>
+<span class="n">station_id</span> <span class="o">=</span> <span class="mi">440</span>
+<span class="n">station_lat</span> <span class="o">=</span> <span class="mf">25.5126</span>
+<span class="n">station_lon</span> <span class="o">=</span> <span class="mf">24.96</span>
+<span class="n">station_county</span> <span class="o">=</span> <span class="s2">&quot;Collier&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">station_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>str
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">station_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>int
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">station_lat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>float
+</pre></div>
+</div>
+</div>
+</div>
+<p>As expected, we see that the <code class="docutils literal notranslate"><span class="pre">station_name</span></code> is a character string, the <code class="docutils literal notranslate"><span class="pre">station_id</span></code> is an integer, and the <code class="docutils literal notranslate"><span class="pre">station_lat</span></code> is a floating point number.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Remember, the data types are important because some are not compatible with one another.</p>
+</div>
+<p>What happens when you try to add the variables <code class="docutils literal notranslate"><span class="pre">station_name</span></code> and <code class="docutils literal notranslate"><span class="pre">station_id</span></code> in the cell below?</p>
+<p>Here we get a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> because Python does not know to combine a string of characters (<code class="docutils literal notranslate"><span class="pre">station_name</span></code>) with an integer value (<code class="docutils literal notranslate"><span class="pre">station_id</span></code>).</p>
+</section>
+<section id="converting-data-from-one-type-to-another">
+<h3>1.2 Converting data from one type to another<a class="headerlink" href="#converting-data-from-one-type-to-another" title="Link to this heading">#</a></h3>
+<p>It is not the case that things like the <code class="docutils literal notranslate"><span class="pre">station_name</span></code> and <code class="docutils literal notranslate"><span class="pre">station_id</span></code> cannot be combined at all, but in order to combine a character string with a number we need to perform a <em>data type conversion</em> to make them compatible. Let’s convert <code class="docutils literal notranslate"><span class="pre">station_id</span></code> to a character string using the <code class="docutils literal notranslate"><span class="pre">str()</span></code> function.</p>
+<p>We can confirm the type has changed by checking the type of <code class="docutils literal notranslate"><span class="pre">station_id</span></code>, or by checking the output when you type the name of the variable into a cell and run it.</p>
+<p>Notice the number is now enclosed in quotation marks. As you can see, <code class="docutils literal notranslate"><span class="pre">str()</span></code> converts a numerical value into a character string with the same numbers as before.</p>
+<p>Now you can do <code class="docutils literal notranslate"><span class="pre">station_name</span> <span class="pre">+</span> <span class="pre">station_id</span></code> without an error</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Similar to using <code class="docutils literal notranslate"><span class="pre">str()</span></code> to convert numbers to character strings, <code class="docutils literal notranslate"><span class="pre">int()</span></code> can be used to convert strings or floating point numbers to integers and <code class="docutils literal notranslate"><span class="pre">float()</span></code> can be used to convert strings or integers to floating point numbers.</p>
+</div>
+<p>Try converting <code class="docutils literal notranslate"><span class="pre">station_id</span></code> back to integer</p>
+</section>
+<section id="combining-text-and-numbers">
+<h3>1.3 Combining text and numbers<a class="headerlink" href="#combining-text-and-numbers" title="Link to this heading">#</a></h3>
+<p>Although most mathematical operations operate on numerical values, a common way to combine character strings is using the addition operator <code class="docutils literal notranslate"><span class="pre">+</span></code>. Let’s create a text string in the variable <code class="docutils literal notranslate"><span class="pre">station_name_and_id</span></code> that is the combination of the <code class="docutils literal notranslate"><span class="pre">station_name</span></code> and <code class="docutils literal notranslate"><span class="pre">station_id</span></code> variables. Once we define <code class="docutils literal notranslate"><span class="pre">station_name_and_id</span></code>, we can print it to the screen to see the result that should look like this</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Output</span><span class="p">:</span> <span class="n">Immokalee</span><span class="p">:</span> <span class="mi">440</span>
+</pre></div>
+</div>
+<p>Note you need to convert <code class="docutils literal notranslate"><span class="pre">station_id</span></code> to a character string using the <code class="docutils literal notranslate"><span class="pre">str()</span></code> function within the assignment to the variable <code class="docutils literal notranslate"><span class="pre">station_name_and_id</span></code>.</p>
+</section>
+</section>
+<section id="working-with-text-and-numbers">
+<h2>2. Working with text (and numbers)<a class="headerlink" href="#working-with-text-and-numbers" title="Link to this heading">#</a></h2>
+<p>The previous example demonstrated how it is possible to combine character strings and numbers (converted to character strings) together using the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator. Although this approach works, it can become quite laborous and error-prone when working with more complicated sets of textual and/or numerical components. In addition, it is sometimes desirable to format the numerical output to change the number of decimal places for floating point values, for example. Hence, next we show a few useful techniques that make manipulating strings easier and more efficient.</p>
+<p>There are three approaches that can be used to manipulate strings in Python:</p>
+<ol class="arabic simple">
+<li><p>f-strings</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">.format()</span></code> method</p></li>
+<li><p>using the <code class="docutils literal notranslate"><span class="pre">%</span></code> operator</p></li>
+</ol>
+<p>The f-string approach is recommended and the most modern, introduced in Python 3.6. However, since you are likely to find examples of the older approaches we also show how they work.</p>
+<section id="f-string-formatting">
+<h3>2.1 f-String formatting<a class="headerlink" href="#f-string-formatting" title="Link to this heading">#</a></h3>
+<p>Here, we show how we can combine the <code class="docutils literal notranslate"><span class="pre">station_name</span></code> text, <code class="docutils literal notranslate"><span class="pre">station_id</span></code> integer number and another floating point number <code class="docutils literal notranslate"><span class="pre">temp</span></code> using Python’s f-string formatting approach. In addition, we will simultaneously round the floating point number (<code class="docutils literal notranslate"><span class="pre">temp</span></code>) to two decimal places. We want an output that looks like this</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Output</span><span class="p">:</span> <span class="n">The</span> <span class="n">temperature</span> <span class="n">at</span> <span class="n">Immokalee</span> <span class="n">station</span> <span class="p">(</span><span class="n">ID</span><span class="p">:</span> <span class="mi">440</span><span class="p">)</span> <span class="ow">is</span> <span class="mf">18.57</span> <span class="n">degrees</span> <span class="n">Celsius</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Here is how to do this using f-formatting</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Here are the variables that you will use</span>
+<span class="n">station_name</span><span class="o">=</span><span class="s2">&quot;Immokalee&quot;</span>  <span class="c1">#An example of string variable</span>
+<span class="n">station_id</span><span class="o">=</span> <span class="mi">440</span> <span class="c1">#An example of integer variable</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="mf">18.56789876</span>  <span class="c1"># An example float variable with many decimals</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The f-string approach (recommended)</span>
+<span class="n">info_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The temperature at </span><span class="si">{</span><span class="n">station_name</span><span class="si">}</span><span class="s2"> station (ID: </span><span class="si">{</span><span class="n">station_id</span><span class="si">}</span><span class="s2">) is </span><span class="si">{</span><span class="n">temp</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> degrees Celsius.&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">info_text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The temperature at Immokalee station (ID: 440) is 18.57 degrees Celsius.
+</pre></div>
+</div>
+</div>
+</div>
+<p>So, here we have managed to combined three different data types and format the floating point value in a single line. Let’s break the f-string down a bit to understand how it works.</p>
+<p><img alt="F-string formatting explained" src="https://geo-python-site.readthedocs.io/en/latest/_images/F-string-formatting.png" />
+<em>f-string formatting explained. Image from the <a class="reference external" href="https://python-gis-book.readthedocs.io/en/develop/part1/chapter-02/nb/00-python-basics.html#working-with-text-and-numbers">draft text of the Introduction to Python for Geographic Data Analysis textbook by Tenkanen et al.</a>.</em></p>
+<p>The key components here are:</p>
+<ul class="simple">
+<li><p>The text that you want to create and/or modify is enclosed within the quotes preceded with letter <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p></li>
+<li><p>You can include any existing variable in the text template by placing the name of the variable inside a set of curly braces <code class="docutils literal notranslate"><span class="pre">{}</span></code>.</p>
+<ul>
+<li><p>Using string formatting, it is also possible to insert numbers (such as <code class="docutils literal notranslate"><span class="pre">station_id</span></code> and <code class="docutils literal notranslate"><span class="pre">temp</span></code>) into the body of text without needing first to convert the data type to a string. This is because the f-string functionality does the data type conversion for us.</p></li>
+</ul>
+</li>
+<li><p>It is possible to round numbers on the fly to a specific precision, such as two decimal points as in our example by adding format specifier (<code class="docutils literal notranslate"><span class="pre">:.2f</span></code>) after the variable that we want to format.</p>
+<ul>
+<li><p>The format specifier works by first adding a colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>) after the variable name</p></li>
+<li><p>The decimal precision can be specified by adding a dot (<code class="docutils literal notranslate"><span class="pre">.</span></code>) followed by a number that indicates the number of decimal places (two in our case)</p></li>
+<li><p>The final character <code class="docutils literal notranslate"><span class="pre">f</span></code> in the format specifier defines the type of the conversion that will be conducted</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">f</span></code> will convert the value to decimal number</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">e</span></code> or <code class="docutils literal notranslate"><span class="pre">E</span></code> will make the number appear in scientific notation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%</span></code> will convert the value to a percentage</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Of the above, the most important thing is to remember to include the <code class="docutils literal notranslate"><span class="pre">f</span></code> at the start of your f-strings :).</p>
+<section id="test-your-understanding">
+<h4>Test your understanding<a class="headerlink" href="#test-your-understanding" title="Link to this heading">#</a></h4>
+<p>Given the variables defined below, print the following sentence to screen:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Output</span><span class="p">:</span> <span class="n">The</span> <span class="n">concentration</span> <span class="n">of</span> <span class="n">carbon</span> <span class="n">dioxide</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">atmosphere</span> <span class="n">has</span> <span class="n">increased</span> <span class="n">by</span> <span class="n">more</span> <span class="n">than</span> <span class="mi">40</span><span class="o">%</span> <span class="n">since</span> <span class="n">the</span> <span class="n">pre</span><span class="o">-</span><span class="n">industrial</span> <span class="n">era</span><span class="p">,</span> <span class="n">reaching</span> <span class="mf">415.79</span> <span class="n">ppm</span> <span class="ow">in</span> <span class="mi">2021</span><span class="p">,</span> <span class="n">about</span> <span class="mf">4.0E-02</span> <span class="n">percent</span> <span class="n">of</span> <span class="n">the</span> <span class="n">atmosphere</span><span class="o">.</span>
+</pre></div>
+</div>
+<p><strong>Note</strong> The line will get long, to contine typing in a new line you need to add <code class="docutils literal notranslate"><span class="pre">\</span></code> to continue typing in a new line</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Here are the variables that you will use</span>
+<span class="n">name</span><span class="o">=</span><span class="s2">&quot;carbon dioxide&quot;</span>      <span class="c1">#string</span>
+<span class="n">increase_rate</span><span class="o">=</span><span class="mf">0.4</span>          <span class="c1">#this will be converted to percentage using % </span>
+<span class="n">concentration</span><span class="o">=</span><span class="mf">415.78888</span>    <span class="c1">#this will be shown with only two decimal numbers</span>
+<span class="n">year</span><span class="o">=</span><span class="mi">2021</span>                  <span class="c1">#intger </span>
+<span class="n">CO2_ratio</span><span class="o">=</span><span class="mf">0.04</span>             <span class="c1">#this will be shown in scientific notation </span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="format-approach-no-longer-recommended">
+<h3>2.2 <code class="docutils literal notranslate"><span class="pre">.format()</span></code> approach (no longer recommended)<a class="headerlink" href="#format-approach-no-longer-recommended" title="Link to this heading">#</a></h3>
+<p>As mentioned above, there are other approaches that can be used to format text and combine different data types. The first one is the <code class="docutils literal notranslate"><span class="pre">.format()</span></code> method. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">info_text2</span> <span class="o">=</span> <span class="s2">&quot;The temperature at </span><span class="si">{0}</span><span class="s2"> station (ID: </span><span class="si">{1}</span><span class="s2">) is </span><span class="si">{2:.2f}</span><span class="s2"> Celsius.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">station_name</span><span class="p">,</span> <span class="n">station_id</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">info_text2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The temperature at Immokalee station (ID: 440) is 18.57 Celsius.
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, here we get the same result as with f-strings using the <code class="docutils literal notranslate"><span class="pre">.format()</span></code> method, which is placed after the quotes. Placeholders are inserted inside curly braces where the numbers refer to the order of the variables listed in the <code class="docutils literal notranslate"><span class="pre">.format()</span></code> function. There are other ways to use this same approach, but the example above is typical. For example, you can omit the numbers and in this case variable will be taken in order.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">info_text2</span> <span class="o">=</span> <span class="s2">&quot;The temperature at </span><span class="si">{}</span><span class="s2"> station (ID: </span><span class="si">{}</span><span class="s2">) is </span><span class="si">{:.2f}</span><span class="s2"> Celsius.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">station_name</span><span class="p">,</span> <span class="n">station_id</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">info_text2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The temperature at Immokalee station (ID: 440) is 18.57 Celsius.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="operator-approach-no-longer-recommended">
+<h3>2.3 <code class="docutils literal notranslate"><span class="pre">%</span></code> operator approach (no longer recommended)<a class="headerlink" href="#operator-approach-no-longer-recommended" title="Link to this heading">#</a></h3>
+<p>The last (historical) string formatting approach is to use the <code class="docutils literal notranslate"><span class="pre">%</span></code> operator. In this approach, the placeholder <code class="docutils literal notranslate"><span class="pre">%</span></code> is added within the quotes, and the variables that are inserted into the body of text are placed inside parentheses after another <code class="docutils literal notranslate"><span class="pre">%</span></code> operator, like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">info_text3</span> <span class="o">=</span> <span class="s2">&quot;The temperature at </span><span class="si">%s</span><span class="s2"> station (ID: </span><span class="si">%s</span><span class="s2">) is </span><span class="si">%.2f</span><span class="s2"> Celsius.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">station_name</span><span class="p">,</span> <span class="n">station_id</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">info_text3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The temperature at Immokalee station (ID: 440) is 18.57 Celsius.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The order of the variables within the parentheses specify which <code class="docutils literal notranslate"><span class="pre">%</span></code> placeholder will receive what information and the number of variables should be exactly the same as the number of <code class="docutils literal notranslate"><span class="pre">%</span></code> placeholders within the text template.</p>
+</section>
+<section id="more-information-about-formatting-text-and-numbers">
+<h3>2.4 More information about formatting text and numbers<a class="headerlink" href="#more-information-about-formatting-text-and-numbers" title="Link to this heading">#</a></h3>
+<p>Of course, there is much more that can be done to format and interact with character strings and numbers. For more information, please have a look at the sites linked below.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://python-gis-book.readthedocs.io/en/develop/part1/chapter-02/nb/00-python-basics.html#common-string-manipulation-techniques">Common string manipulation techniques from <em>Introduction to Python for Geographic Data Analysis</em></a></p></li>
+<li><p><a class="reference external" href="https://www.python.org/dev/peps/pep-0498/">Python documentation: PEP 498 - Literal string interpolation</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters\2. Python Basics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Lesson4_list_solution.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><h1 style="color:green; text-align:center;">Lesson 4: Python Basics 2 - Lists </h1></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../3.%20Python%20Programming/Lesson6_Loops.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><h1 style="color:green; text-align:center;">Lesson 6: Python Programming 1 - Loops </h1></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-different-data-types-work-together">1. Making different data types work together</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reminder-data-types-and-their-compatibility">1.1 Reminder: Data types and their compatibility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-data-from-one-type-to-another">1.2 Converting data from one type to another</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-text-and-numbers">1.3 Combining text and numbers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-text-and-numbers">2. Working with text (and numbers)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-string-formatting">2.1 f-String formatting</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#test-your-understanding">Test your understanding</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#format-approach-no-longer-recommended">2.2 <code class="docutils literal notranslate"><span class="pre">.format()</span></code> approach (no longer recommended)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operator-approach-no-longer-recommended">2.3 <code class="docutils literal notranslate"><span class="pre">%</span></code> operator approach (no longer recommended)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-information-about-formatting-text-and-numbers">2.4 More information about formatting text and numbers</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed Elshall & Thalia Valle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,912 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lessons 16 : Data Science Workflow &#8212; Environmental Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/6. Data Science Workflow/Workflow';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Exercise 6 - AQI Data Preparation" href="Exercise6.html" />
+    <link rel="prev" title="Exercise 5 - API-Key Module (Optional)" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/Exercise_5_API_Key_Module.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Environmental Data Science - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Environmental Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    EGN 4930 / EGN 5932C Special Topic: Environmental Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0. Good Coding Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP1_VariableName.html">GCP1 - Selecting “good” variable names</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP2_DescribingCode.html">Describing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP3_ReadableCode.html">Readable Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP4_WritingScripts.html">Writing Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP5_Assertions.html">Assertions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson2.html">Lesson 2 Getting Started</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Excercise1.html">Exercise 1 - Installing Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson3_PythonBasics1.html">Lesson 3 - Python Basics 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson4_list_solution.html">Lesson 4 - Python Basics 2 - Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson5_formatting.html">Lesson 5 - Python Basics 3 - Formatting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson6_Loops.html">Lesson 6 - Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson7_conditional_statements.html">Lesson 7 - Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson8_functions.html">Lesson 8 - Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson9_modules.html">Lesson 9 - Script Files and Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Exercise3.html">Exercise 3 - Python Programming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 4. Pandas for Tabular Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Lesson10_pandas.html">Lessons 10 - 14 - Pandas Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Exercise4.html">Exercise 4 - Pandas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Artificial intelligence (AI) Coding Assistance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/OpenAI_API_Key_for_Jupyter_AI_Extension.html">OpenAI API key for Jupyter AI extension (Optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/AIcoding.html">Lesson 15 AI coding assistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/Exercise_5_API_Key_Module.html">Exercise 5 - API-Key Module (Optional)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Data Science Workflow</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lessons 16 - Data Science Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise6.html">Exercise 6 - AQI Data Preparation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. NumPy for Scientific Computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/numpy.html">Lessons 18-19 - NumPy Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/exercise7.html">Exercise 7 - NumPy - Air quality data analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8. Matplotlib for Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/matplotlib.html">Lesson 20 - 21 - Matplotlib Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/exercise8.html">Exercise 8 Matplotlib - Air quality data visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/climate.html">Lesson 24 - Climate Data - CMIP6 and Remote Sensing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/xarray.html">Lesson 25-27 - Xarray basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/cartopy.html">Lesson 28 - CartoPy basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/Exercise9.html">Exercise 9 - Sea surface height and red tides (Optional, Advanced)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">10. Introduction to Google Earth Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.0-%20Intro%20to%20GEE.html">Lesson 30 - Intro to Google Earth Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.1-%20JavaScript%20API%20vs.%20Python%20API.html">Lesson 31 - JavaScript API vs. Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html">Lesson 32 - Using Google Earth Engine in a Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/geemap1.html">Exercise 10 -  GeeMap, GEE, and Sentinel-2 Data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Chapters/6. Data Science Workflow/Workflow.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapters/6. Data Science Workflow/Workflow.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/6. Data Science Workflow/Workflow.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><h1 style="color:green; text-align:center;"> Lessons 16 : Data Science Workflow </h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-science">1. Data science</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-information-knowledge-wisdom-hierarchy">2. Data-information-knowledge-wisdom hierarchy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">2. Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-problem">2.1 Define problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-requirements">2.2 Data Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-data">2.3 Prepare Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-discovery-and-profiling">2.3.1 Data discovery and profiling</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-collection">2.3.2 Data collection</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning">2.3.3 Data cleaning</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structuring">2.3.4 Data structuring</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-enrichment">2.3.5 Data Enrichment</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transformation">2.3.6 Data Transformation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-validation">2.3.7 Data validation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-integration">2.3.8 Data Integration</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis">2.4 Data Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">2.5 Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dissemination">2.6 Dissemination</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">2.7 Deployment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-auditing">2.8 Post-auditing</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lessons-16-data-science-workflow">
+<h1><h1 style="color:green; text-align:center;"> Lessons 16 : Data Science Workflow </h1><a class="headerlink" href="#lessons-16-data-science-workflow" title="Link to this heading">#</a></h1>
+<p>This lesson was developed with assistance from GPT-4-1106-preview, claude-2.1, and GPT-3.5-turbo.</p>
+<p><a class="reference external" href="https://mybinder.org/v2/gh/aselshall/eds/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Data science workflow is the process to gain knowledge and insights from data. By the end of this lesson, you will be able to:</p>
+<ul class="simple">
+<li><p>describe different steps in data science workflow</p></li>
+<li><p>collect and preprocess data for analysis</p></li>
+</ul>
+</section>
+<section id="data-science">
+<h2>1. Data science<a class="headerlink" href="#data-science" title="Link to this heading">#</a></h2>
+<p>Data science employs techniques and theories from statistics, computer science, domain knowledge, and other areas to analyze and interpret complex data sets.
+<img src="attachment:ce455990-4c35-43d7-ae7c-c7f6286e7138.png" width="600"></p>
+<p><strong>Data science</strong> is a multidisciplinary field that uses</p>
+<ul class="simple">
+<li><p>scientific methods: formulating hypotheses, collecting data, analyzing data, and drawing conclusions based on evidence</p></li>
+<li><p>processes: data collection, data preprocessing, data analysis, evaluation, and deployment</p></li>
+<li><p>algorithms: clustering, classification, regression, machine learning, and more</p></li>
+<li><p>systems: databases, cloud computing platforms, programming languages, and other software tools</p></li>
+</ul>
+<p>to extract knowledge and insights from structured and unstructured data.</p>
+<p><strong>Environmental Data Science</strong> focuses specifically on applying data science techniques to study environmental systems and phenomena. It involves the collection, analysis, and interpretation of data related to the environment, such as climate data, air and water quality data, biodiversity data, and more. Environmental data science aims to understand and address environmental challenges by leveraging data-driven science and engineering.</p>
+<p><strong>Paradigms in science and engineering</strong></p>
+<ul class="simple">
+<li><p>Empirical description of nature</p></li>
+<li><p>Theoretical with models and generalization</p></li>
+<li><p>Computational with complex system simulations</p></li>
+<li><p>Data driven science and engineering</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="data-information-knowledge-wisdom-hierarchy">
+<h2>2. Data-information-knowledge-wisdom hierarchy<a class="headerlink" href="#data-information-knowledge-wisdom-hierarchy" title="Link to this heading">#</a></h2>
+<p>The Data-Information-Knowledge-Wisdom (DIKW) hierarchy is a pyramid with four levels, each representing a different stage in the transformation of data. Here is an example:</p>
+<p><img alt="image.png" src="Chapters/6. Data Science Workflow/attachment:afee04df-42ad-408e-8658-f6eac5d7ceaf.png" /></p>
+<p><strong>Data:</strong></p>
+<ul class="simple">
+<li><p>Description: Raw, unprocessed facts and figures without context.</p></li>
+<li><p>Characteristics: Discrete, objective, quantitative.</p></li>
+<li><p>Example: Satellite images, sensor readings of water quality, temperature measurements, species population counts.</p></li>
+</ul>
+<p><strong>Information:</strong></p>
+<ul class="simple">
+<li><p>Description: Data that has been given context and meaning, often by being organized or structured.</p></li>
+<li><p>Characteristics: Processed, contextual, interpretable.</p></li>
+<li><p>Example: deforestation rates, pollution levels in an urban lakes in low-income and high-income communities, trends in temperature changes over time, maps showing species distribution</p></li>
+</ul>
+<p><strong>Knowledge:</strong></p>
+<ul class="simple">
+<li><p>Description: Information that has been synthesized and understood, allowing for the drawing of conclusions.</p></li>
+<li><p>Characteristics: Modeled, actionable, experiential.</p></li>
+<li><p>Example : Understanding the impact of deforestation on local ecosystems, recognizing the correlation between urban lake pollution and public health, identifying the causes of climate change, understanding various drivers and species population dynamics.</p></li>
+</ul>
+<p><strong>Wisdom:</strong></p>
+<ul class="simple">
+<li><p>Description: The ability to make sound decisions based on knowledge, including a deep understanding of the consequences.</p></li>
+<li><p>Characteristics: Decisional, reflective, moral.</p></li>
+<li><p>Example: Implementing sustainable land management practices, developing an integrated project for urban lake restoration, developing policies for reducing carbon emissions, creating conservation strategies for endangered species.</p></li>
+</ul>
+</section>
+<section id="workflow">
+<h2>2. Workflow<a class="headerlink" href="#workflow" title="Link to this heading">#</a></h2>
+<p>A data science workflow involves the process of collecting, preparing, analyzing, and interpreting data to extract valuable insights and make informed decisions.</p>
+<p>Here is one workflow:</p>
+<img src="attachment:3bf886d9-72dc-45ba-b857-fde8ddc4b89e.png" width="700"><p>where:</p>
+<ol class="arabic simple">
+<li><p>Problem Definition: Identifying the problem to solve and defining objectives</p></li>
+<li><p>Data Requirements: Determining what data is needed and available and how to obtain it</p></li>
+<li><p>Data Preparation: Collecting and preparing raw data from various sources for analysis</p></li>
+<li><p>Data Analysis: Extracting insights and patterns from the prepared data</p></li>
+<li><p>Evaluation: Assessing the performance of models and analysis results</p></li>
+<li><p>Dissemination: Communicating and sharing findings and results</p></li>
+<li><p>Deployment: Implementing models or solutions in a real-world setting</p></li>
+<li><p>Post-auditing: Conducting assessments after deployment to ensure continued effectiveness</p></li>
+</ol>
+<section id="define-problem">
+<h3>2.1 Define problem<a class="headerlink" href="#define-problem" title="Link to this heading">#</a></h3>
+<p>Identifying the problem to solve and defining objectives</p>
+<ul class="simple">
+<li><p>Understanding the research, management or business question</p></li>
+<li><p>Defining the scope and objectives</p></li>
+<li><p>Identifying key stakeholders</p></li>
+</ul>
+<p><strong>Exampe</strong>: What is the impact of COVID19 lockdown orders on air quality in Miami?</p>
+</section>
+<section id="data-requirements">
+<h3>2.2 Data Requirements<a class="headerlink" href="#data-requirements" title="Link to this heading">#</a></h3>
+<p>Determining what data is needed and available and how to obtain it, which includes</p>
+<ul class="simple">
+<li><p>identifying data needed and its format</p></li>
+<li><p>understanding the availability of the data</p></li>
+<li><p>outlining the methods for obtaining such as surveys, experiments, or datasets</p></li>
+<li><p>consider the quality and reliability of the data sources</p></li>
+</ul>
+<p>This is an important steps the quality of your analysis depends on the quality of the collected data.</p>
+<p><strong>Example:</strong> We need to collect daily air quality data for parameters such as PM2.5, PM10, NO2, SO2, and CO in csv format from 2019 to 2021. That is one year before and one year after the lockdown orders of COVID 19. EPA Air Data contains air quality data collected at outdoor monitors across the US.</p>
+</section>
+<section id="prepare-data">
+<h3>2.3 Prepare Data<a class="headerlink" href="#prepare-data" title="Link to this heading">#</a></h3>
+<img src="attachment:9152356d-bf74-42e9-8a5f-86c10e1b42d6.png" width="900">
+<ol class="arabic simple">
+<li><p>Data discovery and profiling: Exploring the content, quality, and structure of the dataset</p></li>
+<li><p>Data collection: Gathering raw data from various sources for analysis</p></li>
+<li><p>Data cleaning: Standardizing inconsistent data formats, correcting errors, and handling missing values</p></li>
+<li><p>Data structuring: Organizing data for efficient storage and retrieval</p></li>
+<li><p>Data enrichment: Enhancing dataset with additional information from external sources to improve analysis</p></li>
+<li><p>Data transformation: Optimizing the content and structure of data for further analysis</p></li>
+<li><p>Data validation: Ensuring the accuracy, completeness, and reliability of the data</p></li>
+<li><p>Data integration: Combining data from multiple sources to create a unified dataset for analysis</p></li>
+</ol>
+<section id="data-discovery-and-profiling">
+<h4>2.3.1 Data discovery and profiling<a class="headerlink" href="#data-discovery-and-profiling" title="Link to this heading">#</a></h4>
+<p>This step involves the process of exploring and understanding the characteristics and quality of your dataset. This step includes:</p>
+<ul class="simple">
+<li><p>examine the data to gain insights into its structure, distribution, completeness, and quality</p></li>
+<li><p>identifying the types of variables in the dataset</p></li>
+<li><p>checking for missing values</p></li>
+<li><p>assessing data quality issues including scrutinizing for inconsistencies, errors, outliers, or data entry mistakes that could impact the reliability of analyses</p></li>
+</ul>
+<p>By the end of this step, you should be equipped with a comprehensive understanding of your dataset to make informed decisions regarding data collection, preprocessing and analysis strategies.</p>
+</section>
+<section id="data-collection">
+<h4>2.3.2 Data collection<a class="headerlink" href="#data-collection" title="Link to this heading">#</a></h4>
+<p>This is the process of gathering raw data from various sources:</p>
+<ul class="simple">
+<li><p>Databases: Extracting data from structured databases like SQL databases or NoSQL databases such as MongoDB</p></li>
+<li><p>Files: Reading data from various file formats like CSV, netCDF, shapefiles, JSON, images, or text files</p></li>
+<li><p>Sensors: Collecting data from environmental sensors that monitor parameters like temperature, humidity, air quality, etc.</p></li>
+<li><p>APIs: Fetching data from web APIs provided by organizations, government agencies, or environmental monitoring systems such as USGS, NOAA, NASA, CMIP, Google Earth enginer, and many more</p></li>
+<li><p>Manual Data Entry: Inputting data manually when automated methods are not available or feasible</p></li>
+</ul>
+<p>Python provides a rich ecosystem of libraries and tools that facilitate efficient data collection from various sources including</p>
+<ul class="simple">
+<li><p>tools for making HTTP requests to APIs and fetching data with wide formats such csv, JSCON, XML, netCDF, images, shapefile, zip file, and many other such as <code class="docutils literal notranslate"><span class="pre">requests</span></code></p></li>
+<li><p>libraries like <code class="docutils literal notranslate"><span class="pre">Geemap</span></code> that interact with the Google Earth Engine API for accessing and analyzing geospatial data on cloud</p></li>
+<li><p>tools like <code class="docutils literal notranslate"><span class="pre">beautifulsoup</span></code> for web scraping</p></li>
+<li><p>tools for changing file formats and unzipping files such as <code class="docutils literal notranslate"><span class="pre">zipfile</span></code></p></li>
+<li><p>libraries like <code class="docutils literal notranslate"><span class="pre">SQLAlchemy</span></code> for interacting with SQL databases and <code class="docutils literal notranslate"><span class="pre">PyMongo</span></code> for NoSQL databases like MongoDB</p></li>
+<li><p>libraries for specialized file formats like netCDF and shapefiles such as libraries like <code class="docutils literal notranslate"><span class="pre">xarray</span></code>, <code class="docutils literal notranslate"><span class="pre">cartopy</span></code>, and <code class="docutils literal notranslate"><span class="pre">geopandas</span></code></p></li>
+<li><p>libraries like <code class="docutils literal notranslate"><span class="pre">sensors</span></code> or <code class="docutils literal notranslate"><span class="pre">Adafruit</span> <span class="pre">CircuitPython</span></code> can be employed to interface with sensors and capture data in real-time</p></li>
+<li><p>capabilities for manual data entry through GUI libraries like <code class="docutils literal notranslate"><span class="pre">tkinter</span></code> or <code class="docutils literal notranslate"><span class="pre">PyQt</span></code> can be used to create interactive forms for manual data input within Python applications</p></li>
+</ul>
+<p>By leveraging Python and its versatile libraries, engineers and scientists can streamline the data collection process across a wide array of sources.</p>
+</section>
+<section id="data-cleaning">
+<h4>2.3.3 Data cleaning<a class="headerlink" href="#data-cleaning" title="Link to this heading">#</a></h4>
+<p>This step involves identifying and correcting errors, inconsistencies, missing values, and outliers in the dataset. Common data cleaning tasks include:</p>
+<ul class="simple">
+<li><p>Identifying and removing duplicate records from the dataset to ensure data integrity and avoid redundancy in analyses. Python provides functions like <code class="docutils literal notranslate"><span class="pre">drop_duplicates()</span></code> in libraries such as pandas for efficiently handling duplicate data entries.</p></li>
+<li><p>Dealing with missing data points by either imputing them with a suitable value or removing them from the dataset. Libraries like pandas offer methods like <code class="docutils literal notranslate"><span class="pre">fillna()</span></code> and <code class="docutils literal notranslate"><span class="pre">dropna()</span></code> to address missing values effectively.</p></li>
+<li><p>Ensuring consistency in data formats across different columns or variables in the dataset. Python allows for format standardization using functions like <code class="docutils literal notranslate"><span class="pre">str.lower()</span></code>, <code class="docutils literal notranslate"><span class="pre">str.upper()</span></code>, or regular expressions to manipulate text data formats.</p></li>
+<li><p>Rectifying errors in data entries that may arise due to typographical mistakes, inconsistencies, or inaccuracies. Python’s string manipulation functions, data validation techniques, and outlier detection algorithms can aid in identifying and correcting data entry errors.</p></li>
+</ul>
+<p>By performing these data cleaning tasks engineers and scientists can enhance the quality and reliability of the dataset.</p>
+</section>
+<section id="data-structuring">
+<h4>2.3.4 Data structuring<a class="headerlink" href="#data-structuring" title="Link to this heading">#</a></h4>
+<p>This steps involves organizing and formating the data in a way that is optimal for storage and retrieval. This step involves tasks such as:</p>
+<ul class="simple">
+<li><p>restructuring data into a tidy format</p></li>
+<li><p>combining datasets</p></li>
+<li><p>reshaping data</p></li>
+<li><p>creating new variables or features that may be needed for analysis</p></li>
+</ul>
+<p>This step ensure that you can efficiently access your data for further analysis.</p>
+</section>
+<section id="data-enrichment">
+<h4>2.3.5 Data Enrichment<a class="headerlink" href="#data-enrichment" title="Link to this heading">#</a></h4>
+<p>Data enrichment is a process in which existing datasets are enhanced with additional information to make the data more valuable for analysis:</p>
+<ul class="simple">
+<li><p>Incorporating external information such scientific understanding, engineering heuristics, demographic information, economic indicators, weather information, or any relevant external information that can provide context and deeper insights into the analysis</p></li>
+<li><p>Creating new features or variables from existing data through transformation, aggregation, or combination</p></li>
+<li><p>Calculating derived metrics or indicators that capture specific patterns, trends, or relationships within the data.</p></li>
+</ul>
+<p>Data enrichment enriches the dataset with additional context, insights, and features to improve analysis.</p>
+</section>
+<section id="data-transformation">
+<h4>2.3.6 Data Transformation<a class="headerlink" href="#data-transformation" title="Link to this heading">#</a></h4>
+<p>Data transformation involves converting data into a format suitable for analysis. This step often includes tasks such as:</p>
+<ul class="simple">
+<li><p>aggregation by combining multiple data points into a summary statistic</p></li>
+<li><p>Filtering by selecting specific rows or subsets of data based on defined criteria or conditions</p></li>
+<li><p>generating new variables or features from existing data</p></li>
+<li><p>convert a Pandas DataFrame to numpy array for more advanced array operations. You can do this conversion using the method `.values.</p></li>
+</ul>
+<p>Data enrichment and data transformation are closely related but distinct from data structuring. While data structuring primarily involves data wrangling for efficient storage and retrieval, data transformation focuses on preparing data for optimal analysis.</p>
+</section>
+<section id="data-validation">
+<h4>2.3.7 Data validation<a class="headerlink" href="#data-validation" title="Link to this heading">#</a></h4>
+<p>This ensures the data is accurate, complete, and consistent. Common techniques used in data validation include</p>
+<ul class="simple">
+<li><p>statistical analysis</p></li>
+<li><p>visualization</p></li>
+<li><p>cross-referencing with known sources of truth.</p></li>
+</ul>
+<p>This step ensures the integrity and reliability of the data for subsequent analysis.</p>
+</section>
+<section id="data-integration">
+<h4>2.3.8 Data Integration<a class="headerlink" href="#data-integration" title="Link to this heading">#</a></h4>
+<p>Data integration is the process of combining variables from different sources and formats into a unified view. Common challenges in data integration include dealing with</p>
+<ul class="simple">
+<li><p>data inconsistencies</p></li>
+<li><p>ensuring data quality</p></li>
+<li><p>handling different data formats</p></li>
+<li><p>resolving conflicts between datasets</p></li>
+</ul>
+<p>By overcoming these challenges through robust data integration techniques is needed to reach a comprehensive dataset that include are your variables and is analysis ready.</p>
+</section>
+</section>
+<section id="data-analysis">
+<h3>2.4 Data Analysis<a class="headerlink" href="#data-analysis" title="Link to this heading">#</a></h3>
+<p>Applying algorithms and statistical models to analyze the data</p>
+<ul class="simple">
+<li><p>Data Exploration: Exploratory Data Analysis (EDA), statistical analysis, visualization</p></li>
+<li><p>Feature Engineering: Creating new features from existing data, feature (variable) selection, dimensionality reduction (e.g., reducing the number of your variables)</p></li>
+<li><p>Model Building: selecting algorithms, training models, hyperparameter tuning for machine learning</p></li>
+</ul>
+</section>
+<section id="evaluation">
+<h3>2.5 Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h3>
+<p>Validating your data through techniques like</p>
+<ul class="simple">
+<li><p>cross-validation</p></li>
+<li><p>analyzing performance metrics</p></li>
+<li><p>conducting error analysis</p></li>
+</ul>
+<p>This is to ensure the accuracy and reliability of your findings</p>
+</section>
+<section id="dissemination">
+<h3>2.6 Dissemination<a class="headerlink" href="#dissemination" title="Link to this heading">#</a></h3>
+<p>Communicating your results and present your findings through</p>
+<ul class="simple">
+<li><p>reports and presentations</p></li>
+<li><p>embracing open science practices</p></li>
+<li><p>onsidering other relevant factors in the dissemination of your research</p></li>
+</ul>
+</section>
+<section id="deployment">
+<h3>2.7 Deployment<a class="headerlink" href="#deployment" title="Link to this heading">#</a></h3>
+<p>Implementing the analytical model to solve the problem including</p>
+<ul class="simple">
+<li><p>Integration into production environment and real world applications</p></li>
+<li><p>Monitoring and maintenance</p></li>
+</ul>
+</section>
+<section id="post-auditing">
+<h3>2.8 Post-auditing<a class="headerlink" href="#post-auditing" title="Link to this heading">#</a></h3>
+<p>Model monitoring and updating including</p>
+<ul class="simple">
+<li><p>performance monitoring</p></li>
+<li><p>updating models with new data</p></li>
+<li><p>iteration and continuous improvement</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters\6. Data Science Workflow"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/Exercise_5_API_Key_Module.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Exercise 5 - API-Key Module (Optional)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Exercise6.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><h1 style="color:green; text-align:center;"> Exercise 6 - AQI Data Preparation</h1></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-science">1. Data science</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-information-knowledge-wisdom-hierarchy">2. Data-information-knowledge-wisdom hierarchy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">2. Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-problem">2.1 Define problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-requirements">2.2 Data Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-data">2.3 Prepare Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-discovery-and-profiling">2.3.1 Data discovery and profiling</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-collection">2.3.2 Data collection</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning">2.3.3 Data cleaning</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structuring">2.3.4 Data structuring</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-enrichment">2.3.5 Data Enrichment</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transformation">2.3.6 Data Transformation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-validation">2.3.7 Data validation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-integration">2.3.8 Data Integration</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis">2.4 Data Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">2.5 Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dissemination">2.6 Dissemination</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">2.7 Deployment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-auditing">2.8 Post-auditing</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed Elshall & Thalia Valle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

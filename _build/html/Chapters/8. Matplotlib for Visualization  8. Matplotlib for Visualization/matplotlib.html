@@ -1,0 +1,1957 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lesson 20 - 21: Matplotlib Basics &#8212; Environmental Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/8. Matplotlib for Visualization  8. Matplotlib for Visualization/matplotlib';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Exercise 8 Matplotlib: Air quality data visualization" href="exercise8.html" />
+    <link rel="prev" title="Exercise 7 NumPy: Air quality data analysis" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/exercise7.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Environmental Data Science - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Environmental Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    EGN 4930 / EGN 5932C Special Topic: Environmental Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0. Good Coding Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP1_VariableName.html">GCP1 - Selecting “good” variable names</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP2_DescribingCode.html">Describing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP3_ReadableCode.html">Readable Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP4_WritingScripts.html">Writing Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP5_Assertions.html">Assertions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson2.html">Lesson 2 Getting Started</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Excercise1.html">Exercise 1 - Installing Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson3_PythonBasics1.html">Lesson 3 - Python Basics 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson4_list_solution.html">Lesson 4 - Python Basics 2 - Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson5_formatting.html">Lesson 5 - Python Basics 3 - Formatting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson6_Loops.html">Lesson 6 - Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson7_conditional_statements.html">Lesson 7 - Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson8_functions.html">Lesson 8 - Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson9_modules.html">Lesson 9 - Script Files and Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Exercise3.html">Exercise 3 - Python Programming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 4. Pandas for Tabular Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Lesson10_pandas.html">Lessons 10 - 14 - Pandas Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Exercise4.html">Exercise 4 - Pandas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Artificial intelligence (AI) Coding Assistance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/OpenAI_API_Key_for_Jupyter_AI_Extension.html">OpenAI API key for Jupyter AI extension (Optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/AIcoding.html">Lesson 15 AI coding assistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/Exercise_5_API_Key_Module.html">Exercise 5 - API-Key Module (Optional)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Data Science Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Workflow.html">Lessons 16 - Data Science Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Exercise6.html">Exercise 6 - AQI Data Preparation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. NumPy for Scientific Computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/numpy.html">Lessons 18-19 - NumPy Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/exercise7.html">Exercise 7 - NumPy - Air quality data analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8. Matplotlib for Visualization</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lesson 20 - 21 - Matplotlib Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercise8.html">Exercise 8 Matplotlib - Air quality data visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/climate.html">Lesson 24 - Climate Data - CMIP6 and Remote Sensing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/xarray.html">Lesson 25-27 - Xarray basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/cartopy.html">Lesson 28 - CartoPy basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/Exercise9.html">Exercise 9 - Sea surface height and red tides (Optional, Advanced)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">10. Introduction to Google Earth Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.0-%20Intro%20to%20GEE.html">Lesson 30 - Intro to Google Earth Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.1-%20JavaScript%20API%20vs.%20Python%20API.html">Lesson 31 - JavaScript API vs. Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html">Lesson 32 - Using Google Earth Engine in a Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/geemap1.html">Exercise 10 -  GeeMap, GEE, and Sentinel-2 Data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Chapters/8. Matplotlib for Visualization  8. Matplotlib for Visualization/matplotlib.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapters/8. Matplotlib for Visualization  8. Matplotlib for Visualization/matplotlib.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/8. Matplotlib for Visualization  8. Matplotlib for Visualization/matplotlib.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lesson 20 - 21: Matplotlib Basics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">2. Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-plotting-data">3. Prepare plotting data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#air-quality-data">3.1 Air quality data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-information">3.2 Additional information</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-basics">4. Matplotlib basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#axes-and-figures">4.1 Axes and Figures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-plot-in-matplotlib">4.2 Creating a plot in Matplotlib</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-line-plot">5. Basic line plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-subplot">5.1 One subplot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-subplots">5.2 Multiple subplots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subplot-function">5.3 Subplot function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-multiple-graphs-on-the-same-axis">5.4 Plotting multiple graphs on the same axis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-plot">6. Customizing plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-plot-with-axes-object">6.1 Customizing plot with <code class="docutils literal notranslate"><span class="pre">Axes</span></code> object</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#test-your-understanding">Test your understanding</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cutomize-plot-when-calling-plot-function">6.2 Cutomize plot when calling <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Test your understanding</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-plot-with-figure-object">6.3 Customizing plot with <code class="docutils literal notranslate"><span class="pre">Figure</span></code> object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-colors">6.4 Customizing colors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-exercise-putting-this-all-together">7. Class Exercise: Putting this all together</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatterplot-optional">8. Scatterplot (<em>optional</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#displaying-images-optional">9. Displaying images (<em>optional</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contour-and-filled-contour-plots-optional">10. Contour and filled contour plots (<em>optional</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-plot-optional">11. Heatmap plot (<em>optional</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automating-subplot-index-in-a-loop-optional">12. Automating subplot index in a loop (<em>optional</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-for-multiple-datasets-with-for-loop-optional">13. Boxplot for multiple datasets with for-loop (<em>optional</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#axes-interface-and-pyplot-interface-optional">14. “Axes” interface and “pyplot” interface (<em>optional</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">15. Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-and-references">Resources and References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><img alt="Matplotlib logo" src="https://matplotlib.org/stable/_images/sphx_glr_logos2_003.png" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="lesson-20-21-matplotlib-basics">
+<h1>Lesson 20 - 21: Matplotlib Basics<a class="headerlink" href="#lesson-20-21-matplotlib-basics" title="Link to this heading">#</a></h1>
+<p>This lesson is modified from <a class="reference external" href="https://foundations.projectpythia.org/core/matplotlib.html">Matplotlib Basics</a> by <a class="reference external" href="https://projectpythia.org">Project Pythia</a>.</p>
+<p><a class="reference external" href="https://mybinder.org/v2/gh/aselshall/eds/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>We will explore using Matplotlib to create various plots. By the end of this lesson, you will be able to</p>
+<ul class="simple">
+<li><p>decide if Matplotlib fits your visualization needs or if you need other plotting libraries</p></li>
+<li><p>explain the difference between <code class="docutils literal notranslate"><span class="pre">Figure</span></code> and <code class="docutils literal notranslate"><span class="pre">Axes</span></code></p></li>
+<li><p>create and customize line plots with <code class="docutils literal notranslate"><span class="pre">subplots</span></code></p></li>
+<li><p>utilize different plot types like scatter plots, images, and contour plots (<em>optional</em>)</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong><a class="reference external" href="https://geo-python-site.readthedocs.io/en/latest/lessons/L1/motivation.html">Effective data visualization</a></strong> is needed as raw data alone is often insufficient for understanding the information it holds.
+<br>
+<br></p></li>
+<li><p><strong>Python has many data visualization libraries</strong> like Matplotlib, Cartopy,  Plotly, Seaborn, GeoCAT-viz, MetPy, Vapor,and Bokeh.</p>
+<ul class="simple">
+<li><p>When selecting a library for your data visualization needs, consider factors like data type, visualization complexity, and interactivity needs.</p></li>
+<li><p>For example, you can use:</p>
+<ul>
+<li><p><a class="reference external" href="https://matplotlib.org/2.0.2/gallery.html">Matplotlib</a> for creating static, animated, and interactive visualizations with a wide range of plotting options,</p></li>
+<li><p><a class="reference external" href="https://seaborn.pydata.org/examples/index.html">Seaborn</a> for creating complex statistical graphics with a high-level interface,</p></li>
+<li><p><a class="reference external" href="https://plotly.com/python/">Plotly</a> for creating interactive visualizations with dynamic capabilities,</p></li>
+<li><p><a class="reference external" href="https://docs.bokeh.org/en/latest/docs/gallery.html">Bokeh</a> for creating interactive web-based visualizations with interactive tools,</p></li>
+<li><p><a class="reference external" href="https://hvplot.holoviz.org/reference/index.html">hvPlot</a> as a user-friendly tool for creating advanced interactive plots easily,</p></li>
+<li><p><a class="reference external" href="https://scitools.org.uk/cartopy/docs/latest/gallery/index.html">Cartopy</a> for creating static maps with various projections and geospatial data,</p></li>
+<li><p><a class="reference external" href="https://geocat-examples.readthedocs.io/en/latest/gallery/index.html">GeoCAT</a> for specialized geospatial data visualization, particularly for geoscience data,</p></li>
+<li><p><a class="reference external" href="https://unidata.github.io/MetPy/latest/examples/index.html">MetPy</a> when working with weather data,</p></li>
+<li><p><a class="reference external" href="https://visgallery.ucar.edu/category/visualization-software/vapor/">Vapor</a> for interactive 3D visualization,</p></li>
+<li><p>or other libraries based on your specific data visualization needs.</p></li>
+</ul>
+</li>
+<li><p>The <a class="reference external" href="https://projectpythia.org/advanced-viz-cookbook/notebooks/1-comparison.html">Comparison of Visualization Packages</a> cookbook of Project Pythia offers information and resources to help you get started with these libraries.
+<br>
+<br></p></li>
+</ul>
+</li>
+<li><p><strong>Matplotlib is widely used</strong> for creating a varity of plots in Python</p>
+<ul class="simple">
+<li><p>It is suitable for basic to intermediate level plotting needs</p></li>
+<li><p>Matplotlib documentation provides <a class="reference external" href="https://matplotlib.org/stable/gallery/index.html">example plots</a> for different <a class="reference external" href="https://matplotlib.org/stable/plot_types/index.html#plot-types">plot types</a></p></li>
+<li><p>There are many online resources. For example:</p>
+<ul>
+<li><p><a class="reference external" href="https://www.machinelearningplus.com/plots/top-50-matplotlib-visualizations-the-master-plots-python/">Top 50 Matplotlib Visualizations</a> provide codes based on different visualization objectives with emphasis on conveying accurate information, simplicity in design, aesthetics complementing the information, and avoiding information overload.</p></li>
+<li><p>The <a class="reference external" href="https://geocat-examples.readthedocs.io/en/latest/gallery/index.html">geocat gallery</a> contains visualization examples from many plotting categories of geosciences data.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="imports">
+<h2>2. Imports<a class="headerlink" href="#imports" title="Link to this heading">#</a></h2>
+<p>Matplotlib is a Python 2-D plotting library.  It is used to produce publication quality figures in a variety of hard-copy formats and interactive environments across platforms. Matplotlib includes modules such as <code class="docutils literal notranslate"><span class="pre">pyplot</span></code>, <code class="docutils literal notranslate"><span class="pre">figure</span></code>, <code class="docutils literal notranslate"><span class="pre">axes</span></code>, <code class="docutils literal notranslate"><span class="pre">patches</span></code>, <code class="docutils literal notranslate"><span class="pre">colors</span></code>, <code class="docutils literal notranslate"><span class="pre">cm</span></code>, and <code class="docutils literal notranslate"><span class="pre">colorbar</span></code> for creating and customizing plots and visualizations.</p>
+<p>Importing <code class="docutils literal notranslate"><span class="pre">pyplot</span></code> from Matplotlib simplifies figure creation with a MATLAB-like interface. Renaming <code class="docutils literal notranslate"><span class="pre">pyplot</span></code> as <code class="docutils literal notranslate"><span class="pre">plt</span></code> is the common convention for brevity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="prepare-plotting-data">
+<h2>3. Prepare plotting data<a class="headerlink" href="#prepare-plotting-data" title="Link to this heading">#</a></h2>
+<section id="air-quality-data">
+<h3>3.1 Air quality data<a class="headerlink" href="#air-quality-data" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the data from the CSV file into a Pandas DataFrame</span>
+<span class="c1"># Columns: [datetime, &#39;PM2.5&#39;, &#39;PM10&#39;,  &#39;NO2&#39;, &#39;SO2&#39;,  &#39;CO&#39;, &#39;O3&#39;]</span>
+<span class="c1"># Load the array from file</span>
+<span class="n">pre_dates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data/pre_dates.npy&#39;</span><span class="p">)</span>
+<span class="n">pre_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data/pre_values.npy&#39;</span><span class="p">)</span>
+<span class="n">pre_aqi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data/pre_aqi.npy&#39;</span><span class="p">)</span>
+<span class="n">post_dates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data/post_dates.npy&#39;</span><span class="p">)</span>
+<span class="n">post_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data/post_values.npy&#39;</span><span class="p">)</span>
+<span class="n">post_aqi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data/post_aqi.npy&#39;</span><span class="p">)</span>
+
+<span class="c1">#Display loaded data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pre_dates:&quot;</span><span class="p">,</span> <span class="n">pre_dates</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">pre_dates</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">pre_dates</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pre_values:&quot;</span><span class="p">,</span> <span class="n">pre_values</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">pre_values</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pre_aqi:&quot;</span><span class="p">,</span> <span class="n">pre_aqi</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">pre_aqi</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;post_dates:&quot;</span><span class="p">,</span> <span class="n">post_dates</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">pre_dates</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">post_dates</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;post_values:&quot;</span><span class="p">,</span> <span class="n">post_values</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">pre_values</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;post_aqi:&quot;</span><span class="p">,</span> <span class="n">post_aqi</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">pre_aqi</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="additional-information">
+<h3>3.2 Additional information<a class="headerlink" href="#additional-information" title="Link to this heading">#</a></h3>
+<p>Let us define some additonal infromation that we may need to improve visualization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define date ranges</span>
+<span class="n">lockdown_start</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2020-04-01&#39;</span><span class="p">)</span>
+<span class="n">one_year_before</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2019-04-01&#39;</span><span class="p">)</span>
+<span class="n">one_year_after</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2021-04-01&#39;</span><span class="p">)</span>
+
+<span class="c1"># Air quality parameter information</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span>        <span class="s1">&#39;PM2.5&#39;</span><span class="p">,</span> <span class="s1">&#39;PM10&#39;</span><span class="p">,</span>  <span class="s1">&#39;NO2&#39;</span><span class="p">,</span> <span class="s1">&#39;SO2&#39;</span><span class="p">,</span>  <span class="s1">&#39;CO&#39;</span><span class="p">,</span> <span class="s1">&#39;O3&#39;</span><span class="p">]</span>
+<span class="n">units</span> <span class="o">=</span> <span class="p">[</span>             <span class="s1">&#39;µg/m³&#39;</span><span class="p">,</span> <span class="s1">&#39;µg/m³&#39;</span><span class="p">,</span> <span class="s1">&#39;ppb&#39;</span><span class="p">,</span> <span class="s1">&#39;ppb&#39;</span><span class="p">,</span> <span class="s1">&#39;ppm&#39;</span><span class="p">,</span> <span class="s1">&#39;ppm&#39;</span><span class="p">]</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">[</span>        <span class="mi">35</span> <span class="p">,</span>      <span class="mi">155</span><span class="p">,</span>    <span class="mi">100</span><span class="p">,</span>   <span class="mi">50</span><span class="p">,</span>     <span class="mi">9</span><span class="p">,</span>  <span class="mf">0.07</span><span class="p">]</span>  <span class="c1"># Unhealthy levels of senitive groups</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="matplotlib-basics">
+<h2>4. Matplotlib basics<a class="headerlink" href="#matplotlib-basics" title="Link to this heading">#</a></h2>
+<section id="axes-and-figures">
+<h3>4.1 Axes and Figures<a class="headerlink" href="#axes-and-figures" title="Link to this heading">#</a></h3>
+<p>In the context of Matplotlib and plotting in general, understanding the concepts of figures and axes is fundamental. Matplotlib has two core objects:</p>
+<ul class="simple">
+<li><p>The Figure is the top-level container for all plot elements.</p></li>
+<li><p>The Axes is the area of the figure where the data is plotted.</p></li>
+</ul>
+<p><strong>Figure:</strong></p>
+<ul class="simple">
+<li><p>A Figure in Matplotlib is the top-level container that holds all elements of your plot(s).</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">Figure</span></code> can contain one or more <code class="docutils literal notranslate"><span class="pre">Axes</span></code> objects, which are the individual plots.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Figure</span></code> also provides methods for saving plots to files in various formats such as PNG, SVG, etc.</p></li>
+<li><p>You can think of the <code class="docutils literal notranslate"><span class="pre">Figure</span></code> as the canvas on which all the plotting occurs.</p></li>
+<li><p>You can create a Figure using</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">plt.figure()</span></code></p></li>
+<li><p>or <code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Axes:</strong></p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Axes</span></code> in Matplotlib refers to a single plot within a figure and not to the plural form of multiple plots.</p></li>
+<li><p>An <code class="docutils literal notranslate"><span class="pre">Axes</span></code> object includes aspects like the x-axis, y-axis, labels, title, and the plot elements themselves.</p></li>
+<li><p>An <code class="docutils literal notranslate"><span class="pre">Axes</span></code> object contains various methods for creating plots, including <code class="docutils literal notranslate"><span class="pre">plot()</span></code>, <code class="docutils literal notranslate"><span class="pre">scatter()</span></code>, <code class="docutils literal notranslate"><span class="pre">bar()</span></code>, and many others.</p></li>
+<li><p>Within a single <code class="docutils literal notranslate"><span class="pre">Figure</span></code>, you can have multiple <code class="docutils literal notranslate"><span class="pre">Axes</span></code> arranged in a grid.</p></li>
+<li><p>You can create <code class="docutils literal notranslate"><span class="pre">Axes</span></code> objects by using:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code> to create both a <code class="docutils literal notranslate"><span class="pre">Figure</span></code> and one or more <code class="docutils literal notranslate"><span class="pre">Axes</span></code> objects</p></li>
+<li><p>or <code class="docutils literal notranslate"><span class="pre">fig.add_subplot()</span></code> on a <code class="docutils literal notranslate"><span class="pre">Figure</span></code> instance</p></li>
+</ul>
+</li>
+</ul>
+<img src="https://matplotlib.org/stable/_images/sphx_glr_anatomy_001.png" alt="anatomy of a figure" width="600"/><div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Info</p>
+    Matplotlib has <a href="https://matplotlib.org/stable/users/explain/figure/api_interfaces.html">two main interfaces</a>. The explicit "Axes" interface uses methods on a Figure or Axes object to create visual elements step by step. Example: Creating a plot with <code>ax.plot()</code>. The implicit "pyplot" interface: Automatically manages Figures and Axes, adding elements to the last created plot. Example: Creating a plot with <code>plt.plot()</code>. In this tutorial, we will use the "Axes" interface.
+</div></section>
+<section id="creating-a-plot-in-matplotlib">
+<h3>4.2 Creating a plot in Matplotlib<a class="headerlink" href="#creating-a-plot-in-matplotlib" title="Link to this heading">#</a></h3>
+<p>Creating a plot typically involves the following steps:</p>
+<ul class="simple">
+<li><p>Initiating a <code class="docutils literal notranslate"><span class="pre">Figure</span></code> object, which will be the container for your plots.</p></li>
+<li><p>Adding <code class="docutils literal notranslate"><span class="pre">Axes</span></code> to the <code class="docutils literal notranslate"><span class="pre">Figure</span></code>. These can be added using:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code> to create a new <code class="docutils literal notranslate"><span class="pre">Figure</span></code> and <code class="docutils literal notranslate"><span class="pre">Axes</span></code> simultaneously</p></li>
+<li><p>or <code class="docutils literal notranslate"><span class="pre">fig.add_subplot()</span></code> if you have already created a <code class="docutils literal notranslate"><span class="pre">Figure</span></code></p></li>
+</ul>
+</li>
+<li><p>Plotting data on the <code class="docutils literal notranslate"><span class="pre">Axes</span></code> by calling plotting methods such as <code class="docutils literal notranslate"><span class="pre">plot()</span></code>, <code class="docutils literal notranslate"><span class="pre">scatter()</span></code>, etc.</p></li>
+<li><p>Enhancing the plot with titles, axis labels, legends, and other annotations to make the information clear.</p></li>
+<li><p>Finally, displaying the plot with <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code> or saving it with <code class="docutils literal notranslate"><span class="pre">fig.savefig()</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="basic-line-plot">
+<h2>5. Basic line plot<a class="headerlink" href="#basic-line-plot" title="Link to this heading">#</a></h2>
+<p>Plotting with:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fig=plt.figure()</span></code> creates a single figure and you can you use <code class="docutils literal notranslate"><span class="pre">ax=fig.add_subplot()</span></code> to add plots.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fig,ax=plt.subplots()</span></code> creates a single figure with a grid of one or multiple subplots</p></li>
+</ul>
+<p>Both methods will allow you to create a figure with one or multiple subplots. For this tutorial, it is easier to use <code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code>.</p>
+<section id="one-subplot">
+<h3>5.1 One subplot<a class="headerlink" href="#one-subplot" title="Link to this heading">#</a></h3>
+<p>Let use see an example. To plot <code class="docutils literal notranslate"><span class="pre">pre_values</span></code> we need to:</p>
+<ol class="arabic simple">
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">Figure</span></code> with dimensions of 10 inches wide and 6 inches long using the <code class="docutils literal notranslate"><span class="pre">figsize</span></code> parameter.</p></li>
+<li><p>create an <code class="docutils literal notranslate"><span class="pre">Axes</span></code> object with a single subplot on the <code class="docutils literal notranslate"><span class="pre">Figure</span></code> using <code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code></p></li>
+<li><p>use the <code class="docutils literal notranslate"><span class="pre">plot</span></code> method of the <code class="docutils literal notranslate"><span class="pre">Axes</span></code> object, with</p>
+<ul class="simple">
+<li><p>datetime data <code class="docutils literal notranslate"><span class="pre">pre_dates</span></code> for the x-axis (i.e., the independent values)</p></li>
+<li><p>and PM2.5 data <code class="docutils literal notranslate"><span class="pre">pre_values[:,0]</span></code> for the y-axis (i.e., the dependent values)</p></li>
+</ul>
+</li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a figure object and Axes object using subplots() method</span>
+
+
+<span class="c1"># Plot time  [day] as x-variable and PM2.5 [&#39;µg/m³] as y-variable</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Info</p>
+    By default, <code>ax.plot</code> will create a line plot, as seen in the above example.
+</div></section>
+<section id="multiple-subplots">
+<h3>5.2 Multiple subplots<a class="headerlink" href="#multiple-subplots" title="Link to this heading">#</a></h3>
+<p>Now how to plot PM10 on a different subplot?</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">subplots()</span></code> method takes the arguments <code class="docutils literal notranslate"><span class="pre">.subplots(rows,</span> <span class="pre">columns)</span></code>. If we want to plot PM10 below PM2.5 we need a 2x1 grid:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>You can access each Axes using indexing. For example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Below is a concise example using axes within a figure:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a figure</span>
+
+<span class="c1"># Plot times as x-variable and air quality parameters as y-variable</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="subplot-function">
+<h3>5.3 Subplot function<a class="headerlink" href="#subplot-function" title="Link to this heading">#</a></h3>
+<p>You might have noticed that we called the <code class="docutils literal notranslate"><span class="pre">subplots</span></code> function with the keyword argument <code class="docutils literal notranslate"><span class="pre">figsize</span></code>. Here are some of the keyword arguments that you can use when you call <code class="docutils literal notranslate"><span class="pre">subplots</span></code> or <code class="docutils literal notranslate"><span class="pre">.add_subplot()</span></code> method:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Keyword</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Common Values / Ranges</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">subplots</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">addsubplot</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>nrows</p></td>
+<td><p>The number of rows of subplots</p></td>
+<td><p>Integer &gt;= 1</p></td>
+<td><p>2</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>ncols</p></td>
+<td><p>The number of columns of subplots</p></td>
+<td><p>Integer &gt;= 1</p></td>
+<td><p>2</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>index</p></td>
+<td><p>The index of the subplot</p></td>
+<td><p>Integer starting from 1</p></td>
+<td><p>1</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>figsize</p></td>
+<td><p>Size of the figure in inches</p></td>
+<td><p>Tuple (width, height) in inches</p></td>
+<td><p>figsize=(8, 6)</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-even"><td><p>sharex</p></td>
+<td><p>Share the x-axis with other subplots</p></td>
+<td><p>Boolean (True/False)</p></td>
+<td><p>sharex=True</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>sharey</p></td>
+<td><p>Share the y-axis with other subplots</p></td>
+<td><p>Boolean (True/False)</p></td>
+<td><p>sharey=True</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>xlabel</p></td>
+<td><p>The label for the x-axis</p></td>
+<td><p>Any text</p></td>
+<td><p>xlabel=”X-axis”</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>ylabel</p></td>
+<td><p>The label for the y-axis</p></td>
+<td><p>Any text</p></td>
+<td><p>ylabel=”Y-axis”</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>title</p></td>
+<td><p>The title of the subplot</p></td>
+<td><p>Any text</p></td>
+<td><p>title=”Main Plot”</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>xlim</p></td>
+<td><p>The limits for the x-axis</p></td>
+<td><p>Tuple (min, max)</p></td>
+<td><p>xlim=(0, 10)</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>ylim</p></td>
+<td><p>The limits for the y-axis</p></td>
+<td><p>Tuple (min, max)</p></td>
+<td><p>ylim=(0, 20)</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>xticks</p></td>
+<td><p>The positions of tick marks on the x-axis</p></td>
+<td><p>List of values</p></td>
+<td><p>xticks=[0, 5,10]</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+<p>These are just a few common keyword arguments used with these two methods to customize and configure subplots in a figure.</p>
+<p>Let us try one of these keyowrds. Let us try to remove the ticks of x-axis of the upper plot, since both plots share the same axis. We can use the <code class="docutils literal notranslate"><span class="pre">sharex</span></code> argument.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a figure</span>
+
+<span class="c1"># Plot times as x-variable and air quality parameters as y-variable</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">,</span><span class="n">pre_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span> <span class="c1">#PM 2.5</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">,</span><span class="n">pre_values</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="p">);</span>  <span class="c1">#PM 10</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plotting-multiple-graphs-on-the-same-axis">
+<h3>5.4 Plotting multiple graphs on the same axis<a class="headerlink" href="#plotting-multiple-graphs-on-the-same-axis" title="Link to this heading">#</a></h3>
+<p>We can call <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> more than once to add more plots to our Axes. Let rewrite the above code to plot both pre and post data only for PM2.5</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a figure</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plot times as x-variable and air quality parameters as y-variable for PM2.5</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">,</span><span class="n">pre_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span> <span class="c1">#PM 2.5</span>
+
+<span class="c1"># Plot times as x-variable and air quality parameters as y-variable for PM10</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">,</span><span class="n">pre_values</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="p">);</span>  <span class="c1">#PM 10</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="customizing-plot">
+<h2>6. Customizing plot<a class="headerlink" href="#customizing-plot" title="Link to this heading">#</a></h2>
+<section id="customizing-plot-with-axes-object">
+<h3>6.1 Customizing plot with <code class="docutils literal notranslate"><span class="pre">Axes</span></code> object<a class="headerlink" href="#customizing-plot-with-axes-object" title="Link to this heading">#</a></h3>
+<p>Let us look at post-plot customization by leveraging the <code class="docutils literal notranslate"><span class="pre">Axes</span></code> object in Matplotlib. We can specify “Time” as x-axis label and “PM2.5” as y-axis label. This is achieved through the <code class="docutils literal notranslate"><span class="pre">ax.set_xlabel()</span></code> and <code class="docutils literal notranslate"><span class="pre">ax.set_ylabel()</span></code> methods, respectively.</p>
+<p>Let us add labels and visualize the updated the above figure:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add some labels to the y-axis</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">units</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">) &#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">units</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">) &#39;</span><span class="p">)</span>
+
+<span class="c1"># Add some labels to x-axis</span>
+
+
+<span class="c1"># Prompt the notebook to re-display the figure after we modify it</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Info</p>
+    If you have Figure object stored in a variable named <code>fig</code>, you can display it using <code>plt.show(fig)</code>, or simply by placing the variable name <code>fig</code> at the end of the code. This prompts the notebook to re-display the figure after modifications have been made to it rather than recreating the figure from scratch. 
+</div><p>The <code class="docutils literal notranslate"><span class="pre">set_xlabel</span></code> and <code class="docutils literal notranslate"><span class="pre">set_ylabel</span></code> are methods in <code class="docutils literal notranslate"><span class="pre">Axes</span></code> object. Here are a few others for creating and modifying plots using Axes objects.</p>
+<p><strong>Labels and Title</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ax.set_xlabel('Time')</span></code></p></td>
+<td><p>Set the label for the x-axis to ‘Time’</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ax.set_ylabel('Value')</span></code></p></td>
+<td><p>Set the label for the y-axis to ‘Value’</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ax.set_title('Sample</span> <span class="pre">Plot')</span></code></p></td>
+<td><p>Set the title of the plot to ‘Sample Plot’</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Legends and Grid</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ax.legend(['A',</span> <span class="pre">'B',</span> <span class="pre">'C'])</span></code></p></td>
+<td><p>Add a legend with labels ‘A’, ‘B’, ‘C’ to the plot</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ax.grid(True,</span> <span class="pre">linestyle='--')</span></code></p></td>
+<td><p>Add grid lines to the plot with a dashed linestyle</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Axis Limits and Ticks</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ax.set_xlim(0,</span> <span class="pre">10)</span></code></p></td>
+<td><p>Set the limits for the x-axis from 0 to 10</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ax.set_ylim(0,</span> <span class="pre">100)</span></code></p></td>
+<td><p>Set the limits for the y-axis from 0 to 100</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ax.set_xticks([0,</span> <span class="pre">5,</span> <span class="pre">10])</span></code></p></td>
+<td><p>Set the positions of the x-axis ticks at 0, 5, 10</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ax.set_yticks([0,</span> <span class="pre">50,</span> <span class="pre">100])</span></code></p></td>
+<td><p>Set the positions of the y-axis ticks at 0, 50, 100</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ax.set_xticklabels(['low',</span> <span class="pre">'medium',</span> <span class="pre">'high'])</span></code></p></td>
+<td><p>Set the labels for the x-axis ticks as ‘low’, ‘medium’, ‘high’</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ax.set_yticklabels(['start',</span> <span class="pre">'mid',</span> <span class="pre">'end'])</span></code></p></td>
+<td><p>Set the labels for the y-axis ticks as ‘start’, ‘mid’, ‘end’</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ax.tick_params(axis='x',</span> <span class="pre">rotation=45)</span></code></p></td>
+<td><p>Rotate x-axis tick labels by 45 degrees</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Annotation and Lines</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ax.text(0,</span> <span class="pre">80,</span> <span class="pre">'Peak',</span> <span class="pre">fontsize=12)</span></code></p></td>
+<td><p>Add the text ‘Peak’ at coordinates (0, 80) with font size 12</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ax.annotate('Max',</span> <span class="pre">xy=(5,</span> <span class="pre">90),</span> <span class="pre">xytext=(3,</span> <span class="pre">95),</span> <span class="pre">arrowprops=dict(facecolor='black',</span> <span class="pre">shrink=0.05))</span></code></p></td>
+<td><p>Add an annotation ‘Max’ at point (5, 90) with an arrow pointing to (3, 95)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ax.axhline(y=50,</span> <span class="pre">color='r',</span> <span class="pre">linestyle='--')</span></code></p></td>
+<td><p>Add a horizontal dashed line at y=50 with red color</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ax.axvline(x=7,</span> <span class="pre">color='g',</span> <span class="pre">linestyle=':')</span></code></p></td>
+<td><p>Add a vertical dotted line at x=7 with green color</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ax.axhspan(20,</span> <span class="pre">40,</span> <span class="pre">alpha=0.3,</span> <span class="pre">color='yellow')</span></code></p></td>
+<td><p>Add a yellow shaded area between y=20 and y=40 with transparency 0.3</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ax.axvspan(2,</span> <span class="pre">5,</span> <span class="pre">alpha=0.5,</span> <span class="pre">color='gray')</span></code></p></td>
+<td><p>Add a gray shaded area between x=2 and x=5 with transparency 0.5</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Plotting and Visualization</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ax.plot(x,</span> <span class="pre">y,</span> <span class="pre">linestyle='-',</span> <span class="pre">marker='o',</span> <span class="pre">color='purple')</span></code></p></td>
+<td><p>Plot lines connecting data points with circular markers in purple color</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ax.scatter(x,</span> <span class="pre">y,</span> <span class="pre">s=100,</span> <span class="pre">c='red',</span> <span class="pre">marker='s')</span></code></p></td>
+<td><p>Make a scatter plot with red squares of size 100</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ax.fill_between(x,</span> <span class="pre">y1,</span> <span class="pre">y2,</span> <span class="pre">color='gray',</span> <span class="pre">alpha=0.5)</span></code></p></td>
+<td><p>Fill area between two curves with gray color and transparency 0.5</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ax.imshow(image,</span> <span class="pre">cmap='viridis')</span></code></p></td>
+<td><p>Display an image on the axes using the ‘viridis’ colormap</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ax.hist(data,</span> <span class="pre">bins=20,</span> <span class="pre">color='orange')</span></code></p></td>
+<td><p>Plot a histogram of data with 20 bins and orange color</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ax.bar(categories,</span> <span class="pre">values,</span> <span class="pre">color='skyblue')</span></code></p></td>
+<td><p>Plot vertical bars with sky blue color for each category</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ax.barh(categories,</span> <span class="pre">values,</span> <span class="pre">color='lightgreen')</span></code></p></td>
+<td><p>Plot horizontal bars with light green color for each category</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ax.errorbar(x,</span> <span class="pre">y,</span> <span class="pre">yerr=0.1,</span> <span class="pre">fmt='o',</span> <span class="pre">color='blue')</span></code></p></td>
+<td><p>Plot error bars with a blue color for data points with y error of 0.1</p></td>
+</tr>
+</tbody>
+</table>
+<p>For more details on the keyword arguments each method can take, use help functions like <code class="docutils literal notranslate"><span class="pre">ax[1].set_ylabel?</span></code> or <code class="docutils literal notranslate"><span class="pre">help(ax[1].set_label)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>.set_ylabel<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Info</p>
+    Note you  would need to have <code>`ax`</code>, defined before you can access help for its methods like <code>`set_xlabel</code>,
+</div><section id="test-your-understanding">
+<h4>Test your understanding<a class="headerlink" href="#test-your-understanding" title="Link to this heading">#</a></h4>
+<p>For both plots (PM2.5 and PM10), add a title to a plot and adjust the font size:</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">ax.set_title()</span></code> to set the plot title</p></li>
+<li><p>with <code class="docutils literal notranslate"><span class="pre">fontsize</span></code> keyword to set font size. of the title</p></li>
+</ul>
+<p>For the first plot (PM2.5), add a black dotted horizontal line indicating the healthy limit only when the air quality parameter exceeds healthy limit.</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">ax.axhline()</span></code> to add a horizontal line</p></li>
+<li><p>at <code class="docutils literal notranslate"><span class="pre">y</span></code> equal to healty limit of that air quality healty limit</p></li>
+<li><p>if max(pre_post_data of PM2.5) &gt;= healthy limit of PM 2.5</p></li>
+</ul>
+<p>Let us try it out</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Add title and increase title font size to 16</span>
+
+<span class="c1">#Add horizontal line</span>
+<span class="n">max_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">pre_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">post_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
+
+
+<span class="c1">#Display updated figure</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="cutomize-plot-when-calling-plot-function">
+<h3>6.2 Cutomize plot when calling <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> function<a class="headerlink" href="#cutomize-plot-when-calling-plot-function" title="Link to this heading">#</a></h3>
+<p>Instead of customizing the plot using <code class="docutils literal notranslate"><span class="pre">ax.</span></code> after its creation, you can create the plot with customization directly. Let us try to:</p>
+<ol class="arabic simple">
+<li><p>add legened for pre and post at upper left,</p></li>
+<li><p>have blue line for pre and red line for post,</p></li>
+<li><p>add gird to each subplot.</p></li>
+</ol>
+<p>and do not forget to add axis labels as we did before.</p>
+<p>To add a legend to each subplot:</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">label</span></code> keyowrd of <code class="docutils literal notranslate"><span class="pre">plot</span></code> in each <code class="docutils literal notranslate"><span class="pre">plot</span></code> call to create legend labels automatically.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">legend</span></code> method of <code class="docutils literal notranslate"><span class="pre">Axes</span></code> to display the legend labels.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">loc</span></code> keyword of <code class="docutils literal notranslate"><span class="pre">legend</span></code> method to set the legend location</p></li>
+</ul>
+<p>To change line colors:</p>
+<ul class="simple">
+<li><p>Use<code class="docutils literal notranslate"><span class="pre">color</span></code> keyword of <code class="docutils literal notranslate"><span class="pre">plot</span></code> in each <code class="docutils literal notranslate"><span class="pre">plot</span></code> call to specify the desired colors for “pre” (blue) and “post” (red)</p></li>
+</ul>
+<p>To add grid:</p>
+<ul class="simple">
+<li><p>Use grid method of <code class="docutils literal notranslate"><span class="pre">Axes</span></code> to add a grid to the <code class="docutils literal notranslate"><span class="pre">Axes</span></code> objects</p></li>
+</ul>
+<p>Let us try it out:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a 2x1 grid figure with sharex=True</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plot time versus PM 2.5 with label and color blue for pre and red for post </span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">,</span>     <span class="c1">#time</span>
+           <span class="n">pre_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span>     <span class="c1">#PM2.5</span>
+           <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PM2.5 Pre&#39;</span><span class="p">,</span> <span class="c1">#Legend label</span>
+           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span>        <span class="c1">#Line color</span>
+          <span class="p">);</span> <span class="c1">#pre</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">post_dates</span><span class="p">,</span>     <span class="c1">#time</span>
+           <span class="n">post_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span>     <span class="c1">#PM2.5</span>
+           <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PM2.5 Pre&#39;</span><span class="p">,</span> <span class="c1">#Legend label</span>
+           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span>        <span class="c1">#Line color</span>
+          <span class="p">);</span> <span class="c1">#post</span>
+
+<span class="c1"># Plot time versus PM 10 with label and color blue for pre and red for post </span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">,</span>     <span class="c1">#time</span>
+           <span class="n">pre_values</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span>     <span class="c1">#PM10</span>
+           <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PM10 Pre&#39;</span><span class="p">,</span> <span class="c1">#Legend label</span>
+           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span>        <span class="c1">#Line color</span>
+          <span class="p">);</span> <span class="c1">#pre</span>
+
+<span class="c1"># Add a legend to the upper left corner of the plot</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">);</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">);</span>
+
+<span class="c1"># Add gridlines</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Add some labels to the y-axis</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">units</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">) &#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">units</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">) &#39;</span><span class="p">)</span>
+
+<span class="c1"># Add some labels to x-axis</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here are some keyword arguments of the <code class="docutils literal notranslate"><span class="pre">.plot</span></code> function in Matplotlib:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Keyword</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Common Values / Ranges</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x</p></td>
+<td><p>The x-coordinates of the data points</p></td>
+<td><p>Any numerical values</p></td>
+<td><p>[1, 2, 3, 4, 5]</p></td>
+</tr>
+<tr class="row-odd"><td><p>y</p></td>
+<td><p>The y-coordinates of the data points</p></td>
+<td><p>Any numerical values</p></td>
+<td><p>[10, 20, 15, 30, 25]</p></td>
+</tr>
+<tr class="row-even"><td><p>label</p></td>
+<td><p>The label for the data series</p></td>
+<td><p>Any text</p></td>
+<td><p>label= “Data Points”</p></td>
+</tr>
+<tr class="row-odd"><td><p>color</p></td>
+<td><p>The color of the line</p></td>
+<td><p>Any color name or code</p></td>
+<td><p>color=”blue”</p></td>
+</tr>
+<tr class="row-even"><td><p>linestyle</p></td>
+<td><p>The style of the line (solid, dashed, etc)</p></td>
+<td><p>“solid” or “-“(solid line), “dashed” or “–”, “dotted” or “:”, “dashdot” or “-.”</p></td>
+<td><p>linestyle=”dashed”</p></td>
+</tr>
+<tr class="row-odd"><td><p>linewidth</p></td>
+<td><p>The width of the line</p></td>
+<td><p>Any numerical values</p></td>
+<td><p>linewidth=2</p></td>
+</tr>
+<tr class="row-even"><td><p>marker</p></td>
+<td><p>The marker style for data points</p></td>
+<td><p>“o” (circle), “.” (point), “^” (triangle), “s” (square), “d” (diamond), “*” (star),”+” (plus sign)</p></td>
+<td><p>marker=”o”</p></td>
+</tr>
+<tr class="row-odd"><td><p>markersize</p></td>
+<td><p>The size of the markers</p></td>
+<td><p>Any numerical values</p></td>
+<td><p>markersize= 8</p></td>
+</tr>
+<tr class="row-even"><td><p>markerfacecolor</p></td>
+<td><p>The face color of the markers</p></td>
+<td><p>Any color name or code</p></td>
+<td><p>markerfacecolor=”red”</p></td>
+</tr>
+<tr class="row-odd"><td><p>markeredgewidth</p></td>
+<td><p>The width of the marker edges</p></td>
+<td><p>Any numerical values</p></td>
+<td><p>markeredgewidth= 1</p></td>
+</tr>
+<tr class="row-even"><td><p>alpha</p></td>
+<td><p>The transparency of the line</p></td>
+<td><p>Range: 0 (completely transparent) to 1 (completely opaque)</p></td>
+<td><p>alpha= 0.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>zorder</p></td>
+<td><p>The z-order of the line (layering order)</p></td>
+<td><p>Any numerical values</p></td>
+<td><p>zorder=2</p></td>
+</tr>
+<tr class="row-even"><td><p>visible</p></td>
+<td><p>Whether the line is visible or not</p></td>
+<td><p>True or False</p></td>
+<td><p>visible=True</p></td>
+</tr>
+<tr class="row-odd"><td><p>cmap</p></td>
+<td><p>The colormap for coloring the line</p></td>
+<td><p>Any colormap name</p></td>
+<td><p>cmap=”viridis”</p></td>
+</tr>
+<tr class="row-even"><td><p>clip_on</p></td>
+<td><p>Whether to clip the line to the axes or not</p></td>
+<td><p>True or False</p></td>
+<td><p>clip_on=False</p></td>
+</tr>
+<tr class="row-odd"><td><p>solid_capstyle</p></td>
+<td><p>The cap style for solid linestyle</p></td>
+<td><p>“butt”, “round”, “projecting”</p></td>
+<td><p>solid_capstyle=”butt”</p></td>
+</tr>
+<tr class="row-even"><td><p>solid_joinstyle</p></td>
+<td><p>The join style for solid linestyle</p></td>
+<td><p>“miter”, “round”, “bevel”</p></td>
+<td><p>solid_joinstyle=”miter”</p></td>
+</tr>
+</tbody>
+</table>
+<section id="id1">
+<h4>Test your understanding<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<p>For the code below add <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> keywords to cutomize your post PM2.5 plot</p>
+<ul class="simple">
+<li><p>line color black</p></li>
+<li><p>with dotted lines</p></li>
+<li><p>linewidth 2</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a 2x1 grid figure with sharex=True</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plot time versus PM 2.5 with label and color blue for pre and red for post </span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">,</span>     <span class="c1">#time</span>
+           <span class="n">pre_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span>     <span class="c1">#PM2.5</span>
+           <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PM2.5 Pre&#39;</span><span class="p">,</span> <span class="c1">#Legend label</span>
+           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span>        <span class="c1">#Line color</span>
+          <span class="p">);</span> <span class="c1">#pre</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">post_dates</span><span class="p">,</span>     <span class="c1">#time</span>
+           <span class="n">post_values</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span>     <span class="c1">#PM2.5</span>
+           <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PM2.5 Pre&#39;</span><span class="p">,</span> <span class="c1">#Legend label</span>
+
+
+
+          <span class="p">);</span> <span class="c1">#post</span>
+
+<span class="c1"># Plot time versus PM 10 with label and color blue for pre and red for post </span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">,</span>     <span class="c1">#time</span>
+           <span class="n">pre_values</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span>     <span class="c1">#PM10</span>
+           <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PM10 Pre&#39;</span><span class="p">,</span> <span class="c1">#Legend label</span>
+           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span>        <span class="c1">#Line color</span>
+          <span class="p">);</span> <span class="c1">#pre</span>
+
+<span class="c1"># Add a legend to the upper left corner of the plot</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">);</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">);</span>
+
+<span class="c1"># Add gridlines</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Add some labels to the y-axis</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">units</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">) &#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">units</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">) &#39;</span><span class="p">)</span>
+
+<span class="c1"># Add some labels to x-axis</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="customizing-plot-with-figure-object">
+<h3>6.3 Customizing plot with <code class="docutils literal notranslate"><span class="pre">Figure</span></code> object<a class="headerlink" href="#customizing-plot-with-figure-object" title="Link to this heading">#</a></h3>
+<p>In the above plot, we can improve the visual appeal by reducing spacing between the two subplot. This is adjustment involves the <code class="docutils literal notranslate"><span class="pre">Figure</span></code> object rather than the <code class="docutils literal notranslate"><span class="pre">Axes</span></code> objects. By increasing the vertical space between subplots using <code class="docutils literal notranslate"><span class="pre">fig.subplots_adjust(hspace=)</span></code>, we can improve the layout.</p>
+<p>Let us try this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reduce the vertical space between subplots to 0.05 inches or 0 inches</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1">#Display updated figure</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>There other methods associated with <code class="docutils literal notranslate"><span class="pre">Figure</span></code> objects as follows.</p>
+<p><strong>Adjusting Layout</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fig.subplots_adjust(left=0.1,</span> <span class="pre">right=0.9,</span> <span class="pre">bottom=0.1,</span> <span class="pre">top=0.9)</span></code></p></td>
+<td><p>Adjust the spacing between subplots by setting the margins for left, right, bottom, and top</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fig.tight_layout(pad=1.0)</span></code></p></td>
+<td><p>Automatically adjust subplot parameters with additional padding specified</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fig.set_constrained_layout_pads(w_pad=2.0,</span> <span class="pre">h_pad=2.0,</span> <span class="pre">hspace=0.2,</span> <span class="pre">wspace=0.2)</span></code></p></td>
+<td><p>Set padding between subplots and adjust horizontal and vertical spacing</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Saving and Displaying</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fig.savefig('plot.png',</span> <span class="pre">dpi=300)</span></code></p></td>
+<td><p>Save the figure to a file with a specific resolution</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fig.canvas.draw_idle()</span></code></p></td>
+<td><p>Redraw the figure canvas, updating it if changes have been made</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fig.show(warn=True)</span></code></p></td>
+<td><p>Display the figure with a warning if there are potential issues</p></td>
+</tr>
+</tbody>
+</table>
+<p>These examples demonstrate further functionalities for adjusting layout and saving/displaying figures.</p>
+</section>
+<section id="customizing-colors">
+<h3>6.4 Customizing colors<a class="headerlink" href="#customizing-colors" title="Link to this heading">#</a></h3>
+<p>When customizing colors in your visualizations, the <code class="docutils literal notranslate"><span class="pre">color</span></code> attribute offers various options for color representation:</p>
+<ul class="simple">
+<li><p><strong>Named Colors</strong>: You can use named colors such as <code class="docutils literal notranslate"><span class="pre">red</span></code> and <code class="docutils literal notranslate"><span class="pre">blue</span></code> for convenience.</p></li>
+<li><p><strong>HTML Color Codes</strong>: Specify colors using hexadecimal color codes (#RRGGBB), like <code class="docutils literal notranslate"><span class="pre">#FFA500</span></code> for red and <code class="docutils literal notranslate"><span class="pre">#008000</span></code> for blue.</p></li>
+<li><p><strong>RGB Color Codes</strong>: Utilize RGB color codes in the range of 0 to 255, such as <code class="docutils literal notranslate"><span class="pre">(255,</span> <span class="pre">0,</span> <span class="pre">0)</span></code> for red and <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">255)</span></code> for blue.</p></li>
+<li><p><strong>RGBA Color Codes</strong>: Include an alpha channel for transparency with RGBA color codes, for example, <code class="docutils literal notranslate"><span class="pre">(255,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0.5)</span></code>.</p></li>
+</ul>
+<p>Color maps (colormaps) map scalar data values to colors in visualizations, aiding in visualizing data gradients and patterns. Matplotlib provides <a class="reference internal" href="#(https://matplotlib.org/stable/users/explain/colors/colormaps.html)"><span class="xref myst">various built-in color maps</span></a> tailored for different data types. Understanding color maps can enhance plot interpretability and aesthetic appeal.</p>
+<p>For more detailed information, you can refer to the <a class="reference external" href="https://matplotlib.org/stable/gallery/color/named_colors.html">list of named colors in Matplotlib</a> or learn about <a class="reference external" href="https://matplotlib.org/stable/users/explain/colors/colors.html#colors-def">specifying colors in Matplotlib</a>.</p>
+</section>
+</section>
+<section id="class-exercise-putting-this-all-together">
+<h2>7. Class Exercise: Putting this all together<a class="headerlink" href="#class-exercise-putting-this-all-together" title="Link to this heading">#</a></h2>
+<p>Complete the code below by:</p>
+<ol class="arabic simple">
+<li><p>plotting pre and post data for the six parameter with legend (Hint: use for loop)</p></li>
+<li><p>removing horizontal spacing between subplots using <code class="docutils literal notranslate"><span class="pre">fig.subplots_adjust()</span></code> with <code class="docutils literal notranslate"><span class="pre">hspace</span></code> keyword</p></li>
+<li><p>setting x-axis limits from ‘2019-01-01’ to ‘2021-01-01’ using <code class="docutils literal notranslate"><span class="pre">ax.set_xlim()</span></code> with the aid of <code class="docutils literal notranslate"><span class="pre">pd.to_datetime('2019-04-01')</span></code> to convert string to datetime</p></li>
+</ol>
+<p>Let us try it out:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Create Figure and Axes objects (6x1) </span>
+<span class="c1"># with figure size 10 inche long by 8 wide inches and shared x-axis</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">#Change horizontal spaces between subplot</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">limits</span><span class="p">)):</span>
+    
+    <span class="c1"># Plot times as x-variable and air qualiy parameter as y-variable</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">,</span> <span class="n">pre_values</span><span class="p">[:,</span> <span class="n">index</span><span class="p">])</span>   <span class="c1">#pre</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">post_dates</span><span class="p">,</span> <span class="n">post_values</span><span class="p">[:,</span> <span class="n">index</span><span class="p">])</span> <span class="c1">#post </span>
+    
+    <span class="c1"># Add a horizontal line for healthy limit</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">limit</span><span class="o">&lt;=</span> <span class="n">pre_values</span><span class="p">[:,</span> <span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span> <span class="ow">or</span> <span class="p">(</span><span class="n">limit</span> <span class="o">&lt;=</span> <span class="n">post_values</span><span class="p">[:,</span> <span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">parameter</span><span class="si">}</span><span class="s2"> exceeds healthy limit </span><span class="si">{</span><span class="n">limit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Healthy Limit&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Set the x-axis limits using the datetime objects</span>
+    <span class="c1"># Note we need to convert date strings to datetime objects because our NumPy area has datetime</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2019-04-01&#39;</span><span class="p">)</span> <span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2021-04-01&#39;</span><span class="p">))</span>
+    
+    <span class="c1"># Set y-label</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">parameter</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="scatterplot-optional">
+<h2>8. Scatterplot (<em>optional</em>)<a class="headerlink" href="#scatterplot-optional" title="Link to this heading">#</a></h2>
+<p>Some data cannot be plotted accurately as a line plot.  Another type of plot that is popular  is the marker plot, more commonly known as a scatter plot. A simple scatter plot can be created by setting the <code class="docutils literal notranslate"><span class="pre">linestyle</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code>, and specifying a marker type, size, color, etc., like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Specify no line with circle markers</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">post_dates</span><span class="p">,</span> <span class="n">post_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="c1">#x,y</span>
+        <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="c1">#no line</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="c1">#marker style</span>
+        <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="c1">#marker size</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> [</span><span class="si">{</span><span class="n">units</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Specify no line with circle markers</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">post_dates</span><span class="p">,</span> <span class="n">post_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="c1">#x,y</span>
+           <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="c1">#marker style </span>
+           <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span> <span class="c1">#marker size </span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> [</span><span class="si">{</span><span class="n">units</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Info</p>
+    You can also use the <code>scatter</code> method, which is slower, but will give you more control, such as being able to color the points individually based upon a third variable.
+</div>
+<p>Let us make different colors for dots such that values below healty limit is back and above healthy limit is read.</p>
+<p>Here is how to assign colors to dots based on air quality:</p>
+<ul class="simple">
+<li><p>Start with the provided code snippet</p></li>
+<li><p>Define colors for markers based on air quality values</p></li>
+<li><p>Include the <code class="docutils literal notranslate"><span class="pre">c</span></code> keyword argument in the <code class="docutils literal notranslate"><span class="pre">scatter</span></code> function call</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Creating an array of strings using np.full() with black color</span>
+<span class="n">marker_colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">post_dates</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;black&quot;</span><span class="p">)</span>
+
+<span class="c1"># Change black to red for values &gt;= healthy limit </span>
+<span class="n">Check</span> <span class="o">=</span> <span class="n">post_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">marker_colors</span><span class="p">[</span><span class="n">Check</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span>
+
+<span class="c1"># Specify no line with circle markers</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">post_dates</span><span class="p">,</span> <span class="n">post_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="c1">#x,y</span>
+           <span class="n">c</span><span class="o">=</span><span class="n">marker_colors</span><span class="p">,</span>   <span class="c1"># the color value of each marker</span>
+           <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="c1">#marker style </span>
+           <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span> <span class="c1">#marker size </span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> [</span><span class="si">{</span><span class="n">units</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="displaying-images-optional">
+<h2>9. Displaying images (<em>optional</em>)<a class="headerlink" href="#displaying-images-optional" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">imshow</span></code> displays the values in an array as colored pixels, similar to a heat map.</p>
+<p>Here, we declare some fake data in a bivariate normal distribution, to illustrate the <code class="docutils literal notranslate"><span class="pre">imshow</span></code> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an array of values from -3.0 to 3.0 with a step size of 0.025 for both x and y</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">)</span>
+
+<span class="c1"># Create a meshgrid using the x and y values</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Calculate Z1 and Z2 based on exponential functions with X and Y</span>
+<span class="n">Z1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">X</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">Z2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">X</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Calculate Z as the difference between Z1 and Z2 multiplied by 2</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="p">(</span><span class="n">Z1</span> <span class="o">-</span> <span class="n">Z2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="c1"># Print the shapes of arrays X, Y, and Z</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X: </span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Y: </span><span class="si">{</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Z: </span><span class="si">{</span><span class="n">Z</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now pass this fake data to <code class="docutils literal notranslate"><span class="pre">imshow</span></code> to create a heat map of the distribution:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new figure and its subplot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Display the 2D array Z as an image on the subplot ax</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+    <span class="n">Z</span><span class="p">,</span>                   <span class="c1"># The 2D array of data to be plotted as an image</span>
+    <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">,</span>  <span class="c1"># Specifies the interpolation method for displaying the image</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span>           <span class="c1"># Sets the colormap for the image plot to &#39;coolwarm&#39;</span>
+    <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span>            <span class="c1"># Sets the origin of the image data to be at the lower left corner</span>
+    <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>     <span class="c1"># Sets the extent of the image data along the x and y axes</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="contour-and-filled-contour-plots-optional">
+<h2>10. Contour and filled contour plots (<em>optional</em>)<a class="headerlink" href="#contour-and-filled-contour-plots-optional" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">contour</span></code> creates contours around data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">contourf</span></code> creates filled contours around data.</p></li>
+</ul>
+<p>Let’s start with the <code class="docutils literal notranslate"><span class="pre">contour</span></code> method, which, as just mentioned, creates contours around data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new figure and its subplot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Create contour lines on the subplot ax using the meshgrid X, Y, and data Z</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After creating contours, we can label the lines using the <code class="docutils literal notranslate"><span class="pre">clabel</span></code> method, like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new figure and its subplot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Create contour lines on the subplot ax using the meshgrid X, Y, and data Z with specified levels</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">))</span>
+
+<span class="c1"># Label the contour lines on the plot</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As described above, the <code class="docutils literal notranslate"><span class="pre">contourf</span></code> (contour fill) method creates filled contours around data, like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new figure and its subplot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Create filled contour plot on the subplot ax using the meshgrid X, Y, and data Z</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a final example, let’s create a heatmap figure with contours using the <code class="docutils literal notranslate"><span class="pre">contour</span></code> and <code class="docutils literal notranslate"><span class="pre">imshow</span></code> methods.  First, we use <code class="docutils literal notranslate"><span class="pre">imshow</span></code> to create the heatmap, specifying a colormap using the <code class="docutils literal notranslate"><span class="pre">cmap</span></code> keyword argument.  We then call <code class="docutils literal notranslate"><span class="pre">contour</span></code>, specifying black contours and an interval of 0.5.  Here is the example code, and resulting figure:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new figure and its subplot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Display an image (imshow) of the data Z on the subplot ax with specified settings</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>   <span class="c1"># Display an image of the data Z on the subplot ax with specified settings</span>
+    <span class="n">Z</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">,</span> <span class="c1"># Use bilinear interpolation for smoother image display</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;PiYG&#39;</span><span class="p">,</span>  <span class="c1"># Use the PiYG colormap for coloring the image</span>
+    <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="c1"># Set the origin of the image to be at the lower left corner</span>
+    <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1"># Set the extent of the image in the plot</span>
+<span class="p">)</span>
+
+<span class="c1"># Add contour lines on the plot</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span> <span class="c1"># Create contour lines on the plot</span>
+    <span class="n">X</span><span class="p">,</span> <span class="c1"># X coordinates for the contour plot</span>
+    <span class="n">Y</span><span class="p">,</span> <span class="c1"># Y coordinates for the contour plot</span>
+    <span class="n">Z</span><span class="p">,</span> <span class="c1"># Data values for the contour plot</span>
+    <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="c1"># Specify the levels at which contour lines should be drawn</span>
+    <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span> <span class="c1"># Set the color of the contour lines to black</span>
+<span class="p">)</span> 
+
+<span class="c1"># Label the contour lines on the plot</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="heatmap-plot-optional">
+<h2>11. Heatmap plot (<em>optional</em>)<a class="headerlink" href="#heatmap-plot-optional" title="Link to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">matshow</span></code> plot is a type of heatmap that displays a matrix of data as a color-encoded image. Each cell in the matrix is represented by a colored square, with colors indicating the values in the matrix. It is useful for visualizing relationships or patterns in the data, such as correlations between variables in a correlation matrix. The color intensity represents the magnitude of the values, making it easy to identify trends or clusters within the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate a random correlation matrix</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">correlation_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">rowvar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">)</span>
+
+<span class="c1"># Set x-axis and y-axis labels</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="p">)))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="p">)))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Correlation Matrix&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="automating-subplot-index-in-a-loop-optional">
+<h2>12. Automating subplot index in a loop (<em>optional</em>)<a class="headerlink" href="#automating-subplot-index-in-a-loop-optional" title="Link to this heading">#</a></h2>
+<p>If you want to work with an m x n grid, automating the indexing process can be beneficial, particularly in loop scenarios. You can achieve this automation using <code class="docutils literal notranslate"><span class="pre">index</span> <span class="pre">//</span> <span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">index</span> <span class="pre">%</span> <span class="pre">n</span></code>. For instance, in a 2 x 3 subplot grid, you would access the Axes using <code class="docutils literal notranslate"><span class="pre">ax[index</span> <span class="pre">//</span> <span class="pre">3,</span> <span class="pre">index</span> <span class="pre">%</span> <span class="pre">3]</span></code>.</p>
+<p>Here is an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate sample data for 3x2 subplots</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+
+<span class="c1"># Create a figure object and Axes object using subplots() method</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1">#Number of rows</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1">#Number of colums</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Plot data on each subplot</span>
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">index</span> <span class="o">//</span> <span class="n">m</span><span class="p">,</span> <span class="n">index</span> <span class="o">%</span> <span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>  <span class="c1"># Plot histogram for sample data</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">index</span> <span class="o">//</span> <span class="n">m</span><span class="p">,</span> <span class="n">index</span> <span class="o">%</span> <span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Subplot </span><span class="si">{</span><span class="n">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># Set subplot title</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the provided code, the expression <code class="docutils literal notranslate"><span class="pre">ax[index</span> <span class="pre">//</span> <span class="pre">3,</span> <span class="pre">index</span> <span class="pre">%</span> <span class="pre">3]</span></code> is used to access each subplot within a 2x3 grid of subplots. The <code class="docutils literal notranslate"><span class="pre">//</span></code> and <code class="docutils literal notranslate"><span class="pre">%</span></code> operations compute the row and column indices in the grid, making element access and traversal easier during iteration.</p>
+<ul class="simple">
+<li><p>The modulo operation <code class="docutils literal notranslate"><span class="pre">%</span></code> gives the remainder after division, ensuring the column index remains within the range of 0 to 2, allowing for cyclic behavior in element indexing.</p></li>
+<li><p>Integer division <code class="docutils literal notranslate"><span class="pre">//</span></code> divides two numbers and provides the integer part of the quotient, neglecting any remainder, which helps in keeping the row index within the range of 0 to 2.</p></li>
+</ul>
+<p>Combining these two expressions (<code class="docutils literal notranslate"><span class="pre">index</span> <span class="pre">//</span> <span class="pre">3</span></code> for rows and <code class="docutils literal notranslate"><span class="pre">index</span> <span class="pre">%</span> <span class="pre">3</span></code> for columns) allows us to access each subplot in the 2x3 grid systematically. This correctly maps the loop variable <code class="docutils literal notranslate"><span class="pre">index</span></code> to the corresponding row and column indices in the 2x3 grid, enabling dynamic subplot within the loop iteration.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">index</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span> <span class="n">index</span> <span class="o">%</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="boxplot-for-multiple-datasets-with-for-loop-optional">
+<h2>13. Boxplot for multiple datasets with for-loop (<em>optional</em>)<a class="headerlink" href="#boxplot-for-multiple-datasets-with-for-loop-optional" title="Link to this heading">#</a></h2>
+<p>Here we create box plots for multiple datasets iteratively using a for loop in Matplotlib. This example show how to add data one by one and then display the box plots together.</p>
+<p>Here is how you can achieve this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generating sample data for demonstration purposes</span>
+<span class="n">data1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">data2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">data3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">data4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Creating the data list with the sample datasets</span>
+<span class="n">data_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">data1</span><span class="p">,</span> <span class="n">data2</span><span class="p">,</span> <span class="n">data3</span><span class="p">,</span> <span class="n">data4</span><span class="p">]</span>
+
+<span class="c1"># Create dataset and label for plotting</span>
+<span class="n">boxplot_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_list</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">boxplot_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Dataset </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1">#Plot data</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">boxplot_data</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Box Plot for Multiple Datasets&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Values&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">boxplot_data</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the above code:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data_list</span></code> is a list containing the datasets you want to plot.</p></li>
+<li><p>We iterate over each dataset in the <code class="docutils literal notranslate"><span class="pre">data_list</span></code> using a for loop, adding the data to <code class="docutils literal notranslate"><span class="pre">boxplot_data</span></code> and creating labels for each dataset.</p></li>
+<li><p>Finally, we use <code class="docutils literal notranslate"><span class="pre">plt.boxplot()</span></code> to create the box plots for each dataset in <code class="docutils literal notranslate"><span class="pre">boxplot_data</span></code>, with corresponding labels.</p></li>
+</ul>
+<p>By running this code, you can create box plots for multiple datasets one by one using a for loop.</p>
+</section>
+<section id="axes-interface-and-pyplot-interface-optional">
+<h2>14. “Axes” interface and “pyplot” interface (<em>optional</em>)<a class="headerlink" href="#axes-interface-and-pyplot-interface-optional" title="Link to this heading">#</a></h2>
+<p>Matplotlib has <a class="reference external" href="https://matplotlib.org/stable/users/explain/figure/api_interfaces.html">two main interfaces</a>. The explicit “Axes” interface uses methods on a Figure or Axes object to create visual elements step by step. Example: Creating a plot with <code class="docutils literal notranslate"><span class="pre">ax.plot()</span></code>. The implicit “pyplot” interface: Automatically manages Figures and Axes, adding elements to the last created plot. Example: Creating a plot with <code class="docutils literal notranslate"><span class="pre">plt.plot()</span></code></p>
+<p>Here is the above example, with the explicit “Axes” interface <code class="docutils literal notranslate"><span class="pre">ax.plot()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">boxplot_data</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Box Plot for Multiple Datasets&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Values&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">boxplot_data</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The same example with the implicit “pyplot” interface<code class="docutils literal notranslate"><span class="pre">plt.plot()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">boxplot_data</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Box Plot for Multiple Datasets&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Values&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">boxplot_data</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">labels</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note how the methods names for these two interfaces are different (e.g., <code class="docutils literal notranslate"><span class="pre">ax.set_ylabel</span></code> vs. <code class="docutils literal notranslate"><span class="pre">plt.ylabel</span></code>).</p>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>15. Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> can be used to visualize datasets you are working with.</p></li>
+<li><p>You can customize various features such as labels and styles.</p></li>
+<li><p>There are a wide variety of plotting options available, including (but not limited to):</p>
+<ul>
+<li><p>Line plots (<code class="docutils literal notranslate"><span class="pre">plot</span></code>)</p></li>
+<li><p>Scatter plots (<code class="docutils literal notranslate"><span class="pre">scatter</span></code>)</p></li>
+<li><p>Heatmaps (<code class="docutils literal notranslate"><span class="pre">imshow</span></code>)</p></li>
+<li><p>Contour line and contour fill plots (<code class="docutils literal notranslate"><span class="pre">contour</span></code>, <code class="docutils literal notranslate"><span class="pre">contourf</span></code>)</p></li>
+</ul>
+</li>
+<li><p>You can learn next about more plotting functionality such as histograms, pie charts, and animation</p></li>
+</ul>
+</section>
+<section id="resources-and-references">
+<h2>Resources and References<a class="headerlink" href="#resources-and-references" title="Link to this heading">#</a></h2>
+<p>The goal of this tutorial is to provide an overview of the use of the Matplotlib library. It covers creating simple line plots, but it is by no means comprehensive. For more information, try looking at the following documentation:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://matplotlib.org/cheatsheets/">Matplotlib cheatsheets and handouts</a></p></li>
+<li><p><a class="reference external" href="http://matplotlib.org">Matplotlib documentation</a></p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/stable/gallery/index.html">Matplotlib examples gallery</a></p></li>
+<li><p><a class="reference external" href="https://geocat-examples.readthedocs.io/en/latest/gallery/index.html">GeoCAT examples gallery</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters\8. Matplotlib for Visualization  8. Matplotlib for Visualization"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/exercise7.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Exercise 7 NumPy: Air quality data analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exercise8.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exercise 8 Matplotlib: Air quality data visualization</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">2. Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-plotting-data">3. Prepare plotting data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#air-quality-data">3.1 Air quality data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-information">3.2 Additional information</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-basics">4. Matplotlib basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#axes-and-figures">4.1 Axes and Figures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-plot-in-matplotlib">4.2 Creating a plot in Matplotlib</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-line-plot">5. Basic line plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-subplot">5.1 One subplot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-subplots">5.2 Multiple subplots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subplot-function">5.3 Subplot function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-multiple-graphs-on-the-same-axis">5.4 Plotting multiple graphs on the same axis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-plot">6. Customizing plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-plot-with-axes-object">6.1 Customizing plot with <code class="docutils literal notranslate"><span class="pre">Axes</span></code> object</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#test-your-understanding">Test your understanding</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cutomize-plot-when-calling-plot-function">6.2 Cutomize plot when calling <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Test your understanding</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-plot-with-figure-object">6.3 Customizing plot with <code class="docutils literal notranslate"><span class="pre">Figure</span></code> object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-colors">6.4 Customizing colors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-exercise-putting-this-all-together">7. Class Exercise: Putting this all together</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatterplot-optional">8. Scatterplot (<em>optional</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#displaying-images-optional">9. Displaying images (<em>optional</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contour-and-filled-contour-plots-optional">10. Contour and filled contour plots (<em>optional</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-plot-optional">11. Heatmap plot (<em>optional</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automating-subplot-index-in-a-loop-optional">12. Automating subplot index in a loop (<em>optional</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-for-multiple-datasets-with-for-loop-optional">13. Boxplot for multiple datasets with for-loop (<em>optional</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#axes-interface-and-pyplot-interface-optional">14. “Axes” interface and “pyplot” interface (<em>optional</em>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">15. Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-and-references">Resources and References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed Elshall & Thalia Valle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

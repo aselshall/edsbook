@@ -1,0 +1,1448 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lesson 6: Python Programming 1 - Loops &#8212; Environmental Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/3. Python Programming/Lesson6_Loops';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lesson 7: Conditional Statements" href="Lesson7_conditional_statements.html" />
+    <link rel="prev" title="Lesson 5: Python Basics 3 - Formatting" href="../2.%20Python%20Basics/Lesson5_formatting.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Environmental Data Science - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Environmental Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    EGN 4930 / EGN 5932C Special Topic: Environmental Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0. Good Coding Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP1_VariableName.html">GCP1 - Selecting “good” variable names</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP2_DescribingCode.html">Describing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP3_ReadableCode.html">Readable Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP4_WritingScripts.html">Writing Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP5_Assertions.html">Assertions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson2.html">Lesson 2 Getting Started</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Excercise1.html">Exercise 1 - Installing Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson3_PythonBasics1.html">Lesson 3 - Python Basics 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson4_list_solution.html">Lesson 4 - Python Basics 2 - Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson5_formatting.html">Lesson 5 - Python Basics 3 - Formatting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Python Programming</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lesson 6 - Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson7_conditional_statements.html">Lesson 7 - Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson8_functions.html">Lesson 8 - Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lesson9_modules.html">Lesson 9 - Script Files and Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise3.html">Exercise 3 - Python Programming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 4. Pandas for Tabular Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Lesson10_pandas.html">Lessons 10 - 14 - Pandas Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Exercise4.html">Exercise 4 - Pandas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Artificial intelligence (AI) Coding Assistance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/OpenAI_API_Key_for_Jupyter_AI_Extension.html">OpenAI API key for Jupyter AI extension (Optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/AIcoding.html">Lesson 15 AI coding assistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/Exercise_5_API_Key_Module.html">Exercise 5 - API-Key Module (Optional)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Data Science Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Workflow.html">Lessons 16 - Data Science Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Exercise6.html">Exercise 6 - AQI Data Preparation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. NumPy for Scientific Computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/numpy.html">Lessons 18-19 - NumPy Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/exercise7.html">Exercise 7 - NumPy - Air quality data analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8. Matplotlib for Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/matplotlib.html">Lesson 20 - 21 - Matplotlib Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/exercise8.html">Exercise 8 Matplotlib - Air quality data visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/climate.html">Lesson 24 - Climate Data - CMIP6 and Remote Sensing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/xarray.html">Lesson 25-27 - Xarray basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/cartopy.html">Lesson 28 - CartoPy basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/Exercise9.html">Exercise 9 - Sea surface height and red tides (Optional, Advanced)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">10. Introduction to Google Earth Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.0-%20Intro%20to%20GEE.html">Lesson 30 - Intro to Google Earth Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.1-%20JavaScript%20API%20vs.%20Python%20API.html">Lesson 31 - JavaScript API vs. Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html">Lesson 32 - Using Google Earth Engine in a Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/geemap1.html">Exercise 10 -  GeeMap, GEE, and Sentinel-2 Data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Chapters/3. Python Programming/Lesson6_Loops.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapters/3. Python Programming/Lesson6_Loops.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/3. Python Programming/Lesson6_Loops.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><h1 style="color:green; text-align:center;">Lesson 6: Python Programming 1 - Loops </h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basics-of-for-loops">1. Basics of for loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bad-example">1.1 A (bad) example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-the-for-loop">1.2 Introducing the for loop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loop-format">1.3 for loop format</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loop-variables">1.4 for loop variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loops-and-the-range-function">1.5 for loops and the range() function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#check-your-understanding">Check your understanding</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#looping-over-the-length-of-lists-using-index-values">1.6 Looping over the length of lists using index values</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-index-values-to-loop-over-a-list">1.6.1 How to use index values to loop over a list?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-index-values-to-loop-over-a-list">1.6.2 Why use index values to loop over a list?</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Check your understanding</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loop-with-zip-no-idexing-required">1.7 Loop with <code class="docutils literal notranslate"><span class="pre">zip</span></code> - no idexing required</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#looping-over-the-length-of-list-using-enumerate-advanced-topic">1.8 Looping over the length of list using <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> (<em>advanced topic</em>)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-enumerate-step-by-step">1.8.1 Understanding <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> step-by-step</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-enumerate-to-loop-over-a-list">1.8.2 How to use <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> to loop over a list?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-list-and-dictionary-comprehensions-advanced-topic">1.9 Using list and dictionary comprehensions (<em>advanced topic</em>)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-syntax-and-concept-of-list-comprehensions">1.9.1 The syntax and concept of list comprehensions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#test-your-understanding">Test your understanding</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionary-comprehensions">1.9.2 Dictionary Comprehensions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#challaning-problem">1.9.3 Challaning problem</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-for-loop-to-apply-a-mathematical-formula-to-a-list">1.10 Using for-loop to apply a mathematical formula to a list</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-explicit-for-loop">1.10.1 Using explicit for-loop</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-list-comprehension-advanced-topic">1.10.2 Using list comprehension (advanced topic)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loop-with-unpacking">1.11 For loop with unpacking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intorduction-to-while-loop">2. Intorduction to while loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lesson-6-python-programming-1-loops">
+<h1><h1 style="color:green; text-align:center;">Lesson 6: Python Programming 1 - Loops </h1><a class="headerlink" href="#lesson-6-python-programming-1-loops" title="Link to this heading">#</a></h1>
+<p>This lesson is modified from <a class="reference external" href="https://geo-python-site.readthedocs.io/en/latest/notebooks/L3/for-loops.html">for-loops</a> from <a class="reference external" href="https://geo-python-site.readthedocs.io/en/latest/index.html">geo-python</a>.</p>
+<p><a class="reference external" href="https://mybinder.org/v2/gh/aselshall/eds/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+<section id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
+<p>By the end of this lesson, you will be able to</p>
+<ul class="simple">
+<li><p>repeat tasks using <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code> loops</p></li>
+<li><p>iterate over all of the items in a list to perform calculation</p></li>
+<li><p>use list and dictionary comprehensions to create a python list and python dictionary  (optional)</p></li>
+</ul>
+</section>
+<section id="basics-of-for-loops">
+<h2>1. Basics of for loops<a class="headerlink" href="#basics-of-for-loops" title="Link to this heading">#</a></h2>
+<p>In our last lesson we covered lists in Python, one form of a collection of values that can be referenced (indexed) by a single variable. In this lesson we will learn how to use <em>loops</em>. Loops allow parts of code to be repeated some number of times, such as using a section of code to process each item in a list.</p>
+<p><img alt="Looping through my day" src="https://geo-python-site.readthedocs.io/en/latest/_images/2009-11-03-Cats-Eye.gif" />
+Source: <a class="reference external" href="https://www.bugmartini.com/comic/cats-eye/">https://www.bugmartini.com/comic/cats-eye/</a></p>
+<section id="a-bad-example">
+<h3>1.1 A (bad) example<a class="headerlink" href="#a-bad-example" title="Link to this heading">#</a></h3>
+<p>Let’s consider an example using the list below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_slots</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;7:00 AM&quot;</span><span class="p">,</span> <span class="s2">&quot;7:13 AM&quot;</span><span class="p">,</span> <span class="s2">&quot;3:00 PM&quot;</span><span class="p">,</span> <span class="s2">&quot;3:10 PM&quot;</span><span class="p">,</span> <span class="s2">&quot;4:30 PM&quot;</span> <span class="p">,</span> <span class="s2">&quot;5:15 PM&quot;</span><span class="p">,</span> <span class="s2">&quot;6:33 PM&quot;</span><span class="p">]</span>
+<span class="n">daily_activities</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Wake up&quot;</span><span class="p">,</span> <span class="s2">&quot;Nap&quot;</span><span class="p">,</span> <span class="s2">&quot;Beg for food&quot;</span><span class="p">,</span> <span class="s2">&quot;Doze&quot;</span><span class="p">,</span> <span class="s2">&quot;Rest&quot;</span><span class="p">,</span> <span class="s2">&quot;Sleep&quot;</span><span class="p">,</span> <span class="s2">&quot;Act bat sh*t crazy for no good reason&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Suppose we want to check each activity in our lists and for each item print something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Output</span><span class="p">:</span> <span class="n">At</span> <span class="mi">7</span><span class="p">:</span><span class="mi">00</span> <span class="n">am</span><span class="p">,</span> <span class="n">I</span> <span class="n">Wake</span> <span class="n">Up</span>
+</pre></div>
+</div>
+<p>We could use the index value for each time and activity and do the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;At </span><span class="si">{</span><span class="n">time_slots</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, I </span><span class="si">{</span><span class="n">daily_activities</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At 7:00 AM, I Wake up
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;At </span><span class="si">{</span><span class="n">time_slots</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">, I </span><span class="si">{</span><span class="n">daily_activities</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At 7:13 AM, I Nap
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;At </span><span class="si">{</span><span class="n">time_slots</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">, I </span><span class="si">{</span><span class="n">daily_activities</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At 3:00 PM, I Beg for food
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;At </span><span class="si">{</span><span class="n">time_slots</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">, I </span><span class="si">{</span><span class="n">daily_activities</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At 3:10 PM, I Doze
+</pre></div>
+</div>
+</div>
+</div>
+<p>But this is a bad idea. Why? Well there are two reasons:</p>
+<ol class="arabic simple">
+<li><p>It does not scale nicely for long lists; it will take forever to type in.</p></li>
+<li><p>It won’t work if the length of the list has fewer or more activies</p></li>
+</ol>
+<p>Here is an example of how it will not work with new lists.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_slot2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;7:00 AM&quot;</span><span class="p">,</span> <span class="s2">&quot;7:13 AM&quot;</span><span class="p">]</span>
+<span class="n">daily_activities2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Wake up&quot;</span><span class="p">,</span> <span class="s2">&quot;Nap&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;At </span><span class="si">{</span><span class="n">time_slot2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, I </span><span class="si">{</span><span class="n">daily_activities2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At 7:00 AM, I Wake up
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;At </span><span class="si">{</span><span class="n">time_slot2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">, I </span><span class="si">{</span><span class="n">daily_activities2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At 7:13 AM, I Nap
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;At </span><span class="si">{</span><span class="n">time_slot2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">, I </span><span class="si">{</span><span class="n">daily_activities2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;At </span><span class="si">{</span><span class="n">time_slot2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">, I </span><span class="si">{</span><span class="n">daily_activities2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="ne">IndexError</span>: list index out of range
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we encounter an <code class="docutils literal notranslate"><span class="pre">IndexError</span></code> because we have tried to access a value outside the range of values in the updated <code class="docutils literal notranslate"><span class="pre">european_cities</span></code> list.</p>
+<p>Would not it be easier if we just did this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">time_slot</span><span class="p">,</span> <span class="n">daily_activity</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">time_slots</span><span class="p">,</span> <span class="n">daily_activities</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;At </span><span class="si">{</span><span class="n">time_slot</span><span class="si">}</span><span class="s2">, I </span><span class="si">{</span><span class="n">daily_activity</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="introducing-the-for-loop">
+<h3>1.2 Introducing the for loop<a class="headerlink" href="#introducing-the-for-loop" title="Link to this heading">#</a></h3>
+<p>In such situations it is far more efficient to use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. Let’s see an example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">florida_cities</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Fort Myers&quot;</span><span class="p">,</span> <span class="s2">&quot;Cape Coral&quot;</span><span class="p">,</span> <span class="s2">&quot;Lehigh Acres&quot;</span><span class="p">,</span> <span class="s2">&quot;Estero&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">florida_cities</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">city</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Not only is this shorter than indexing through the list item by item, but it is also more flexible.</p>
+<p>Try doing your first for loop to print out each city in this list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">us_cities</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Detroit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Chicago&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Denver&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Boston&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Portland&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;San Francisco&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Houston&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Orlando&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="for-loop-format">
+<h3>1.3 for loop format<a class="headerlink" href="#for-loop-format" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">for</span></code> loops in Python have the general form below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">collection</span><span class="p">:</span>
+    <span class="n">use</span> <span class="n">the</span> <span class="n">variable</span> <span class="n">to</span> <span class="n">do</span> <span class="n">things</span>
+</pre></div>
+</div>
+<p>Let’s break down the code above to see some essential aspects of <code class="docutils literal notranslate"><span class="pre">for</span></code> loops:</p>
+<ol class="arabic simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">variable</span></code> can be any name you like other than a <a class="reference external" href="https://docs.python.org/3/reference/lexical_analysis.html#keywords">reserved keyword</a></p></li>
+<li><p>The statement of the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop must end with a <code class="docutils literal notranslate"><span class="pre">:</span></code></p></li>
+<li><p>The code that should be executed as part of the loop must be indented beneath the <code class="docutils literal notranslate"><span class="pre">for</span></code> statement</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">typical</span> <span class="n">indentation</span> <span class="ow">is</span> <span class="mi">4</span> <span class="n">spaces</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>There is no additional special word needed to end the loop, you simply change the indentation back to normal.</p></li>
+</ol>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p><code class="docutils literal notranslate"><span class="pre">for</span></code> loops are useful to repeat some part of the code a <em>finite</em> number of times.</p>
+</div>
+</section>
+<section id="for-loop-variables">
+<h3>1.4 for loop variables<a class="headerlink" href="#for-loop-variables" title="Link to this heading">#</a></h3>
+<p>Note that the variable used in a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop is just a normal variable. Thus, its value still exists after the loop has been run. Let’s loop over the list of weather conditions below and print them to the screen. If you use <code class="docutils literal notranslate"><span class="pre">weather</span></code> for the loop variable, what is its value after the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop has completed?</p>
+<p>For this list below, write a for loop that prints each weather condition in the list.<br />
+After the loop, print the variable name <code class="docutils literal notranslate"><span class="pre">weather</span></code> in a new cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather_conditions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;rain&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sleet&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;snow&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;freezing fog&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sunny&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cloudy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ice pellets&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="for-loops-and-the-range-function">
+<h3>1.5 for loops and the range() function<a class="headerlink" href="#for-loops-and-the-range-function" title="Link to this heading">#</a></h3>
+<p>A loop can be used to iterate over any collection of values in Python. So far we have considered only iterating over lists, but we could also write a loop that performs a calculation a specified number of times by using the <code class="docutils literal notranslate"><span class="pre">range()</span></code> function.</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">range()</span></code> function to create a list  using <code class="docutils literal notranslate"><span class="pre">list(range())</span></code> or <code class="docutils literal notranslate"><span class="pre">[*range()]</span></code>.  Here is how to do it to create, for example, this list “[0, 1, 2, 4]”</p>
+<p>In this case, we used a special function called <code class="docutils literal notranslate"><span class="pre">range()</span></code> to give us a list of 5 numbers <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4]</span></code>. When given an integer (whole number) as an argument, <code class="docutils literal notranslate"><span class="pre">range(number)</span></code> will produce a list of numbers with a length equal to the specified <code class="docutils literal notranslate"><span class="pre">number</span></code>.
+The list starts at <code class="docutils literal notranslate"><span class="pre">0</span></code> and ends with <code class="docutils literal notranslate"><span class="pre">number</span> <span class="pre">-</span> <span class="pre">1</span></code>.</p>
+<div class="highlight-note notranslate"><div class="highlight"><pre><span></span>In case you are wondering about the syntax `[* range()]`, asterisk `*` is used for unpacking elements from iterables like lists, tuples, or other iterable objects.
+</pre></div>
+</div>
+<p>You can learn a bit more about range by typing <code class="docutils literal notranslate"><span class="pre">range?</span></code> or <code class="docutils literal notranslate"><span class="pre">help(range)</span></code> ?</p>
+<p>Let’s consider an example where we use a for loop with <code class="docutils literal notranslate"><span class="pre">value</span></code> as the loop variable and <code class="docutils literal notranslate"><span class="pre">range(5)</span></code> as the collection. What happens when you print <code class="docutils literal notranslate"><span class="pre">value</span></code> at each iteration?</p>
+<section id="check-your-understanding">
+<h4>Check your understanding<a class="headerlink" href="#check-your-understanding" title="Link to this heading">#</a></h4>
+<p>The program below will print numbers to the screen using the <code class="docutils literal notranslate"><span class="pre">range()</span></code> function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">...</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Using the documentation that is produced when you run <code class="docutils literal notranslate"><span class="pre">help(range)</span></code>, what values would you replace the <code class="docutils literal notranslate"><span class="pre">...</span></code> in the parentheses of the <code class="docutils literal notranslate"><span class="pre">range()</span></code> function with to have the following output printed to the screen?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span>
+<span class="mi">5</span>
+<span class="mi">8</span>
+</pre></div>
+</div>
+<p>You can test your solution in the cell below</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here&#39;s one possible solution</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+</section>
+<section id="looping-over-the-length-of-lists-using-index-values">
+<h3>1.6 Looping over the length of lists using index values<a class="headerlink" href="#looping-over-the-length-of-lists-using-index-values" title="Link to this heading">#</a></h3>
+<p>Since we already know how to find the length of a list using the <code class="docutils literal notranslate"><span class="pre">len()</span></code> function, we can now take advantage of this knowledge to make our <code class="docutils literal notranslate"><span class="pre">for</span></code> loops more flexible. Let’s start by doing something we have done earlier, printing out city names using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. However, this time we will also use the <code class="docutils literal notranslate"><span class="pre">range()</span></code> function to print the cities.</p>
+<section id="how-to-use-index-values-to-loop-over-a-list">
+<h4>1.6.1 How to use index values to loop over a list?<a class="headerlink" href="#how-to-use-index-values-to-loop-over-a-list" title="Link to this heading">#</a></h4>
+<p>Since we already know how to find the length of a list using the <code class="docutils literal notranslate"><span class="pre">len()</span></code> function, we can now take advantage of this knowledge to make our <code class="docutils literal notranslate"><span class="pre">for</span></code> loops more flexible. Let’s start by doing something we have done earlier, printing out city names using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. However, this time we will also use the <code class="docutils literal notranslate"><span class="pre">range()</span></code> function to print the cities.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">african_cities</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Dakar&quot;</span><span class="p">,</span> <span class="s2">&quot;Addis Ababa&quot;</span><span class="p">,</span> <span class="s2">&quot;Nairobi&quot;</span><span class="p">,</span> <span class="s2">&quot;Cairo&quot;</span><span class="p">,</span> <span class="s2">&quot;Rabat&quot;</span><span class="p">,</span> <span class="s2">&quot;Kampala&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">african_cities</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">african_cities</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="si">}</span><span class="s2"> is at index </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> in the list.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see what is different now:</p>
+<ol class="arabic simple">
+<li><p>You can see that because we are using the <code class="docutils literal notranslate"><span class="pre">range()</span></code> function, the value assigned to the loop variable <code class="docutils literal notranslate"><span class="pre">idx</span></code> starts with <code class="docutils literal notranslate"><span class="pre">0</span></code> and increases by <code class="docutils literal notranslate"><span class="pre">1</span></code> each time through the loop.</p></li>
+<li><p>In order to access individual cities in the <code class="docutils literal notranslate"><span class="pre">african_cities</span></code> list, we need to include the index value (e.g., <code class="docutils literal notranslate"><span class="pre">african_cities[idx]</span></code>. Here, the variable <code class="docutils literal notranslate"><span class="pre">idx</span></code> will be replaced by the current value assigned from the <code class="docutils literal notranslate"><span class="pre">range()</span></code> function.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While the variable <code class="docutils literal notranslate"><span class="pre">i</span></code> is commonly used to denote the index variable in loops, a good coding practice often involves using meaningful and descriptive variable names to enhance code readability.  For example, if you are iterating over elements in an array representing a number of items, you might use <code class="docutils literal notranslate"><span class="pre">itemIdx</span></code> or <code class="docutils literal notranslate"><span class="pre">idx</span></code> instead of <code class="docutils literal notranslate"><span class="pre">i</span></code>. If you are working with matrices, you could use <code class="docutils literal notranslate"><span class="pre">rowIdx</span></code> and <code class="docutils literal notranslate"><span class="pre">colIdx</span></code> instead of <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code>. For nested loops, consider using more descriptive names like <code class="docutils literal notranslate"><span class="pre">outerIdx</span></code> and <code class="docutils literal notranslate"><span class="pre">innerIdx</span></code>.</p>
+</div>
+</section>
+<section id="why-use-index-values-to-loop-over-a-list">
+<h4>1.6.2 Why use index values to loop over a list?<a class="headerlink" href="#why-use-index-values-to-loop-over-a-list" title="Link to this heading">#</a></h4>
+<p>Good question. There are two common case where you might need to loop using index values:</p>
+<ol class="arabic simple">
+<li><p>If you want to update individual values in a list you’re likely going to need a loop that includes the index values. There are functions such as <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> as shown below that can help, but their use can be somewhat confusing for new programmers.</p></li>
+<li><p>In cases where you have multiple lists that are related to one another, it can be handy to use a loop with the index values to be able to access corresponding locations in each list. For this, let’s consider an example with the two lists below.</p></li>
+</ol>
+<section id="id1">
+<h5>Check your understanding<a class="headerlink" href="#id1" title="Link to this heading">#</a></h5>
+<p>What output would the following program produce?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">odd_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="n">even_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">odd_numbers</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">odd_numbers</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">even_numbers</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Try to think about the loop without running the code</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here&#39;s the solution</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Try to do this one. As you can see we have 5 cities and 5 corresponding counties. Print out each pair using a single for loop and print the output to screer to look like this</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Washington</span> <span class="n">D</span><span class="o">.</span><span class="n">C</span><span class="o">.</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">capital</span> <span class="n">of</span> <span class="n">USA</span>
+</pre></div>
+</div>
+<p>for each city.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cities</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Washington D.C.&quot;</span><span class="p">,</span> <span class="s2">&quot;Berlin&quot;</span><span class="p">,</span> <span class="s2">&quot;Cairo&quot;</span><span class="p">,</span> <span class="s2">&quot;Sydney&quot;</span><span class="p">,</span> <span class="s2">&quot;Kathmandu&quot;</span><span class="p">]</span>
+<span class="n">countries</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;USA&quot;</span><span class="p">,</span> <span class="s2">&quot;Germany&quot;</span><span class="p">,</span> <span class="s2">&quot;Egypt&quot;</span><span class="p">,</span> <span class="s2">&quot;Australia&quot;</span><span class="p">,</span> <span class="s2">&quot;Nepal&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cool. So as you can see, the index <code class="docutils literal notranslate"><span class="pre">idx</span></code> is used in this case to access each item in the two lists of cities and countries and allow us to print out the city/country pairs. We’ll get more practice with this kind of thing in the exercises for this week.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the example above, we used the length of the list <code class="docutils literal notranslate"><span class="pre">cities</span></code> or <code class="docutils literal notranslate"><span class="pre">countries</span></code> in the <code class="docutils literal notranslate"><span class="pre">range()</span></code> function since both lists are the same length.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="loop-with-zip-no-idexing-required">
+<h3>1.7 Loop with <code class="docutils literal notranslate"><span class="pre">zip</span></code> - no idexing required<a class="headerlink" href="#loop-with-zip-no-idexing-required" title="Link to this heading">#</a></h3>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">zip</span></code> function to iterate over multiple lists simultaneously, something like this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">variable1</span><span class="p">,</span> <span class="n">variable2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">list2</span><span class="p">):</span>
+    <span class="n">use</span> <span class="n">variable1</span><span class="p">,</span> <span class="n">variable2</span> <span class="n">to</span> <span class="n">do</span> <span class="n">something</span>
+</pre></div>
+</div>
+<p>Try the above sample using <code class="docutils literal notranslate"><span class="pre">zip</span></code> instead of indexing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cities</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Washington D.C.&quot;</span><span class="p">,</span> <span class="s2">&quot;Berlin&quot;</span><span class="p">,</span> <span class="s2">&quot;Cairo&quot;</span><span class="p">,</span> <span class="s2">&quot;Sydney&quot;</span><span class="p">,</span> <span class="s2">&quot;Kathmandu&quot;</span><span class="p">]</span>
+<span class="n">countries</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;USA&quot;</span><span class="p">,</span> <span class="s2">&quot;Germany&quot;</span><span class="p">,</span> <span class="s2">&quot;Egypt&quot;</span><span class="p">,</span> <span class="s2">&quot;Australia&quot;</span><span class="p">,</span> <span class="s2">&quot;Nepal&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In that case <code class="docutils literal notranslate"><span class="pre">zip</span></code> is pairing corresponding elements from <code class="docutils literal notranslate"><span class="pre">cities</span></code> and <code class="docutils literal notranslate"><span class="pre">countries</span></code>, and you can iterate over these pairs in the for loop. Using <code class="docutils literal notranslate"><span class="pre">zip</span></code> is more pythonic. Using indexing is more like MATLAB.</p>
+</section>
+<section id="looping-over-the-length-of-list-using-enumerate-advanced-topic">
+<h3>1.8 Looping over the length of list using <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> (<em>advanced topic</em>)<a class="headerlink" href="#looping-over-the-length-of-list-using-enumerate-advanced-topic" title="Link to this heading">#</a></h3>
+<p>If you want to use python as python (not as MATLAB) instead of using <code class="docutils literal notranslate"><span class="pre">range(len())</span></code> use the <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> function. Here we do the above example but with <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> instead of <code class="docutils literal notranslate"><span class="pre">range(len())</span></code>.</p>
+<section id="understanding-enumerate-step-by-step">
+<h4>1.8.1 Understanding <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> step-by-step<a class="headerlink" href="#understanding-enumerate-step-by-step" title="Link to this heading">#</a></h4>
+<p>Before we use <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> let use first understand what it does with this example</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">african_cities</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Dakar&quot;</span><span class="p">,</span> <span class="s2">&quot;Addis Ababa&quot;</span><span class="p">,</span> <span class="s2">&quot;Nairobi&quot;</span><span class="p">,</span> <span class="s2">&quot;Cairo&quot;</span><span class="p">,</span> <span class="s2">&quot;Rabat&quot;</span><span class="p">,</span> <span class="s2">&quot;Kampala&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="nb">object</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">african_cities</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">african_cities</span><span class="p">[</span><span class="nb">object</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="si">}</span><span class="s2"> is at index </span><span class="si">{</span><span class="nb">object</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> in the list.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In case you are wondering, the above object is a <code class="docutils literal notranslate"><span class="pre">tuple</span></code>, which is a data strcuture similar to <code class="docutils literal notranslate"><span class="pre">list</span></code>, that is defined using parentheses, and can contain elements of different data types. Other data strctures in python include <code class="docutils literal notranslate"><span class="pre">dict</span></code> and <code class="docutils literal notranslate"><span class="pre">set</span></code>. Check <a class="reference external" href="https://wesmckinney.com/book/python-builtin">Chapter 3. Built-In Data Structures, Functions, and Files</a> in your textbook if you want to learn more about data strctures in python.</p>
+</section>
+<section id="how-to-use-enumerate-to-loop-over-a-list">
+<h4>1.8.2 How to use <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> to loop over a list?<a class="headerlink" href="#how-to-use-enumerate-to-loop-over-a-list" title="Link to this heading">#</a></h4>
+<p>The above example is still more or less like how you will do it in MATLAB, but to do this in python style:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">african_cities</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Dakar&quot;</span><span class="p">,</span> <span class="s2">&quot;Addis Ababa&quot;</span><span class="p">,</span> <span class="s2">&quot;Nairobi&quot;</span><span class="p">,</span> <span class="s2">&quot;Cairo&quot;</span><span class="p">,</span> <span class="s2">&quot;Rabat&quot;</span><span class="p">,</span> <span class="s2">&quot;Kampala&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span><span class="n">city</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">african_cities</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> is at index </span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2"> in the list.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Much simpler than MATLAB style as shown in  <a class="reference internal" href="#1.6-Looping-over-the-length-of-lists-using-index-values"><span class="xref myst">Section 1.6</span></a>. But it might take you sometime to migrate from coding the MATLAB way to the python way.</p>
+</section>
+</section>
+<section id="using-list-and-dictionary-comprehensions-advanced-topic">
+<h3>1.9 Using list and dictionary comprehensions (<em>advanced topic</em>)<a class="headerlink" href="#using-list-and-dictionary-comprehensions-advanced-topic" title="Link to this heading">#</a></h3>
+<p>Comprehensions in python provide a concise and efficient way to create lists and dictionaries. They are particularly useful when dealing with large datasets.</p>
+<section id="the-syntax-and-concept-of-list-comprehensions">
+<h4>1.9.1 The syntax and concept of list comprehensions<a class="headerlink" href="#the-syntax-and-concept-of-list-comprehensions" title="Link to this heading">#</a></h4>
+<p>A list comprehension consists of brackets containing an expression followed by a for clause, then zero or more for or if clauses. The result will be a new list resulting from evaluating the expression in the context of the for and if clauses which follow it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">expression</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">list</span> <span class="k">if</span> <span class="n">condition</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Example, let us create a list of 5 positive  integers and call it <code class="docutils literal notranslate"><span class="pre">list1</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list1</span><span class="o">=</span><span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>let us create this list [2, 4, 6, 8] by at least three different ways</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">([</span><span class="n">value</span><span class="o">*</span><span class="mi">2</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">value</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">value</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="k">if</span> <span class="n">value</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">])</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<p>You are familiar with the first two methods. I am adding the third method to make you curious. We will learn the if condition in the next lesson. But you are probably wondering what is this <code class="docutils literal notranslate"><span class="pre">%</span></code> ? The <code class="docutils literal notranslate"><span class="pre">%</span></code> operator in python is the modulus operator. It returns the remainder when the left operand is divided by the right operand. In the context of <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">value</span> <span class="pre">%</span> <span class="pre">2</span> <span class="pre">==</span> <span class="pre">0</span></code>, it is checking if the variable <code class="docutils literal notranslate"><span class="pre">value</span></code> is even. Here is the breakdown: <code class="docutils literal notranslate"><span class="pre">value</span> <span class="pre">%</span> <span class="pre">2</span></code> calculates the remainder when <code class="docutils literal notranslate"><span class="pre">value</span></code> is divided by 2, and <code class="docutils literal notranslate"><span class="pre">value</span> <span class="pre">%</span> <span class="pre">2</span> <span class="pre">==</span> <span class="pre">0</span></code> checks if the remainder is equal to 0, which means that <code class="docutils literal notranslate"><span class="pre">value</span></code> is divisible evenly by 2.  So, <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">value</span> <span class="pre">%</span> <span class="pre">2</span> <span class="pre">==</span> <span class="pre">0</span></code> is a common way to test for even numbers.</p>
+</section>
+<section id="test-your-understanding">
+<h4>Test your understanding<a class="headerlink" href="#test-your-understanding" title="Link to this heading">#</a></h4>
+<p>Use list comprehension to convert a list of temperatures in Celsius to Fahrenheit.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fahrenheit_temp</span> <span class="o">=</span> <span class="p">(</span><span class="n">celsius_temp</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">32</span>
+</pre></div>
+</div>
+<p>remember here is the formula</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">expression</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>To think about this: Identify your expression, item, and iterable</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">celsius_temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">56.7</span><span class="p">]</span>
+
+<span class="n">fahrenheit_temperatures</span><span class="o">=</span> <span class="p">[(</span><span class="n">celsius_temperature</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">32</span> <span class="k">for</span> <span class="n">celsius_temperature</span> <span class="ow">in</span> <span class="n">celsius_temperatures</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fahrenheit_temperatures</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that 134°F (56.7°C), which was recorded in Death Valley, California on July 10, 1913, is the highest recorded temperature on Earth. The lowest temperature ever recorded in Florida is -2°F, which was recorded in Tallahassee on February 13, 1899.</p>
+</section>
+<section id="dictionary-comprehensions">
+<h4>1.9.2 Dictionary Comprehensions<a class="headerlink" href="#dictionary-comprehensions" title="Link to this heading">#</a></h4>
+<p>A concept similar to list comprehensions, is dictionary comprehensions that allow you to create dictionaries in a single, readable line.</p>
+<p>Before we learn how to do this, what is a python dictionary ? We learned about the <code class="docutils literal notranslate"><span class="pre">list</span></code> data structure (e.g., <code class="docutils literal notranslate"><span class="pre">mylist=[1,2,3]</span></code>). Python dictionary <code class="docutils literal notranslate"><span class="pre">dic</span></code> is another python data structure that stores key-value pairs. Each key in the dictionary must be unique, and it is associated with a corresponding value. Dictionaries are defined within braces <code class="docutils literal notranslate"><span class="pre">{}</span></code> with each item being a pair in the form <code class="docutils literal notranslate"><span class="pre">key:</span> <span class="pre">value</span></code>.</p>
+<p>Here’s a brief example of a Python dictionary:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating a dictionary</span>
+<span class="n">city_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;Fort Myers&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="mf">40.5</span><span class="p">,</span>
+    <span class="s1">&#39;humidity&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+    <span class="s1">&#39;air_quality&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span>
+<span class="p">}</span>
+
+<span class="c1"># Accessing values using keys</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;City:&quot;</span><span class="p">,</span> <span class="n">city_data</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Temperature:&quot;</span><span class="p">,</span> <span class="n">city_data</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Humidity:&quot;</span><span class="p">,</span> <span class="n">city_data</span><span class="p">[</span><span class="s1">&#39;humidity&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Air Quality:&quot;</span><span class="p">,</span> <span class="n">city_data</span><span class="p">[</span><span class="s1">&#39;air_quality&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So dictionary is another form of storing data in python like a list. In the above example, we created the dictionary <code class="docutils literal notranslate"><span class="pre">city_data</span></code> manually. Now hwo to create a dictionary with dictionary comprehensions?
+Here is one syntax</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span><span class="n">values</span><span class="p">)}</span>
+</pre></div>
+</div>
+<p>Try it out with the following example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Key parameters and corresponding values for a location</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;City&#39;</span><span class="p">,</span> <span class="s1">&#39;Temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;Humidity&#39;</span><span class="p">,</span> <span class="s1">&#39;Air Quality&#39;</span><span class="p">]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fort Myers&#39;</span><span class="p">,</span> <span class="s1">&#39;40.5&#39;</span><span class="p">,</span> <span class="s1">&#39;60&#39;</span><span class="p">,</span><span class="s1">&#39;good&#39;</span><span class="p">]</span>
+
+<span class="c1"># Create a dictionary mapping each parameter to its value</span>
+<span class="n">city_data</span><span class="o">=</span><span class="p">{</span><span class="n">parameter</span> <span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">values</span><span class="p">)}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">city_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also create a dictionary from lists. Here is an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Multiple lists </span>
+<span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">]</span>
+<span class="n">launched</span><span class="o">=</span><span class="p">[</span><span class="mi">1983</span><span class="p">,</span><span class="mi">1984</span><span class="p">,</span><span class="mi">1984</span><span class="p">,</span><span class="mi">1984</span><span class="p">]</span>
+<span class="n">discontinued</span><span class="o">=</span><span class="p">[</span><span class="mi">1986</span><span class="p">,</span> <span class="mi">1985</span><span class="p">,</span> <span class="mi">1984</span><span class="p">,</span> <span class="mi">1986</span><span class="p">]</span>
+
+<span class="c1">#Dictionary with list comprehension (the easy way flowing the syntax above)</span>
+<span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;models&#39;</span><span class="p">,</span><span class="s1">&#39;launched&#39;</span><span class="p">,</span> <span class="s1">&#39;discontinued&#39;</span><span class="p">]</span>
+<span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="n">models</span><span class="p">,</span> <span class="n">launched</span><span class="p">,</span> <span class="n">discontinued</span><span class="p">]</span>
+<span class="n">data1</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span><span class="n">values</span><span class="p">)}</span>
+
+<span class="c1">#Dictionary with list comprehension (another way of doing it)</span>
+<span class="n">data2</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span><span class="n">values</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">keys</span><span class="p">)}</span>
+
+<span class="c1">#Printing some outputs</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="s1">&#39;models&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="s1">&#39;models&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="challaning-problem">
+<h4>1.9.3 Challaning problem<a class="headerlink" href="#challaning-problem" title="Link to this heading">#</a></h4>
+<p>This is a challanging problem where you can apply what you have learned in Lesson 4 about the method <code class="docutils literal notranslate"><span class="pre">list.count()</span></code>, list comprehesions, and diconary comprehesions. You need to apply these three tools to solve this problem.</p>
+<p>Suppose you have a dataset that includes species names and their counts</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">species</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Oak&#39;</span><span class="p">,</span> <span class="s1">&#39;Pine&#39;</span><span class="p">,</span> <span class="s1">&#39;Birch&#39;</span><span class="p">,</span> <span class="s1">&#39;Oak&#39;</span><span class="p">,</span> <span class="s1">&#39;Pine&#39;</span><span class="p">,</span> <span class="s1">&#39;Oak&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>How can you count each species and produce a dictionary showning each species with its corresponding count as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Output</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Oak&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Pine&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Birch&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>This is not an easy puzzle, but you already have a clue about the three tools that you can use. Start by remembering what <code class="docutils literal notranslate"><span class="pre">list.count()</span></code> can do.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">species</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Oak&#39;</span><span class="p">,</span> <span class="s1">&#39;Pine&#39;</span><span class="p">,</span> <span class="s1">&#39;Birch&#39;</span><span class="p">,</span> <span class="s1">&#39;Oak&#39;</span><span class="p">,</span> <span class="s1">&#39;Pine&#39;</span><span class="p">,</span> <span class="s1">&#39;Oak&#39;</span><span class="p">]</span>
+<span class="n">species</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;Oak&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Can I loop over the list <code class="docutils literal notranslate"><span class="pre">species</span></code> can keep counting. Something like this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">expression</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>In that case my expression will be the counting.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">species</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Oak&#39;</span><span class="p">,</span> <span class="s1">&#39;Pine&#39;</span><span class="p">,</span> <span class="s1">&#39;Birch&#39;</span><span class="p">,</span> <span class="s1">&#39;Oak&#39;</span><span class="p">,</span> <span class="s1">&#39;Pine&#39;</span><span class="p">,</span> <span class="s1">&#39;Oak&#39;</span><span class="p">]</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="p">[</span><span class="n">species</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">species</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now remeber each key in the dictionary must be unique, so if we created a dictionary using the two lists that we have that are <code class="docutils literal notranslate"><span class="pre">species</span></code> and <code class="docutils literal notranslate"><span class="pre">counts</span></code>, we will get what we want. Here is the dictionary syntax again</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span><span class="n">values</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Apply this syntax with the two lists that you have, to create an new dictionary <code class="docutils literal notranslate"><span class="pre">species_dict</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">species_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">count</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">species</span><span class="p">,</span> <span class="n">counts</span><span class="p">)}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">species_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you can understand that much, this means that you have a very good command of python.</p>
+<p>So far you have learned how to use list and dictionary comprehensions to create lists and dictionaries efficiently. These techniques are valuable for handling and processing large datasets, allowing us to perform data transformations and analysis.</p>
+</section>
+</section>
+<section id="using-for-loop-to-apply-a-mathematical-formula-to-a-list">
+<h3>1.10 Using for-loop to apply a mathematical formula to a list<a class="headerlink" href="#using-for-loop-to-apply-a-mathematical-formula-to-a-list" title="Link to this heading">#</a></h3>
+<p>We will do this later more effectively with the numpy library similar to MATLAB. Here we will use for-loops to perform calculations on elements of a list and store the results in a new list. We will see this with both explicit for-loop and implicit for-loop (i.e., list comprehensions).</p>
+<section id="using-explicit-for-loop">
+<h4>1.10.1 Using explicit for-loop<a class="headerlink" href="#using-explicit-for-loop" title="Link to this heading">#</a></h4>
+<p>We want to create a new list <code class="docutils literal notranslate"><span class="pre">new_list</span></code> based on values from another list <code class="docutils literal notranslate"><span class="pre">existing_list</span></code> and a formula. To do this:</p>
+<ul class="simple">
+<li><p>create new empty list <code class="docutils literal notranslate"><span class="pre">new_list</span> <span class="pre">=</span> <span class="pre">[]</span></code></p></li>
+<li><p>use for-loop to calculate formula element by element</p></li>
+<li><p>append <code class="docutils literal notranslate"><span class="pre">new_list</span></code> with the calculated value using append method</p></li>
+</ul>
+<p>For example, apply the formua <code class="docutils literal notranslate"><span class="pre">y=</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">3</span></code> to each element in this list</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">existing_list</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>such the the output will be</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="p">:</span> <span class="n">new_list</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">24</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Here is how to do this.`</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#One list</span>
+<span class="n">existing_list</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+
+<span class="c1">#Create new empty list &quot;new_list&quot;</span>
+<span class="n">new_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1">#for loop to apply formula y= x* 3 to the existing list element by element and save output to the new list</span>
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">existing_list</span><span class="p">:</span>
+    <span class="n">new_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>    <span class="c1">#append list with calculated value</span>
+
+<span class="c1">#Print new list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-list-comprehension-advanced-topic">
+<h4>1.10.2 Using list comprehension (advanced topic)<a class="headerlink" href="#using-list-comprehension-advanced-topic" title="Link to this heading">#</a></h4>
+<p>List comprehension can achieve the same result without explicitly writing a loop. Here is the syntax again</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">new_list</span><span class="o">=</span><span class="p">[</span><span class="n">expression</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">existing_list</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Here’s how you can do it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#One list</span>
+<span class="n">existing_list</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+
+<span class="c1"># Apply formula y= x * 3  using list comprehension</span>
+<span class="n">new_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="o">*</span><span class="mi">3</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">existing_list</span><span class="p">]</span>
+
+<span class="c1"># Print new list </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This code does exactly the same thing as the previous one, but it does so in a more concise way by using a list comprehension instead of a for loop.</p>
+</section>
+</section>
+</section>
+<section id="for-loop-with-unpacking">
+<h2>1.11 For loop with unpacking<a class="headerlink" href="#for-loop-with-unpacking" title="Link to this heading">#</a></h2>
+<p>How can you loop through a nested list that has four sublists.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">list_of_lists</span><span class="o">=</span><span class="p">[</span>
+          <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">2000</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">6000</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">5000</span><span class="p">],</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>You have many opitions. You can do indexing, or unpacking for the sublist.</p>
+<p>For example, add the three numbers in each of the above four sublists.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_of_lists</span><span class="o">=</span><span class="p">[</span>
+          <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">2000</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">4000</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">5000</span><span class="p">],</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is the indexing method (the MATLAB way)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">list_of_lists</span><span class="p">:</span>
+    <span class="nb">sum</span><span class="o">=</span> <span class="n">sublist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span> <span class="n">sublist</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span> <span class="n">sublist</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1110
+2220
+4440
+5550
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is the unpacking method</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">list_of_lists</span><span class="p">:</span>
+    <span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">,</span> <span class="n">num3</span> <span class="o">=</span> <span class="n">sublist</span>
+    <span class="nb">sum</span><span class="o">=</span> <span class="n">num1</span> <span class="o">+</span> <span class="n">num2</span> <span class="o">+</span> <span class="n">num3</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1110
+2220
+4440
+5550
+</pre></div>
+</div>
+</div>
+</div>
+<p>Unpacking, more concisely</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">,</span><span class="n">num3</span> <span class="ow">in</span> <span class="n">list_of_lists</span><span class="p">:</span>
+    <span class="nb">sum</span><span class="o">=</span> <span class="n">num1</span> <span class="o">+</span> <span class="n">num2</span> <span class="o">+</span> <span class="n">num3</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1110
+2220
+4440
+5550
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also do a nested loop that is a loop inside a loop, but that should be your last resort, when no other approach can solve your problem.</p>
+</section>
+<section id="intorduction-to-while-loop">
+<h2>2. Intorduction to while loop<a class="headerlink" href="#intorduction-to-while-loop" title="Link to this heading">#</a></h2>
+<p>Control structures in python are loops (i.e, for-loop and while-loop) and conditional statements (next lesson).  While <a class="reference external" href="https://docs.python.org/3/reference/compound_stmts.html#for">for loop</a> loops a collection of values, <a class="reference external" href="https://docs.python.org/3/reference/compound_stmts.html#while">while loop</a> loops until some condition is met. Here is a simple example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x is &#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note: In Python, incrementing the value of x by 2, you will see the syntax <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+=</span> <span class="pre">2</span></code> used more often than <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x+2</span></code> as shown above. The reason for using <code class="docutils literal notranslate"><span class="pre">+=</span></code> is not just brevity, but it can also saves some memory, making the code slightly more efficient. Let us rewrite the above code to be more pythonic</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x is &#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">+=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://geo-python-site.readthedocs.io/en/latest/notebooks/L3/for-loops.html">for-loops</a> by Geo-python</p></li>
+<li><p><a class="reference external" href="https://aaltoscicomp.github.io/python-for-scicomp/python/">Intorduction to Python</a> by Python for Scientific Computing</p></li>
+<li><p><a class="reference external" href="https://lectures.scientific-python.org/intro/language/python_language.html">1.2 The Python language</a> by Scientific Python Lectures</p></li>
+<li><p><a class="reference external" href="https://wesmckinney.com/book/python-builtin">3  Built-In Data Structures, Functions, and Files</a> in Python for Data Analysis, 3rd edition</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters\3. Python Programming"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../2.%20Python%20Basics/Lesson5_formatting.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><h1 style="color:green; text-align:center;">Lesson 5: Python Basics 3 - Formatting </h1></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Lesson7_conditional_statements.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><h1 style="color:green; text-align:center;">Lesson 7: Conditional Statements </h1></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basics-of-for-loops">1. Basics of for loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bad-example">1.1 A (bad) example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-the-for-loop">1.2 Introducing the for loop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loop-format">1.3 for loop format</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loop-variables">1.4 for loop variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loops-and-the-range-function">1.5 for loops and the range() function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#check-your-understanding">Check your understanding</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#looping-over-the-length-of-lists-using-index-values">1.6 Looping over the length of lists using index values</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-index-values-to-loop-over-a-list">1.6.1 How to use index values to loop over a list?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-index-values-to-loop-over-a-list">1.6.2 Why use index values to loop over a list?</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Check your understanding</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loop-with-zip-no-idexing-required">1.7 Loop with <code class="docutils literal notranslate"><span class="pre">zip</span></code> - no idexing required</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#looping-over-the-length-of-list-using-enumerate-advanced-topic">1.8 Looping over the length of list using <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> (<em>advanced topic</em>)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-enumerate-step-by-step">1.8.1 Understanding <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> step-by-step</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-enumerate-to-loop-over-a-list">1.8.2 How to use <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> to loop over a list?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-list-and-dictionary-comprehensions-advanced-topic">1.9 Using list and dictionary comprehensions (<em>advanced topic</em>)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-syntax-and-concept-of-list-comprehensions">1.9.1 The syntax and concept of list comprehensions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#test-your-understanding">Test your understanding</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionary-comprehensions">1.9.2 Dictionary Comprehensions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#challaning-problem">1.9.3 Challaning problem</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-for-loop-to-apply-a-mathematical-formula-to-a-list">1.10 Using for-loop to apply a mathematical formula to a list</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-explicit-for-loop">1.10.1 Using explicit for-loop</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-list-comprehension-advanced-topic">1.10.2 Using list comprehension (advanced topic)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loop-with-unpacking">1.11 For loop with unpacking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intorduction-to-while-loop">2. Intorduction to while loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed Elshall & Thalia Valle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

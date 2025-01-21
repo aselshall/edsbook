@@ -1,0 +1,13 @@
+name: myenv
+channels:
+  - defaults
+dependencies:
+  - python=3.8
+  - numpy
+  - pandas
+  - matplotlib
+  - scipy
+  - earthengine-api
+  - geemap
+  - pip:
+    - some-package-not-available-via-conda

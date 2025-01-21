@@ -1,0 +1,1716 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Exercise: GeeMap, GEE, and Sentinel-2 data &#8212; Environmental Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/10. Intro to Google Earth Engine/geemap1';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Using Google Earth Engine in a Jupyter Notebook" href="10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Environmental Data Science - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Environmental Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    EGN 4930 / EGN 5932C Special Topic: Environmental Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0. Good Coding Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP1_VariableName.html">GCP1 - Selecting “good” variable names</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP2_DescribingCode.html">Describing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP3_ReadableCode.html">Readable Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP4_WritingScripts.html">Writing Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP5_Assertions.html">Assertions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson2.html">Lesson 2 Getting Started</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Excercise1.html">Exercise 1 - Installing Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson3_PythonBasics1.html">Lesson 3 - Python Basics 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson4_list_solution.html">Lesson 4 - Python Basics 2 - Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson5_formatting.html">Lesson 5 - Python Basics 3 - Formatting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson6_Loops.html">Lesson 6 - Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson7_conditional_statements.html">Lesson 7 - Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson8_functions.html">Lesson 8 - Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson9_modules.html">Lesson 9 - Script Files and Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Exercise3.html">Exercise 3 - Python Programming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 4. Pandas for Tabular Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Lesson10_pandas.html">Lessons 10 - 14 - Pandas Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%204.%20Pandas%20for%20Tabular%20Data/Exercise4.html">Exercise 4 - Pandas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Artificial intelligence (AI) Coding Assistance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/OpenAI_API_Key_for_Jupyter_AI_Extension.html">OpenAI API key for Jupyter AI extension (Optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/AIcoding.html">Lesson 15 AI coding assistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/Exercise_5_API_Key_Module.html">Exercise 5 - API-Key Module (Optional)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Data Science Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Workflow.html">Lessons 16 - Data Science Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Exercise6.html">Exercise 6 - AQI Data Preparation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. NumPy for Scientific Computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/numpy.html">Lessons 18-19 - NumPy Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/exercise7.html">Exercise 7 - NumPy - Air quality data analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8. Matplotlib for Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/matplotlib.html">Lesson 20 - 21 - Matplotlib Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/exercise8.html">Exercise 8 Matplotlib - Air quality data visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/climate.html">Lesson 24 - Climate Data - CMIP6 and Remote Sensing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/xarray.html">Lesson 25-27 - Xarray basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/cartopy.html">Lesson 28 - CartoPy basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/Exercise9.html">Exercise 9 - Sea surface height and red tides (Optional, Advanced)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">10. Introduction to Google Earth Engine</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10.0-%20Intro%20to%20GEE.html">Lesson 30 - Intro to Google Earth Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10.1-%20JavaScript%20API%20vs.%20Python%20API.html">Lesson 31 - JavaScript API vs. Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html">Lesson 32 - Using Google Earth Engine in a Jupyter Notebook</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Exercise 10 -  GeeMap, GEE, and Sentinel-2 Data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Chapters/10. Intro to Google Earth Engine/geemap1.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapters/10. Intro to Google Earth Engine/geemap1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/10. Intro to Google Earth Engine/geemap1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Exercise:  GeeMap, GEE, and Sentinel-2 data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">1. Environment Setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">2. Import Libraries</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">3. Exercise</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#select-an-area-of-interest-in-big-cypress-florida">3.1 Select an area of interest in Big Cypress, Florida</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-and-process-sentinel-2-data">3.2 Import and process Sentinel-2 data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#import-sentinel-2-data">3.2.1 Import Sentinel-2 data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#view-sentinel-2-data">3.2.2 View Sentinel-2 data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#define-and-calcuate-indices-for-each-image">3.2.3 Define and calcuate indices for each image</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-ndci-turbidity-and-wvi">3.3.4 Visualize NDCI, Turbidity, and WVI</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-time-series-analysis">3.3 Perform Time Series Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-mean-values-over-time">3.3.1 Calculate mean values over time</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-time-series">3.3.2 Plot time series</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-analysis">3.4 Statistical analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-matrix-and-heatmap">3.41 Correlation matrix and heatmap</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plots">3.4.2 Scatter plots</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-analysis">3.4.3 Trend analysis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-analysis">3.4.4 Regression analysis</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="exercise-geemap-gee-and-sentinel-2-data">
+<h1>Exercise:  GeeMap, GEE, and Sentinel-2 data<a class="headerlink" href="#exercise-geemap-gee-and-sentinel-2-data" title="Link to this heading">#</a></h1>
+<p>This lesson is modified from <a class="reference external" href="https://geemap.org/workshops/AGU_2023/">An Introduction to Cloud-Based Geospatial Analysis with Earth Engine and Geemap</a>. Codes, annotation, and formatting are produced wuth assistant from Jupter AI using ChatGPT 3.5 Turbo and ChatGPT4o.</p>
+<p><a class="reference external" href="https://mybinder.org/v2/gh/aselshall/eds/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+<hr class="docutils" />
+<section id="environment-setup">
+<h2>1. Environment Setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h2>
+<p>You need to install <a class="reference external" href="https://geemap.org/">GeeMap</a> library. Installing geemap library can take more than 5 minutes depending on the specs of your machine.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pip install geemap</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You need to <a class="reference external" href="https://code.earthengine.google.com/register">register</a> to <a class="reference external" href="https://earthengine.google.com/">Google Earth Engine</a>  and follow the instructions <a class="reference external" href="https://docs.google.com/document/d/1ZGSmrNm6_baqd8CHt33kIBWOlvkh-HLr46bODgJN1h0/edit?usp=sharing">here</a> to create a Cloud Project.</p>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+If you have an Earth Engine account with your university email but have not used the Earth Engine Python API,  creating a new account with your personal Gmail is a good idea. The API needs a Google Cloud Project, which universities may restrict users from creating.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pip install earthengine-api</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Running the following cell will start the Earth Engine authentication. Follow the instructions <a class="reference external" href="https://book.geemap.org/chapters/01_introduction.html#earth-engine-authentication">here</a> to authenticate Earth Engine.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ee</span>
+<span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
+<span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">ee</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">()</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;ee&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="import-libraries">
+<h3>2. Import Libraries<a class="headerlink" href="#import-libraries" title="Link to this heading">#</a></h3>
+<p>Import geemap and run the code below. If you can see the image then geemap is working. If you cannot see the image close your JupyterLab and reopen it again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geemap</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.seasonal</span> <span class="kn">import</span> <span class="n">seasonal_decompose</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span><span class="n">geemap</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">[</span><span class="mf">26.465</span><span class="p">,</span> <span class="o">-</span><span class="mf">81.775</span><span class="p">],</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">17</span><span class="p">)</span>
+
+<span class="n">m</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <style>
+                .geemap-dark {
+                    --jp-widgets-color: white;
+                    --jp-widgets-label-color: white;
+                    --jp-ui-font-color1: white;
+                    --jp-layout-color2: #454545;
+                    background-color: #383838;
+                }
+
+                .geemap-dark .jupyter-button {
+                    --jp-layout-color3: #383838;
+                }
+
+                .geemap-colab {
+                    background-color: var(--colab-primary-surface-color, white);
+                }
+
+                .geemap-colab .jupyter-button {
+                    --jp-layout-color3: var(--colab-primary-surface-color, white);
+                }
+            </style>
+            </div><script type="application/vnd.jupyter.widget-view+json">{"model_id": "6ea08eef13484a5798caa8589ebff561", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<p>To learn how to use Google Earth engine (gee) and geemap package, please check the <a class="reference external" href="https://www.youtube.com/&#64;giswqs">geemap developer’s YouTube channel</a>. As a start please check the playlist of <a class="reference external" href="https://www.youtube.com/playlist?list=PLAxJ4-o7ZoPeeJZL-_3kcZ2WLYF5x87eX">Earth Engine and Geemap Workshops</a>. You need to have an idea about GEE and geemap before you do this exercise.</p>
+</section>
+</section>
+<section id="exercise">
+<h2>3. Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h2>
+<p>There are several remote sensing indices that can be useful for studying harmful algal blooms (HABs) in Big Cypress, Florida that include normalized difference chlorophyll index (NDCI), turbidity, water vegetation index (WVI), chlorophyll-a concentration, normalized difference water index (NDWI), floating algae index (FAI) and so on.</p>
+<p>This example shows the workflow for Sentinel-2 data and GEE to study time series changes in NDCI, turbidity and WVI.</p>
+<p><strong><a class="reference external" href="https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/ndci/">Normalized Difference Chlorophyll Index (NDCI)</a></strong><br />
+used to estimate chlorophyll concentration in water bodies, indicating the presence of algae and phytoplankton.
+$<span class="math notranslate nohighlight">\(
+\text{NDCI} = \frac{(\text{B5} - \text{B4})}{(\text{B5} + \text{B4})}
+\)</span>$</p>
+<p>Bands Used:</p>
+<ul class="simple">
+<li><p>B5 (Red Edge)</p></li>
+<li><p>B4(Red)</p></li>
+</ul>
+<p><strong><a class="reference external" href="https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/se2waq/">Turbidity</a></strong><br />
+measures the cloudiness or haziness of water caused by suspended particles, which can affect light penetration and water quality.
+$<span class="math notranslate nohighlight">\(
+\text{Turbidity} = 8.93 \left(\frac{\text{B3}}{\text{B1}}\right) - 6.39
+\)</span>$</p>
+<p>Bands Used:</p>
+<ul class="simple">
+<li><p>B3 (Green)</p></li>
+<li><p>B1 (Coastal Aerosol- Blue)</p></li>
+</ul>
+<p><strong><a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6111878/">Water Vegetation Index (WVI)</a></strong><br />
+used to assess the vegetation health and extent in water-related environments such as wetlands, by combining normalized difference vegetation index (NDVI) that measures live green vegetation, and the modified normalized difference water index (MNDWI) that better distinguishes water bodies such as lakes, and rivers.</p>
+<div class="math notranslate nohighlight">
+\[
+\text{WVI} = \text{NDVI} + \text{MNDWI}
+\]</div>
+<p>Where:
+$<span class="math notranslate nohighlight">\(
+\text{NDVI} = \frac{(\text{B8} - \text{B4})}{(\text{B8} + \text{B4})}
+\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(
+\text{MNDWI} = \frac{(\text{B3} - \text{B11})}{(\text{B3} + \text{B11})}
+\)</span>$</p>
+<p>Bands Used:</p>
+<ul class="simple">
+<li><p>B8 (Near Infrared - NIR)</p></li>
+<li><p>B4 (Red)</p></li>
+<li><p>B3 (Green)</p></li>
+<li><p>B11 (Shortwave Infrared - SWIR1)
+3 (Green)</p></li>
+<li><p>B11 (Shortwave Infrared - SWIR1)</p></li>
+</ul>
+<p>Similarly we can also consider:</p>
+<ul class="simple">
+<li><p><strong><a class="reference external" href="https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/cyanobacteria_chla_ndci_l1c/">Chlorophyll-a concentration</a></strong> to directly measures the concentration of chlorophyll-a as key indicator of algal biomass</p></li>
+<li><p><strong><a class="reference external" href="https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/ndwi/">Normalized difference water index (NDWI)</a></strong> to monitor changes in water content of water bodies</p></li>
+<li><p><strong><a class="reference external" href="https://forum.sentinel-hub.com/t/floating-algae-monitoring-with-s-2-and-s-3/1867">Floating algae index (FAI)</a></strong> to detect floating algae in water bodies</p></li>
+<li><p><strong><a class="reference external" href="https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/wiw_s2_script/">Water In Wetlands Index (WIW)</a></strong> to generate water maps by featuring water in blue and other landscape features in natural colors</p></li>
+</ul>
+<p>Check <a class="reference external" href="https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel/sentinel-2/">Sentinel-hub</a> for more details about these indicies, code snippets, and more indicies that you can use.</p>
+<p>The purpose of this exercise is to illustrate the workflow using NDCI, Turbidity, and WVI indicies as examples.</p>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+Bofore starting this exercise you need to set up Google Earth Engine (GEE) and important geemap as shown above.
+</div><section id="select-an-area-of-interest-in-big-cypress-florida">
+<h3>3.1 Select an area of interest in Big Cypress, Florida<a class="headerlink" href="#select-an-area-of-interest-in-big-cypress-florida" title="Link to this heading">#</a></h3>
+<p>Use coordinates to define your area of interest (AOI). You can obtain the boundaries from a shapefile, or you can manually digitize your AOI using geemap. Here we will select a polygon at our study area.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the AOI using a polygon</span>
+<span class="n">aoi</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="o">.</span><span class="n">Polygon</span><span class="p">([</span>
+  <span class="p">[</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">81.4</span><span class="p">,</span> <span class="mf">25.9</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">81.4</span><span class="p">,</span> <span class="mf">25.7</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">81.2</span><span class="p">,</span> <span class="mf">25.7</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">81.2</span><span class="p">,</span> <span class="mf">25.9</span><span class="p">]</span>
+  <span class="p">]</span>
+<span class="p">])</span>
+
+<span class="c1"># Create a map centered on the AOI</span>
+<span class="n">Map</span> <span class="o">=</span> <span class="n">geemap</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">[</span><span class="mf">25.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">81.3</span><span class="p">],</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Add a high-resolution satellite image as the basemap</span>
+<span class="c1">#Map.add_basemap(&#39;SATELLITE&#39;)</span>
+
+
+<span class="c1"># Add the AOI to the map</span>
+<span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">aoi</span><span class="p">,</span> <span class="p">{},</span> <span class="s1">&#39;AOI&#39;</span><span class="p">)</span>
+
+<span class="c1"># Display the map</span>
+<span class="n">Map</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <style>
+                .geemap-dark {
+                    --jp-widgets-color: white;
+                    --jp-widgets-label-color: white;
+                    --jp-ui-font-color1: white;
+                    --jp-layout-color2: #454545;
+                    background-color: #383838;
+                }
+
+                .geemap-dark .jupyter-button {
+                    --jp-layout-color3: #383838;
+                }
+
+                .geemap-colab {
+                    background-color: var(--colab-primary-surface-color, white);
+                }
+
+                .geemap-colab .jupyter-button {
+                    --jp-layout-color3: var(--colab-primary-surface-color, white);
+                }
+            </style>
+            </div><script type="application/vnd.jupyter.widget-view+json">{"model_id": "89d0718400074b50aaea5bf307a64ae2", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+</section>
+<section id="import-and-process-sentinel-2-data">
+<h3>3.2 Import and process Sentinel-2 data<a class="headerlink" href="#import-and-process-sentinel-2-data" title="Link to this heading">#</a></h3>
+<p>This step filters Sentinel-2 data and calculate the necessary indices.</p>
+<section id="import-sentinel-2-data">
+<h4>3.2.1 Import Sentinel-2 data<a class="headerlink" href="#import-sentinel-2-data" title="Link to this heading">#</a></h4>
+<p>From GEE the Sentinel-2 Level-2A surface reflectance image collection <a class="reference external" href="https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED">COPERNICUS/S2_HARMONIZED</a> is imported and filtered by bounds, date, and cloud cover. The code below will initializes the Sentinel-2 image collection from the GEE catalog. Then will filter the image collection to include only images that intersect with AOI, taken with defined time range, and with less than 20% cloud cover.</p>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+COPERNICUS/S2_HARMONIZED provides harmonized Sentinel-2 surface reflectance imagery. This collection combines data from Sentinel-2A and Sentinel-2B satellites and ensures consistent data quality across both satellites. It applies atmospheric correction to convert the top-of-atmosphere (TOA) reflectance values to surface reflectance values.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Sentinel-2 image collection</span>
+<span class="n">sentinel2</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s1">&#39;COPERNICUS/S2_HARMONIZED&#39;</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">filterBounds</span><span class="p">(</span><span class="n">aoi</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="s1">&#39;2019-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2023-12-31&#39;</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="s1">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+
+<span class="c1"># Display the collection size to verify the filtering</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of images in the filtered collection:&#39;</span><span class="p">,</span> <span class="n">sentinel2</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <style>
+                .geemap-dark {
+                    --jp-widgets-color: white;
+                    --jp-widgets-label-color: white;
+                    --jp-ui-font-color1: white;
+                    --jp-layout-color2: #454545;
+                    background-color: #383838;
+                }
+
+                .geemap-dark .jupyter-button {
+                    --jp-layout-color3: #383838;
+                }
+
+                .geemap-colab {
+                    background-color: var(--colab-primary-surface-color, white);
+                }
+
+                .geemap-colab .jupyter-button {
+                    --jp-layout-color3: var(--colab-primary-surface-color, white);
+                }
+            </style>
+            </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of images in the filtered collection: 355
+</pre></div>
+</div>
+</div>
+</div>
+<p>You could also further filter images to a specific dates such as a specific season or month.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Sentinel-2 image collection and apply the season filter</span>
+<span class="n">sentinel2</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s1">&#39;COPERNICUS/S2&#39;</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">filterBounds</span><span class="p">(</span><span class="n">aoi</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="s1">&#39;2016-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2023-12-31&#39;</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">calendarRange</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">))</span> \
+  <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="s1">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">.filter(ee.Filter.calendarRange(6,</span> <span class="pre">8,</span> <span class="pre">'month'))</span></code> selects images captured between June and August of each year within the specified date range. You can also select specific dates using <code class="docutils literal notranslate"><span class="pre">ee.Date()</span></code> such as <code class="docutils literal notranslate"><span class="pre">ee.Date.fromYMD(year,</span> <span class="pre">8,</span> <span class="pre">31)</span></code> to select a specific day as a start or end date for example.For details, you can check <a class="reference external" href="https://github.com/ndminhhus/geeguide/tree/maste">Harmonization of Landsat and Sentinel 2 in Google Earth Engine, documentation and scripts</a>. You can also use AI coding assistance.a</p>
+</section>
+<section id="view-sentinel-2-data">
+<h4>3.2.2 View Sentinel-2 data<a class="headerlink" href="#view-sentinel-2-data" title="Link to this heading">#</a></h4>
+<p>Before any data processing let use geemap to visualize Sentinel-2 data for the given AOI.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a map centered on the AOI</span>
+<span class="c1"># Creates a map object centered at the specified latitude and longitude (25.8, -81.3) with a zoom level of 10.</span>
+<span class="n">Map</span> <span class="o">=</span> <span class="n">geemap</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">[</span><span class="mf">25.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">81.3</span><span class="p">],</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1">#Select an image</span>
+<span class="c1"># These are examples for some selections that you can make</span>
+<span class="c1">#first_image = sentinel2.first().clip(aoi)                             #first image</span>
+<span class="c1">#specific_image = sentinel2.toList(sentinel2.size()).get(4).clip(aoi)  #Fifth image</span>
+<span class="c1">#image_with_specific_date = sentinel2.filterDate(&#39;2020-06-15&#39;, &#39;2020-06-15&#39;).first().clip(aoi)</span>
+<span class="c1">#image_with_lowest_cloud_coverage = sentinel2.sort(&#39;CLOUDY_PIXEL_PERCENTAGE&#39;).first().clip(aoi)</span>
+
+<span class="c1"># Select the median image</span>
+<span class="c1"># Reduces the image collection to a single image </span>
+<span class="c1"># by taking the median value of each pixel across all images in the collection.</span>
+<span class="c1"># Clips the median image to the boundaries of the AOI </span>
+<span class="n">median_image</span> <span class="o">=</span> <span class="n">sentinel2</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">aoi</span><span class="p">)</span>
+
+
+<span class="c1"># Define visualization parameters</span>
+<span class="n">vis_params</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="c1"># Specifies the bands used for visualization. B4 (Red), B3 (Green), and B2 (Blue) are selected for a true color image</span>
+  <span class="s1">&#39;bands&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">],</span>  <span class="c1"># True color visualization</span>
+   <span class="c1"># Defines the range of values to display. Pixel values between 0 and 3000 will be mapped to the color range</span>
+  <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+  <span class="c1"># Adjusts the gamma correction to enhance the visual contrast of the image</span>
+  <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="mf">1.4</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># Add the Sentinel-2 image to the map</span>
+<span class="c1"># Adds the median image layer to the map using the specified visualization parameters.</span>
+<span class="c1"># The layer is labeled &#39;Sentinel-2&#39; in the map&#39;s layer control</span>
+<span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">median_image</span><span class="p">,</span> <span class="n">vis_params</span><span class="p">,</span> <span class="s1">&#39;Sentinel-2&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add the AOI to the map</span>
+<span class="c1"># Adds the area of interest (AOI) as a layer on the map. </span>
+<span class="c1"># The AOI layer is labeled &#39;AOI&#39; in the map&#39;s layer control</span>
+<span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">aoi</span><span class="p">,</span> <span class="p">{},</span> <span class="s1">&#39;AOI&#39;</span><span class="p">)</span>
+
+<span class="c1"># Display the map</span>
+<span class="c1"># Adds a layer control to the map, allowing users to toggle the visibility of different layers.</span>
+<span class="n">Map</span><span class="o">.</span><span class="n">addLayerControl</span><span class="p">()</span>  <span class="c1"># Add layer control to toggle layers on/off</span>
+
+<span class="c1"># Displays the map with the added layers and controls.</span>
+<span class="n">Map</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <style>
+                .geemap-dark {
+                    --jp-widgets-color: white;
+                    --jp-widgets-label-color: white;
+                    --jp-ui-font-color1: white;
+                    --jp-layout-color2: #454545;
+                    background-color: #383838;
+                }
+
+                .geemap-dark .jupyter-button {
+                    --jp-layout-color3: #383838;
+                }
+
+                .geemap-colab {
+                    background-color: var(--colab-primary-surface-color, white);
+                }
+
+                .geemap-colab .jupyter-button {
+                    --jp-layout-color3: var(--colab-primary-surface-color, white);
+                }
+            </style>
+            </div><script type="application/vnd.jupyter.widget-view+json">{"model_id": "1210fa17ae4b487d8c368c0687908a1b", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+</section>
+<section id="define-and-calcuate-indices-for-each-image">
+<h4>3.2.3 Define and calcuate indices for each image<a class="headerlink" href="#define-and-calcuate-indices-for-each-image" title="Link to this heading">#</a></h4>
+<p>Let us define functions that we can use to calcuate NDCI, turbidity and WVI. We use the equations with the bands shown above.</p>
+<p>Then we can use the <code class="docutils literal notranslate"><span class="pre">map</span></code> method to apply specified functions to each image in the sentinel2 image collection.Each function (<code class="docutils literal notranslate"><span class="pre">calculateNDCI</span></code>, <code class="docutils literal notranslate"><span class="pre">calculateTurbidity</span></code>, <code class="docutils literal notranslate"><span class="pre">calculateWVI</span></code>) calculates a specific index for an image and adds that index as a new band to the image. The result is a new image collection called <code class="docutils literal notranslate"><span class="pre">processed_images</span></code> where each image now contains additional bands for NDCI, Turbidity, and WVI. By processing each image to include these additional bands, we prepare the dataset for further analysis and visualization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define indices calculation functions</span>
+<span class="k">def</span> <span class="nf">calculate_indices</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="n">ndci</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B5&#39;</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;NDCI&#39;</span><span class="p">)</span>
+    <span class="n">turbidity</span> <span class="o">=</span> <span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;B3&#39;</span><span class="p">)</span>  <span class="c1"># Select band B3</span>
+                <span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;B1&#39;</span><span class="p">))</span>  <span class="c1"># Divide B3 by B1</span>
+                <span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mf">8.93</span><span class="p">)</span>          <span class="c1"># Multiply the result by 8.93</span>
+                <span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="mf">6.39</span><span class="p">)</span>        <span class="c1"># Subtract 6.39 from the result</span>
+                <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;Turbidity&#39;</span><span class="p">)</span>         <span class="c1"># Rename the resulting band to &#39;Turbidity</span>
+                <span class="p">)</span>
+    <span class="n">ndvi</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B8&#39;</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;NDVI&#39;</span><span class="p">)</span>
+    <span class="n">mndwi</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B11&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;MNDWI&#39;</span><span class="p">)</span>
+    <span class="n">wvi</span> <span class="o">=</span> <span class="n">ndvi</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">mndwi</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;WVI&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">image</span><span class="o">.</span><span class="n">addBands</span><span class="p">([</span><span class="n">ndci</span><span class="p">,</span> <span class="n">turbidity</span><span class="p">,</span> <span class="n">wvi</span><span class="p">])</span>
+
+<span class="c1"># Apply the calculation functions</span>
+<span class="n">processed_images</span> <span class="o">=</span> <span class="n">sentinel2</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">calculate_indices</span><span class="p">)</span>
+
+<span class="c1"># Print the bands of the first image to verify</span>
+<span class="c1"># Get the first image from the processed collection</span>
+<span class="c1"># Get the band names of the first image</span>
+<span class="n">first_image_bands</span> <span class="o">=</span> <span class="n">processed_images</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">bandNames</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bands in the first processed image:&#39;</span><span class="p">,</span> <span class="n">first_image_bands</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <style>
+                .geemap-dark {
+                    --jp-widgets-color: white;
+                    --jp-widgets-label-color: white;
+                    --jp-ui-font-color1: white;
+                    --jp-layout-color2: #454545;
+                    background-color: #383838;
+                }
+
+                .geemap-dark .jupyter-button {
+                    --jp-layout-color3: #383838;
+                }
+
+                .geemap-colab {
+                    background-color: var(--colab-primary-surface-color, white);
+                }
+
+                .geemap-colab .jupyter-button {
+                    --jp-layout-color3: var(--colab-primary-surface-color, white);
+                }
+            </style>
+            </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bands in the first processed image: [&#39;B1&#39;, &#39;B2&#39;, &#39;B3&#39;, &#39;B4&#39;, &#39;B5&#39;, &#39;B6&#39;, &#39;B7&#39;, &#39;B8&#39;, &#39;B8A&#39;, &#39;B9&#39;, &#39;B10&#39;, &#39;B11&#39;, &#39;B12&#39;, &#39;QA10&#39;, &#39;QA20&#39;, &#39;QA60&#39;, &#39;NDCI&#39;, &#39;Turbidity&#39;, &#39;WVI&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualize-ndci-turbidity-and-wvi">
+<h4>3.3.4 Visualize NDCI, Turbidity, and WVI<a class="headerlink" href="#visualize-ndci-turbidity-and-wvi" title="Link to this heading">#</a></h4>
+<p>Now let us visualize the NDCI, Turbidity, and WVI bands on the map using geemap.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Create a map centered on the AOI</span>
+<span class="c1"># Map = geemap.Map(center=[25.8, -81.3], zoom=8)</span>
+
+<span class="c1"># # Add the NDCI layer to the map</span>
+<span class="c1"># ndci_params = {&#39;min&#39;: -1, &#39;max&#39;: 1, &#39;palette&#39;: [&#39;blue&#39;, &#39;white&#39;, &#39;green&#39;]}</span>
+<span class="c1"># Map.addLayer(processed_images.select(&#39;NDCI&#39;).mean(), ndci_params, &#39;NDCI&#39;)</span>
+
+<span class="c1"># # # Add the Turbidity layer to the map</span>
+<span class="c1"># # turbidity_params = {&#39;min&#39;: 0, &#39;max&#39;: 10, &#39;palette&#39;: [&#39;blue&#39;, &#39;white&#39;, &#39;red&#39;]}</span>
+<span class="c1"># # Map.addLayer(processed_images.select(&#39;Turbidity&#39;).mean(), turbidity_params, &#39;Turbidity&#39;)</span>
+
+<span class="c1"># # # Add the WVI layer to the map</span>
+<span class="c1"># # wvi_params = {&#39;min&#39;: -1, &#39;max&#39;: 1, &#39;palette&#39;: [&#39;blue&#39;, &#39;white&#39;, &#39;green&#39;]}</span>
+<span class="c1"># # Map.addLayer(processed_images.select(&#39;WVI&#39;).mean(), wvi_params, &#39;WVI&#39;)</span>
+
+<span class="c1"># # Display the map</span>
+<span class="c1"># Map</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <style>
+                .geemap-dark {
+                    --jp-widgets-color: white;
+                    --jp-widgets-label-color: white;
+                    --jp-ui-font-color1: white;
+                    --jp-layout-color2: #454545;
+                    background-color: #383838;
+                }
+
+                .geemap-dark .jupyter-button {
+                    --jp-layout-color3: #383838;
+                }
+
+                .geemap-colab {
+                    background-color: var(--colab-primary-surface-color, white);
+                }
+
+                .geemap-colab .jupyter-button {
+                    --jp-layout-color3: var(--colab-primary-surface-color, white);
+                }
+            </style>
+            </div></div>
+</div>
+<p>We now have defined our data and we are ready to do some analysis.</p>
+</section>
+</section>
+<section id="perform-time-series-analysis">
+<h3>3.3 Perform Time Series Analysis<a class="headerlink" href="#perform-time-series-analysis" title="Link to this heading">#</a></h3>
+<p>In this step we define a function to calculate the mean values of specific indices (NDCI, Turbidity, and WVI) over time for each image in the collection and then generate time series data for these indices.</p>
+<section id="calculate-mean-values-over-time">
+<h4>3.3.1 Calculate mean values over time<a class="headerlink" href="#calculate-mean-values-over-time" title="Link to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">calculate_time_series(image_collection,</span> <span class="pre">index_name)</span></code> function takes an image collection and the name of an index (e.g., ‘NDCI’, ‘Turbidity’, ‘WVI’) and returns a time series of mean values for the specified index over time. The nested function <code class="docutils literal notranslate"><span class="pre">reduce_region(image)</span></code> reduces each image in the collection to its mean value over the AOI.</p>
+<div class="admonition alert alert-info" >
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+Sometime the below function will take overever to run. In that case restart kernel and clear all outputs. This will fix the problem.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to calculate mean values over time</span>
+<span class="k">def</span> <span class="nf">calculate_time_series</span><span class="p">(</span><span class="n">image_collection</span><span class="p">,</span> <span class="n">index_name</span><span class="p">):</span>
+    <span class="c1"># Inner function to reduce each image to a mean value over the AOI</span>
+    <span class="k">def</span> <span class="nf">reduce_region</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+        <span class="c1"># Calculate mean value for the specified index over the AOI</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">reduceRegion</span><span class="p">(</span>      <span class="c1"># Computes the mean value of the specified index over the AOI.</span>
+            <span class="n">reducer</span><span class="o">=</span><span class="n">ee</span><span class="o">.</span><span class="n">Reducer</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>   <span class="c1"># Specifies that we want to calculate the mean</span>
+            <span class="n">geometry</span><span class="o">=</span><span class="n">aoi</span><span class="p">,</span>                <span class="c1"># Area of Interest (AOI) over which to calculate the mean</span>
+            <span class="n">scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>                    <span class="c1"># Spatial resolution in meter at which to perform the calculation (e.g. 10 meters)</span>
+            <span class="n">maxPixels</span><span class="o">=</span><span class="mf">1e9</span>                <span class="c1"># Max number of pixels to include in the calculation (large number ensures completeness)</span>
+        <span class="p">)</span>
+
+        <span class="c1">#Converts the result to a feature and adds the date of the image to the feature</span>
+        <span class="k">return</span> <span class="n">ee</span><span class="o">.</span><span class="n">Feature</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">stats</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;YYYY-MM-dd&#39;</span><span class="p">))</span>
+
+    <span class="c1"># Apply the reduce_region function to each image in the collection</span>
+    <span class="c1"># Maps the reduce_region function over the entire image collection, </span>
+    <span class="c1"># resulting in a collection of features with mean index values and dates</span>
+    <span class="n">time_series</span> <span class="o">=</span> <span class="n">image_collection</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">reduce_region</span><span class="p">)</span>
+
+    <span class="c1"># Converts the collection of features to a list of date-index value pairs.</span>
+    <span class="n">time_series_list</span> <span class="o">=</span> <span class="n">time_series</span><span class="o">.</span><span class="n">reduceColumns</span><span class="p">(</span>
+        <span class="n">ee</span><span class="o">.</span><span class="n">Reducer</span><span class="o">.</span><span class="n">toList</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>            <span class="c1">#  Aggregates the results into a list</span>
+        <span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">index_name</span><span class="p">]</span>             <span class="c1"># Specifies the properties to include in the list (date and the specified index).</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getInfo</span><span class="p">()</span>              <span class="c1"># Retrieves the list from the server as a Python object</span>
+
+    <span class="c1"># Return the time series list</span>
+    <span class="k">return</span> <span class="n">time_series_list</span>
+
+<span class="c1"># Calculate time series for each index</span>
+<span class="c1"># apply the calculate_time_series function </span>
+<span class="c1"># to the processed_images collection for each index (NDCI, Turbidity, and WVI)</span>
+<span class="n">ndci_time_series</span> <span class="o">=</span> <span class="n">calculate_time_series</span><span class="p">(</span><span class="n">processed_images</span><span class="p">,</span> <span class="s1">&#39;NDCI&#39;</span><span class="p">)</span>    
+<span class="n">turbidity_time_series</span> <span class="o">=</span> <span class="n">calculate_time_series</span><span class="p">(</span><span class="n">processed_images</span><span class="p">,</span> <span class="s1">&#39;Turbidity&#39;</span><span class="p">)</span> 
+<span class="n">wvi_time_series</span> <span class="o">=</span> <span class="n">calculate_time_series</span><span class="p">(</span><span class="n">processed_images</span><span class="p">,</span> <span class="s1">&#39;WVI&#39;</span><span class="p">)</span>     
+
+<span class="c1"># Convert time series to pandas DataFrame</span>
+<span class="k">def</span> <span class="nf">time_series_to_df</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> <span class="n">index_name</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">index_name</span><span class="p">])</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">df</span>
+<span class="n">ndci_df</span> <span class="o">=</span> <span class="n">time_series_to_df</span><span class="p">(</span><span class="n">ndci_time_series</span><span class="p">,</span> <span class="s1">&#39;NDCI&#39;</span><span class="p">)</span>
+<span class="n">turbidity_df</span> <span class="o">=</span> <span class="n">time_series_to_df</span><span class="p">(</span><span class="n">turbidity_time_series</span><span class="p">,</span> <span class="s1">&#39;Turbidity&#39;</span><span class="p">)</span>
+<span class="n">wvi_df</span> <span class="o">=</span> <span class="n">time_series_to_df</span><span class="p">(</span><span class="n">wvi_time_series</span><span class="p">,</span> <span class="s1">&#39;WVI&#39;</span><span class="p">)</span>
+
+<span class="c1"># Merge dataframes for analysis</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">ndci_df</span><span class="p">,</span> <span class="n">turbidity_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">),</span> <span class="n">wvi_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
+
+<span class="c1"># Save data to CSV</span>
+<span class="n">ndci_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;NDCI_TimeSeries_BigCypress.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">turbidity_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;Turbidity_TimeSeries_BigCypress.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">wvi_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;WVI_TimeSeries_BigCypress.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">merged_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;Merged_TimeSeries_BigCypress.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <style>
+                .geemap-dark {
+                    --jp-widgets-color: white;
+                    --jp-widgets-label-color: white;
+                    --jp-ui-font-color1: white;
+                    --jp-layout-color2: #454545;
+                    background-color: #383838;
+                }
+
+                .geemap-dark .jupyter-button {
+                    --jp-layout-color3: #383838;
+                }
+
+                .geemap-colab {
+                    background-color: var(--colab-primary-surface-color, white);
+                }
+
+                .geemap-colab .jupyter-button {
+                    --jp-layout-color3: var(--colab-primary-surface-color, white);
+                }
+            </style>
+            </div></div>
+</div>
+</section>
+<section id="plot-time-series">
+<h4>3.3.2 Plot time series<a class="headerlink" href="#plot-time-series" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Plot NDCI time series</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ndci_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">ndci_df</span><span class="p">[</span><span class="s1">&#39;NDCI&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;NDCI&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;NDCI&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;NDCI Time Series in Big Cypress AOI&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Plot Turbidity time series</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">turbidity_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">turbidity_df</span><span class="p">[</span><span class="s1">&#39;Turbidity&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Turbidity&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Turbidity&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Turbidity Time Series in Big Cypress AOI&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Plot WVI time series</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wvi_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">wvi_df</span><span class="p">[</span><span class="s1">&#39;WVI&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;WVI&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;WVI&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;WVI Time Series in Big Cypress AOI&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <style>
+                .geemap-dark {
+                    --jp-widgets-color: white;
+                    --jp-widgets-label-color: white;
+                    --jp-ui-font-color1: white;
+                    --jp-layout-color2: #454545;
+                    background-color: #383838;
+                }
+
+                .geemap-dark .jupyter-button {
+                    --jp-layout-color3: #383838;
+                }
+
+                .geemap-colab {
+                    background-color: var(--colab-primary-surface-color, white);
+                }
+
+                .geemap-colab .jupyter-button {
+                    --jp-layout-color3: var(--colab-primary-surface-color, white);
+                }
+            </style>
+            </div><img alt="../../_images/0c97519f8e636ad700341b5e211252b29a6c7ee46856e49f074334bbe1746385.png" src="../../_images/0c97519f8e636ad700341b5e211252b29a6c7ee46856e49f074334bbe1746385.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="statistical-analysis">
+<h3>3.4 Statistical analysis<a class="headerlink" href="#statistical-analysis" title="Link to this heading">#</a></h3>
+<section id="correlation-matrix-and-heatmap">
+<h4>3.41 Correlation matrix and heatmap<a class="headerlink" href="#correlation-matrix-and-heatmap" title="Link to this heading">#</a></h4>
+<p>Correlation matrix and heatmap display correlations between multiple variables, and how variables are related to each other, with darker colors indicating stronger correlations. Let us calculate and plot correlation coefficient to determine linear relationship between indices.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Correlation Analysis</span>
+<span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">merged_df</span><span class="p">[[</span><span class="s1">&#39;NDCI&#39;</span><span class="p">,</span> <span class="s1">&#39;Turbidity&#39;</span><span class="p">,</span> <span class="s1">&#39;WVI&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+
+<span class="c1"># Plotting Correlation Matrix</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Correlation Matrix of NDCI, Turbidity, and WVI&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Print Correlation Matrix</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;heat_map.png&#39;</span><span class="p">)</span>  <span class="c1"># Save the figure</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Correlation Matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">corr_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <style>
+                .geemap-dark {
+                    --jp-widgets-color: white;
+                    --jp-widgets-label-color: white;
+                    --jp-ui-font-color1: white;
+                    --jp-layout-color2: #454545;
+                    background-color: #383838;
+                }
+
+                .geemap-dark .jupyter-button {
+                    --jp-layout-color3: #383838;
+                }
+
+                .geemap-colab {
+                    background-color: var(--colab-primary-surface-color, white);
+                }
+
+                .geemap-colab .jupyter-button {
+                    --jp-layout-color3: var(--colab-primary-surface-color, white);
+                }
+            </style>
+            </div><img alt="../../_images/8f87f47593f85ab79dc6eebddff27f77ab3b68e15701083ee3af85364e92bd08.png" src="../../_images/8f87f47593f85ab79dc6eebddff27f77ab3b68e15701083ee3af85364e92bd08.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation Matrix:
+                NDCI  Turbidity       WVI
+NDCI       1.000000  -0.540212  0.576419
+Turbidity -0.540212   1.000000 -0.920884
+WVI        0.576419  -0.920884  1.000000
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>A heat map would show the strength of correlation between different indices (NDCI, Turbidity, WVI).</p>
+<ul class="simple">
+<li><p>High positive values (closer to 1) indicate a strong positive correlation</p></li>
+<li><p>High negative values (closer to -1) indicate a strong negative correlation.</p></li>
+<li><p>Values near zero suggest no significant correlation.</p></li>
+</ul>
+</section>
+<section id="scatter-plots">
+<h4>3.4.2 Scatter plots<a class="headerlink" href="#scatter-plots" title="Link to this heading">#</a></h4>
+<p>Scatter plots show relationships between two variables to identify patterns and correlations in data, to spot outliers and to understand the strength and direction of relationships between variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scatter Plot Analysis</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">merged_df</span><span class="p">[</span><span class="s1">&#39;NDCI&#39;</span><span class="p">],</span> <span class="n">merged_df</span><span class="p">[</span><span class="s1">&#39;Turbidity&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;NDCI&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Turbidity&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;NDCI vs Turbidity&#39;</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">merged_df</span><span class="p">[</span><span class="s1">&#39;NDCI&#39;</span><span class="p">],</span> <span class="n">merged_df</span><span class="p">[</span><span class="s1">&#39;WVI&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;NDCI&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;WVI&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;NDCI vs WVI&#39;</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">merged_df</span><span class="p">[</span><span class="s1">&#39;Turbidity&#39;</span><span class="p">],</span> <span class="n">merged_df</span><span class="p">[</span><span class="s1">&#39;WVI&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Turbidity&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;WVI&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Turbidity vs WVI&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;Scatter_plot.png&#39;</span><span class="p">)</span>  <span class="c1"># Save the figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <style>
+                .geemap-dark {
+                    --jp-widgets-color: white;
+                    --jp-widgets-label-color: white;
+                    --jp-ui-font-color1: white;
+                    --jp-layout-color2: #454545;
+                    background-color: #383838;
+                }
+
+                .geemap-dark .jupyter-button {
+                    --jp-layout-color3: #383838;
+                }
+
+                .geemap-colab {
+                    background-color: var(--colab-primary-surface-color, white);
+                }
+
+                .geemap-colab .jupyter-button {
+                    --jp-layout-color3: var(--colab-primary-surface-color, white);
+                }
+            </style>
+            </div><img alt="../../_images/84344f7a1d37c349ec2093707c3c2fbbe3916243ab71bc7bb1866825e8d823bc.png" src="../../_images/84344f7a1d37c349ec2093707c3c2fbbe3916243ab71bc7bb1866825e8d823bc.png" />
+</div>
+</div>
+<p><strong>Interpretation:</strong></p>
+<ul class="simple">
+<li><p>As the chlorophyll concentration (indicated by NDCI) increases, turbidity tends to decrease. This does not make sense as higher chlorophyll levels (algae) is generally not associated with clearer water. However, in this specific area this might be possible due to settling of particles. Or this could be a calculation error!</p></li>
+<li><p>Higher values of chlorophyll concentration (NDCI) are associated with higher water vegetation health (WVI). This suggests that areas with more chlorophyll (algae) also have healthier or more abundant water-related vegetation</p></li>
+<li><p>As turbidity increases, the health of water-related vegetation (WVI) decreases. High turbidity, which indicates more suspended particles in the water, might reduce light penetration, adversely affecting aquatic vegetation. Thus, that it makes sense that clearer water conditions (lower turbidity) can lead to healthier water vegetation.</p></li>
+</ul>
+</section>
+<section id="trend-analysis">
+<h4>3.4.3 Trend analysis<a class="headerlink" href="#trend-analysis" title="Link to this heading">#</a></h4>
+<p>We can use trend analysis (seasonal decomposition) to analyze the time series data of three indices: NDCI, Turbidity, and WVI. Seasonal decomposition helps us understand the underlying patterns in the time series data by breaking it down into three components: trend, seasonal, and residual components:</p>
+<ul class="simple">
+<li><p>Trend: The long-term movement in the data.</p></li>
+<li><p>Seasonal: The repeating short-term cycle in the data.</p></li>
+<li><p>Residual: The remaining noise or random fluctuations after removing the trend and seasonal components.</p></li>
+</ul>
+<p>By decomposing the time series for NDCI, Turbidity, and WVI, we can better understand the long-term trends, seasonal patterns, and any residual noise in the data.</p>
+<p>We can use the <code class="docutils literal notranslate"><span class="pre">seasonal_decompose</span></code> function from the statsmodels library to perform this decomposition.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Plotting function to be called as needed</span>
+<span class="k">def</span> <span class="nf">plot_seasonal_decomposition</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">observed</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Observed&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">trend</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Trend&#39;</span><span class="p">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">seasonal</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Seasonal&#39;</span><span class="p">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">resid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residual&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Format x-axis labels to be more readable</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <style>
+                .geemap-dark {
+                    --jp-widgets-color: white;
+                    --jp-widgets-label-color: white;
+                    --jp-ui-font-color1: white;
+                    --jp-layout-color2: #454545;
+                    background-color: #383838;
+                }
+
+                .geemap-dark .jupyter-button {
+                    --jp-layout-color3: #383838;
+                }
+
+                .geemap-colab {
+                    background-color: var(--colab-primary-surface-color, white);
+                }
+
+                .geemap-colab .jupyter-button {
+                    --jp-layout-color3: var(--colab-primary-surface-color, white);
+                }
+            </style>
+            </div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ensure that the &#39;date&#39; column is in datetime format and set it as the index</span>
+<span class="n">merged_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">date</span><span class="p">)</span>
+
+<span class="c1"># Remove or aggregate duplicates by taking the mean for each date</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># Resample the data to a daily frequency and interpolate missing values</span>
+<span class="n">df_resampled</span> <span class="o">=</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">interpolate</span><span class="p">()</span>
+
+<span class="c1"># Set the period for seasonal decomposition (e.g., 365 for yearly seasonality)</span>
+<span class="n">period</span> <span class="o">=</span> <span class="mi">365</span>
+
+<span class="c1"># Decompose and plot the NDCI time series</span>
+<span class="n">result_ndci</span> <span class="o">=</span> <span class="n">seasonal_decompose</span><span class="p">(</span><span class="n">df_resampled</span><span class="p">[</span><span class="s1">&#39;NDCI&#39;</span><span class="p">],</span> <span class="n">model</span><span class="o">=</span><span class="s1">&#39;additive&#39;</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="n">period</span><span class="p">)</span>
+<span class="n">plot_seasonal_decomposition</span><span class="p">(</span><span class="n">result_ndci</span><span class="p">,</span> <span class="s1">&#39;NDCI Seasonal Decomposition&#39;</span><span class="p">,</span> <span class="s1">&#39;NDCI_seasonal_decomposition_custom.png&#39;</span><span class="p">)</span>
+
+<span class="c1"># Decompose and plot the Turbidity time series</span>
+<span class="n">result_turbidity</span> <span class="o">=</span> <span class="n">seasonal_decompose</span><span class="p">(</span><span class="n">df_resampled</span><span class="p">[</span><span class="s1">&#39;Turbidity&#39;</span><span class="p">],</span> <span class="n">model</span><span class="o">=</span><span class="s1">&#39;additive&#39;</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="n">period</span><span class="p">)</span>
+<span class="n">plot_seasonal_decomposition</span><span class="p">(</span><span class="n">result_turbidity</span><span class="p">,</span> <span class="s1">&#39;Turbidity Seasonal Decomposition&#39;</span><span class="p">,</span> <span class="s1">&#39;Turbidity_seasonal_decomposition_custom.png&#39;</span><span class="p">)</span>
+
+<span class="c1"># Decompose and plot the WVI time series</span>
+<span class="n">result_wvi</span> <span class="o">=</span> <span class="n">seasonal_decompose</span><span class="p">(</span><span class="n">df_resampled</span><span class="p">[</span><span class="s1">&#39;WVI&#39;</span><span class="p">],</span> <span class="n">model</span><span class="o">=</span><span class="s1">&#39;additive&#39;</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="n">period</span><span class="p">)</span>
+<span class="n">plot_seasonal_decomposition</span><span class="p">(</span><span class="n">result_wvi</span><span class="p">,</span> <span class="s1">&#39;WVI Seasonal Decomposition&#39;</span><span class="p">,</span> <span class="s1">&#39;WVI_seasonal_decomposition_custom.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <style>
+                .geemap-dark {
+                    --jp-widgets-color: white;
+                    --jp-widgets-label-color: white;
+                    --jp-ui-font-color1: white;
+                    --jp-layout-color2: #454545;
+                    background-color: #383838;
+                }
+
+                .geemap-dark .jupyter-button {
+                    --jp-layout-color3: #383838;
+                }
+
+                .geemap-colab {
+                    background-color: var(--colab-primary-surface-color, white);
+                }
+
+                .geemap-colab .jupyter-button {
+                    --jp-layout-color3: var(--colab-primary-surface-color, white);
+                }
+            </style>
+            </div><img alt="../../_images/78a4e82552cccc11adfc0232e12bff7faf494e2a233841ae3c2236074e01eeca.png" src="../../_images/78a4e82552cccc11adfc0232e12bff7faf494e2a233841ae3c2236074e01eeca.png" />
+<img alt="../../_images/6eb771c683e662de98f8be8212e5b969f4a4f01049092b5f189e4e9aee8808ee.png" src="../../_images/6eb771c683e662de98f8be8212e5b969f4a4f01049092b5f189e4e9aee8808ee.png" />
+<img alt="../../_images/3a665bd354083ef0ef50c9aff1b0169f34d7ec81c5be8f3bc3cf29a563628943.png" src="../../_images/3a665bd354083ef0ef50c9aff1b0169f34d7ec81c5be8f3bc3cf29a563628943.png" />
+</div>
+</div>
+<p><strong>NDCI (Normalized difference chlorophyll index)</strong></p>
+<ul class="simple">
+<li><p>Gradual increase in chlorophyll concentration over time suggest possible increase in algal blooms or vegetation</p></li>
+<li><p>Seasonal patterns in chlorophyll concentration could be due to climatic conditions or human activities</p></li>
+<li><p>Residuals are fairly consistent and centered around zero, indicating that the model has captured most of the variability with the trend and seasonal components</p></li>
+</ul>
+<p><strong>Turbidity</strong></p>
+<ul class="simple">
+<li><p>Gradual reduction in turbidity levels over times suggesting improvements in water clarity or reductions in sediment or pollution levels</p></li>
+<li><p>Periodic fluctuations suggest that turbidity levels are influenced by seasonal factors such as rainfall, runoff, or human activities</p></li>
+<li><p>Residuals are more dispersed than those for NDCI meaning more unexplained variability</p></li>
+</ul>
+<p><strong>WVI (Water vegetation index)</strong></p>
+<ul class="simple">
+<li><p>Increase in water vegetation health and extent over time could be due to environmental changes, conservation efforts, or other factors enhancing vegetation growth. Plants could be stressed due pollution, invasive species, or changes in hydrology. Also, vegetation health indicates the wetland’s capacity to filter pollutants, regulate water flow, and maintain water quality. This can also suggest less over-irrigation leading to waterlogging and nutrient leaching. Climate change can also impact vegetation health by altering precipitation patterns, and temperature. Changes in land use (e.g., urbanization, deforestation, or agricultural expansion) can affect water-related vegetation. Conservation efforts such as wetland restoration projects also has an impact. There can be also stress due to due to pollution such as runoff from agricultural fields containing high levels of nutrients (nitrogen and phosphorus) and pesticides. These are some of the drivers that can be invistigated.</p></li>
+<li><p>Seasonal component shows clear periodic variations mainly due seasonal growth and decay cycles of water vegetation</p></li>
+<li><p>Residuals indicated that the seasonal decomposition model has effectively captured the main patterns in the data</p></li>
+</ul>
+<p><strong>Some key points:</strong></p>
+<ul class="simple">
+<li><p>Increasing trends in both NDCI and WVI suggest a rise in chlorophyll concentration and water vegetation over time. One reason for this is increased nutrient levels leading to more algal growth and vegetation</p></li>
+<li><p>Decreasing trend in turbidity suggests improving water clarity that could be due to some water management practices that we can identify</p></li>
+<li><p>All three indices show strong seasonal patterns, highlighting the influence of seasonal climatic factors. Understanding these patterns can help in planning and managing water resources</p></li>
+<li><p>Residuals for all three indices indicates the decomposition model has successfully captured the primary trends and seasonal variations</p></li>
+</ul>
+</section>
+<section id="regression-analysis">
+<h4>3.4.4 Regression analysis<a class="headerlink" href="#regression-analysis" title="Link to this heading">#</a></h4>
+<p>Ordinary least squares (OLS) regression model assesses the relationship between the dependent variable (WVI) and two independent variables (NDCI and Turbidity).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Regression Analysis</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">merged_df</span><span class="p">[[</span><span class="s1">&#39;NDCI&#39;</span><span class="p">,</span> <span class="s1">&#39;Turbidity&#39;</span><span class="p">]]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># Adding a constant</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">merged_df</span><span class="p">[</span><span class="s1">&#39;WVI&#39;</span><span class="p">]</span>
+
+<span class="c1"># Fit the regression model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <style>
+                .geemap-dark {
+                    --jp-widgets-color: white;
+                    --jp-widgets-label-color: white;
+                    --jp-ui-font-color1: white;
+                    --jp-layout-color2: #454545;
+                    background-color: #383838;
+                }
+
+                .geemap-dark .jupyter-button {
+                    --jp-layout-color3: #383838;
+                }
+
+                .geemap-colab {
+                    background-color: var(--colab-primary-surface-color, white);
+                }
+
+                .geemap-colab .jupyter-button {
+                    --jp-layout-color3: var(--colab-primary-surface-color, white);
+                }
+            </style>
+            </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    WVI   R-squared:                       0.868
+Model:                            OLS   Adj. R-squared:                  0.867
+Method:                 Least Squares   F-statistic:                     1146.
+Date:                Mon, 01 Jul 2024   Prob (F-statistic):          7.39e-154
+Time:                        18:58:07   Log-Likelihood:                 759.22
+No. Observations:                 351   AIC:                            -1512.
+Df Residuals:                     348   BIC:                            -1501.
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.3390      0.005     63.265      0.000       0.328       0.350
+NDCI           0.2882      0.048      5.992      0.000       0.194       0.383
+Turbidity     -0.1209      0.003    -36.613      0.000      -0.127      -0.114
+==============================================================================
+Omnibus:                        7.932   Durbin-Watson:                   1.622
+Prob(Omnibus):                  0.019   Jarque-Bera (JB):                8.311
+Skew:                          -0.288   Prob(JB):                       0.0157
+Kurtosis:                       3.487   Cond. No.                         34.3
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Key Statistics and interpretation</p>
+<ul class="simple">
+<li><p>Adj R-squared 0.868 indicates that 86.7% of the variability in WVI can be explained by the model. Note that adjusted R-squared accounts for the number of predictors in the model.</p></li>
+<li><p>The p-value associated with the F-statistic (7.39e-154) indicats the model is highly significant (p &lt; 0.05). Both NDCI and Turbidity are significant predictors of WVI. NDCI has a positive relationship, while Turbidity has a negative relationship with WVI. The model fit is strong, and the predictors are statistically significant, making the model useful for understanding the relationships between these indices.</p></li>
+<li><p>Durbin-Watson: 1.622 for the presence of autocorrelation in the residuals, which is close to 2, suggesting no autocorrelation. However, the Prob(Omnibus) with p-value 0.019 suggests that the residuals are not perfectly normal (p &lt; 0.05).
+We see here the same story that we saw above. The regression model shows that WVI is significantly influenced by both NDCI and Turbidity. An increase in NDCI leads to an increase in WVI, suggesting healthier water-related vegetation with higher chlorophyll levels. Conversely, an increase in Turbidity leads to a decrease in WVI, indicating that higher turbidity negatively impacts water-related vegetation health.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This code is generated by ChatGPT4o.</span>
+<span class="c1"># Scatter plots with regression lines</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># NDCI vs WVI</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;NDCI&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;WVI&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">merged_df</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">})</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;NDCI vs WVI with Regression Line&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;NDCI&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;WVI&#39;</span><span class="p">)</span>
+
+<span class="c1"># Turbidity vs WVI</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Turbidity&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;WVI&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">merged_df</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">})</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Turbidity vs WVI with Regression Line&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Turbidity&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;WVI&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Residuals Plot</span>
+<span class="n">residuals</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">resid</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lowess</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Fitted Values&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Residuals&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Residuals vs Fitted Values&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Coefficient Plot</span>
+<span class="n">coefficients</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">params</span>
+<span class="n">conf</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">conf_int</span><span class="p">()</span>
+<span class="n">conf</span><span class="p">[</span><span class="s1">&#39;Coefficient&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coefficients</span>
+<span class="n">conf</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Lower Bound&#39;</span><span class="p">,</span> <span class="s1">&#39;Upper Bound&#39;</span><span class="p">,</span> <span class="s1">&#39;Coefficient&#39;</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">conf</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Coefficient&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">conf</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">conf</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;Coefficient&#39;</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="p">[</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;Coefficient&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">conf</span><span class="p">[</span><span class="s1">&#39;Lower Bound&#39;</span><span class="p">],</span> <span class="n">conf</span><span class="p">[</span><span class="s1">&#39;Upper Bound&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">conf</span><span class="p">[</span><span class="s1">&#39;Coefficient&#39;</span><span class="p">]],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Variables&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Coefficient&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Coefficient Plot with 95% Confidence Intervals&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add Adj. R-squared annotation</span>
+<span class="n">adj_r_squared</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">rsquared_adj</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Adj. R-squared: </span><span class="si">{</span><span class="n">adj_r_squared</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">),</span> 
+             <span class="n">xycoords</span><span class="o">=</span><span class="s1">&#39;axes fraction&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <style>
+                .geemap-dark {
+                    --jp-widgets-color: white;
+                    --jp-widgets-label-color: white;
+                    --jp-ui-font-color1: white;
+                    --jp-layout-color2: #454545;
+                    background-color: #383838;
+                }
+
+                .geemap-dark .jupyter-button {
+                    --jp-layout-color3: #383838;
+                }
+
+                .geemap-colab {
+                    background-color: var(--colab-primary-surface-color, white);
+                }
+
+                .geemap-colab .jupyter-button {
+                    --jp-layout-color3: var(--colab-primary-surface-color, white);
+                }
+            </style>
+            </div><img alt="../../_images/d6e7d34c58a40b34ae417aa3abe56c3c8ea5926d2a4f999b77b2c0b960dcb809.png" src="../../_images/d6e7d34c58a40b34ae417aa3abe56c3c8ea5926d2a4f999b77b2c0b960dcb809.png" />
+<img alt="../../_images/85fd525cffc49f2367b1a1856a640bb59b68ce9cdcd6d0ff7260b1694b7e26ab.png" src="../../_images/85fd525cffc49f2367b1a1856a640bb59b68ce9cdcd6d0ff7260b1694b7e26ab.png" />
+<img alt="../../_images/c3e387ff6fc9dc74845221dec70b6bcf2c9c6bd048d09c35f4d017800cd67a56.png" src="../../_images/c3e387ff6fc9dc74845221dec70b6bcf2c9c6bd048d09c35f4d017800cd67a56.png" />
+</div>
+</div>
+<p>The coef. plot visually confirms the statistical significance and direction of the relationships between the predictors (NDCI and Turbidity) and the response variable (WVI) supporting the conclusions drawn from the regression summary.</p>
+<ul class="simple">
+<li><p>NDCI has a positive coefficient, meaning that higher NDCI values (indicative of higher chlorophyll concentration) are associated with higher WVI (better water vegetation health)</p></li>
+<li><p>Turbidity has a negative coefficient, indicating that higher turbidity levels (cloudier water) are associated with lower WVI (worse water vegetation health)</p></li>
+<li><p>Narrow confidence intervals, especially for the intercept and Turbidity, suggest that the estimates are precise and reliable</p></li>
+</ul>
+</section>
+</section>
+<section id="resources">
+<h3>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://geemap.org/">Geemap Documentation</a> for extensive examples and tutorials at the YouTube channel that will help you to learn geemap, GEE, and machine learning of GEE for <a class="reference external" href="https://youtu.be/k9MEy2awVJQ?si=4anPnBaC2W12d4dn">unsupervised classification</a> and <a class="reference external" href="https://youtu.be/qWaEfgWi21o?si=G3LyluK3DUtIPw8w">supervised classification</a> and codes at <a class="reference external" href="https://github.com/gee-community/geemap">Geemap GitHub Repository</a></p></li>
+<li><p><a class="reference external" href="https://developers.google.com/earth-engine/tutorials/community/intro-to-python-api">Earth Engine Python API Documentation</a> for detailed documentation and examples</p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/&#64;googleearth/playlists">Google Earth Engine YouTube Channel</a> for tutorials on various GEE functionalities and applications.</p></li>
+<li><p>AI coding assistants (e.g. ChatGPT), <a class="reference external" href="https://groups.google.com/g/google-earth-engine-developers/about">Google Earth Engine Developers Community</a>, and <a class="reference external" href="https://stackoverflow.com/questions/tagged/google-earth-engine">Stack Overflow</a> to get help with specific issues.</p></li>
+<li><p><a class="reference external" href="https://projectpythia.org/resource-gallery.html">Resource gallery of projectpythia</a> for additional resources</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters\10. Intro to Google Earth Engine"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Using Google Earth Engine in a Jupyter Notebook</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">1. Environment Setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">2. Import Libraries</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">3. Exercise</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#select-an-area-of-interest-in-big-cypress-florida">3.1 Select an area of interest in Big Cypress, Florida</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-and-process-sentinel-2-data">3.2 Import and process Sentinel-2 data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#import-sentinel-2-data">3.2.1 Import Sentinel-2 data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#view-sentinel-2-data">3.2.2 View Sentinel-2 data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#define-and-calcuate-indices-for-each-image">3.2.3 Define and calcuate indices for each image</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-ndci-turbidity-and-wvi">3.3.4 Visualize NDCI, Turbidity, and WVI</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-time-series-analysis">3.3 Perform Time Series Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-mean-values-over-time">3.3.1 Calculate mean values over time</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-time-series">3.3.2 Plot time series</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-analysis">3.4 Statistical analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-matrix-and-heatmap">3.41 Correlation matrix and heatmap</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plots">3.4.2 Scatter plots</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-analysis">3.4.3 Trend analysis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-analysis">3.4.4 Regression analysis</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed Elshall & Thalia Valle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
