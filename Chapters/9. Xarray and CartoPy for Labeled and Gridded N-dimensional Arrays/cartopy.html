@@ -1,0 +1,1970 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lesson 28: CartoPy Basics &#8212; Environmental Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays/cartopy';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Exercise 9 Xarray and CartoPy: Sea-surface height and red tides" href="Exercise9.html" />
+    <link rel="prev" title="Lessons 25-26 : Xarray Basics" href="xarray.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Environmental Data Science - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Environmental Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    EGN 4930 / EGN 5932C Special Topic: Environmental Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0. Good Coding Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP1_VariableName.html">GCP1 - Selecting “good” variable names</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP2_DescribingCode.html">Describing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP3_ReadableCode.html">Readable Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP4_WritingScripts.html">Writing Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.0.%20Good%20Coding%20Practices/GCP5_Assertions.html">Assertions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Lesson2.html">Lesson 2 Getting Started</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science%20with%20Python/Excercise1.html">Exercise 1 - Installing Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson3_PythonBasics1.html">Lesson 3 - Python Basics 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson4_list_solution.html">Lesson 4 - Python Basics 2 - Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson5_formatting.html">Lesson 5 - Python Basics 3 - Formatting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson6_Loops.html">Lesson 6 - Loops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson7_conditional_statements.html">Lesson 7 - Conditional Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson8_functions.html">Lesson 8 - Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson9_modules.html">Lesson 9 - Script Files and Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Exercise3.html">Exercise 3 - Python Programming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Artificial intelligence (AI) Coding Assistance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/OpenAI_API_Key_for_Jupyter_AI_Extension.html">OpenAI API key for Jupyter AI extension (Optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/AIcoding.html">Lesson 15 AI coding assistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5.%20Artificial%20intelligence%20%28AI%29%20Coding%20Assistance/Exercise_5_API_Key_Module.html">Exercise 5 - API-Key Module (Optional)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Data Science Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Workflow.html">Lessons 16 - Data Science Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Exercise6.html">Exercise 6 - AQI Data Preparation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. NumPy for Scientific Computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/numpy.html">Lessons 18-19 - NumPy Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing%20%207.%20NumPy%20for%20Scientific%20Computing/exercise7.html">Exercise 7 - NumPy - Air quality data analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8. Matplotlib for Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/matplotlib.html">Lesson 20 - 21 - Matplotlib Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization%20%208.%20Matplotlib%20for%20Visualization/exercise8.html">Exercise 8 Matplotlib - Air quality data visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="climate.html">Lesson 24 - Climate Data - CMIP6 and Remote Sensing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xarray.html">Lesson 25-27 - Xarray basics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lesson 28 - CartoPy basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise9.html">Exercise 9 - Sea surface height and red tides (Optional, Advanced)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">10. Introduction to Google Earth Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.0-%20Intro%20to%20GEE.html">Lesson 30 - Intro to Google Earth Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.1-%20JavaScript%20API%20vs.%20Python%20API.html">Lesson 31 - JavaScript API vs. Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html">Lesson 32 - Using Google Earth Engine in a Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Intro%20to%20Google%20Earth%20Engine/geemap1.html">Exercise 10 -  GeeMap, GEE, and Sentinel-2 Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">11. ML</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../11.%20ML/MachineLearning.html">Machine Learning</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Chapters/9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays/cartopy.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapters/9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays/cartopy.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays/cartopy.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lesson 28: CartoPy Basics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-and-import">Installation and import</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-concepts">1. Basic concepts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extend-matplotlib-s-axes-into-georeferenced-geoaxes">1.1 Extend Matplotlib’s <code class="docutils literal notranslate"><span class="pre">axes</span></code> into georeferenced <code class="docutils literal notranslate"><span class="pre">GeoAxes</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-map-with-a-specified-projection">1.2 Create a map with a specified projection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-cartographic-features-to-the-map">1.3 Add cartographic features to the map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-a-background-image">1.4 Add a background image</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cartopy-s-map-projections">1.5 Cartopy’s map projections</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-regional-maps">2. Create regional maps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cartopy-s-set-extent-method">2.1 Cartopy’s <code class="docutils literal notranslate"><span class="pre">set_extent</span></code> method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-features-from-natural-earth-datasets">2.2 Adding features from Natural Earth Datasets</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#add-some-predefined-features">2.2.1 Add some predefined features</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#add-shapefiles-from-natural-earth">2.2.2 Add shapefiles from Natural Earth</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-user-defined-features">2.3 plot user-defined features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-2d-raster-data">2.4 Plot 2d raster data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-and-georeferencing-an-image-to-a-map">2.5 Adding and georeferencing an image to a map</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-figure-with-multiple-subplots">3. A figure with multiple subplots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-a-figure">4. Saving a figure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-and-references">Resources and References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <img src=https://scitools.org.uk/cartopy/docs/v0.16/_images/sphx_glr_logo_001.png width=400 /><section class="tex2jax_ignore mathjax_ignore" id="lesson-28-cartopy-basics">
+<h1>Lesson 28: CartoPy Basics<a class="headerlink" href="#lesson-28-cartopy-basics" title="Link to this heading">#</a></h1>
+<p>This lesson is modified from <a class="reference external" href="https://foundations.projectpythia.org/core/cartopy/cartopy.html">Introduction to Cartopy</a> by <a class="reference external" href="https://projectpythia.org">Project Pythia</a>, and <a class="reference external" href="https://rabernat.github.io/research_computing_2018/maps-with-cartopy.html">Maps with CartoPy</a> by <a class="reference external" href="https://rabernat.github.io/research_computing_2018/">Research Computing in Earth Science</a></p>
+<p><a class="reference external" href="https://mybinder.org/v2/gh/aselshall/eds/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>CartoPy is a Python library that provides cartographic tools for creating maps and visualizing geospatial data with Matplotlib. By then end of this lesson you will be able to</p>
+<ol class="arabic simple">
+<li><p>Explain core Cartopy concepts such as map projections and <code class="docutils literal notranslate"><span class="pre">GeoAxes</span></code></p></li>
+<li><p>. Creating regional maps with raster data (where each cell contains a single value) or vector data (represting geographic features as points, lines, and polygons)</p></li>
+<li><p>Create a map figure with multiple subplots</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="installation-and-import">
+<h2>Installation and import<a class="headerlink" href="#installation-and-import" title="Link to this heading">#</a></h2>
+<p>We import the main libraries of Cartopy: Coordinate Reference Systems (crs) and Feature.</p>
+<ul class="simple">
+<li><p>CRS defines how coordinates are projected onto a flat surface.</p></li>
+<li><p>Features in Cartopy represent elements such as coastlines, borders, and rivers that can be added to maps for better visualization and context.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pip install cartopy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cartopy</span> <span class="kn">import</span> <span class="n">crs</span> <span class="k">as</span> <span class="n">ccrs</span>
+<span class="kn">from</span> <span class="nn">cartopy</span> <span class="kn">import</span> <span class="n">feature</span> <span class="k">as</span> <span class="n">cfeature</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+
+<span class="c1">#  Suppress warnings issued by Cartopy when downloading data files</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="basic-concepts">
+<h2>1. Basic concepts<a class="headerlink" href="#basic-concepts" title="Link to this heading">#</a></h2>
+<p>Python integratez with libraries and tools for data analysis, visualization, and machine learning. This allows you to create end-to-end workflows. An important step in the workflow is map plotting.</p>
+<section id="extend-matplotlib-s-axes-into-georeferenced-geoaxes">
+<h3>1.1 Extend Matplotlib’s <code class="docutils literal notranslate"><span class="pre">axes</span></code> into georeferenced <code class="docutils literal notranslate"><span class="pre">GeoAxes</span></code><a class="headerlink" href="#extend-matplotlib-s-axes-into-georeferenced-geoaxes" title="Link to this heading">#</a></h3>
+<p>In previous tutorials, we learned that a <em>figure</em> in Matplotlib consists of a <code class="docutils literal notranslate"><span class="pre">Figure</span></code> object and a list of one or more <code class="docutils literal notranslate"><span class="pre">Axes</span></code> objects (subplots). By importing <code class="docutils literal notranslate"><span class="pre">cartopy.crs</span></code>, we gain access to Cartopy’s <em>Coordinate Reference System</em>, which offers various geographical projections. Specifying one of these projections for an <code class="docutils literal notranslate"><span class="pre">Axes</span></code> object transforms it into a <code class="docutils literal notranslate"><span class="pre">GeoAxes</span></code> object, effectively <em>georeferencing</em> the subplot.</p>
+</section>
+<section id="create-a-map-with-a-specified-projection">
+<h3>1.2 Create a map with a specified projection<a class="headerlink" href="#create-a-map-with-a-specified-projection" title="Link to this heading">#</a></h3>
+<p>Here, we will generate a <code class="docutils literal notranslate"><span class="pre">GeoAxes</span></code> object with the <code class="docutils literal notranslate"><span class="pre">PlateCarree</span></code> projection. The <code class="docutils literal notranslate"><span class="pre">PlateCarree</span></code> projection is a global lat-lon map projection where each point is evenly spaced in terms of degrees. The term “Plate Carré” is French for “flat square.”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a figure with a specified size</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">))</span>
+
+<span class="c1"># Add a subplot with PlateCarree projection</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=-</span><span class="mi">75</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;A Geo-referenced subplot, Plate Carree projection&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;A Geo-referenced subplot, Plate Carree projection&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/833bf1defed9f7ebd4171c5f26e50ec60e988002de3e6d63b9c1862ffc867038.png" src="../../_images/833bf1defed9f7ebd4171c5f26e50ec60e988002de3e6d63b9c1862ffc867038.png" />
+</div>
+</div>
+<p>Although the figure seems empty, it has been georeferenced using a map projection using Cartopy’s <code class="docutils literal notranslate"><span class="pre">crs</span></code> (coordinate reference system) class. We can now add in cartographic features to our subplot in the form of <em>shapefiles</em>. One such cartographic feature is coastlines, which can be added to our subplot using the callable <code class="docutils literal notranslate"><span class="pre">GeoAxes</span></code> method simply called <code class="docutils literal notranslate"><span class="pre">coastlines</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Method 1 for pre-defined features of Natural Earht datasets</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;110m&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5aedf22f3267d8c9766dbdecb9a792f77397852cff74cd58c3d16aa00a487184.png" src="../../_images/5aedf22f3267d8c9766dbdecb9a792f77397852cff74cd58c3d16aa00a487184.png" />
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Info</p>
+    To get the figure to display again with the features that we've added since the original display, just type the name of the Figure object in its own cell.
+</div></section>
+<section id="add-cartographic-features-to-the-map">
+<h3>1.3 Add cartographic features to the map<a class="headerlink" href="#add-cartographic-features-to-the-map" title="Link to this heading">#</a></h3>
+<p>Cartopy provides other cartographic features via its <code class="docutils literal notranslate"><span class="pre">features</span></code> class, which was imported at the beginning of this page, under the name <code class="docutils literal notranslate"><span class="pre">cfeature</span></code>. These cartographic features are represented as data stored in shapefiles. When these cartographic features are called for the first time in a script or notebook, the shapefiles are downloaded from <a class="reference external" href="https://www.naturalearthdata.com/features/">Natural Earth Data</a>. A list of the different Natural Earth shapefiles can be accessed from <a class="reference external" href="https://scitools.org.uk/cartopy/docs/latest/matplotlib/feature_interface.html">CartoPy documentation</a> including a list of CartoPy pre-defined features (e.g. <code class="docutils literal notranslate"><span class="pre">.BORDERS</span></code> and <code class="docutils literal notranslate"><span class="pre">.STATES</span></code>).</p>
+<p>To incorporate these features into our subplot, we can utilize the <code class="docutils literal notranslate"><span class="pre">add_feature</span></code> method, which permits the specification of attributes (e.g., line style) through arguments (e.g. <code class="docutils literal notranslate"><span class="pre">linestyle=dashed</span></code>), similar to Matplotlib’s <code class="docutils literal notranslate"><span class="pre">plot</span></code> method.</p>
+<p>Let us include borders and U.S. state lines in our subplot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adding borders and states to the plot</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">STATES</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;brown&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/3d8304b8234c0a2985fbf9657afb0d2f3ee386458c1dcf295c6c1cd749548450.png" src="../../_images/3d8304b8234c0a2985fbf9657afb0d2f3ee386458c1dcf295c6c1cd749548450.png" />
+</div>
+</div>
+<p>In the above example, we used predefined features like <code class="docutils literal notranslate"><span class="pre">cfeature.BORDERS</span></code>, but we can use any Natural Earth dataset by creating a CartoPy instance with <code class="docutils literal notranslate"><span class="pre">cfeature.NaturalEarthFeature()</span></code> as explained further below.</p>
+</section>
+<section id="add-a-background-image">
+<h3>1.4 Add a background image<a class="headerlink" href="#add-a-background-image" title="Link to this heading">#</a></h3>
+<p>CartoPy has only one pre-created background image that you can use with <code class="docutils literal notranslate"><span class="pre">.stock_img</span></code> method. You can add other background images such as <a class="reference external" href="http://earthpy.org/cartopy_backgroung.html">etopo toppgraphy or NASA Blue marble</a> using background_img() method. In addition to background images, you can use <code class="docutils literal notranslate"><span class="pre">ax.imshow()</span></code> in CartoPy to display any image on your map as detailed below.</p>
+<p>Let us add the pre-created background image <code class="docutils literal notranslate"><span class="pre">stock_img</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Add the only pre-created background image in CartoPy</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
+
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/3bc539c6aead04dc368f6a77c0f25b616f67330067419bc1dd6513fb53ffee9d.png" src="../../_images/3bc539c6aead04dc368f6a77c0f25b616f67330067419bc1dd6513fb53ffee9d.png" />
+</div>
+</div>
+</section>
+<section id="cartopy-s-map-projections">
+<h3>1.5 Cartopy’s map projections<a class="headerlink" href="#cartopy-s-map-projections" title="Link to this heading">#</a></h3>
+<p>The <a class="reference external" href="https://scitools.org.uk/cartopy/docs/latest/reference/crs.html">crs class</a> of CartoPy offers a <a class="reference external" href="https://scitools.org.uk/cartopy/docs/latest/reference/projections.html">variety of map projections</a> for visualizing geospatial data such as</p>
+<ol class="arabic simple">
+<li><p><strong>Plate Carree</strong> that represents the globe as a rectangular grid with equal spacing in all directions, and thus exaggerates the spatial extent of regions closer to the poles.</p></li>
+<li><p><strong>Mercator</strong>, which is a cylindrical map projection that preserves straight lines, making it useful for navigation purposes.</p></li>
+<li><p><strong>Robinson</strong> that balances distortions in size and shape, suitable for world maps.</p></li>
+<li><p><strong>Orthographic</strong>, a perspective projection where the globe is projected onto a tangent plane, creating a realistic view of the Earth.</p></li>
+<li><p><strong>Mollweide</strong>, an equal-area projection that distorts shape and direction while preserving area, making it ideal for thematic maps and often used with global satellite mosaics</p></li>
+</ol>
+<p>In the Plate Carree (Equirectangular) projection, the meridians (lines of longitude) and parallels (lines of latitude) are straight and intersect at right angles similar to Mecator. This characteristic contributes to the simplicity of the Plate Carree projection, as the grid lines form a regular rectangular grid on the map. However. the distortion increases as you move towards the poles, making the higher latitudes appear larger than they actually are.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">projections</span> <span class="o">=</span> <span class="p">[</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
+               <span class="n">ccrs</span><span class="o">.</span><span class="n">Mercator</span><span class="p">(),</span>
+               <span class="n">ccrs</span><span class="o">.</span><span class="n">Robinson</span><span class="p">(),</span>
+               <span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(),</span>
+               <span class="n">ccrs</span><span class="o">.</span><span class="n">Mollweide</span><span class="p">(),</span>
+              <span class="p">]</span>
+
+<span class="k">for</span> <span class="n">proj</span> <span class="ow">in</span> <span class="n">projections</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">);</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">proj</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6f699f83b7d2e1ed7a1d298554e00b9545728683950560dc5ec8e3b74edf1433.png" src="../../_images/6f699f83b7d2e1ed7a1d298554e00b9545728683950560dc5ec8e3b74edf1433.png" />
+<img alt="../../_images/e5851ca776ab4624ae95a9e2ba3564f8f9872c229312e61cb5d6e9a6c4cef538.png" src="../../_images/e5851ca776ab4624ae95a9e2ba3564f8f9872c229312e61cb5d6e9a6c4cef538.png" />
+<img alt="../../_images/cae733e01ee10f7920eeeb1ef036950debf3073bf27e737f84df62690e3b1310.png" src="../../_images/cae733e01ee10f7920eeeb1ef036950debf3073bf27e737f84df62690e3b1310.png" />
+<img alt="../../_images/628a2a05e0bdb05bb482bfc5c139c981e778597c9b70ae2c5fa555836b2d7f41.png" src="../../_images/628a2a05e0bdb05bb482bfc5c139c981e778597c9b70ae2c5fa555836b2d7f41.png" />
+<img alt="../../_images/28fd677d88cfca321eb79e128fb3860ec2a19b18f212ad3870e49bdbbbe1b169.png" src="../../_images/28fd677d88cfca321eb79e128fb3860ec2a19b18f212ad3870e49bdbbbe1b169.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="create-regional-maps">
+<h2>2. Create regional maps<a class="headerlink" href="#create-regional-maps" title="Link to this heading">#</a></h2>
+<p>For this example, let us plot a map for the Gulf of Mexico. We will :</p>
+<ol class="arabic simple">
+<li><p>set extend to the Gulf of Mexico lat and lon coordinates</p></li>
+<li><p>add features such as coastlines, boarder, states, land, rivers, ocean, and bathymetry</p></li>
+<li><p>plot features such as markers for major cities, a track line, and study area boundaries</p></li>
+<li><p>plot 2d raster data such as sea surface height (zos)</p></li>
+<li><p>Add and georeference an image to our map</p></li>
+</ol>
+<p>Let us do this part by part.</p>
+<section id="cartopy-s-set-extent-method">
+<h3>2.1 Cartopy’s <code class="docutils literal notranslate"><span class="pre">set_extent</span></code> method<a class="headerlink" href="#cartopy-s-set-extent-method" title="Link to this heading">#</a></h3>
+<p>Using Plate Carree projection, we will use Cartopy’s <code class="docutils literal notranslate"><span class="pre">set_extent</span></code> method to restrict the map coverage to a Florida view.</p>
+<p>Here we set the domain, which defines the geographical region to be plotted that is used in the <code class="docutils literal notranslate"><span class="pre">set_extent</span></code> call. Since these coordinates are expressed in degrees, they correspond to a PlateCarree projection.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Select plot extend: Lon_West, Lon_East, Lat_South, Lat_North in Degrees</span>
+<span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">75</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">31</span><span class="p">]</span> 
+<span class="n">cLon</span> <span class="o">=</span> <span class="p">(</span><span class="n">extent</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">extent</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">cLat</span> <span class="o">=</span> <span class="p">(</span><span class="n">extent</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">extent</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="c1">#Select projection</span>
+<span class="n">projPC</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="image.png" src="Chapters/9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays/attachment:867ab6d9-37c7-4922-b1a7-9b7dd422a2ff.png" /></p>
+<p>Source:<a class="reference external" href="https://www.satsig.net/lat_long.htm">https://www.satsig.net/lat_long.htm</a></p>
+<p>Let us do this regional plot including plotting the latitude and longitude lines, and adding a title.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create figure and axes</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">projPC</span><span class="p">)</span>
+
+<span class="c1"># Setting the extent of the plot</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">(</span><span class="n">extent</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">projPC</span><span class="p">)</span>
+
+<span class="c1"># Add plot title and gridlines</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Plate Carree&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">(</span><span class="n">draw_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;cartopy.mpl.gridliner.Gridliner at 0x1916988a910&gt;
+</pre></div>
+</div>
+<img alt="../../_images/cb51f5739fcd473dee10ed0aea2d88c653518df6258b44a42774aed7ffc2e556.png" src="../../_images/cb51f5739fcd473dee10ed0aea2d88c653518df6258b44a42774aed7ffc2e556.png" />
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Info</p>
+     The call to the <code>subplot</code> method use PateCarree projection, the calls to <code>set_extent</code> use PlateCarree. This ensures that the values we passed into <code>set_extent</code> will be transformed from degrees into the values appropriate for the projection we use for the map. Here it makes no difference since the map projection is also PateCarree.
+</div></section>
+<section id="adding-features-from-natural-earth-datasets">
+<h3>2.2 Adding features from Natural Earth Datasets<a class="headerlink" href="#adding-features-from-natural-earth-datasets" title="Link to this heading">#</a></h3>
+<p>In CartoPy, you can add features from Natural Earth datasets to a map in various ways.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># Method 1 for Cartopy pre-defined features of Natural Earht datasets</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="o">.</span><span class="n">with_scale</span><span class="p">(</span><span class="s1">&#39;10m&#39;</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span><span class="err">`</span><span class="p">,</span>
+
+<span class="c1"># Method 2 beyond Cartopy pre-defined features of Natural Earht datasets</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">NaturalEarthFeature</span><span class="p">(</span>
+    <span class="n">category</span><span class="o">=</span><span class="s1">&#39;physical&#39;</span><span class="p">,</span> 
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;coastline&#39;</span><span class="p">,</span> 
+    <span class="n">scale</span><span class="o">=</span><span class="s1">&#39;10m&#39;</span><span class="p">,</span> 
+    <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> 
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The first method is suitable for <a class="reference external" href="https://scitools.org.uk/cartopy/docs/latest/matplotlib/feature_interface.html">CartoPy’s pre-defined features</a> including BORDERS, COASTLINE, LAKES, LAND, OCEAN, RIVERS, and STATES, while the second method allows you to incorporate additional shapefiles from Natural Earth beyond the pre-defined features. When using pre-defined features, you can specify resolutions of ‘10m’, ‘50m’, or ‘110m. For custom Natural Earth features, ensure to verify the available resolutions for the feature you intend to add by referring to the <a class="reference external" href="https://www.naturalearthdata.com/features/">Natural Earth features website</a>.</p>
+<section id="add-some-predefined-features">
+<h4>2.2.1 Add some predefined features<a class="headerlink" href="#add-some-predefined-features" title="Link to this heading">#</a></h4>
+<p>For illustration, let us use the first method to add some pre-defined features such as boarders, land, rivers, and lakes.  Some cartographical features are predefined as constants in the <code class="docutils literal notranslate"><span class="pre">cartopy.feature</span></code> package. The resolution of these features depends on the amount of geographical area in your map, specified by <code class="docutils literal notranslate"><span class="pre">set_extent</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set background color to water color</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COLORS</span><span class="p">[</span><span class="s1">&#39;water&#39;</span><span class="p">])</span>
+
+<span class="c1"># Add Land with zorder=0 meaning that feature order will be backward</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="o">.</span><span class="n">with_scale</span><span class="p">(</span><span class="s1">&#39;10m&#39;</span><span class="p">),</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> 
+
+<span class="c1"># Add Coastlines, and Lakes above Land features</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAKES</span><span class="o">.</span><span class="n">with_scale</span><span class="p">(</span><span class="s1">&#39;10m&#39;</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;aqua&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span> 
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="o">.</span><span class="n">with_scale</span><span class="p">(</span><span class="s1">&#39;10m&#39;</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span> 
+
+<span class="c1"># Add Boarders feature on the top</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> 
+               <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">22</span><span class="p">)</span> 
+
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2d058b633e389c4fb413aa92bd5f4e6c633ee17b6238f97519e5a100470e247e.png" src="../../_images/2d058b633e389c4fb413aa92bd5f4e6c633ee17b6238f97519e5a100470e247e.png" />
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note:</p>
+    For high-resolution Natural Earth shapefiles such as this, while we could add Cartopy's <code>OCEAN</code> feature, it currently takes <i>much longer</i> to render on the plot. Instead, we take the strategy of first setting the facecolor of the entire subplot to match that of water bodies in Cartopy. When we then layer on the <code>LAND</code> feature, pixels that are not part of the <code>LAND</code> shapefile remain in the background as <code>water</code> facecolor, which is the same color as the <code>OCEAN</code>.
+</div><p>By setting different <code class="docutils literal notranslate"><span class="pre">zorder</span></code> values for different map features, you control their drawing order on the plot canvas. Features with higher <code class="docutils literal notranslate"><span class="pre">zorder</span></code> values are drawn on top of those with lower values. The above code adds land features and sets the <code class="docutils literal notranslate"><span class="pre">zorder</span></code> to 20, meaning that these land features will be drawn below features with higher <code class="docutils literal notranslate"><span class="pre">zorder</span></code> values such as lakes and coastlines with <code class="docutils literal notranslate"><span class="pre">zorder</span></code> of 21  to ensure that lakes and coastlines are  drawn above land features. The code adds borders to the plot with <code class="docutils literal notranslate"><span class="pre">zorder</span></code> of 22, placing the borders on top of all other features. We will later assign <code class="docutils literal notranslate"><span class="pre">zorder</span></code> values of 10 to 19 to ocean features to ensure that they drawn below land featurs.</p>
+</section>
+<section id="add-shapefiles-from-natural-earth">
+<h4>2.2.2 Add shapefiles from Natural Earth<a class="headerlink" href="#add-shapefiles-from-natural-earth" title="Link to this heading">#</a></h4>
+<p>Instead of using pre-defined features, here we will use <a class="reference external" href="https://www.naturalearthdata.com/features/">shapefiles from Natural Earth</a>. This requires much more code than previous examples. We first need to create new objects associated shapefiles using the <code class="docutils literal notranslate"><span class="pre">NaturalEarthFeature</span></code> method, which is part of the Cartopy <code class="docutils literal notranslate"><span class="pre">feature</span></code> class. Then we can use <code class="docutils literal notranslate"><span class="pre">add_feature</span></code> to add the new objects to our new map.</p>
+<p>The general syntax is</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">NaturalEarthFeature</span><span class="p">(</span>
+    <span class="n">category</span><span class="o">=</span><span class="s1">&#39;physical&#39;</span><span class="p">,</span> 
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;coastline&#39;</span><span class="p">,</span> 
+    <span class="n">scale</span><span class="o">=</span><span class="s1">&#39;10m&#39;</span><span class="p">,</span> 
+    <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> 
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">category</span></code>can be:</p>
+<ul class="simple">
+<li><p>‘physical’ with <code class="docutils literal notranslate"><span class="pre">name</span></code> such as ‘coastline’, ‘land’, ‘rivers_lake_centerlines’, etc.</p></li>
+<li><p>‘cultural’ with <code class="docutils literal notranslate"><span class="pre">name</span></code> such as ‘state’, ‘urban polygons’, <code class="docutils literal notranslate"><span class="pre">admin_1_states_provinces</span></code>, etc.</p></li>
+</ul>
+<p>and  the scale can be <code class="docutils literal notranslate"><span class="pre">10</span></code>, <code class="docutils literal notranslate"><span class="pre">50</span></code>, or <code class="docutils literal notranslate"><span class="pre">110</span></code>.</p>
+<p>To find the feature <code class="docutils literal notranslate"><span class="pre">category</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span></code>:</p>
+<ul class="simple">
+<li><p>select the feature that you want from <a class="reference external" href="https://www.naturalearthdata.com/features/">Natural Earth Data</a></p></li>
+<li><p>and obtain the <code class="docutils literal notranslate"><span class="pre">category</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span></code> from the feature download link.</p></li>
+</ul>
+<p>For example, for rivers in North America, the download link is:</p>
+<blockquote>
+<div><p><a class="reference internal" href="#http//www.naturalearthdata.com/download/10m/physical/ne_10m_rivers_north_america.zip"><span class="xref myst">http//www.naturalearthdata.com/download/10m/physical/ne_10m_rivers_north_america.zip</span></a></p>
+</div></blockquote>
+<p>Accordingly, we can set <code class="docutils literal notranslate"><span class="pre">category='physical'</span></code>,  <code class="docutils literal notranslate"><span class="pre">name='rivers_north_america'</span></code>, and <code class="docutils literal notranslate"><span class="pre">scale='10m'</span></code>, and so on.</p>
+<p>Let us add rivers and supplementary North America rivers. In addition, let us add few bathymetry lines using a loop.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add rivers</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">NaturalEarthFeature</span><span class="p">(</span>
+    <span class="s1">&#39;physical&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;rivers_lake_centerlines&#39;</span><span class="p">,</span>
+    <span class="n">scale</span><span class="o">=</span><span class="s1">&#39;10m&#39;</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+    <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+               <span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
+
+<span class="c1"># Add additional for North America</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">NaturalEarthFeature</span><span class="p">(</span>
+    <span class="s1">&#39;physical&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;rivers_north_america&#39;</span><span class="p">,</span>
+    <span class="n">scale</span><span class="o">=</span><span class="s1">&#39;10m&#39;</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+    <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>
+               <span class="n">zorder</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
+
+<span class="c1"># Plot 6 bathymetry lines using a loop</span>
+<span class="c1"># Names of bathymetry line </span>
+<span class="n">bathymetry_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bathymetry_L_0&#39;</span><span class="p">,</span> <span class="s1">&#39;bathymetry_K_200&#39;</span><span class="p">,</span> 
+                    <span class="s1">&#39;bathymetry_J_1000&#39;</span><span class="p">,</span> <span class="s1">&#39;bathymetry_I_2000&#39;</span><span class="p">,</span> 
+                    <span class="s1">&#39;bathymetry_H_3000&#39;</span><span class="p">,</span> <span class="s1">&#39;bathymetry_G_4000&#39;</span><span class="p">]</span> 
+
+<span class="c1"># Very light blue to light blue generated by ChatGPT 3.5 Turbo</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> 
+          <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> 
+          <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">]</span>  
+
+<span class="c1"># Loop to plot each bathymetry line</span>
+<span class="k">for</span> <span class="n">bathymetry_name</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bathymetry_names</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span>
+        <span class="n">cfeature</span><span class="o">.</span><span class="n">NaturalEarthFeature</span><span class="p">(</span>
+            <span class="n">category</span><span class="o">=</span><span class="s1">&#39;physical&#39;</span><span class="p">,</span> 
+            <span class="n">name</span><span class="o">=</span><span class="n">bathymetry_name</span><span class="p">,</span> 
+            <span class="n">scale</span><span class="o">=</span><span class="s1">&#39;10m&#39;</span><span class="p">,</span> 
+            <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> 
+            <span class="n">facecolor</span><span class="o">=</span><span class="n">color</span><span class="p">),</span> 
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">11</span><span class="p">)</span>
+
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/cdfef9debd94df1c4615a56b5402e83ffcb7eac7472e9145b6b127f016c0e19a.png" src="../../_images/cdfef9debd94df1c4615a56b5402e83ffcb7eac7472e9145b6b127f016c0e19a.png" />
+</div>
+</div>
+<div class="admonition alert alert-warning">
+    <p class="admonition-title" style="font-weight:bold">Warning</p>
+    Be patient; when plotting a small geographical area, the high-resolution "10m" shapefiles are used by default.  As a result, these plots take longer to create, especially if the shapefiles are not yet downloaded from Natural Earth.  Similar issues can occur whenever a `GeoAxes` object is transformed from one coordinate system to another. 
+</div></section>
+</section>
+<section id="plot-user-defined-features">
+<h3>2.3 plot user-defined features<a class="headerlink" href="#plot-user-defined-features" title="Link to this heading">#</a></h3>
+<p>Let us as study area boundaries, a track line, and markers for major cities.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot site area on GeoAxes given lon and lat coordinates</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mf">85.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">85.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">26.5</span><span class="p">,</span> <span class="mf">28.0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>  
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mf">85.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">82.85</span><span class="p">],</span> <span class="p">[</span><span class="mf">28.0</span><span class="p">,</span> <span class="mf">28.0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mf">85.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">81.9</span><span class="p">],</span> <span class="p">[</span><span class="mf">26.5</span><span class="p">,</span> <span class="mf">26.5</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+
+
+<span class="c1"># Plot Track 026 line on GeoAxex and annotate with text using axes cooridnates</span>
+<span class="c1"># Deinfe start and end points of the line</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">85.7940</span><span class="p">,</span> <span class="mf">28.4487</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">83.6190</span><span class="p">,</span> <span class="mf">23.8411</span><span class="p">]])</span> 
+
+<span class="c1"># Plot the line</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># Annotate the line</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span>  <span class="c1"># Coordinates are in axes coordinate rather than data coordinates  </span>
+        <span class="s1">&#39;Track 026&#39;</span><span class="p">,</span>  <span class="c1"># Specify text content</span>
+        <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>  <span class="c1"># Set coordinate system for coordinates, which is the coordinate system of the axes itself </span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>  <span class="c1"># Set color of the text</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>  <span class="c1"># Set font size of the text</span>
+        <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>  <span class="c1"># Set horizontal alignment of the text</span>
+        <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>  <span class="c1"># Set vertical alignment of the text</span>
+        <span class="n">rotation</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="c1"># Rotate text</span>
+        <span class="n">zorder</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>  <span class="c1"># Plot order of the feature</span>
+       <span class="p">)</span>
+
+<span class="c1"># Add names and locations of major cities</span>
+<span class="c1"># Define markers for each location as a dictionary</span>
+<span class="n">locations_coordinates</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Tampa&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">27.9506</span><span class="p">,</span> <span class="o">-</span><span class="mf">82.4572</span><span class="p">],</span>
+    <span class="s2">&quot;Sarasota&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">27.3364</span><span class="p">,</span> <span class="o">-</span><span class="mf">82.5307</span><span class="p">],</span>
+    <span class="s2">&quot;Fort Myers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">26.6406</span><span class="p">,</span> <span class="o">-</span><span class="mf">81.8723</span><span class="p">],</span>
+    <span class="s2">&quot;Naples&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">26.142</span><span class="p">,</span> <span class="o">-</span><span class="mf">81.7948</span><span class="p">]}</span>
+
+<span class="c1"># Use a loop to add markers and text labels slightly away from each other for each location </span>
+<span class="k">for</span> <span class="n">location</span><span class="p">,</span> <span class="n">coordinates</span> <span class="ow">in</span> <span class="n">locations_coordinates</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="c1">#Plot marker</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>  <span class="c1"># lon coordinate of locatin in Degrees</span>
+            <span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>  <span class="c1"># lat coordinate of locatin in Degrees</span>
+            <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span>  <span class="c1"># Set coordinate system for coordinates, which is Plate Carree</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>      <span class="c1"># Marker style for the plot</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>     <span class="c1"># Color of the markers</span>
+            <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>    <span class="c1"># Size of the markers   </span>
+            <span class="n">zorder</span> <span class="o">=</span> <span class="mi">22</span><span class="p">,</span>  <span class="c1"># Plot order of the feature</span>
+           <span class="p">)</span>
+    <span class="c1">#Annote each city</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span>   <span class="c1"># lon coordinate of locatin in Degrees (slightly adjusted away from marker)</span>
+            <span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span>   <span class="c1"># lat coordinate of locatin in Degrees (slightly adjusted away from marker)</span>
+            <span class="n">location</span><span class="p">,</span>               <span class="c1"># Text to display (city name)</span>
+            <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span>   <span class="c1"># Specify coordinate system for coordinates, which is Plate Carree</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>           <span class="c1"># Color of the text</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>              <span class="c1"># Font size of the text</span>
+            <span class="n">zorder</span> <span class="o">=</span> <span class="mi">22</span><span class="p">,</span>  <span class="c1"># Plot order of the feature</span>
+           <span class="p">)</span>
+
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a7f0b2f9223ee1cf987352ddfd1296313e00e6dd6ebb6c1c6a75fefcc53bd304.png" src="../../_images/a7f0b2f9223ee1cf987352ddfd1296313e00e6dd6ebb6c1c6a75fefcc53bd304.png" />
+</div>
+</div>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note:</p>
+    The transform=ax.transAxes parameter is used to specify the coordinate system of the provided coordinates.  In this case, <code>ax.transAxes</code> refers to the coordinate system of the axes itself. When you use <code>ax.transAxes</code>, the coordinates (0,0) correspond to the lower left corner of the axes and (1,1) correspond to the upper right corner of the axes, regardless of the data limits or scales within the plot. By specifying <code>transform=ax.transAxes</code>, you are indicating that the coordinates (0.6, 0.6) are relative to the size of the axes, ensuring that the text 'Track 026' is positioned at 60% of the width and 60% of the height of the axes, regardless of the data being plotted.
+</div></section>
+<section id="plot-2d-raster-data">
+<h3>2.4 Plot 2d raster data<a class="headerlink" href="#plot-2d-raster-data" title="Link to this heading">#</a></h3>
+<p>Plotting data on a Cartesian grid is like using the PlateCarree projection, where meridians and parallels are straight lines with constant spacing. We can plot our raster data as a contour map. Similar to what we did before, we use the <code class="docutils literal notranslate"><span class="pre">transform</span></code> keyword argument in the contour-plotting method to specify the current projection of our raster data, which will be transformed into the projection of our <code class="docutils literal notranslate"><span class="pre">subplot</span></code> method. In this particular case, we do not need to use use the <code class="docutils literal notranslate"><span class="pre">transform</span></code> keyword since the project of our raster data is Plate Carree, which is the same as our subplot projection.</p>
+<p>We can read raster data from a NetCDF file using <code class="docutils literal notranslate"><span class="pre">xr.open_dataset()</span></code>, or generate our data. Let us generate some data that we can add to our figure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create coordinates for the four labels</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2024-01-03&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Generating a time range for the data</span>
+<span class="n">depths</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>  <span class="c1"># List of depth values</span>
+<span class="n">latitudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">24.5</span><span class="p">,</span><span class="mf">30.5</span><span class="p">,</span><span class="mi">80</span><span class="p">)</span>  <span class="c1"># latitude values (y-values)</span>
+<span class="n">longitudes</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">87</span><span class="p">,</span><span class="o">-</span><span class="mi">77</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>  <span class="c1"># longitude values (x-values)</span>
+
+<span class="c1"># Create a 4D Numpy Array representing values  for a 2x3x4x5 grid</span>
+<span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">depths</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">latitudes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">longitudes</span><span class="p">))</span>
+<span class="n">zos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span> <span class="n">size</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">#sea surface height [m]</span>
+<span class="n">tos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">#sea surface temperature [C]</span>
+<span class="n">sos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">#sea surface salinty (PSU) </span>
+                 
+<span class="c1"># Create a DataArray with zos values</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">({</span><span class="s1">&#39;zos&#39;</span><span class="p">:</span> <span class="p">((</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">),</span> <span class="n">zos</span><span class="p">),</span>
+                <span class="s1">&#39;tos&#39;</span><span class="p">:</span> <span class="p">((</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">),</span> <span class="n">tos</span><span class="p">),</span>
+                <span class="s1">&#39;sos&#39;</span><span class="p">:</span> <span class="p">((</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">),</span> <span class="n">sos</span><span class="p">),},</span>
+    <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">dates</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">:</span> <span class="n">depths</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="n">latitudes</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="n">longitudes</span><span class="p">})</span>
+
+<span class="c1"># Add metadata to the DataArray</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">zos</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Sea surface height above the geoid (m)&quot;</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">tos</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Sea surface temperature (°C)&quot;</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">sos</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Sea surface salinty (PSU)&quot;</span> 
+
+<span class="c1"># Display ds</span>
+<span class="n">ds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt; Size: 1MB
+Dimensions:  (date: 2, depth: 3, lat: 80, lon: 100)
+Coordinates:
+  * date     (date) datetime64[ns] 16B 2024-01-03 2024-01-04
+  * depth    (depth) int32 12B 10 20 30
+  * lat      (lat) float64 640B 24.5 24.58 24.65 24.73 ... 30.35 30.42 30.5
+  * lon      (lon) float64 800B -87.0 -86.9 -86.8 -86.7 ... -77.2 -77.1 -77.0
+Data variables:
+    zos      (date, depth, lat, lon) float64 384kB -0.98 -0.47 ... -0.17 0.19
+    tos      (date, depth, lat, lon) float64 384kB 27.06 28.06 ... 28.59 28.68
+    sos      (date, depth, lat, lon) float64 384kB 33.5 34.06 ... 33.05 34.76</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-91b6ea91-5efa-4c1f-b42f-1e41c7e134b9' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-91b6ea91-5efa-4c1f-b42f-1e41c7e134b9' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>date</span>: 2</li><li><span class='xr-has-index'>depth</span>: 3</li><li><span class='xr-has-index'>lat</span>: 80</li><li><span class='xr-has-index'>lon</span>: 100</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-80cda31e-c44b-4140-8af1-f07af21db5e3' class='xr-section-summary-in' type='checkbox'  checked><label for='section-80cda31e-c44b-4140-8af1-f07af21db5e3' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>date</span></div><div class='xr-var-dims'>(date)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2024-01-03 2024-01-04</div><input id='attrs-ea515472-b9b3-4d87-a7d5-e270ad8e0dc5' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-ea515472-b9b3-4d87-a7d5-e270ad8e0dc5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-16c85bf3-821e-412f-ac94-a4e4037ab89e' class='xr-var-data-in' type='checkbox'><label for='data-16c85bf3-821e-412f-ac94-a4e4037ab89e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;2024-01-03T00:00:00.000000000&#x27;, &#x27;2024-01-04T00:00:00.000000000&#x27;],
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>depth</span></div><div class='xr-var-dims'>(depth)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>10 20 30</div><input id='attrs-1741b2cb-80be-4b15-9563-7a305212855c' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-1741b2cb-80be-4b15-9563-7a305212855c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0ddc9c9e-5e28-4176-a9f3-f1701e72fe90' class='xr-var-data-in' type='checkbox'><label for='data-0ddc9c9e-5e28-4176-a9f3-f1701e72fe90' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([10, 20, 30])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>lat</span></div><div class='xr-var-dims'>(lat)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>24.5 24.58 24.65 ... 30.42 30.5</div><input id='attrs-df592c4f-6841-44db-a8c6-7a7e9c1fd8d4' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-df592c4f-6841-44db-a8c6-7a7e9c1fd8d4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-eeb078ba-93f4-44ba-ace6-770e157bc0f9' class='xr-var-data-in' type='checkbox'><label for='data-eeb078ba-93f4-44ba-ace6-770e157bc0f9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([24.5     , 24.575949, 24.651899, 24.727848, 24.803797, 24.879747,
+       24.955696, 25.031646, 25.107595, 25.183544, 25.259494, 25.335443,
+       25.411392, 25.487342, 25.563291, 25.639241, 25.71519 , 25.791139,
+       25.867089, 25.943038, 26.018987, 26.094937, 26.170886, 26.246835,
+       26.322785, 26.398734, 26.474684, 26.550633, 26.626582, 26.702532,
+       26.778481, 26.85443 , 26.93038 , 27.006329, 27.082278, 27.158228,
+       27.234177, 27.310127, 27.386076, 27.462025, 27.537975, 27.613924,
+       27.689873, 27.765823, 27.841772, 27.917722, 27.993671, 28.06962 ,
+       28.14557 , 28.221519, 28.297468, 28.373418, 28.449367, 28.525316,
+       28.601266, 28.677215, 28.753165, 28.829114, 28.905063, 28.981013,
+       29.056962, 29.132911, 29.208861, 29.28481 , 29.360759, 29.436709,
+       29.512658, 29.588608, 29.664557, 29.740506, 29.816456, 29.892405,
+       29.968354, 30.044304, 30.120253, 30.196203, 30.272152, 30.348101,
+       30.424051, 30.5     ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>lon</span></div><div class='xr-var-dims'>(lon)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-87.0 -86.9 -86.8 ... -77.1 -77.0</div><input id='attrs-e5226c43-a5ad-4dbd-8a43-889c51b14b13' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-e5226c43-a5ad-4dbd-8a43-889c51b14b13' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-316418ba-30a6-442a-99ae-18d348918e90' class='xr-var-data-in' type='checkbox'><label for='data-316418ba-30a6-442a-99ae-18d348918e90' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-87.      , -86.89899 , -86.79798 , -86.69697 , -86.59596 , -86.494949,
+       -86.393939, -86.292929, -86.191919, -86.090909, -85.989899, -85.888889,
+       -85.787879, -85.686869, -85.585859, -85.484848, -85.383838, -85.282828,
+       -85.181818, -85.080808, -84.979798, -84.878788, -84.777778, -84.676768,
+       -84.575758, -84.474747, -84.373737, -84.272727, -84.171717, -84.070707,
+       -83.969697, -83.868687, -83.767677, -83.666667, -83.565657, -83.464646,
+       -83.363636, -83.262626, -83.161616, -83.060606, -82.959596, -82.858586,
+       -82.757576, -82.656566, -82.555556, -82.454545, -82.353535, -82.252525,
+       -82.151515, -82.050505, -81.949495, -81.848485, -81.747475, -81.646465,
+       -81.545455, -81.444444, -81.343434, -81.242424, -81.141414, -81.040404,
+       -80.939394, -80.838384, -80.737374, -80.636364, -80.535354, -80.434343,
+       -80.333333, -80.232323, -80.131313, -80.030303, -79.929293, -79.828283,
+       -79.727273, -79.626263, -79.525253, -79.424242, -79.323232, -79.222222,
+       -79.121212, -79.020202, -78.919192, -78.818182, -78.717172, -78.616162,
+       -78.515152, -78.414141, -78.313131, -78.212121, -78.111111, -78.010101,
+       -77.909091, -77.808081, -77.707071, -77.606061, -77.505051, -77.40404 ,
+       -77.30303 , -77.20202 , -77.10101 , -77.      ])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-1dc0983e-3530-417f-84f5-d6f15b91badc' class='xr-section-summary-in' type='checkbox'  checked><label for='section-1dc0983e-3530-417f-84f5-d6f15b91badc' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>zos</span></div><div class='xr-var-dims'>(date, depth, lat, lon)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-0.98 -0.47 -0.05 ... -0.17 0.19</div><input id='attrs-ed8aab58-5f71-41c7-adab-775537e756d2' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ed8aab58-5f71-41c7-adab-775537e756d2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8a4a5e31-4a14-47a8-b811-36ab2ce041e4' class='xr-var-data-in' type='checkbox'><label for='data-8a4a5e31-4a14-47a8-b811-36ab2ce041e4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>Description :</span></dt><dd>Sea surface height above the geoid (m)</dd></dl></div><div class='xr-var-data'><pre>array([[[[-0.98, -0.47, -0.05, ...,  0.18,  0.41, -0.97],
+         [-0.32, -0.62, -0.38, ...,  0.41,  0.73,  0.72],
+         [ 0.71,  0.07, -0.16, ..., -0.3 ,  0.67,  0.7 ],
+         ...,
+         [ 0.72, -0.13, -0.1 , ...,  0.24,  0.71,  0.36],
+         [ 0.54,  0.85,  0.26, ..., -0.38, -0.18,  0.9 ],
+         [-0.46, -0.45, -0.1 , ..., -0.35,  0.83, -0.14]],
+
+        [[ 0.28,  0.19,  0.67, ...,  0.13, -0.24,  0.25],
+         [ 0.07, -0.03, -0.24, ..., -0.55, -0.35,  0.59],
+         [-0.88, -0.58, -0.5 , ...,  0.4 ,  0.51,  0.94],
+         ...,
+         [ 0.67,  0.61, -0.77, ...,  0.54, -0.78, -0.87],
+         [ 0.44,  0.65, -0.02, ...,  0.66, -1.  , -0.22],
+         [-0.5 ,  0.95,  0.11, ..., -0.4 , -0.53,  0.99]],
+
+        [[ 0.64,  0.59, -0.49, ..., -0.66, -0.79, -0.93],
+         [ 0.62, -0.39, -0.36, ..., -0.45, -0.89,  0.87],
+         [ 0.47,  0.15,  0.61, ..., -0.11,  0.33,  0.55],
+         ...,
+...
+         ...,
+         [-0.68,  0.32,  0.28, ...,  0.56, -0.32,  0.99],
+         [ 0.94, -0.4 , -0.79, ...,  0.46,  0.18, -0.69],
+         [-0.08,  0.54,  0.93, ..., -0.31, -0.42, -0.28]],
+
+        [[-0.61, -0.83,  0.37, ...,  0.13, -0.73, -1.  ],
+         [-0.69,  0.71, -0.63, ..., -0.34, -0.98, -0.78],
+         [-0.17, -0.51,  0.78, ..., -0.54,  0.6 ,  0.69],
+         ...,
+         [-0.16,  0.75, -0.59, ...,  0.16,  0.74, -0.26],
+         [-0.3 ,  0.19, -0.89, ...,  0.72,  0.05,  0.6 ],
+         [-0.05,  0.81,  0.48, ...,  0.88, -0.65, -0.44]],
+
+        [[-0.25,  0.57,  0.05, ..., -0.89,  0.98, -0.99],
+         [ 0.51,  0.34,  0.24, ..., -0.  ,  0.35, -0.76],
+         [-0.93, -0.71,  0.93, ...,  0.35,  0.76,  0.91],
+         ...,
+         [ 0.23,  0.9 , -0.81, ...,  0.65,  0.88,  0.47],
+         [ 0.17, -0.57,  0.6 , ..., -0.01,  0.52,  0.42],
+         [-0.28,  0.06,  0.36, ..., -0.46, -0.17,  0.19]]]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>tos</span></div><div class='xr-var-dims'>(date, depth, lat, lon)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>27.06 28.06 28.03 ... 28.59 28.68</div><input id='attrs-58dafbb9-de76-48c7-86ee-17bc6294615c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-58dafbb9-de76-48c7-86ee-17bc6294615c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2828d3fb-5643-4dbb-b6b8-811d7d20af59' class='xr-var-data-in' type='checkbox'><label for='data-2828d3fb-5643-4dbb-b6b8-811d7d20af59' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>Description :</span></dt><dd>Sea surface temperature (°C)</dd></dl></div><div class='xr-var-data'><pre>array([[[[27.06, 28.06, 28.03, ..., 27.51, 27.43, 27.84],
+         [28.37, 29.29, 28.31, ..., 28.3 , 28.81, 29.41],
+         [29.54, 27.86, 29.29, ..., 28.46, 26.66, 26.11],
+         ...,
+         [29.15, 28.5 , 27.03, ..., 27.19, 28.73, 27.3 ],
+         [26.24, 26.45, 27.31, ..., 29.04, 27.56, 26.64],
+         [27.14, 26.01, 29.43, ..., 26.12, 28.83, 28.24]],
+
+        [[26.73, 26.36, 28.12, ..., 29.98, 26.38, 26.24],
+         [28.12, 27.14, 27.58, ..., 28.91, 27.17, 28.18],
+         [27.42, 29.16, 26.44, ..., 26.97, 26.8 , 28.49],
+         ...,
+         [28.34, 28.16, 28.5 , ..., 29.6 , 28.34, 27.26],
+         [29.15, 29.38, 27.04, ..., 28.58, 26.1 , 26.32],
+         [29.11, 28.75, 27.56, ..., 27.28, 27.11, 29.94]],
+
+        [[27.83, 26.85, 27.74, ..., 29.16, 26.21, 28.79],
+         [26.15, 28.46, 27.13, ..., 27.04, 28.63, 26.26],
+         [29.49, 27.93, 28.98, ..., 26.81, 27.37, 28.88],
+         ...,
+...
+         ...,
+         [29.82, 29.48, 29.95, ..., 27.13, 28.34, 28.5 ],
+         [27.9 , 29.18, 29.38, ..., 28.93, 29.43, 26.64],
+         [27.48, 28.13, 27.79, ..., 27.21, 27.78, 26.89]],
+
+        [[26.5 , 27.98, 29.67, ..., 28.43, 27.29, 29.84],
+         [26.64, 26.06, 26.45, ..., 28.77, 27.71, 27.11],
+         [27.09, 26.53, 28.19, ..., 27.61, 26.21, 28.42],
+         ...,
+         [29.84, 26.08, 29.18, ..., 28.91, 26.57, 27.37],
+         [26.08, 29.99, 28.96, ..., 27.44, 29.44, 28.59],
+         [26.82, 26.78, 29.79, ..., 27.01, 27.4 , 29.36]],
+
+        [[27.44, 29.1 , 28.  , ..., 28.94, 28.54, 27.31],
+         [26.37, 28.37, 26.45, ..., 28.3 , 28.18, 28.25],
+         [26.05, 27.48, 29.98, ..., 27.72, 28.28, 28.99],
+         ...,
+         [26.32, 29.08, 27.71, ..., 27.58, 27.68, 29.73],
+         [28.56, 26.74, 28.5 , ..., 27.3 , 29.31, 28.15],
+         [28.57, 27.6 , 26.33, ..., 27.29, 28.59, 28.68]]]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>sos</span></div><div class='xr-var-dims'>(date, depth, lat, lon)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>33.5 34.06 33.62 ... 33.05 34.76</div><input id='attrs-eb226a83-6c37-4329-8b41-e539caa90a9f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-eb226a83-6c37-4329-8b41-e539caa90a9f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8aa700de-4dc8-4de3-b796-7fb07ba263dd' class='xr-var-data-in' type='checkbox'><label for='data-8aa700de-4dc8-4de3-b796-7fb07ba263dd' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>Description :</span></dt><dd>Sea surface salinty (PSU)</dd></dl></div><div class='xr-var-data'><pre>array([[[[33.5 , 34.06, 33.62, ..., 34.31, 33.61, 35.05],
+         [34.06, 35.97, 35.31, ..., 35.78, 35.53, 34.16],
+         [34.71, 34.99, 33.72, ..., 33.68, 33.18, 34.17],
+         ...,
+         [33.49, 35.15, 33.29, ..., 34.52, 34.82, 33.37],
+         [34.49, 34.17, 33.43, ..., 34.62, 34.43, 35.64],
+         [34.84, 33.73, 33.87, ..., 35.7 , 33.92, 35.32]],
+
+        [[35.07, 34.63, 35.57, ..., 34.57, 34.92, 33.08],
+         [33.26, 34.98, 34.16, ..., 34.11, 33.98, 34.44],
+         [34.49, 33.05, 34.84, ..., 33.39, 34.64, 36.  ],
+         ...,
+         [33.56, 33.14, 34.47, ..., 35.43, 33.1 , 33.4 ],
+         [34.21, 34.94, 33.63, ..., 35.05, 33.1 , 33.19],
+         [35.16, 34.17, 34.71, ..., 35.87, 34.84, 33.35]],
+
+        [[35.67, 33.61, 35.94, ..., 35.23, 33.49, 33.97],
+         [35.9 , 34.18, 34.42, ..., 34.83, 34.68, 35.  ],
+         [34.34, 33.41, 33.43, ..., 35.71, 35.54, 34.97],
+         ...,
+...
+         ...,
+         [34.4 , 35.47, 35.14, ..., 34.78, 33.89, 33.79],
+         [35.92, 34.15, 33.41, ..., 34.06, 33.07, 34.55],
+         [34.08, 34.85, 34.04, ..., 34.15, 34.66, 34.22]],
+
+        [[35.06, 33.96, 34.77, ..., 33.1 , 35.45, 34.25],
+         [34.22, 35.59, 33.1 , ..., 34.47, 33.08, 34.53],
+         [34.96, 34.3 , 35.53, ..., 33.96, 34.35, 35.26],
+         ...,
+         [33.55, 34.34, 34.13, ..., 34.03, 33.01, 33.31],
+         [35.  , 35.25, 33.39, ..., 33.06, 34.1 , 34.59],
+         [33.69, 33.63, 34.74, ..., 35.13, 34.76, 34.7 ]],
+
+        [[33.89, 34.93, 34.29, ..., 33.76, 34.85, 34.99],
+         [34.31, 33.41, 34.36, ..., 34.53, 35.25, 35.46],
+         [33.7 , 35.55, 33.7 , ..., 35.23, 35.13, 33.86],
+         ...,
+         [33.34, 34.89, 34.39, ..., 35.25, 33.36, 35.82],
+         [33.67, 33.17, 34.15, ..., 35.82, 34.27, 33.18],
+         [33.08, 33.05, 34.23, ..., 35.49, 33.05, 34.76]]]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-441f8b90-3288-48bf-9abb-bf346144c312' class='xr-section-summary-in' type='checkbox'  ><label for='section-441f8b90-3288-48bf-9abb-bf346144c312' class='xr-section-summary' >Indexes: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>date</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-59573969-5348-4261-8733-d6cce55765e8' class='xr-index-data-in' type='checkbox'/><label for='index-59573969-5348-4261-8733-d6cce55765e8' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2024-01-03&#x27;, &#x27;2024-01-04&#x27;], dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;date&#x27;, freq=&#x27;D&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>depth</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-3da10137-29a1-461b-9e4e-e94c343f5653' class='xr-index-data-in' type='checkbox'/><label for='index-3da10137-29a1-461b-9e4e-e94c343f5653' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([10, 20, 30], dtype=&#x27;int32&#x27;, name=&#x27;depth&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>lat</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-2074e95a-8727-4a5a-9f08-f613275ff36b' class='xr-index-data-in' type='checkbox'/><label for='index-2074e95a-8727-4a5a-9f08-f613275ff36b' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([              24.5, 24.575949367088608, 24.651898734177216,
+       24.727848101265824, 24.803797468354432, 24.879746835443036,
+       24.955696202531644, 25.031645569620252,  25.10759493670886,
+        25.18354430379747, 25.259493670886076, 25.335443037974684,
+       25.411392405063292,   25.4873417721519, 25.563291139240505,
+       25.639240506329113,  25.71518987341772,  25.79113924050633,
+       25.867088607594937, 25.943037974683545, 26.018987341772153,
+        26.09493670886076,  26.17088607594937, 26.246835443037973,
+        26.32278481012658,  26.39873417721519, 26.474683544303797,
+       26.550632911392405, 26.626582278481013,  26.70253164556962,
+        26.77848101265823, 26.854430379746837, 26.930379746835442,
+        27.00632911392405, 27.082278481012658, 27.158227848101266,
+       27.234177215189874, 27.310126582278482,  27.38607594936709,
+       27.462025316455698, 27.537974683544306,  27.61392405063291,
+       27.689873417721518, 27.765822784810126, 27.841772151898734,
+       27.917721518987342,  27.99367088607595, 28.069620253164558,
+       28.145569620253163, 28.221518987341774,  28.29746835443038,
+       28.373417721518987, 28.449367088607595, 28.525316455696203,
+        28.60126582278481,  28.67721518987342, 28.753164556962027,
+        28.82911392405063, 28.905063291139243, 28.981012658227847,
+       29.056962025316455, 29.132911392405063,  29.20886075949367,
+        29.28481012658228, 29.360759493670887, 29.436708860759495,
+         29.5126582278481,  29.58860759493671, 29.664556962025316,
+       29.740506329113924,  29.81645569620253,  29.89240506329114,
+       29.968354430379748, 30.044303797468356, 30.120253164556964,
+       30.196202531645568,  30.27215189873418, 30.348101265822784,
+       30.424050632911392,               30.5],
+      dtype=&#x27;float64&#x27;, name=&#x27;lat&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>lon</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-7635707e-0067-435b-be2b-2f2f74029018' class='xr-index-data-in' type='checkbox'/><label for='index-7635707e-0067-435b-be2b-2f2f74029018' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([             -87.0,  -86.8989898989899, -86.79797979797979,
+        -86.6969696969697,  -86.5959595959596,  -86.4949494949495,
+       -86.39393939393939, -86.29292929292929,  -86.1919191919192,
+        -86.0909090909091, -85.98989898989899, -85.88888888888889,
+       -85.78787878787878, -85.68686868686869, -85.58585858585859,
+       -85.48484848484848, -85.38383838383838, -85.28282828282828,
+       -85.18181818181819, -85.08080808080808, -84.97979797979798,
+       -84.87878787878788, -84.77777777777777, -84.67676767676768,
+       -84.57575757575758, -84.47474747474747, -84.37373737373737,
+       -84.27272727272727, -84.17171717171718, -84.07070707070707,
+       -83.96969696969697, -83.86868686868686, -83.76767676767676,
+       -83.66666666666667, -83.56565656565657, -83.46464646464646,
+       -83.36363636363636, -83.26262626262626, -83.16161616161617,
+       -83.06060606060606, -82.95959595959596, -82.85858585858585,
+       -82.75757575757575, -82.65656565656566, -82.55555555555556,
+       -82.45454545454545, -82.35353535353535, -82.25252525252526,
+       -82.15151515151516, -82.05050505050505, -81.94949494949495,
+       -81.84848484848484, -81.74747474747474, -81.64646464646465,
+       -81.54545454545455, -81.44444444444444, -81.34343434343434,
+       -81.24242424242425, -81.14141414141415, -81.04040404040404,
+       -80.93939393939394, -80.83838383838383, -80.73737373737374,
+       -80.63636363636364, -80.53535353535354, -80.43434343434343,
+       -80.33333333333333, -80.23232323232324, -80.13131313131314,
+       -80.03030303030303, -79.92929292929293, -79.82828282828282,
+       -79.72727272727273, -79.62626262626263, -79.52525252525253,
+       -79.42424242424242, -79.32323232323232, -79.22222222222223,
+       -79.12121212121212, -79.02020202020202, -78.91919191919192,
+       -78.81818181818181, -78.71717171717172, -78.61616161616162,
+       -78.51515151515152, -78.41414141414141, -78.31313131313131,
+       -78.21212121212122, -78.11111111111111, -78.01010101010101,
+        -77.9090909090909,  -77.8080808080808, -77.70707070707071,
+       -77.60606060606061,  -77.5050505050505,  -77.4040404040404,
+        -77.3030303030303, -77.20202020202021,  -77.1010101010101,
+                    -77.0],
+      dtype=&#x27;float64&#x27;, name=&#x27;lon&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-db9bd844-1872-4eb8-9584-dfc0afa6e223' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-db9bd844-1872-4eb8-9584-dfc0afa6e223' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+</div>
+<p>Let us add a slice of this zos data to our map, add a colorbar for zos, and add a label to the color bar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select the data for the specific time and depth</span>
+<span class="n">data_slice</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">zos</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  
+
+<span class="n">dataplot</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">data_slice</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span>   <span class="c1"># X-coordinates for the contour plot</span>
+                       <span class="n">data_slice</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span>   <span class="c1"># Y-coordinates for the contour plot</span>
+                       <span class="n">data_slice</span><span class="p">,</span>       <span class="c1"># Data values to plot</span>
+                       <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span>  <span class="c1"># Colormap for the plot</span>
+                       <span class="n">zorder</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>         <span class="c1"># Drawing order for the plot above bathymetry and below land and study area</span>
+                       <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>  <span class="c1">#Not needed as both our data and figure are Plate Carree</span>
+                      <span class="p">)</span>
+
+<span class="c1"># Add a colorbar</span>
+<span class="n">colorbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">dataplot</span><span class="p">,</span>  <span class="c1"># Create a colorbar for dataplot data</span>
+                        <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span>  <span class="c1"># Set the orientation of the colorbar to horizontal</span>
+                        <span class="n">pad</span><span class="o">=</span><span class="mf">0.06</span><span class="p">,</span>  <span class="c1"># Set the padding between the colorbar and the plot</span>
+                        <span class="n">shrink</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>  <span class="c1"># Adjust the size of the colorbar to 80% of the default size</span>
+
+<span class="c1"># Add a label to the colorbar with a specified font size</span>
+<span class="n">colorbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">zos</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Description&#39;</span><span class="p">],</span>  <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/3b50d526f7b1cdc00fabddd7f8fbbeec5c9f376008992fa235f02c3cb990da98.png" src="../../_images/3b50d526f7b1cdc00fabddd7f8fbbeec5c9f376008992fa235f02c3cb990da98.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="adding-and-georeferencing-an-image-to-a-map">
+<h3>2.5 Adding and georeferencing an image to a map<a class="headerlink" href="#adding-and-georeferencing-an-image-to-a-map" title="Link to this heading">#</a></h3>
+<p>We can add a satellite image on the map if we know the coordinates of the image edges.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read image </span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;Data/Track026.png&#39;</span><span class="p">)</span>
+<span class="n">img_extent</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">81</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span> <span class="c1">#lon E to W and Lat S to N</span>
+
+<span class="c1"># Add image to map </span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span>              <span class="c1"># Image to plot</span>
+          <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;upper&#39;</span><span class="p">,</span>   <span class="c1"># Origin is upper left corner for png image</span>
+          <span class="n">extent</span><span class="o">=</span><span class="n">img_extent</span><span class="p">,</span> 
+          <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="c1"># Specify coordinate system for image coordinates </span>
+          <span class="n">zorder</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>        <span class="c1"># Drawing order for image is above raster data but below land</span>
+         <span class="p">)</span>
+
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Read image </span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">img</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;Data/Track026.png&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">img_extent</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">81</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span> <span class="c1">#lon E to W and Lat S to N</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Add image to map </span>
+
+<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\matplotlib\pyplot.py:2404,</span> in <span class="ni">imread</span><span class="nt">(fname, format)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2400</span> <span class="nd">@_copy_docstring_and_deprecators</span><span class="p">(</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">imread</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2401</span> <span class="k">def</span> <span class="nf">imread</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2402</span>         <span class="n">fname</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">|</span> <span class="n">BinaryIO</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">2403</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2404</span>     <span class="k">return</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="nb">format</span><span class="p">)</span>
+
+<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\matplotlib\image.py:1525,</span> in <span class="ni">imread</span><span class="nt">(fname, format)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1518</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span><span class="o">.</span><span class="n">scheme</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1519</span>     <span class="c1"># Pillow doesn&#39;t handle URLs directly.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1520</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1521</span>         <span class="s2">&quot;Please open the URL for reading and pass the &quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1522</span>         <span class="s2">&quot;result to Pillow, e.g. with &quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1523</span>         <span class="s2">&quot;``np.array(PIL.Image.open(urllib.request.urlopen(url)))``.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1524</span>         <span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1525</span> <span class="k">with</span> <span class="n">img_open</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="k">as</span> <span class="n">image</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1526</span>     <span class="k">return</span> <span class="p">(</span><span class="n">_pil_png_to_float_array</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1527</span>             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">PIL</span><span class="o">.</span><span class="n">PngImagePlugin</span><span class="o">.</span><span class="n">PngImageFile</span><span class="p">)</span> <span class="k">else</span>
+<span class="g g-Whitespace">   </span><span class="mi">1528</span>             <span class="n">pil_to_array</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
+
+<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\PIL\ImageFile.py:125,</span> in <span class="ni">ImageFile.__init__</span><span class="nt">(self, fp, filename)</span>
+<span class="g g-Whitespace">    </span><span class="mi">121</span> <span class="bp">self</span><span class="o">.</span><span class="n">decodermaxblock</span> <span class="o">=</span> <span class="n">MAXBLOCK</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span> <span class="k">if</span> <span class="n">is_path</span><span class="p">(</span><span class="n">fp</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span>     <span class="c1"># filename</span>
+<span class="ne">--&gt; </span><span class="mi">125</span>     <span class="bp">self</span><span class="o">.</span><span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">126</span>     <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">fp</span>
+<span class="g g-Whitespace">    </span><span class="mi">127</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_exclusive_fp</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;Data/Track026.png&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="a-figure-with-multiple-subplots">
+<h2>3. A figure with multiple subplots<a class="headerlink" href="#a-figure-with-multiple-subplots" title="Link to this heading">#</a></h2>
+<p>Let put everything together and create a figure with three subplots for the three variables and one with an image, using a loop.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1) Select plot extend: Lon_West, Lon_East, Lat_South, Lat_North in Degrees</span>
+<span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">75</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">31</span><span class="p">]</span> 
+<span class="n">cLon</span> <span class="o">=</span> <span class="p">(</span><span class="n">extent</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">extent</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">cLat</span> <span class="o">=</span> <span class="p">(</span><span class="n">extent</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">extent</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="c1"># 2) Select projection</span>
+<span class="n">projPC</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+
+<span class="c1"># 3) Create figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>  <span class="c1"># Adjust the height and width spaces between subplots</span>
+
+<span class="c1"># 4) Loop to plot variables </span>
+<span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;zos&#39;</span><span class="p">,</span><span class="s1">&#39;tos&#39;</span><span class="p">,</span><span class="s1">&#39;sos&#39;</span><span class="p">,</span> <span class="s1">&#39;image&#39;</span><span class="p">]</span>
+<span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;(a) &#39;</span><span class="p">,</span> <span class="s1">&#39;(b)&#39;</span><span class="p">,</span> <span class="s1">&#39;(c)&#39;</span><span class="p">,</span> <span class="s1">&#39;(d)&#39;</span><span class="p">]</span>
+<span class="n">colormaps</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">colormap</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">variables</span><span class="p">,</span> <span class="n">titles</span><span class="p">,</span> <span class="n">colormaps</span><span class="p">)):</span>
+
+    <span class="c1"># 5) Create Axes     </span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">projPC</span><span class="p">)</span>
+    
+    <span class="c1"># 6) Setting the extent of the plot</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">(</span><span class="n">extent</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">projPC</span><span class="p">)</span>
+    
+    <span class="c1"># 7) Add plot title </span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># 8) Add gridlines (we need to cutomize grid lines to improve visualization)                              </span>
+    <span class="n">gl</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">(</span><span class="n">draw_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xlocs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">extent</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">extent</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">5</span><span class="p">),</span> <span class="n">ylocs</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">extent</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">extent</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">5</span><span class="p">),</span>
+                      <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>  <span class="n">zorder</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+    <span class="n">gl</span><span class="o">.</span><span class="n">right_labels</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># </span>
+    <span class="n">gl</span><span class="o">.</span><span class="n">top_labels</span> <span class="o">=</span> <span class="kc">False</span>    <span class="c1"># Set the font size for x-axis labels</span>
+    <span class="n">gl</span><span class="o">.</span><span class="n">xlabel_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>  <span class="c1"># Set the font size for x-axis labels</span>
+    <span class="n">gl</span><span class="o">.</span><span class="n">ylabel_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>  <span class="c1"># Set the font size for y-axis labels</span>
+    
+    <span class="c1"># 9) Adding Natural Earth features</span>
+    <span class="c1">## Pre-defined features</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COLORS</span><span class="p">[</span><span class="s1">&#39;water&#39;</span><span class="p">])</span>  <span class="c1">#Blackgroundwater color for the ocean</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="o">.</span><span class="n">with_scale</span><span class="p">(</span><span class="s1">&#39;10m&#39;</span><span class="p">),</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> 
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAKES</span><span class="o">.</span><span class="n">with_scale</span><span class="p">(</span><span class="s1">&#39;10m&#39;</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;aqua&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span> 
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="o">.</span><span class="n">with_scale</span><span class="p">(</span><span class="s1">&#39;10m&#39;</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span> 
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">22</span><span class="p">)</span> 
+
+    <span class="c1">## General features (not pre-defined)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">NaturalEarthFeature</span><span class="p">(</span>
+        <span class="s1">&#39;physical&#39;</span><span class="p">,</span> <span class="s1">&#39;rivers_lake_centerlines&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s1">&#39;10m&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span> <span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">NaturalEarthFeature</span><span class="p">(</span>
+        <span class="s1">&#39;physical&#39;</span><span class="p">,</span><span class="s1">&#39;rivers_north_america&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s1">&#39;10m&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span><span class="n">zorder</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
+
+    <span class="c1">## Multiple features with a loop</span>
+    <span class="n">bathymetry_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bathymetry_L_0&#39;</span><span class="p">,</span> <span class="s1">&#39;bathymetry_K_200&#39;</span><span class="p">,</span> <span class="s1">&#39;bathymetry_J_1000&#39;</span><span class="p">,</span> 
+                        <span class="s1">&#39;bathymetry_I_2000&#39;</span><span class="p">,</span>  <span class="s1">&#39;bathymetry_H_3000&#39;</span><span class="p">,</span> <span class="s1">&#39;bathymetry_G_4000&#39;</span><span class="p">]</span> 
+    <span class="n">colors</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>  <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>  <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">]</span>  
+    <span class="k">for</span> <span class="n">bathymetry_name</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bathymetry_names</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">NaturalEarthFeature</span><span class="p">(</span>
+            <span class="n">category</span><span class="o">=</span><span class="s1">&#39;physical&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">bathymetry_name</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s1">&#39;10m&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">color</span><span class="p">),</span> <span class="n">zorder</span> <span class="o">=</span> <span class="mi">11</span><span class="p">)</span>
+
+    <span class="c1"># 10) Adding user-defined features </span>
+    <span class="c1">## Plot site area on GeoAxes given lon and lat coordinates in first subplot </span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mf">85.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">85.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">26.5</span><span class="p">,</span> <span class="mf">28.0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>  
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mf">85.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">82.85</span><span class="p">],</span> <span class="p">[</span><span class="mf">28.0</span><span class="p">,</span> <span class="mf">28.0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mf">85.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">81.9</span><span class="p">],</span> <span class="p">[</span><span class="mf">26.5</span><span class="p">,</span> <span class="mf">26.5</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+
+    <span class="c1">## Plot Track 026 line on GeoAxex and annotate with text using axes cooridnates in second subplot</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> 
+        <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">85.7940</span><span class="p">,</span> <span class="mf">28.4487</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">83.6190</span><span class="p">,</span> <span class="mf">23.8411</span><span class="p">]])</span> 
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.58</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="s1">&#39;Track 026&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> 
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>  <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>  <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>  <span class="n">rotation</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+
+    <span class="c1">## Adding names and locations of major cities</span>
+    <span class="n">locations_coordinates</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Tampa&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">27.9506</span><span class="p">,</span> <span class="o">-</span><span class="mf">82.4572</span><span class="p">],</span> 
+                             <span class="c1">#&quot;Sarasota&quot;: [27.3364, -82.5307], </span>
+                             <span class="c1">#&quot;Fort Myers&quot;: [26.6406, -81.8723], </span>
+                             <span class="s2">&quot;Naples&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">26.142</span><span class="p">,</span> <span class="o">-</span><span class="mf">81.7948</span><span class="p">]}</span>
+    <span class="k">for</span> <span class="n">location</span><span class="p">,</span> <span class="n">coordinates</span> <span class="ow">in</span> <span class="n">locations_coordinates</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>  
+                <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span>  <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span> <span class="mi">22</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span> 
+                <span class="n">location</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span> <span class="mi">22</span><span class="p">)</span>
+
+    <span class="c1"># 11) Adding raster data and colorbar for the first three subplots</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span> 
+        <span class="n">data_slice</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  
+        <span class="n">dataplot</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">data_slice</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">data_slice</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">data_slice</span><span class="p">,</span> 
+                               <span class="n">cmap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+        <span class="n">colorbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">dataplot</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  
+        <span class="n">colorbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Description&#39;</span><span class="p">],</span>  <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="c1"># 12) Adding an image for the fourth subplot </span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;Data/Track026.png&#39;</span><span class="p">)</span>
+        <span class="n">img_extent</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">81</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span> <span class="c1">#lon E to W and Lat S to N</span>
+        <span class="n">imgplot</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;upper&#39;</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">img_extent</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+        
+        <span class="c1"># adding invisible colorbar for the layout of the subplots remains aligned visually</span>
+        <span class="c1"># you can also do this by adjusting subplot size or using GridSpec as suggested by ChatGPT 3.5 Turbo</span>
+        <span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">imgplot</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  
+        <span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Creating publication-quality figures with subplots is time-consuming, as it involves balancing automation with attention to detail.  Factors contributing to this include precise layout adjustments, customization of plot elements, ensuring consistency, and handling complex visualizations. This iterative process of refinement is important for achieving a polished final figure. Libraries like Seaborn or Plotly can streamline complex visualization creation with less manual effort.</p>
+</section>
+<section id="saving-a-figure">
+<h2>4. Saving a figure<a class="headerlink" href="#saving-a-figure" title="Link to this heading">#</a></h2>
+<p>CartoPy is built on top of Matplotlib. When saving a figure in Matplotlib, you can specify the format using the <code class="docutils literal notranslate"><span class="pre">savefig()</span></code> function. For example, to save a figure as a PNG file, you can use:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figure.png&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Commonly used image formats in Matplotlib include:</p>
+<ul class="simple">
+<li><p>PNG for sharp edges and solid colors with lossless compression</p></li>
+<li><p>TIFF for high-quality images with lossless compression</p></li>
+<li><p>JPEG for smooth gradients or photographs with small file sizes</p></li>
+<li><p>SVG for scalable plots without quality loss as a vector format</p></li>
+<li><p>PDF for embedding in documents</p></li>
+</ul>
+<p>You can choose the image format based on your specific requirements such as quality, scalability, and intended use of the plot.</p>
+<p>Let’s save our last image with subplots.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Save the figure as an image file</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;output_image.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Cartopy allows for the georeferencing of Matplotlib <code class="docutils literal notranslate"><span class="pre">Axes</span></code> objects.</p></li>
+<li><p>Cartopy’s <code class="docutils literal notranslate"><span class="pre">crs</span></code> class supports a variety of map projections.</p></li>
+<li><p>Cartopy’s <code class="docutils literal notranslate"><span class="pre">feature</span></code> class allows for a variety of cartographic features to be overlaid on a georeferenced plot or subplot.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="resources-and-references">
+<h2>Resources and References<a class="headerlink" href="#resources-and-references" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://scitools.org.uk/cartopy/docs/latest/">Cartopy Documentation</a></p></li>
+<li><p><a class="reference external" href="https://scitools.org.uk/cartopy/docs/latest/reference/crs.html">Full list of projections in Cartopy</a></p></li>
+<li><p><a class="reference external" href="https://rabernat.github.io/research_computing_2018/maps-with-cartopy.html">Maps with Cartopy (Ryan Abernathey)</a></p></li>
+<li><p><a class="reference external" href="https://geocat-examples.readthedocs.io/en/latest/gallery/index.html#map-projections">Map Projections (GeoCAT)</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=ivmd3RluMiw">NCAR xdev Cartopy Tutorial Video</a></p></li>
+<li><p><a class="reference external" href="https://youtu.be/ivmd3RluMiw">Python Tutorial Seminar Series - Cartopy</a></p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters\9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="xarray.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lessons 25-26 : Xarray Basics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Exercise9.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exercise 9 Xarray and CartoPy: Sea-surface height and red tides</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-and-import">Installation and import</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-concepts">1. Basic concepts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extend-matplotlib-s-axes-into-georeferenced-geoaxes">1.1 Extend Matplotlib’s <code class="docutils literal notranslate"><span class="pre">axes</span></code> into georeferenced <code class="docutils literal notranslate"><span class="pre">GeoAxes</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-map-with-a-specified-projection">1.2 Create a map with a specified projection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-cartographic-features-to-the-map">1.3 Add cartographic features to the map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-a-background-image">1.4 Add a background image</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cartopy-s-map-projections">1.5 Cartopy’s map projections</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-regional-maps">2. Create regional maps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cartopy-s-set-extent-method">2.1 Cartopy’s <code class="docutils literal notranslate"><span class="pre">set_extent</span></code> method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-features-from-natural-earth-datasets">2.2 Adding features from Natural Earth Datasets</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#add-some-predefined-features">2.2.1 Add some predefined features</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#add-shapefiles-from-natural-earth">2.2.2 Add shapefiles from Natural Earth</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-user-defined-features">2.3 plot user-defined features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-2d-raster-data">2.4 Plot 2d raster data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-and-georeferencing-an-image-to-a-map">2.5 Adding and georeferencing an image to a map</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-figure-with-multiple-subplots">3. A figure with multiple subplots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-a-figure">4. Saving a figure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-and-references">Resources and References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed Elshall & Thalia Valle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
