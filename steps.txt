@@ -16,6 +16,6 @@ git status  #Change you made
 git add .
 git commit -m "adding ML"
 git pull 
-git push -u 
+git push
 
 
