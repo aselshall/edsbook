@@ -106,7 +106,12 @@ parts:
       - file: Chapters/10. Intro to Google Earth Engine/geemap1.ipynb
         title: Exercise 10 -  GeeMap, GEE, and Sentinel-2 Data
         
-       
+  - caption: "11. ML"
+    chapters:
+      - file: Chapters/11. ML/MachineLearning.ipynb
+        title: Machine Learning
+      
+
       
       
       

@@ -1,40 +1,59 @@
 Traceback (most recent call last):
-  File "C:\Python311\Lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+  File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
     executenb(
-  File "C:\Python311\Lib\site-packages\nbclient\client.py", line 1314, in execute
+  File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\site-packages\nbclient\client.py", line 1305, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Python311\Lib\site-packages\jupyter_core\utils\__init__.py", line 165, in wrapped
+  File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\site-packages\jupyter_core\utils\__init__.py", line 165, in wrapped
     return loop.run_until_complete(inner)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Python311\Lib\asyncio\base_events.py", line 650, in run_until_complete
+  File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\asyncio\base_events.py", line 653, in run_until_complete
     return future.result()
            ^^^^^^^^^^^^^^^
-  File "C:\Python311\Lib\contextlib.py", line 222, in __aexit__
-    await self.gen.athrow(typ, value, traceback)
-  File "C:\Python311\Lib\site-packages\nbclient\client.py", line 654, in async_setup_kernel
-    yield
-  File "C:\Python311\Lib\site-packages\nbclient\client.py", line 709, in async_execute
+  File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\site-packages\nbclient\client.py", line 705, in async_execute
     await self.async_execute_cell(
-  File "C:\Python311\Lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
+  File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\site-packages\nbclient\client.py", line 1058, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "C:\Python311\Lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
+  File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\site-packages\nbclient\client.py", line 914, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import numpy as np
-import pandas as pd
-import matplotlib.pylab as plt
-from scipy import stats
+# Load the array from file
+# Columns: [datetime, 'PM2.5', 'PM10',  'NO2', 'SO2',  'CO', 'O3']
+pre_dates = np.load('data/pre_dates.npy')
+pre_values = np.load('data/pre_values.npy')
+pre_aqi = np.load('data/pre_aqi.npy')
+post_dates = np.load('data/post_dates.npy')
+post_values = np.load('data/post_values.npy')
+post_aqi = np.load('data/post_aqi.npy')
+
+#Display loaded data
+print("pre_dates:", pre_dates.dtype, pre_dates.shape)
+print(pre_dates[0],pre_dates[-1])
+print("pre_values:", pre_values.dtype, pre_values.shape)
+print("pre_aqi:", pre_aqi.dtype, pre_aqi.shape)
+print("post_dates:", post_dates.dtype, pre_dates.shape)
+print(pre_dates[0],post_dates[-1])
+print("post_values:", post_values.dtype, pre_values.shape)
+print("post_aqi:", post_aqi.dtype, pre_aqi.shape)
 ------------------
 
 
 [1;31m---------------------------------------------------------------------------[0m
-[1;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [1;32mIn[1], line 1[0m
-[1;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
-[0;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
-[0;32m      3[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpylab[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[1;31mFileNotFoundError[0m                         Traceback (most recent call last)
+Cell [1;32mIn[2], line 3[0m
+[0;32m      1[0m [38;5;66;03m# Load the array from file[39;00m
+[0;32m      2[0m [38;5;66;03m# Columns: [datetime, 'PM2.5', 'PM10',  'NO2', 'SO2',  'CO', 'O3'][39;00m
+[1;32m----> 3[0m pre_dates [38;5;241m=[39m [43mnp[49m[38;5;241;43m.[39;49m[43mload[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mdata/pre_dates.npy[39;49m[38;5;124;43m'[39;49m[43m)[49m
+[0;32m      4[0m pre_values [38;5;241m=[39m np[38;5;241m.[39mload([38;5;124m'[39m[38;5;124mdata/pre_values.npy[39m[38;5;124m'[39m)
+[0;32m      5[0m pre_aqi [38;5;241m=[39m np[38;5;241m.[39mload([38;5;124m'[39m[38;5;124mdata/pre_aqi.npy[39m[38;5;124m'[39m)
 
-[1;31mModuleNotFoundError[0m: No module named 'numpy'
+File [1;32m~\AppData\Local\miniconda3\Lib\site-packages\numpy\lib\npyio.py:427[0m, in [0;36mload[1;34m(file, mmap_mode, allow_pickle, fix_imports, encoding, max_header_size)[0m
+[0;32m    425[0m     own_fid [38;5;241m=[39m [38;5;28;01mFalse[39;00m
+[0;32m    426[0m [38;5;28;01melse[39;00m:
+[1;32m--> 427[0m     fid [38;5;241m=[39m stack[38;5;241m.[39menter_context([38;5;28;43mopen[39;49m[43m([49m[43mos_fspath[49m[43m([49m[43mfile[49m[43m)[49m[43m,[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mrb[39;49m[38;5;124;43m"[39;49m[43m)[49m)
+[0;32m    428[0m     own_fid [38;5;241m=[39m [38;5;28;01mTrue[39;00m
+[0;32m    430[0m [38;5;66;03m# Code to distinguish from NumPy binary files and pickles.[39;00m
+
+[1;31mFileNotFoundError[0m: [Errno 2] No such file or directory: 'data/pre_dates.npy'
 
