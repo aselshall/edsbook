@@ -33,6 +33,6 @@ html:
 
 launch_buttons:
   binderhub_url: "https://mybinder.org"
-  repository_url: "https://github.com/aselshall/Environmental-Data-Science-Book"
+  repository_url: "https://github.com/aselshall/edsbook"
   branch: main  
 
