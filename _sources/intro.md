@@ -6,7 +6,7 @@ Welcome to the Environmental Data Science Book! This book was created to simplif
 
 ## Course Syllabus
 
-[Link](https://aselshall.github.io/eds): Course syllabus inlucding link to project assignment and past student projects
+Course syllabus inlucding link to project assignment and past student projects: [Link](https://aselshall.github.io/eds)
 
 ## About the Author
 
