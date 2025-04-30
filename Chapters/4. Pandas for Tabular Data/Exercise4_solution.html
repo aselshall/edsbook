@@ -1,0 +1,1334 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Dataset &#8212; Environmental Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/4. Pandas for Tabular Data/Exercise4_solution';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Homework 3" href="HW3.html" />
+    <link rel="prev" title="Lessons 10 - 14 : Pandas Primer" href="Lesson10_pandas_solution.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Environmental Data Science - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Environmental Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    EGN 4930 / EGN 5932C Special Topic: Environmental Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0. Good Coding Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP1_VariableName.html">GCP1 - Selecting “good” variable names</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP2_DescribingCode.html">Describing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP3_ReadableCode.html">Readable Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP4_WritingScripts.html">Writing Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP5_Assertions.html">Assertions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson2.html">Lesson 2 Getting Started</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Excercise1.html">Exercise 1 - Installing Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson3_variables_solution.html">Objectives</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson4_list_solution.html">Objectives</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson5_formatting_solution.html">Objectives</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Exercise2_solution.html">Exercise 2 - Becoming a millionaire</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/HW1.html">Problem 1 - Happiness rating</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson6_Loops_solution.html">Objectives</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson7_conditional_statements_solution.html">Objectives</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson8_functions_solution.html">Objectives</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson9_modules_solution.html">Objectives</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Exercise3_solution.html">Objectives</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/HW2.html">Problem 1 - For-loop and indexing</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 4. Pandas for Tabular Data</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Lesson10_pandas_solution.html">Lessons 10 - 14 - Pandas Primer</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Dataset</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="HW3.html">Homework 3</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. AI Coding Assistance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../5.%20AI%20Coding%20Assistance/JupyterAI.html">OpenAI API key for Jupyter AI extension (Optional)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Data Science Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Workflow.html">Lessons 16 - Data Science Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Exercise6_solution.html">1. Problem definition</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. NumPy for Scientific Computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing/numpy_solution.html">Lessons 18-19 - NumPy Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing/exercise7_solution.html">Exercise 7 - NumPy - Air quality data analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8. Matplotlib for Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization/matplotlib.html">Lesson 20 - 21 - Matplotlib Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization/exercise8_solution.html">Exercise 8 Matplotlib - Air quality data visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization/HW4.html">1. Problem statement</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/climate.html">Lesson 24 - Climate Data - CMIP6 and Remote Sensing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/xarray_solution.html">Lesson 25-27 - Xarray basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/cartopy_solution.html">Lesson 28 - CartoPy basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/Exercise9.html">Exercise 9 - Sea surface height and red tides (Optional, Advanced)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/HW5.html">Install and import libraries</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">10. Google Earth Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/10.0-%20Intro%20to%20GEE.html">Lesson 30 - Intro to Google Earth Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/10.1-%20JavaScript%20API%20vs.%20Python%20API.html">Lesson 31 - JavaScript API vs. Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html">Lesson 32 - Using Google Earth Engine in a Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/geemap1.html">Exercise 10 -  GeeMap and Sentinel-2 Data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Chapters/4. Pandas for Tabular Data/Exercise4_solution.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapters/4. Pandas for Tabular Data/Exercise4_solution.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/4. Pandas for Tabular Data/Exercise4_solution.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Dataset</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Dataset</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#study-areas">Study areas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement">Problem statement</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">1. Import libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-data-from-csv-file">2. Read data from csv file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-to-columns-needed-for-analysis">3. Filter to columns needed for analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assign-region-name-based-on-latitude-and-longitude-values">4. Assign region name based on latitude and longitude values.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-column-with-date-information-as-index">5. Set column with date information as index</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-the-data-for-each-region">6. Select the data for each region</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-data-for-each-region">7. Plot the data for each region</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asking-a-llm-about-adding-a-legend-to-two-pandas-plots">8. Asking a LLM about adding a legend to two pandas plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#you-can-do-some-cutomization-with-pandas-plot">9. You can do some cutomization with Pandas plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#which-region-experienced-more-severe-red-tides-in-the-last-10-years">10. Which region experienced more severe red tides in the last 10 years?</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1 style="color:green; text-align:center;"> Exercise 4 - Pandas </h1> 
+<p><a class="reference external" href="https://mybinder.org/v2/gh/aselshall/eds/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+<section id="dataset">
+<h1>Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h1>
+<p>Red tides are caused by Karenia brevis harmful algae blooms. For Karenia brevis cell count data, you can use the <a class="reference external" href="https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0120767">current dataset</a> of Physical and biological data collected along the Texas, Mississippi, Alabama, and Florida Gulf coasts in the Gulf of Mexico as part of the Harmful Algal BloomS Observing System from 1953-08-19 to 2023-07-06 (NCEI Accession 0120767). For direct data download, you can use this <a class="reference external" href="https://www.nodc.noaa.gov/archive/arc0069/0120767/7.7/data/0-data/habsos_20230714.csv">data link</a> and this <a class="reference external" href="https://www.nodc.noaa.gov/archive/arc0069/0120767/7.7/data/0-data/Support%20Documents/">data documentation link</a>.  Alternatively, FWRI documents Karenia brevis blooms from 1953 to the present. The dataset has more than 200,000 records is updated daily. To request this dataset email: <a class="reference external" href="mailto:HABdata&#37;&#52;&#48;MyFWC&#46;com">HABdata<span>&#64;</span>MyFWC<span>&#46;</span>com</a>. To learn more about this data, check the <a class="reference external" href="https://myfwc.com/research/redtide/statewide/">FWRI  Red Tide  Red Tide Current Status</a>.</p>
+</section>
+<section id="study-areas">
+<h1>Study areas<a class="headerlink" href="#study-areas" title="Link to this heading">#</a></h1>
+<p>Conduct your analysis in Tampa Bay and Charlotte Harbor estuary. For Tampa Bay, restrict the Karenia brevis measurements from 27° N to 28° N and 85° W to coast. For Charlotte Harbor estuary, restrict the Karenia brevis measurements from 25.5° N to less than 27° N and 85° W to coast.</p>
+</section>
+<section id="problem-statement">
+<h1>Problem statement<a class="headerlink" href="#problem-statement" title="Link to this heading">#</a></h1>
+<p>For each of the two regions, plot the maximum Karenia brevis concentration (i.e., cellcount) per week for the whole study period and for the last 10 years.</p>
+</section>
+<section id="exercise">
+<h1>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h1>
+<p>Peform the 10 tasks below. Use of a LLM is permitted.</p>
+<section id="import-libraries">
+<h2>1. Import libraries<a class="headerlink" href="#import-libraries" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="read-data-from-csv-file">
+<h2>2. Read data from csv file<a class="headerlink" href="#read-data-from-csv-file" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read a csv file with Pandas</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;habsos_20230714.csv&#39;</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="filter-to-columns-needed-for-analysis">
+<h2>3. Filter to columns needed for analysis<a class="headerlink" href="#filter-to-columns-needed-for-analysis" title="Link to this heading">#</a></h2>
+<p>Select columns that include State ID, description, latitude, longitude, sample date, and cellcount.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Display columns labels</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;STATE_ID&#39;, &#39;DESCRIPTION&#39;, &#39;LATITUDE&#39;, &#39;LONGITUDE&#39;, &#39;SAMPLE_DATE&#39;,
+       &#39;SAMPLE_DEPTH&#39;, &#39;GENUS&#39;, &#39;SPECIES&#39;, &#39;CATEGORY&#39;, &#39;CELLCOUNT&#39;,
+       &#39;CELLCOUNT_UNIT&#39;, &#39;CELLCOUNT_QA&#39;, &#39;SALINITY&#39;, &#39;SALINITY_UNIT&#39;,
+       &#39;SALINITY_QA&#39;, &#39;WATER_TEMP&#39;, &#39;WATER_TEMP_UNIT&#39;, &#39;WATER_TEMP_QA&#39;,
+       &#39;WIND_DIR&#39;, &#39;WIND_DIR_UNIT&#39;, &#39;WIND_DIR_QA&#39;, &#39;WIND_SPEED&#39;,
+       &#39;WIND_SPEED_UNIT&#39;, &#39;WIND_SPEED_QA&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select column names that you need for your analysis (e.g., &#39;LATITUDE&#39;, &#39;LONGITUDE&#39;, &#39;SAMPLE_DATE&#39;, &#39;CELLCOUNT&#39;, etc.) </span>
+<span class="n">selected_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;STATE_ID&#39;</span><span class="p">,</span><span class="s1">&#39;DESCRIPTION&#39;</span><span class="p">,</span><span class="s1">&#39;LATITUDE&#39;</span><span class="p">,</span> <span class="s1">&#39;LONGITUDE&#39;</span><span class="p">,</span> <span class="s1">&#39;SAMPLE_DATE&#39;</span><span class="p">,</span> <span class="s1">&#39;CELLCOUNT&#39;</span><span class="p">]</span>
+
+<span class="c1"># Filter the DataFrame to include only the selected columns</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">selected_columns</span><span class="p">]</span>
+
+<span class="c1"># Display your DataFrame</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>STATE_ID</th>
+      <th>DESCRIPTION</th>
+      <th>LATITUDE</th>
+      <th>LONGITUDE</th>
+      <th>SAMPLE_DATE</th>
+      <th>CELLCOUNT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>FL</td>
+      <td>Bay Dock (Sarasota Bay)</td>
+      <td>27.331600</td>
+      <td>-82.577900</td>
+      <td>11/30/2022 18:50</td>
+      <td>388400000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>FL</td>
+      <td>Bay Dock (Sarasota Bay)</td>
+      <td>27.331600</td>
+      <td>-82.577900</td>
+      <td>12/9/1994 20:30</td>
+      <td>358000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>FL</td>
+      <td>Siesta Key; 8 mi off mkr 3A at 270 degrees</td>
+      <td>27.277200</td>
+      <td>-82.722300</td>
+      <td>2/22/1996 0:00</td>
+      <td>197656000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>TX</td>
+      <td>Windsurfing Flats, Pinell Property, south Padr...</td>
+      <td>26.162420</td>
+      <td>-97.182580</td>
+      <td>10/10/2005 21:21</td>
+      <td>40000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>FL</td>
+      <td>Lido Key, 2.5 miles WSW of</td>
+      <td>27.300000</td>
+      <td>-82.620000</td>
+      <td>1/2/2019 20:30</td>
+      <td>186266667</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>205547</th>
+      <td>MS</td>
+      <td>5-9A</td>
+      <td>30.361850</td>
+      <td>-88.850067</td>
+      <td>8/25/2020 0:00</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>205548</th>
+      <td>MS</td>
+      <td>Katrina Key</td>
+      <td>30.356869</td>
+      <td>-88.839592</td>
+      <td>9/30/2020 0:00</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>205549</th>
+      <td>MS</td>
+      <td>Sample* Long Beach</td>
+      <td>30.346020</td>
+      <td>-89.141030</td>
+      <td>1/25/2021 0:00</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>205550</th>
+      <td>MS</td>
+      <td>10-Jun</td>
+      <td>30.343900</td>
+      <td>-88.602667</td>
+      <td>11/15/2021 0:00</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>205551</th>
+      <td>MS</td>
+      <td>10-Jun</td>
+      <td>30.343900</td>
+      <td>-88.602667</td>
+      <td>12/21/2021 0:00</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>205552 rows × 6 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="assign-region-name-based-on-latitude-and-longitude-values">
+<h2>4. Assign region name based on latitude and longitude values.<a class="headerlink" href="#assign-region-name-based-on-latitude-and-longitude-values" title="Link to this heading">#</a></h2>
+<p>First create a new column <code class="docutils literal notranslate"><span class="pre">REGION</span></code> with default value ‘Other’. Then use a Boolean mask to change ‘Other’ in each row to ‘Tampa Bay’ or ‘Charlotte Harbor’ based on latitude and longitude values.  You can assign values, i.e., ‘Tampa Bay` or ‘Charlotte Harbor’, uing for example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">`</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="s1">&#39;column_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;your_value&#39;</span>
+</pre></div>
+</div>
+<p>Or any other method of your choice. Do it with this method, and ask a LLM to suggest for you other methods. That is a very effective way of learning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new column &#39;region&#39; with default value &#39;Other&#39;</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;REGION&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Other&#39;</span>
+
+<span class="c1"># Mask for dicing: Define mask for Tampa Bay region based on latitude and longitude values</span>
+<span class="n">tampa_bay_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;LATITUDE&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">27</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;LATITUDE&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">28</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;LONGITUDE&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">85</span><span class="p">)</span>
+
+<span class="c1"># Assign value &#39;Tampa Bay&#39; to rows matching Tampa Bay mask </span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tampa_bay_mask</span><span class="p">,</span> <span class="s1">&#39;REGION&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Tampa Bay&#39;</span>
+
+<span class="c1"># Mask for decing: Define mask for Charlotte Harbor estuary region  based on latitude and longitude values</span>
+<span class="n">charlotte_harbor_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;LATITUDE&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">25.5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;LATITUDE&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">27</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;LONGITUDE&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">85</span><span class="p">)</span>
+
+<span class="c1"># Assign value &#39;Charlotte Harbor&#39; to rows matching Charlotte Harbor mask</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">charlotte_harbor_mask</span><span class="p">,</span> <span class="s1">&#39;REGION&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Charlotte Harbor&#39;</span>
+
+<span class="c1">#Display dataframe</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>STATE_ID</th>
+      <th>DESCRIPTION</th>
+      <th>LATITUDE</th>
+      <th>LONGITUDE</th>
+      <th>SAMPLE_DATE</th>
+      <th>CELLCOUNT</th>
+      <th>REGION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>FL</td>
+      <td>Bay Dock (Sarasota Bay)</td>
+      <td>27.331600</td>
+      <td>-82.577900</td>
+      <td>11/30/2022 18:50</td>
+      <td>388400000</td>
+      <td>Tampa Bay</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>FL</td>
+      <td>Bay Dock (Sarasota Bay)</td>
+      <td>27.331600</td>
+      <td>-82.577900</td>
+      <td>12/9/1994 20:30</td>
+      <td>358000000</td>
+      <td>Tampa Bay</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>FL</td>
+      <td>Siesta Key; 8 mi off mkr 3A at 270 degrees</td>
+      <td>27.277200</td>
+      <td>-82.722300</td>
+      <td>2/22/1996 0:00</td>
+      <td>197656000</td>
+      <td>Tampa Bay</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>TX</td>
+      <td>Windsurfing Flats, Pinell Property, south Padr...</td>
+      <td>26.162420</td>
+      <td>-97.182580</td>
+      <td>10/10/2005 21:21</td>
+      <td>40000</td>
+      <td>Other</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>FL</td>
+      <td>Lido Key, 2.5 miles WSW of</td>
+      <td>27.300000</td>
+      <td>-82.620000</td>
+      <td>1/2/2019 20:30</td>
+      <td>186266667</td>
+      <td>Tampa Bay</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>205547</th>
+      <td>MS</td>
+      <td>5-9A</td>
+      <td>30.361850</td>
+      <td>-88.850067</td>
+      <td>8/25/2020 0:00</td>
+      <td>0</td>
+      <td>Other</td>
+    </tr>
+    <tr>
+      <th>205548</th>
+      <td>MS</td>
+      <td>Katrina Key</td>
+      <td>30.356869</td>
+      <td>-88.839592</td>
+      <td>9/30/2020 0:00</td>
+      <td>0</td>
+      <td>Other</td>
+    </tr>
+    <tr>
+      <th>205549</th>
+      <td>MS</td>
+      <td>Sample* Long Beach</td>
+      <td>30.346020</td>
+      <td>-89.141030</td>
+      <td>1/25/2021 0:00</td>
+      <td>0</td>
+      <td>Other</td>
+    </tr>
+    <tr>
+      <th>205550</th>
+      <td>MS</td>
+      <td>10-Jun</td>
+      <td>30.343900</td>
+      <td>-88.602667</td>
+      <td>11/15/2021 0:00</td>
+      <td>0</td>
+      <td>Other</td>
+    </tr>
+    <tr>
+      <th>205551</th>
+      <td>MS</td>
+      <td>10-Jun</td>
+      <td>30.343900</td>
+      <td>-88.602667</td>
+      <td>12/21/2021 0:00</td>
+      <td>0</td>
+      <td>Other</td>
+    </tr>
+  </tbody>
+</table>
+<p>205552 rows × 7 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="set-column-with-date-information-as-index">
+<h2>5. Set column with date information as index<a class="headerlink" href="#set-column-with-date-information-as-index" title="Link to this heading">#</a></h2>
+<p>Change <code class="docutils literal notranslate"><span class="pre">SAMPLE_DATE</span></code> to datetime format and set is as an index.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert the &quot;SAMPLE_DATE&quot; column to datetime format using pd.to_datetime()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;SAMPLE_DATE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;SAMPLE_DATE&#39;</span><span class="p">])</span>
+
+<span class="c1"># Set the &quot;SAMPLE_DATE&quot; column as the index of your DataFrame</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;SAMPLE_DATE&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sort the index and display min and max index value</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Sort index (optional step)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">#Display min index value</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+<span class="c1">#Display max index value</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timestamp(&#39;1953-08-19 00:00:00&#39;)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timestamp(&#39;2023-07-06 16:06:00&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="select-the-data-for-each-region">
+<h2>6. Select the data for each region<a class="headerlink" href="#select-the-data-for-each-region" title="Link to this heading">#</a></h2>
+<p>Create a new DataFrame from for each region: <code class="docutils literal notranslate"><span class="pre">charlotte_harbor_data</span></code> and <code class="docutils literal notranslate"><span class="pre">tampa_bay_data</span></code>. Each DataFrame should contain the maximum cellcount per month for the whole period.</p>
+<p>Start with charlotte harbor region</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Get rows for charlotte harbor region</span>
+<span class="n">charlotte_harbor_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;REGION&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Charlotte Harbor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1">#For these rows, find the maximum cellcount per month for the study period </span>
+<span class="n">charlotte_harbor_data</span> <span class="o">=</span> <span class="n">charlotte_harbor_data</span><span class="p">[</span><span class="s1">&#39;CELLCOUNT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="c1"># display data</span>
+<span class="n">charlotte_harbor_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\aelshall\AppData\Local\Temp\ipykernel_19768\4247551668.py:5: FutureWarning: &#39;M&#39; is deprecated and will be removed in a future version, please use &#39;ME&#39; instead.
+  charlotte_harbor_data = charlotte_harbor_data[&#39;CELLCOUNT&#39;].resample(&#39;M&#39;).max()
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SAMPLE_DATE
+1953-08-31      116000.0
+1953-09-30           NaN
+1953-10-31           NaN
+1953-11-30           NaN
+1953-12-31           NaN
+                 ...    
+2023-02-28    55655327.0
+2023-03-31    12085102.0
+2023-04-30      240128.0
+2023-05-31      184500.0
+2023-06-30         333.0
+Freq: ME, Name: CELLCOUNT, Length: 839, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Get rows for tampa bay region</span>
+<span class="n">tampa_bay_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;REGION&#39;</span><span class="p">]</span> <span class="o">==</span>  <span class="s1">&#39;Tampa Bay&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1">#For these rows find the maximum cellcount per month for the study period </span>
+<span class="n">tampa_bay_data</span> <span class="o">=</span> <span class="n">tampa_bay_data</span><span class="p">[</span><span class="s1">&#39;CELLCOUNT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="c1"># display data</span>
+<span class="n">tampa_bay_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\aelshall\AppData\Local\Temp\ipykernel_19768\3546396697.py:5: FutureWarning: &#39;M&#39; is deprecated and will be removed in a future version, please use &#39;ME&#39; instead.
+  tampa_bay_data = tampa_bay_data[&#39;CELLCOUNT&#39;].resample(&#39;M&#39;).max()
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SAMPLE_DATE
+1953-08-31      178000.0
+1953-09-30     2444000.0
+1953-10-31      140000.0
+1953-11-30      392000.0
+1953-12-31      580000.0
+                 ...    
+2023-02-28    35286933.0
+2023-03-31     6363000.0
+2023-04-30     1023333.0
+2023-05-31       89000.0
+2023-06-30         667.0
+Freq: ME, Name: CELLCOUNT, Length: 839, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-the-data-for-each-region">
+<h2>7. Plot the data for each region<a class="headerlink" href="#plot-the-data-for-each-region" title="Link to this heading">#</a></h2>
+<p>Use the Pandas plot function to plot the data for each region. If you put the plot commands for each region together in the same code cell, both of them will be plotted on the same graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot charlotte harbor data</span>
+<span class="n">charlotte_harbor_data</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/06894ce6113d795eb3c123fac1a7cc544f92e504dc6c9880b46649c9e5bad5e3.png" src="../../_images/06894ce6113d795eb3c123fac1a7cc544f92e504dc6c9880b46649c9e5bad5e3.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot tampa bay data</span>
+<span class="n">tampa_bay_data</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/87a37c04ee3dfb91a53badab43282e41211f786d9df2744368fc0de25033cd84.png" src="../../_images/87a37c04ee3dfb91a53badab43282e41211f786d9df2744368fc0de25033cd84.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot data for both regions by placing the two plot commands for each region below one another</span>
+<span class="n">charlotte_harbor_data</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+<span class="n">tampa_bay_data</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a635609728524e5b969b81b90fe6355772d1426f32e32a0df1a5497b7cb322f9.png" src="../../_images/a635609728524e5b969b81b90fe6355772d1426f32e32a0df1a5497b7cb322f9.png" />
+</div>
+</div>
+<p>Now we have a problem because we do not know which is which. Ask a LLM about how to add a legend for two Pandas plots.</p>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+    Pandas plot is something quick. Later we will learn how to use matplotlib library to make sophisticated and customized plots. Actually, your LLM may suggest that you use matplotlib because Pandas plot alone may not be able to do this. In that case you may need to install matplotlib with pip install before you use it.</a>
+</div></section>
+<section id="asking-a-llm-about-adding-a-legend-to-two-pandas-plots">
+<h2>8. Asking a LLM about adding a legend to two pandas plots<a class="headerlink" href="#asking-a-llm-about-adding-a-legend-to-two-pandas-plots" title="Link to this heading">#</a></h2>
+<p>Ask a LLM about how to add legend for two plots when using the plotting tool of pandas.</p>
+<p>This is the prompt that I provided to ChatGPT 3.5 Turbo:</p>
+<blockquote>
+<div><p>I am doing these two plots with pandas, how to add legend</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">charlotte_harbor</span><span class="p">[</span><span class="s1">&#39;CELLCOUNT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">tampa_bay</span><span class="p">[</span><span class="s1">&#39;CELLCOUNT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Here is the reponse that I got:</p>
+<blockquote>
+<div><p>To add a legend to your plots in Pandas, you can set the <code class="docutils literal notranslate"><span class="pre">label</span></code> parameter within the <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function for each plot, and then call the <code class="docutils literal notranslate"><span class="pre">legend()</span></code> method. Here’s how you can do it:</p>
+<hr class="docutils" />
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Plot the data</span>
+<span class="n">charlotte_harbor_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Charlotte Harbor&#39;</span><span class="p">)</span>
+<span class="n">tampa_bay_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Tampa Bay&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>In this code:</p>
+<ul class="simple">
+<li><p>Each plot is labeled using the <code class="docutils literal notranslate"><span class="pre">label</span></code> parameter within the <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function.</p></li>
+<li><p>After plotting both series, <code class="docutils literal notranslate"><span class="pre">plt.legend()</span></code> is called to display the legend.</p></li>
+<li><p>Finally, <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code> is used to show the plot with the legend. Make sure to have <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib.pyplot</span> <span class="pre">as</span> <span class="pre">plt</span></code> at the beginning of your script or Jupyter Notebook cell.</p></li>
+</ul>
+</div></blockquote>
+<p>Now let us try this solution</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Plot the data</span>
+<span class="n">charlotte_harbor_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Charlotte Harbor&#39;</span><span class="p">)</span>
+<span class="n">tampa_bay_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Tampa Bay&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/50626316487d96c13b978ee93664feb707b7c93caebdf123c7f6985c8102d01d.png" src="../../_images/50626316487d96c13b978ee93664feb707b7c93caebdf123c7f6985c8102d01d.png" />
+</div>
+</div>
+</section>
+<section id="you-can-do-some-cutomization-with-pandas-plot">
+<h2>9. You can do some cutomization with Pandas plot<a class="headerlink" href="#you-can-do-some-cutomization-with-pandas-plot" title="Link to this heading">#</a></h2>
+<p>Set the size of the figure to (14, 4) inches and add a y-label. Check Section 4.15.4 Customize your Plot in Pandas lesson for details.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the data with cutomization </span>
+<span class="n">charlotte_harbor_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Charlotte Harbor&#39;</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">));</span>
+<span class="n">tampa_bay_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Tampa Bay&#39;</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Cells/Liter&#39;</span><span class="p">);</span>
+
+<span class="c1"># Add legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/db88c614d838c93f61e405a0b2573f6a0c6f9e3e8712d5b8e85fb55aa76f043b.png" src="../../_images/db88c614d838c93f61e405a0b2573f6a0c6f9e3e8712d5b8e85fb55aa76f043b.png" />
+</div>
+</div>
+</section>
+<section id="which-region-experienced-more-severe-red-tides-in-the-last-10-years">
+<h2>10. Which region experienced more severe red tides in the last 10 years?<a class="headerlink" href="#which-region-experienced-more-severe-red-tides-in-the-last-10-years" title="Link to this heading">#</a></h2>
+<p>To answer this question let use plot the data for the last 10 years.  You can do this with plot cutomization. Check Section 4.15.4 Customize your Plot in Pandas Primer lesson for details.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the data with cutomization </span>
+<span class="n">charlotte_harbor_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Charlotte Harbor&#39;</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;2014-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-01-01&#39;</span><span class="p">));</span>
+<span class="n">tampa_bay_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Tampa Bay&#39;</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Cells/Liter&#39;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;2014-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-01-01&#39;</span><span class="p">));</span>
+
+<span class="c1"># Add legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/57932cb79b89e5a9f3d6500c8c9a89ea3fa04eacfaf8e46cf711b6f29dfca800.png" src="../../_images/57932cb79b89e5a9f3d6500c8c9a89ea3fa04eacfaf8e46cf711b6f29dfca800.png" />
+</div>
+</div>
+<p><strong>Which region experienced more severe red tides in the last 10 years?</strong></p>
+<p>From the above figure, it is visually unclear which region experienced more severe red tides in the last 10 years. Also, to accurately assess the significance of the data, we need additional information to understand the relationship between cell counts and bloom severity. Moreover, we need to improve our analysis method. Instead of simply finding the maximum concentration per month, we need to develop a more rigorous method to characterize bloom events. That is to get a deeper insights into the dynamics of red tides occurrences and understand data gaps. Finally, we may need to select statistical methods that can help identify patterns, trends, and correlations within the data. Addressing the above limitations in our analysis will allow for better understanding of red tides occurrences and their potential impacts.</p>
+<div class="admonition alert alert-info">
+    <p class="admonition-title" style="font-weight:bold">Note</p>
+    The <a href="https://github.com/plotly/plotly.py">Plotly</a> library in Python enables interactive plotting, allowing users to create figures where they can zoom in and out on specific parts of the data. While we will not cover Plotly this semester, now that you are a Python user, you have the opportunity to explore Plotly's capabilities independently.
+</div></section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters\4. Pandas for Tabular Data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Lesson10_pandas_solution.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lessons 10 - 14 : Pandas Primer</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="HW3.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Homework 3</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Dataset</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#study-areas">Study areas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement">Problem statement</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">1. Import libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-data-from-csv-file">2. Read data from csv file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-to-columns-needed-for-analysis">3. Filter to columns needed for analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assign-region-name-based-on-latitude-and-longitude-values">4. Assign region name based on latitude and longitude values.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-column-with-date-information-as-index">5. Set column with date information as index</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-the-data-for-each-region">6. Select the data for each region</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-data-for-each-region">7. Plot the data for each region</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asking-a-llm-about-adding-a-legend-to-two-pandas-plots">8. Asking a LLM about adding a legend to two pandas plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#you-can-do-some-cutomization-with-pandas-plot">9. You can do some cutomization with Pandas plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#which-region-experienced-more-severe-red-tides-in-the-last-10-years">10. Which region experienced more severe red tides in the last 10 years?</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed Elshall & Thalia Valle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

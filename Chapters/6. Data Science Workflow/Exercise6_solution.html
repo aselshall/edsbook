@@ -1,0 +1,1720 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1. Problem definition &#8212; Environmental Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/6. Data Science Workflow/Exercise6_solution';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lessons 18-19: NumPy Basics" href="../7.%20NumPy%20for%20Scientific%20Computing/numpy_solution.html" />
+    <link rel="prev" title="Lessons 16 : Data Science Workflow" href="Workflow.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Environmental Data Science - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Environmental Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    EGN 4930 / EGN 5932C Special Topic: Environmental Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0. Good Coding Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP1_VariableName.html">GCP1 - Selecting “good” variable names</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP2_DescribingCode.html">Describing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP3_ReadableCode.html">Readable Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP4_WritingScripts.html">Writing Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP5_Assertions.html">Assertions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson2.html">Lesson 2 Getting Started</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Excercise1.html">Exercise 1 - Installing Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson3_variables_solution.html">Objectives</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson4_list_solution.html">Objectives</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson5_formatting_solution.html">Objectives</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Exercise2_solution.html">Exercise 2 - Becoming a millionaire</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/HW1.html">Problem 1 - Happiness rating</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson6_Loops_solution.html">Objectives</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson7_conditional_statements_solution.html">Objectives</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson8_functions_solution.html">Objectives</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson9_modules_solution.html">Objectives</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Exercise3_solution.html">Objectives</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/HW2.html">Problem 1 - For-loop and indexing</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 4. Pandas for Tabular Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../4.%20Pandas%20for%20Tabular%20Data/Lesson10_pandas_solution.html">Lessons 10 - 14 - Pandas Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4.%20Pandas%20for%20Tabular%20Data/Exercise4_solution.html">Dataset</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../4.%20Pandas%20for%20Tabular%20Data/HW3.html">Homework 3</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. AI Coding Assistance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../5.%20AI%20Coding%20Assistance/JupyterAI.html">OpenAI API key for Jupyter AI extension (Optional)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Data Science Workflow</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Workflow.html">Lessons 16 - Data Science Workflow</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Problem definition</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. NumPy for Scientific Computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing/numpy_solution.html">Lessons 18-19 - NumPy Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing/exercise7_solution.html">Exercise 7 - NumPy - Air quality data analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8. Matplotlib for Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization/matplotlib.html">Lesson 20 - 21 - Matplotlib Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization/exercise8_solution.html">Exercise 8 Matplotlib - Air quality data visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization/HW4.html">1. Problem statement</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/climate.html">Lesson 24 - Climate Data - CMIP6 and Remote Sensing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/xarray_solution.html">Lesson 25-27 - Xarray basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/cartopy_solution.html">Lesson 28 - CartoPy basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/Exercise9.html">Exercise 9 - Sea surface height and red tides (Optional, Advanced)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/HW5.html">Install and import libraries</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">10. Google Earth Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/10.0-%20Intro%20to%20GEE.html">Lesson 30 - Intro to Google Earth Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/10.1-%20JavaScript%20API%20vs.%20Python%20API.html">Lesson 31 - JavaScript API vs. Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html">Lesson 32 - Using Google Earth Engine in a Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/geemap1.html">Exercise 10 -  GeeMap and Sentinel-2 Data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Chapters/6. Data Science Workflow/Exercise6_solution.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapters/6. Data Science Workflow/Exercise6_solution.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/6. Data Science Workflow/Exercise6_solution.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1. Problem definition</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Problem definition</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-requirements">2. Data requirements</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">3. Data preparation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-discovery-and-profiling">3.1 Data discovery and profiling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-collection">3.2 Data collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning">3.3 Data cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structuring">3.4 Data structuring</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-integration">3.5 Data integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-validation">3.6 Data validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-enrichment">3.7 Data enrichment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transformation">3.8 Data transformation</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">4. Summary</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1 style="color:green; text-align:center;"> Exercise 6 - AQI Data Preparation</h1> 
+<p><img alt="image.png" src="Chapters/6. Data Science Workflow/attachment:337a4d17-1b64-4792-ac93-f4e40eae0d26.png" />
+This lesson was developed with assistance from GPT-4-1106-preview, claude-2.1, and GPT-3.5-turbo.</p>
+<p><a class="reference external" href="https://mybinder.org/v2/gh/aselshall/eds/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+<hr class="docutils" />
+<section id="problem-definition">
+<h1>1. Problem definition<a class="headerlink" href="#problem-definition" title="Link to this heading">#</a></h1>
+<p>What is the impact of COVID19 lockdown orders on air quality in Miami?</p>
+</section>
+<section id="data-requirements">
+<h1>2. Data requirements<a class="headerlink" href="#data-requirements" title="Link to this heading">#</a></h1>
+<p>We need to collect daily air quality data for parameters such as PM2.5, PM10, NO2, SO2, and CO in csv format from 2019 to 2021. That is one year before and one year after the lockdown orders of COVID 19 in April 2020. <a class="reference external" href="https://www.epa.gov/outdoor-air-quality-data">EPA Air Data</a>  contains air quality data collected at outdoor monitors across the US.</p>
+</section>
+<section id="data-preparation">
+<h1>3. Data preparation<a class="headerlink" href="#data-preparation" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Data discovery and profiling: Exploring the content, quality, and structure of the dataset</p></li>
+<li><p>Data collection: Gathering raw data from various sources for analysis</p></li>
+<li><p>Data cleaning: Standardizing inconsistent data formats, correcting errors, and handling missing values</p></li>
+<li><p>Data structuring: Organizing data for efficient storage and retrieval</p></li>
+<li><p>Data enrichment: Enhancing dataset with additional information from external sources to improve analysis</p></li>
+<li><p>Data transformation: Optimizing the content and structure of data for further analysis</p></li>
+<li><p>Data validation: Ensuring the accuracy, completeness, and reliability of the data</p></li>
+<li><p>Data integration: Combining data from multiple sources to create a unified dataset for analysis</p></li>
+</ul>
+<section id="data-discovery-and-profiling">
+<h2>3.1 Data discovery and profiling<a class="headerlink" href="#data-discovery-and-profiling" title="Link to this heading">#</a></h2>
+<p>In this step we are exploring the content, quality, and structure of the dataset. From this step we can learn the following.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.epa.gov/outdoor-air-quality-data">EPA Air Data</a>  contains air quality data collected at outdoor monitors across the US.</p></li>
+<li><p>For this exercise we want to use <a class="reference external" href="https://aqs.epa.gov/aqsweb/airdata/download_files.html#Daily">Pre-Generated Data Files - Daily Data</a>.</p></li>
+<li><p>For each year one data quality parameter (e.g., NO2, SO2, and CO) is recorded in a csv file.</p></li>
+<li><p>The dataset have 16 air quality parameters.</p></li>
+<li><p>For three years, there are 48 csv files and each file is about 60 MB. That is approximately 3 GB of data.</p></li>
+</ul>
+</section>
+<section id="data-collection">
+<h2>3.2 Data collection<a class="headerlink" href="#data-collection" title="Link to this heading">#</a></h2>
+<p>In this step we want to gather raw data for analysis The breakdown of this step is as follows.</p>
+<ul class="simple">
+<li><p>We need to collect data for 16 air quality parameters for three years from <a class="reference external" href="https://aqs.epa.gov/aqsweb/airdata/download_files.html#Daily">Pre-Generated Data Files - Daily Data</a> that is 48 files</p></li>
+<li><p>Each file is in csv format and zipped</p></li>
+<li><p>We can use Python tools for making HTTP requests such as <code class="docutils literal notranslate"><span class="pre">request</span></code> package</p></li>
+<li><p>We can use Python tools for unzipping files such as <code class="docutils literal notranslate"><span class="pre">zipfile</span></code> package</p></li>
+<li><p>Each file is large than 60MB, so the download and processing of raw data can be long</p></li>
+</ul>
+</section>
+<section id="data-cleaning">
+<h2>3.3 Data cleaning<a class="headerlink" href="#data-cleaning" title="Link to this heading">#</a></h2>
+<p>This step involves standardizing inconsistent data formats, correcting errors, and handling missing values. For this step we will do the following:</p>
+<ul class="simple">
+<li><p>For this EPA data, cleaning is minimal</p></li>
+<li><p>We will record the files that has no records for our study area and period</p></li>
+<li><p>We do not need to do anything about missing data at this stage</p></li>
+</ul>
+</section>
+<section id="data-structuring">
+<h2>3.4 Data structuring<a class="headerlink" href="#data-structuring" title="Link to this heading">#</a></h2>
+<p>This steps involves organizing and formating the data in a way that is optimal for storage and retrieval. For this step we need to do the following tasks.</p>
+<ul class="simple">
+<li><p>To reduce storage space, we will filter out rows outside our study region</p></li>
+<li><p>We will only keep relevant columns for our record and analysis that are: ‘County Code’, ‘Parameter Name’, ‘Date Local’, ‘Units of Measure’, ‘Arithmetic Mean’, ‘CBSA Name’.</p></li>
+<li><p>This will reduce the storgage space per file from from ~60 MB to ~0.4 MB.</p></li>
+</ul>
+<p>Note: A core-based statistical area (CBSA) is a geographic region of the <a class="reference external" href="http://U.S.as">U.S.as</a> defined by the Office of Management and Budget.A CBSA is “one or more adjacent counties or county equivalents that have at least one urban core area of at least 10,000 population, plus adjacent territory that has a high degree of social and economic integration with the core as measured by commuting ties” (Wikipedia).</p>
+<p>After conducting an initial data exploration and profiling, we can formulate a prompt  our language model to assist with data collection, cleaning, and structuring. Here is a prompot:</p>
+<p><strong>Python code with rich annotations:</strong><br />
+This code  collects air quality data in a <code class="docutils literal notranslate"><span class="pre">region</span></code> for one year before and one year after the lockdown order on April 1, 2020.</p>
+<p>These are the FileIDs of the air quality data that we want to download:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="head"><p>Parameter</p></th>
+<th class="head"><p>FileID</p></th>
+<th class="head"><p>Unit</p></th>
+<th class="head"><p>Records</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Criteria Gases</p></td>
+<td><p>Ozone</p></td>
+<td><p>44201</p></td>
+<td><p>na</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Criteria Gases</p></td>
+<td><p>SO2</p></td>
+<td><p>42401</p></td>
+<td><p>na</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>Criteria Gases</p></td>
+<td><p>CO</p></td>
+<td><p>42101</p></td>
+<td><p>na</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Criteria Gases</p></td>
+<td><p>NO2</p></td>
+<td><p>42602</p></td>
+<td><p>na</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>Particulates</p></td>
+<td><p>PM2.5 FRM/FEM Mass</p></td>
+<td><p>88101</p></td>
+<td><p>na</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Particulates</p></td>
+<td><p>PM2.5 non FRM/FEM Mass</p></td>
+<td><p>88502</p></td>
+<td><p>na</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>Particulates</p></td>
+<td><p>PM10 Mass</p></td>
+<td><p>81102</p></td>
+<td><p>na</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Particulates</p></td>
+<td><p>PMc Mass</p></td>
+<td><p>86101</p></td>
+<td><p>na</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>Meteorological</p></td>
+<td><p>Winds</p></td>
+<td><p>WIND</p></td>
+<td><p>na</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Meteorological</p></td>
+<td><p>Temperature</p></td>
+<td><p>TEMP</p></td>
+<td><p>na</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>Meteorological</p></td>
+<td><p>Barometric Pressure</p></td>
+<td><p>PRESS</p></td>
+<td><p>na</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Meteorological</p></td>
+<td><p>RH and Dewpoint</p></td>
+<td><p>RH_DP</p></td>
+<td><p>na</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>Toxics, Precursors, and Lead</p></td>
+<td><p>HAPs</p></td>
+<td><p>HAPS</p></td>
+<td><p>na</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Toxics, Precursors, and Lead</p></td>
+<td><p>VOCs</p></td>
+<td><p>VOCS</p></td>
+<td><p>na</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>Toxics, Precursors, and Lead</p></td>
+<td><p>NONOxNOy</p></td>
+<td><p>NONOxNOy</p></td>
+<td><p>na</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Toxics, Precursors, and Lead</p></td>
+<td><p>Lead</p></td>
+<td><p>LEAD</p></td>
+<td><p>na</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The daily data file is named ‘daily_FileID_Year.zip’.<br />
+For example, ‘daily_44201_2023.zip’ has Ozone data for 2023</p>
+<p>The file address is: <a class="reference external" href="https://aqs.epa.gov/aqsweb/airdata/daily_44201_2023.zip">https://aqs.epa.gov/aqsweb/airdata/daily_44201_2023.zip</a><br />
+For example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;daily_44201_2023.zip&#39;</span> 
+<span class="n">base_url</span> <span class="o">=</span> <span class="s1">&#39;https://aqs.epa.gov/aqsweb/airdata/</span>
+<span class="n">download_from</span> <span class="o">=</span> <span class="n">base_url</span> <span class="o">+</span> <span class="n">filename</span>
+</pre></div>
+</div>
+<p>will be the address of the Ozone data for 2023.</p>
+<p>Each zip file contains a csv file.
+For example, ‘daily_44201_2023.zip’ contains ‘daily_44201_2023.csv’</p>
+<p>Addtional information</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#These files will be downloaded to:</span>
+<span class="n">save_to</span> <span class="o">=</span> <span class="s1">&#39;Data\L2_Structured&quot;</span>
+
+<span class="c1"># Region of interest</span>
+<span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Miami&#39;</span>
+
+<span class="c1"># CBSA Name of the region of interest </span>
+<span class="n">CBSA_Name_Value</span> <span class="o">=</span> <span class="s1">&#39;Miami-Fort Lauderdale-West Palm Beach, FL&#39;</span>
+</pre></div>
+</div>
+<p>Write a Python code to:</p>
+<ol class="arabic simple">
+<li><p>Use the information in th table above to create <code class="docutils literal notranslate"><span class="pre">Attributes</span></code> list or dictionary for ‘Category’, ‘Parameter’, ‘FileID’, ‘Unit’, ‘Records’</p></li>
+<li><p>Define variables <code class="docutils literal notranslate"><span class="pre">region</span></code> and <code class="docutils literal notranslate"><span class="pre">CBSA_Name_Value</span></code></p></li>
+<li><p>Count each download with variable name <code class="docutils literal notranslate"><span class="pre">download_count</span></code></p></li>
+<li><p>Get files for years 2019, 2020, 2021 for all the FileIDs</p></li>
+<li><p>Show message about download progress after each fileas as <code class="docutils literal notranslate"><span class="pre">download_count</span></code> : <code class="docutils literal notranslate"><span class="pre">year</span></code> : <code class="docutils literal notranslate"><span class="pre">parameter</span></code> : <code class="docutils literal notranslate"><span class="pre">filename</span></code></p></li>
+<li><p>Unzip each file</p></li>
+<li><p>Read csv file with Pandas as <code class="docutils literal notranslate"><span class="pre">raw_data</span></code> DataFrame</p></li>
+<li><p>Delete zip file: ‘daily_FileID_Year.zip’ only if it exists and if file is open, close it. For example, ‘daily_44201_2023.zip’</p></li>
+<li><p>Delete csv file: ‘daily_FileID_Year.csv’ only if it exists and if file is open, close it. For example, ‘daily_44201_2023.csv’</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">raw_data</span></code>, address this warning: “Columns (13) have mixed types. Specify dtype option on import or set low_memory=False”.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">Attributes</span></code>, update ‘Unit’ with the first value in column ‘Units of Measure’ in <code class="docutils literal notranslate"><span class="pre">raw_data</span></code>. For example, for fileid = 44201, ‘na’ will be replaced with ‘Parts per million’. If the first value does not exist update ‘Unit’ in <code class="docutils literal notranslate"><span class="pre">Attributes</span></code> list with ‘empy_file’</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">raw_data</span></code>, keep only rows where the value of Column ‘CBSA Name’ is equal to CBSA_Name_Value</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">raw_data</span></code>, keep only columns with labels: ‘County Code’, ‘Parameter Name’, ‘Date Local’, ‘Units of Measure’, ‘Arithmetic Mean’, ‘CBSA Name’</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">raw_data</span></code>, convert ‘Date Local’ column to datetime format, set as index, and sort by index</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">Attributes</span></code>, update ‘Records’  with the number of rows in the <code class="docutils literal notranslate"><span class="pre">raw_data</span></code> plus the current value of ‘Records’</p></li>
+<li><p>Save <code class="docutils literal notranslate"><span class="pre">raw_data</span></code> at <code class="docutils literal notranslate"><span class="pre">save_to</span></code> location with file name ‘daily_{FileID}<em>{year}</em>{region}.csv2019, and create folder if it does not exists</p></li>
+<li><p>At the end from <code class="docutils literal notranslate"><span class="pre">Attributes</span></code> create <code class="docutils literal notranslate"><span class="pre">df_Attributes</span></code> DataFrame</p></li>
+<li><p>Save  <code class="docutils literal notranslate"><span class="pre">df_Attributes</span></code> at <code class="docutils literal notranslate"><span class="pre">save_to</span></code> as ‘Attributes.cs</p></li>
+<li><p>Display <code class="docutils literal notranslate"><span class="pre">df_Attributes</span></code> DataFrame</p></li>
+<li><p>Annotate code with detailed and rich annotations describing each task and sub-task inside and outside the loop</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#ChatGPT 3.5 Turbo Code</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
+
+<span class="c1"># 1. Define Attributes dictionary for air quality data</span>
+<span class="n">Attributes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Category&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Criteria Gases&#39;</span><span class="p">,</span> <span class="s1">&#39;Criteria Gases&#39;</span><span class="p">,</span> <span class="s1">&#39;Criteria Gases&#39;</span><span class="p">,</span> <span class="s1">&#39;Criteria Gases&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;Particulates&#39;</span><span class="p">,</span> <span class="s1">&#39;Particulates&#39;</span><span class="p">,</span> <span class="s1">&#39;Particulates&#39;</span><span class="p">,</span> <span class="s1">&#39;Particulates&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;Meteorological&#39;</span><span class="p">,</span> <span class="s1">&#39;Meteorological&#39;</span><span class="p">,</span> <span class="s1">&#39;Meteorological&#39;</span><span class="p">,</span> <span class="s1">&#39;Meteorological&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;Toxics, Precursors, and Lead&#39;</span><span class="p">,</span> <span class="s1">&#39;Toxics, Precursors, and Lead&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;Toxics, Precursors, and Lead&#39;</span><span class="p">,</span> <span class="s1">&#39;Toxics, Precursors, and Lead&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Parameter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ozone&#39;</span><span class="p">,</span> <span class="s1">&#39;SO2&#39;</span><span class="p">,</span> <span class="s1">&#39;CO&#39;</span><span class="p">,</span> <span class="s1">&#39;NO2&#39;</span><span class="p">,</span> <span class="s1">&#39;PM2.5 FRM/FEM Mass&#39;</span><span class="p">,</span> <span class="s1">&#39;PM2.5 non FRM/FEM Mass&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;PM10 Mass&#39;</span><span class="p">,</span> <span class="s1">&#39;PMc Mass&#39;</span><span class="p">,</span> <span class="s1">&#39;Winds&#39;</span><span class="p">,</span> <span class="s1">&#39;Temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;Barometric Pressure&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;RH and Dewpoint&#39;</span><span class="p">,</span> <span class="s1">&#39;HAPs&#39;</span><span class="p">,</span> <span class="s1">&#39;VOCs&#39;</span><span class="p">,</span> <span class="s1">&#39;NONOxNOy&#39;</span><span class="p">,</span> <span class="s1">&#39;Lead&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;FileID&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">44201</span><span class="p">,</span> <span class="mi">42401</span><span class="p">,</span> <span class="mi">42101</span><span class="p">,</span> <span class="mi">42602</span><span class="p">,</span> <span class="mi">88101</span><span class="p">,</span> <span class="mi">88502</span><span class="p">,</span> <span class="mi">81102</span><span class="p">,</span> <span class="mi">86101</span><span class="p">,</span> <span class="s1">&#39;WIND&#39;</span><span class="p">,</span> <span class="s1">&#39;TEMP&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;PRESS&#39;</span><span class="p">,</span> <span class="s1">&#39;RH_DP&#39;</span><span class="p">,</span> <span class="s1">&#39;HAPS&#39;</span><span class="p">,</span> <span class="s1">&#39;VOCS&#39;</span><span class="p">,</span> <span class="s1">&#39;NONOxNOy&#39;</span><span class="p">,</span> <span class="s1">&#39;LEAD&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Unit&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;na&#39;</span><span class="p">,</span> <span class="s1">&#39;na&#39;</span><span class="p">,</span> <span class="s1">&#39;na&#39;</span><span class="p">,</span> <span class="s1">&#39;na&#39;</span><span class="p">,</span> <span class="s1">&#39;na&#39;</span><span class="p">,</span> <span class="s1">&#39;na&#39;</span><span class="p">,</span> <span class="s1">&#39;na&#39;</span><span class="p">,</span> <span class="s1">&#39;na&#39;</span><span class="p">,</span> <span class="s1">&#39;na&#39;</span><span class="p">,</span> <span class="s1">&#39;na&#39;</span><span class="p">,</span> <span class="s1">&#39;na&#39;</span><span class="p">,</span> <span class="s1">&#39;na&#39;</span><span class="p">,</span> <span class="s1">&#39;na&#39;</span><span class="p">,</span> <span class="s1">&#39;na&#39;</span><span class="p">,</span> <span class="s1">&#39;na&#39;</span><span class="p">,</span> <span class="s1">&#39;na&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Records&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">16</span>
+<span class="p">}</span>
+
+<span class="c1"># 2. Define region and CBSA_Name_Value</span>
+<span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Miami&#39;</span>
+<span class="n">CBSA_Name_Value</span> <span class="o">=</span> <span class="s1">&#39;Miami-Fort Lauderdale-West Palm Beach, FL&#39;</span>
+
+<span class="c1"># 3. Initialize download_count</span>
+<span class="n">download_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># 4. Loop through each year and download files</span>
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">2022</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">file_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Attributes</span><span class="p">[</span><span class="s1">&#39;FileID&#39;</span><span class="p">]):</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;daily_</span><span class="si">{</span><span class="n">file_id</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">.zip&#39;</span>
+        <span class="n">base_url</span> <span class="o">=</span> <span class="s1">&#39;https://aqs.epa.gov/aqsweb/airdata/&#39;</span>
+        <span class="n">download_from</span> <span class="o">=</span> <span class="n">base_url</span> <span class="o">+</span> <span class="n">filename</span>
+        
+        <span class="c1"># 5. Show download progress</span>
+        <span class="n">download_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Download </span><span class="si">{</span><span class="n">download_count</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">Attributes</span><span class="p">[</span><span class="s1">&#39;Parameter&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Download file</span>
+        <span class="n">urlretrieve</span><span class="p">(</span><span class="n">download_from</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        
+        <span class="c1"># 6. Unzip file</span>
+        <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+            <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">()</span>
+        
+        <span class="c1"># 7. Read csv file</span>
+        <span class="n">raw_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;daily_</span><span class="si">{</span><span class="n">file_id</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        
+        <span class="c1"># 8. Delete zip file if exists</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        
+        <span class="c1"># 9. Delete csv file if exists</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;daily_</span><span class="si">{</span><span class="n">file_id</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;daily_</span><span class="si">{</span><span class="n">file_id</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">)</span>
+        
+        <span class="c1"># 10. Handle warning in raw_data</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;mode.chained_assignment&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        
+        <span class="c1"># 11. Update &#39;Unit&#39; in Attributes</span>
+        <span class="n">Attributes</span><span class="p">[</span><span class="s1">&#39;Unit&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;Units of Measure&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;empty_file&#39;</span>
+        
+        <span class="c1"># 12. Filter by CBSA_Name_Value</span>
+        <span class="n">raw_data</span> <span class="o">=</span> <span class="n">raw_data</span><span class="p">[</span><span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;CBSA Name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">CBSA_Name_Value</span><span class="p">]</span>
+        
+        <span class="c1"># 13. Keep required columns</span>
+        <span class="n">raw_data</span> <span class="o">=</span> <span class="n">raw_data</span><span class="p">[[</span><span class="s1">&#39;County Code&#39;</span><span class="p">,</span> <span class="s1">&#39;Parameter Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Date Local&#39;</span><span class="p">,</span> <span class="s1">&#39;Units of Measure&#39;</span><span class="p">,</span>
+                             <span class="s1">&#39;Arithmetic Mean&#39;</span><span class="p">,</span> <span class="s1">&#39;CBSA Name&#39;</span><span class="p">]]</span>
+        
+        <span class="c1"># 14. Convert &#39;Date Local&#39; to datetime and set as index</span>
+        <span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;Date Local&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;Date Local&#39;</span><span class="p">])</span>
+        <span class="n">raw_data</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date Local&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">raw_data</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="c1"># 15. Update &#39;Records&#39; in Attributes</span>
+        <span class="n">Attributes</span><span class="p">[</span><span class="s1">&#39;Records&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span>
+        
+        <span class="c1"># 16. Save raw_data</span>
+        <span class="n">save_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;Data&#39;</span><span class="p">,</span> <span class="s1">&#39;L2_Structured&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">save_folder</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">save_folder</span><span class="p">)</span>
+        <span class="n">raw_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_folder</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;daily_</span><span class="si">{</span><span class="n">file_id</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">region</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">))</span>
+        
+
+<span class="c1"># 17. Create DataFrame from Attributes</span>
+<span class="n">df_Attributes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Attributes</span><span class="p">)</span>
+
+<span class="c1"># 18. Save df_Attributes</span>
+<span class="n">df_Attributes</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_folder</span><span class="p">,</span> <span class="s1">&#39;Attributes.csv&#39;</span><span class="p">))</span>
+
+<span class="c1"># 19. Display df_Attributes</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_Attributes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download 1: 2019 : Ozone : daily_44201_2019.zip
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download 2: 2019 : SO2 : daily_42401_2019.zip
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download 3: 2019 : CO : daily_42101_2019.zip
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download 4: 2019 : NO2 : daily_42602_2019.zip
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download 5: 2019 : PM2.5 FRM/FEM Mass : daily_88101_2019.zip
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download 6: 2019 : PM2.5 non FRM/FEM Mass : daily_88502_2019.zip
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download 7: 2019 : PM10 Mass : daily_81102_2019.zip
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download 8: 2019 : PMc Mass : daily_86101_2019.zip
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download 9: 2019 : Winds : daily_WIND_2019.zip
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">43</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Download </span><span class="si">{</span><span class="n">download_count</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">Attributes</span><span class="p">[</span><span class="s1">&#39;Parameter&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span> <span class="c1"># Download file</span>
+<span class="ne">---&gt; </span><span class="mi">43</span> <span class="n">urlretrieve</span><span class="p">(</span><span class="n">download_from</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span> <span class="c1"># 6. Unzip file</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+
+<span class="nn">File ~\AppData\Local\miniconda3\Lib\urllib\request.py:268,</span> in <span class="ni">urlretrieve</span><span class="nt">(url, filename, reporthook, data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">265</span> <span class="k">if</span> <span class="n">reporthook</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">266</span>     <span class="n">reporthook</span><span class="p">(</span><span class="n">blocknum</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">268</span> <span class="k">while</span> <span class="n">block</span> <span class="o">:=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">bs</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">269</span>     <span class="n">read</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">270</span>     <span class="n">tfp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+
+<span class="nn">File ~\AppData\Local\miniconda3\Lib\http\client.py:479,</span> in <span class="ni">HTTPResponse.read</span><span class="nt">(self, amt)</span>
+<span class="g g-Whitespace">    </span><span class="mi">476</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">amt</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">477</span>     <span class="c1"># clip the read to the &quot;end of response&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">478</span>     <span class="n">amt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span>
+<span class="ne">--&gt; </span><span class="mi">479</span> <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">amt</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">480</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span> <span class="ow">and</span> <span class="n">amt</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">481</span>     <span class="c1"># Ideally, we would raise IncompleteRead if the content-length</span>
+<span class="g g-Whitespace">    </span><span class="mi">482</span>     <span class="c1"># wasn&#39;t satisfied, but it might break compatibility.</span>
+<span class="g g-Whitespace">    </span><span class="mi">483</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_close_conn</span><span class="p">()</span>
+
+<span class="nn">File ~\AppData\Local\miniconda3\Lib\socket.py:720,</span> in <span class="ni">SocketIO.readinto</span><span class="nt">(self, b)</span>
+<span class="g g-Whitespace">    </span><span class="mi">718</span> <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">719</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">720</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">721</span>     <span class="k">except</span> <span class="n">timeout</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">722</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_timeout_occurred</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="nn">File ~\AppData\Local\miniconda3\Lib\ssl.py:1251,</span> in <span class="ni">SSLSocket.recv_into</span><span class="nt">(self, buffer, nbytes, flags)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1247</span>     <span class="k">if</span> <span class="n">flags</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1248</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1249</span>           <span class="s2">&quot;non-zero flags not allowed in calls to recv_into() on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+<span class="g g-Whitespace">   </span><span class="mi">1250</span>           <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1251</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nbytes</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1252</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1253</span>     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">nbytes</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
+
+<span class="nn">File ~\AppData\Local\miniconda3\Lib\ssl.py:1103,</span> in <span class="ni">SSLSocket.read</span><span class="nt">(self, len, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1101</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1102</span>     <span class="k">if</span> <span class="n">buffer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1103</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1104</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1105</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-integration">
+<h2>3.5 Data integration<a class="headerlink" href="#data-integration" title="Link to this heading">#</a></h2>
+<p>This step involves combining data from multiple data  to create a unified dataset for analysis.</p>
+<ul class="simple">
+<li><p>We need to combine our data into a 2d array that has our 16 parameters (also known as features or variables) for the whole study period.</p></li>
+</ul>
+<p>We can give this code outline below for your LM to complete.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Miami&#39;</span>
+
+<span class="c1"># read &#39;Data/L2_Structured/Attributes.csv&#39; as `df_Attributes` DataFrame</span>
+
+<span class="c1"># create `data` DataFrame with daily index from 2019-01-01 to 2021-12-31 </span>
+<span class="c1">#and column names are the values of &#39;FileID&#39; column in `df_Attributes`</span>
+ 
+<span class="c1"># loop from year 2019 to 2021</span>
+    <span class="c1">#Loop for each value in &#39;FileID&#39;</span>
+        <span class="c1">#Read f&#39;Data/L2_Structured/daily_{fileID}_{year}_{region}.csv&#39; as `raw_data` DataFrame </span>
+        <span class="c1">#and set column &#39;Date Local&#39; as datetime index</span>
+
+       <span class="c1">#resample the column &#39;Arithmetic Mean&#39; in `raw_data` with .max() as `resampled_arithmetic_mean`</span>
+
+       <span class="c1">#Copy the values of resampled_arithmetic_mean for each fileID into its corresponding column in `data` with the same fileID</span>
+       <span class="c1">#Dates must match. For example, the value in 2019-01-01 in resampled_arithmetic_mean would be copied to </span>
+       <span class="c1">#the firt row of `data` with index equal 2019-01-01 </span>
+
+<span class="c1"># Save `data` DataFrame as &#39;data_{region}.csv at this path &#39;Data/L3_Integrated&#39; and create folder if it does not exists</span>
+
+<span class="c1">#display `data` DataFrame using  `display()` not `print()`</span>
+
+<span class="c1"># Add rich code annotation</span>
+
+<span class="c1">#code only. no introduction and conclusion.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#ChatGPT 3.5 Turbo Code </span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Miami&#39;</span>
+
+<span class="c1"># Read &#39;Data/L2_Structured/Attributes.csv&#39; as `df_Attributes` DataFrame</span>
+<span class="n">df_Attributes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Data/L2_Structured/Attributes.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create `data` DataFrame with daily index from 2019-01-01 to 2021-12-31 </span>
+<span class="c1"># and with columns such that the column labels are the &#39;FileID&#39; column in `df_Attributes`</span>
+<span class="n">start_date</span> <span class="o">=</span> <span class="s1">&#39;2019-01-01&#39;</span>
+<span class="n">end_date</span> <span class="o">=</span> <span class="s1">&#39;2021-12-31&#39;</span>
+<span class="n">date_range</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">date_range</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">df_Attributes</span><span class="p">[</span><span class="s1">&#39;FileID&#39;</span><span class="p">])</span>
+
+<span class="c1"># Loop from year 2019 to 2021</span>
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">2022</span><span class="p">):</span>
+    <span class="c1"># Loop for each value in &#39;FileID&#39;</span>
+    <span class="k">for</span> <span class="n">fileID</span> <span class="ow">in</span> <span class="n">df_Attributes</span><span class="p">[</span><span class="s1">&#39;FileID&#39;</span><span class="p">]:</span>
+        <span class="c1"># Read f&#39;Data/L2_Structured/daily_{fileID}_{year}_{region}.csv&#39; as `raw_data` DataFrame</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Data/L2_Structured/daily_</span><span class="si">{</span><span class="n">fileID</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">region</span><span class="si">}</span><span class="s1">.csv&#39;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+            <span class="n">raw_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+            <span class="c1"># Set column &#39;Date Local&#39; as datetime index</span>
+            <span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;Date Local&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;Date Local&#39;</span><span class="p">])</span>
+            <span class="n">raw_data</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date Local&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            
+            <span class="c1"># Resample the column &#39;Arithmetic Mean&#39; in `raw_data` with .max() as `resampled_arithmetic_mean`</span>
+            <span class="n">resampled_arithmetic_mean</span> <span class="o">=</span> <span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;Arithmetic Mean&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            
+            <span class="c1"># Copy the values of resampled_arithmetic_mean for each fileID into its corresponding column in `data`</span>
+            <span class="c1"># with the same fileID. Dates must match.</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">resampled_arithmetic_mean</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">fileID</span><span class="p">]</span> <span class="o">=</span> <span class="n">resampled_arithmetic_mean</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Save `data` DataFrame as &#39;data_{region}.csv&#39; at this path &#39;Data/L3_Integrated&#39; and create folder if it does not exist</span>
+<span class="n">output_folder</span> <span class="o">=</span> <span class="s1">&#39;Data/L3_Integrated&#39;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;data_</span><span class="si">{</span><span class="n">region</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">))</span>
+
+<span class="c1"># Display `data` DataFrame using `display()`</span>
+<span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>FileID</th>
+      <th>44201</th>
+      <th>42401</th>
+      <th>42101</th>
+      <th>42602</th>
+      <th>88101</th>
+      <th>88502</th>
+      <th>81102</th>
+      <th>86101</th>
+      <th>WIND</th>
+      <th>TEMP</th>
+      <th>PRESS</th>
+      <th>RH_DP</th>
+      <th>HAPS</th>
+      <th>VOCS</th>
+      <th>NONOxNOy</th>
+      <th>LEAD</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2019-01-01</th>
+      <td>0.035412</td>
+      <td>0.6625</td>
+      <td>0.477667</td>
+      <td>8.416667</td>
+      <td>7.158333</td>
+      <td>53.795833</td>
+      <td>18.0</td>
+      <td>NaN</td>
+      <td>258.291667</td>
+      <td>73.0</td>
+      <td>NaN</td>
+      <td>86.833333</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>18.820833</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2019-01-02</th>
+      <td>0.029471</td>
+      <td>0.754167</td>
+      <td>0.55</td>
+      <td>18.217647</td>
+      <td>6.404348</td>
+      <td>5.125</td>
+      <td>18.0</td>
+      <td>NaN</td>
+      <td>262.916667</td>
+      <td>74.75</td>
+      <td>NaN</td>
+      <td>82.958333</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>49.576471</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2019-01-03</th>
+      <td>0.026882</td>
+      <td>0.725</td>
+      <td>0.56725</td>
+      <td>18.270833</td>
+      <td>9.929167</td>
+      <td>6.979167</td>
+      <td>22.0</td>
+      <td>10.1</td>
+      <td>307.708333</td>
+      <td>75.291667</td>
+      <td>NaN</td>
+      <td>87.375</td>
+      <td>0.72</td>
+      <td>2.76</td>
+      <td>50.520833</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2019-01-04</th>
+      <td>0.031882</td>
+      <td>0.740909</td>
+      <td>0.533333</td>
+      <td>18.1625</td>
+      <td>12.4</td>
+      <td>10.7875</td>
+      <td>28.0</td>
+      <td>NaN</td>
+      <td>155.083333</td>
+      <td>72.875</td>
+      <td>NaN</td>
+      <td>88.166667</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>46.6125</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2019-01-05</th>
+      <td>0.034765</td>
+      <td>0.683333</td>
+      <td>0.408333</td>
+      <td>17.983333</td>
+      <td>12.016667</td>
+      <td>11.370833</td>
+      <td>24.0</td>
+      <td>NaN</td>
+      <td>100.166667</td>
+      <td>70.541667</td>
+      <td>NaN</td>
+      <td>82.75</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>32.495833</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2021-12-27</th>
+      <td>0.042882</td>
+      <td>0.805882</td>
+      <td>0.7375</td>
+      <td>24.579167</td>
+      <td>9.929167</td>
+      <td>8.045833</td>
+      <td>20</td>
+      <td>6.970833</td>
+      <td>202.208333</td>
+      <td>70.208333</td>
+      <td>NaN</td>
+      <td>84.958333</td>
+      <td>0.01</td>
+      <td>NaN</td>
+      <td>42.8375</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-12-28</th>
+      <td>0.040647</td>
+      <td>0.683333</td>
+      <td>0.816667</td>
+      <td>27.979167</td>
+      <td>8.865217</td>
+      <td>7.663158</td>
+      <td>21</td>
+      <td>6.904167</td>
+      <td>254.875</td>
+      <td>70.166667</td>
+      <td>NaN</td>
+      <td>87.625</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>85.0875</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-12-29</th>
+      <td>0.034059</td>
+      <td>0.691667</td>
+      <td>0.665375</td>
+      <td>24.183333</td>
+      <td>8.183333</td>
+      <td>6.970833</td>
+      <td>17</td>
+      <td>7.8125</td>
+      <td>269.5</td>
+      <td>71.958333</td>
+      <td>NaN</td>
+      <td>88.25</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>77.915</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-12-30</th>
+      <td>0.025706</td>
+      <td>0.679167</td>
+      <td>0.804167</td>
+      <td>23.5375</td>
+      <td>8.320833</td>
+      <td>6.708333</td>
+      <td>16</td>
+      <td>7.066667</td>
+      <td>268.958333</td>
+      <td>73.5</td>
+      <td>NaN</td>
+      <td>89.75</td>
+      <td>0.007</td>
+      <td>NaN</td>
+      <td>83.466667</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-12-31</th>
+      <td>0.02925</td>
+      <td>0.5375</td>
+      <td>0.717125</td>
+      <td>15.479167</td>
+      <td>12.591667</td>
+      <td>16.475</td>
+      <td>14</td>
+      <td>6.170833</td>
+      <td>261.416667</td>
+      <td>73.583333</td>
+      <td>NaN</td>
+      <td>88.416667</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>41.7125</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>1096 rows × 16 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="data-validation">
+<h2>3.6 Data validation<a class="headerlink" href="#data-validation" title="Link to this heading">#</a></h2>
+<p>Data validation includes ensuring the accuracy, completeness, and reliability of the data.  Here we will simply cross-reference our collected data in <code class="docutils literal notranslate"><span class="pre">data</span></code> DataFrame with the data in raw data files to ensure that we did not do any mistake. We can display any rows and columns of your <code class="docutils literal notranslate"><span class="pre">data</span></code> DataFrame and cross-check them with raw data and the csv files. Here is one example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">columns_to_show</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;86101&#39;</span><span class="p">,</span> <span class="s1">&#39;WIND&#39;</span><span class="p">,</span><span class="s1">&#39;TEMP&#39;</span><span class="p">]</span>
+<span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2019-12-30&#39;</span><span class="p">:</span><span class="s1">&#39;2020-01-01&#39;</span><span class="p">,</span> <span class="n">columns_to_show</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>FileID</th>
+      <th>86101</th>
+      <th>WIND</th>
+      <th>TEMP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2019-12-30</th>
+      <td>10.45</td>
+      <td>220.916667</td>
+      <td>75.833333</td>
+    </tr>
+    <tr>
+      <th>2019-12-31</th>
+      <td>6.995833</td>
+      <td>170.458333</td>
+      <td>71.333333</td>
+    </tr>
+    <tr>
+      <th>2020-01-01</th>
+      <td>6.233333</td>
+      <td>200.875</td>
+      <td>68.333333</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can also use the <a class="reference external" href="https://github.com/jupyterlab-contrib/jupyterlab-variableInspector">JupyterLab variableInspector extension</a> to get an overview of the data before additional preprocessing:</p>
+<ul class="simple">
+<li><p>review each parameter in the CSV file to ensure there are no errors.</p></li>
+<li><p>note that the parameters “NONOxNOy”, “VOCs”, and “HAPs” need special handling due to its multiple-parameter nature.</p></li>
+<li><p>acknowledge this issue for the current analysis. No further action is needed as this parameter won’t be used in our analysis.</p></li>
+</ul>
+</section>
+<section id="data-enrichment">
+<h2>3.7 Data enrichment<a class="headerlink" href="#data-enrichment" title="Link to this heading">#</a></h2>
+<p>This steps involved enhancing dataset with additional information from external sources to improve analysis.</p>
+<ul class="simple">
+<li><p>No data enrichment is required at this stage.</p></li>
+</ul>
+</section>
+<section id="data-transformation">
+<h2>3.8 Data transformation<a class="headerlink" href="#data-transformation" title="Link to this heading">#</a></h2>
+<p>This step involves converting data into a format suitable form for analysis. Data enrichment and data transformation are closely related but distinct from data structuring. While data structuring primarily involves data wrangling for efficient storage and retrieval, data transformation focuses on preparing data for optimal analysis.</p>
+<p>Our analysis will focus on PM 2.5, PM 10, <NOsub>2</sub>, SO<sub>2</sub>, CO, and O<sub>3</sub>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>FileID</p></th>
+<th class="head"><p>Unit</p></th>
+<th class="head"><p>Records</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PM2.5 FRM/FEM Mass</p></td>
+<td><p>88101</p></td>
+<td><p>Micrograms/cubic meter (LC)</p></td>
+<td><p>14924</p></td>
+</tr>
+<tr class="row-odd"><td><p>PM2.5 non FRM/FEM Mass</p></td>
+<td><p>88502</p></td>
+<td><p>Micrograms/cubic meter (LC)</p></td>
+<td><p>7987</p></td>
+</tr>
+<tr class="row-even"><td><p>PM10 Mass</p></td>
+<td><p>81102</p></td>
+<td><p>Micrograms/cubic meter (25 C)</p></td>
+<td><p>4130</p></td>
+</tr>
+<tr class="row-odd"><td><p>NO2</p></td>
+<td><p>42602</p></td>
+<td><p>Parts per billion</p></td>
+<td><p>5056</p></td>
+</tr>
+<tr class="row-even"><td><p>SO2</p></td>
+<td><p>42401</p></td>
+<td><p>Parts per billion</p></td>
+<td><p>4253</p></td>
+</tr>
+<tr class="row-odd"><td><p>CO</p></td>
+<td><p>42101</p></td>
+<td><p>Parts per million</p></td>
+<td><p>6256</p></td>
+</tr>
+<tr class="row-even"><td><p>Ozone</p></td>
+<td><p>44201</p></td>
+<td><p>Parts per million</p></td>
+<td><p>8420</p></td>
+</tr>
+<tr class="row-odd"><td><p>Winds</p></td>
+<td><p>WIND</p></td>
+<td><p>Knots</p></td>
+<td><p>2192</p></td>
+</tr>
+<tr class="row-even"><td><p>Temperature</p></td>
+<td><p>TEMP</p></td>
+<td><p>Degrees Fahrenheit</p></td>
+<td><p>1796</p></td>
+</tr>
+<tr class="row-odd"><td><p>RH and Dewpoint</p></td>
+<td><p>RH_DP</p></td>
+<td><p>Percent relative humidity</p></td>
+<td><p>1787</p></td>
+</tr>
+<tr class="row-even"><td><p>HAPs</p></td>
+<td><p>HAPS</p></td>
+<td><p>Micrograms/cubic meter (LC)</p></td>
+<td><p>6536</p></td>
+</tr>
+<tr class="row-odd"><td><p>VOCs</p></td>
+<td><p>VOCS</p></td>
+<td><p>Parts per billion Carbon</p></td>
+<td><p>7433</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>To streamline this process, we will:</p>
+<ul class="simple">
+<li><p>Combine ‘PM2.5 FRM/FEM Mass’ and ‘PM2.5 non FRM/FEM Mass’ for both samplers into one ‘PM2.5’ set.</p></li>
+<li><p>Select parameters: PM2.5, PM10, NO2, SO2, CO, and Ozone.</p></li>
+<li><p>Rename column labels from FileIDs to parameter names for clarity (e.g., ‘81102’ to ‘PM10’).</p></li>
+<li><p>Convert the DataFrame to a NumPy representation using <code class="docutils literal notranslate"><span class="pre">.values</span></code> for analysis with NumPy</p></li>
+<li><p>Save the data as a NumPy array for analysis.</p></li>
+</ul>
+<p>We can ask our AI code assistant to do this.</p>
+<p><strong>Python code with rich annotations</strong></p>
+<p>region = ‘Miami’</p>
+<ol class="arabic simple">
+<li><p>Read ‘data_{}.csv’ as <code class="docutils literal notranslate"><span class="pre">data</span></code> DateFrame with datetime index from ‘Data/L3_Integrated’</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">data</span></code>, create column ‘PM2.5’ which is mean of columns ‘88101’, ‘88502’</p></li>
+<li><p>Create a new DataFrame <code class="docutils literal notranslate"><span class="pre">aqi_data</span></code> as a copy of <code class="docutils literal notranslate"><span class="pre">data</span></code> which shall include the following columns from <code class="docutils literal notranslate"><span class="pre">data</span></code></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">columns_from_data</span><span class="o">=</span> <span class="p">[</span>
+<span class="s1">&#39;PM2.5&#39;</span><span class="p">,</span> <span class="c1">#PM2.5</span>
+<span class="s1">&#39;81102&#39;</span><span class="p">,</span> <span class="c1">#PM10</span>
+<span class="s1">&#39;42602&#39;</span><span class="p">,</span> <span class="c1">#NO2</span>
+<span class="s1">&#39;42401&#39;</span><span class="p">,</span> <span class="c1">#SO2</span>
+<span class="s1">&#39;42101&#39;</span><span class="p">,</span> <span class="c1">#CO</span>
+<span class="s1">&#39;44201&#39;</span><span class="p">,</span>  <span class="c1">#O3</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>In <code class="docutils literal notranslate"><span class="pre">aqi_data</span></code> DataFrame rename columns lables as follows:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;PM2.5&#39;</span><span class="p">:</span> <span class="s1">&#39;PM2.5&#39;</span>
+<span class="s1">&#39;81102&#39;</span><span class="p">,</span> <span class="s1">&#39;PM10&#39;</span>
+<span class="s1">&#39;42602&#39;</span><span class="p">,</span> <span class="s1">&#39;NO2&#39;</span>
+<span class="s1">&#39;42401&#39;</span><span class="p">,</span> <span class="s1">&#39;SO2&#39;</span>
+<span class="s1">&#39;42101&#39;</span><span class="p">,</span> <span class="s1">&#39;CO&#39;</span>
+<span class="s1">&#39;44201&#39;</span><span class="p">,</span>  <span class="s1">&#39;O3&#39;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>In <code class="docutils literal notranslate"><span class="pre">air_quality_data</span></code>, get a NumPy representation of DataFrame using <code class="docutils literal notranslate"><span class="pre">.values</span></code> method</p></li>
+<li><p>To be later openned by NumPy, save the <code class="docutils literal notranslate"><span class="pre">aqi_data_</span></code> DataFrame  as ‘aqi_data_{region}.csv’ at ‘Data/L4_Transformed’ and create folder if it does not exists</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Miami&#39;</span>
+
+<span class="c1"># 1. Read &#39;data_{}.csv&#39; as `data` DataFrame with datetime index from &#39;Data/L3_Integrated&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data/L3_Integrated/data_</span><span class="si">{</span><span class="n">region</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 2. In `data`, create column &#39;PM2.5&#39; which is mean of columns &#39;88101&#39;, &#39;88502&#39;</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;PM2.5&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s1">&#39;88101&#39;</span><span class="p">,</span> <span class="s1">&#39;88502&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># 3. Create a new DataFrame `aqi_data` as a copy of `data` which shall include specific columns</span>
+<span class="n">columns_from_data</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PM2.5&#39;</span><span class="p">,</span> <span class="s1">&#39;81102&#39;</span><span class="p">,</span> <span class="s1">&#39;42602&#39;</span><span class="p">,</span> <span class="s1">&#39;42401&#39;</span><span class="p">,</span> <span class="s1">&#39;42101&#39;</span><span class="p">,</span> <span class="s1">&#39;44201&#39;</span><span class="p">]</span>
+
+<span class="n">aqi_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">columns_from_data</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># 4. Rename columns labels in `aqi_data` DataFrame</span>
+<span class="n">aqi_data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PM2.5&#39;</span><span class="p">,</span> <span class="s1">&#39;PM10&#39;</span><span class="p">,</span> <span class="s1">&#39;NO2&#39;</span><span class="p">,</span> <span class="s1">&#39;SO2&#39;</span><span class="p">,</span> <span class="s1">&#39;CO&#39;</span><span class="p">,</span> <span class="s1">&#39;O3&#39;</span><span class="p">]</span>
+
+
+<span class="c1"># 5. Get a NumPy representation of `aqi_data` DataFrame using `.values` method</span>
+<span class="n">aqi_data_values</span> <span class="o">=</span> <span class="n">aqi_data</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># 6. Save the `aqi_data` DataFrame as &#39;aqi_data_{region}.csv&#39; in &#39;Data/L4_Transformed&#39; and create folder if it does not exist</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;Data/L4_Transformed&#39;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">aqi_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data/L4_Transformed/aqi_data_</span><span class="si">{</span><span class="n">region</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After this transformation, our data is prepared for analysis. The next step is to utilize NumPy to calculate the air quality index before and after the lockdown.</p>
+</section>
+</section>
+<section id="summary">
+<h1>4. Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step(s)</p></th>
+<th class="head"><p>File Name</p></th>
+<th class="head"><p>Number of files</p></th>
+<th class="head"><p>File size</p></th>
+<th class="head"><p>Data size</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1) Data discovery and profiling</p></td>
+<td><p>‘daily_{FileID}_{year}.csv’</p></td>
+<td><p>48</p></td>
+<td><p>~60 MB</p></td>
+<td><p>~ 3 GB</p></td>
+<td><p>16 parameters and 3 years</p></td>
+</tr>
+<tr class="row-odd"><td><p>2) Data collection, cleaning, and structuring</p></td>
+<td><p>‘daily_{FileID}_{year}_Miami.csv’</p></td>
+<td><p>48</p></td>
+<td><p>~0. 4MB</p></td>
+<td><p>~ 10 MB</p></td>
+<td><p>16 parameters and 3 years for Miami and selected columns</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>‘attributes.csv’</p></td>
+<td><p>1</p></td>
+<td><p>2  KB</p></td>
+<td><p></p></td>
+<td><p>Parameter details and file information</p></td>
+</tr>
+<tr class="row-odd"><td><p>5) Data integration</p></td>
+<td><p>‘data_Miami.csv’</p></td>
+<td><p>1</p></td>
+<td><p>125 KB</p></td>
+<td><p>125 KB</p></td>
+<td><p>Integrated data with 16 parameters</p></td>
+</tr>
+<tr class="row-even"><td><p>6) Data validation</p></td>
+<td><p>‘data_Miami.csv’</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>NONOxNOy, HAPs and VOCs columns need additional treatment</p></td>
+</tr>
+<tr class="row-odd"><td><p>7) Data enrichment</p></td>
+<td><p>‘data_Miami.csv’</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>No data enrichment</p></td>
+</tr>
+<tr class="row-even"><td><p>8) Data transformation</p></td>
+<td><p>‘aqi_data_Miami.csv’</p></td>
+<td><p>1</p></td>
+<td><p>67 KB</p></td>
+<td><p>67 KB</p></td>
+<td><p>Data for AQI analysis with NumPy representation</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters\6. Data Science Workflow"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Workflow.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><h1 style="color:green; text-align:center;"> Lessons 16 : Data Science Workflow </h1></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../7.%20NumPy%20for%20Scientific%20Computing/numpy_solution.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lessons 18-19: NumPy Basics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Problem definition</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-requirements">2. Data requirements</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">3. Data preparation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-discovery-and-profiling">3.1 Data discovery and profiling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-collection">3.2 Data collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning">3.3 Data cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structuring">3.4 Data structuring</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-integration">3.5 Data integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-validation">3.6 Data validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-enrichment">3.7 Data enrichment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transformation">3.8 Data transformation</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">4. Summary</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed Elshall & Thalia Valle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

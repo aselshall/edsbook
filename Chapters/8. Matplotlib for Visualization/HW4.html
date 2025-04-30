@@ -1,0 +1,1148 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1. Problem statement &#8212; Environmental Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/8. Matplotlib for Visualization/HW4';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lessons 24 : Climate Data - CMIP6 and Remote Sensing" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/climate.html" />
+    <link rel="prev" title="Exercise 8 Matplotlib: Air quality data visualization" href="exercise8_solution.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Environmental Data Science - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Environmental Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    EGN 4930 / EGN 5932C Special Topic: Environmental Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0. Good Coding Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP1_VariableName.html">GCP1 - Selecting “good” variable names</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP2_DescribingCode.html">Describing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP3_ReadableCode.html">Readable Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP4_WritingScripts.html">Writing Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP5_Assertions.html">Assertions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson2.html">Lesson 2 Getting Started</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Excercise1.html">Exercise 1 - Installing Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson3_variables_solution.html">Objectives</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson4_list_solution.html">Objectives</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson5_formatting_solution.html">Objectives</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Exercise2_solution.html">Exercise 2 - Becoming a millionaire</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/HW1.html">Problem 1 - Happiness rating</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson6_Loops_solution.html">Objectives</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson7_conditional_statements_solution.html">Objectives</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson8_functions_solution.html">Objectives</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Lesson9_modules_solution.html">Objectives</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/Exercise3_solution.html">Objectives</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../3.%20Python%20Programming/HW2.html">Problem 1 - For-loop and indexing</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 4. Pandas for Tabular Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../4.%20Pandas%20for%20Tabular%20Data/Lesson10_pandas_solution.html">Lessons 10 - 14 - Pandas Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4.%20Pandas%20for%20Tabular%20Data/Exercise4_solution.html">Dataset</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../4.%20Pandas%20for%20Tabular%20Data/HW3.html">Homework 3</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. AI Coding Assistance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../5.%20AI%20Coding%20Assistance/JupyterAI.html">OpenAI API key for Jupyter AI extension (Optional)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Data Science Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Workflow.html">Lessons 16 - Data Science Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Exercise6_solution.html">1. Problem definition</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. NumPy for Scientific Computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing/numpy_solution.html">Lessons 18-19 - NumPy Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing/exercise7_solution.html">Exercise 7 - NumPy - Air quality data analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8. Matplotlib for Visualization</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="matplotlib.html">Lesson 20 - 21 - Matplotlib Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercise8_solution.html">Exercise 8 Matplotlib - Air quality data visualization</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Problem statement</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/climate.html">Lesson 24 - Climate Data - CMIP6 and Remote Sensing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/xarray_solution.html">Lesson 25-27 - Xarray basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/cartopy_solution.html">Lesson 28 - CartoPy basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/Exercise9.html">Exercise 9 - Sea surface height and red tides (Optional, Advanced)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/HW5.html">Install and import libraries</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">10. Google Earth Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/10.0-%20Intro%20to%20GEE.html">Lesson 30 - Intro to Google Earth Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/10.1-%20JavaScript%20API%20vs.%20Python%20API.html">Lesson 31 - JavaScript API vs. Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html">Lesson 32 - Using Google Earth Engine in a Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/geemap1.html">Exercise 10 -  GeeMap and Sentinel-2 Data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Chapters/8. Matplotlib for Visualization/HW4.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapters/8. Matplotlib for Visualization/HW4.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/8. Matplotlib for Visualization/HW4.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1. Problem statement</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Problem statement</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">2. Data Preparation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-collection-8-points">2.1 Data Collection (8 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-integration-8-points">2.2 Data integration (8 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transformation-4-points">2.3 Data transformation (4 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-8-points">2.4 Data cleaning (8 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-information">2.5 Additional information</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis">3. Data analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics-10-points">3.1 Summary statistics (10 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#line-plot-10-points">3.2 Line Plot (10 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-10-points">3.3 Boxplot (10 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-coefficients-12-points">3.4 Correlation Coefficients (12 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-10-points">3.5 Discussion (10 points)</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1 style="color:green; text-align:center;"> Homework 4: Workflow, NumPy, and Matplotlib</h1> 
+<hr class="docutils" />
+<p>General:</p>
+<ul class="simple">
+<li><p>Please submit your homework as a Jupyter notebook with well-commented code, plots, and your written summary</p></li>
+<li><p>Make sure to submit other relevent file(s) required to run the main parts of your code</p></li>
+<li><p>Late submission policy is same as Homework 3</p></li>
+<li><p>Total 80 points</p></li>
+</ul>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Import libraries </span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pylab</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlretrieve</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="problem-statement">
+<h1>1. Problem statement<a class="headerlink" href="#problem-statement" title="Link to this heading">#</a></h1>
+<p>In this assignment, you will analyze air quality data for the core-based statistical area (CBSA) of Miami to understand correlations between different air quality variables. You will be working with EPA daily air quality data for PM2.5, PM10, wind and temperature from 01-01-2018 to 31-12-2019. To complete the assignment, you will mainly use the skills learned in the lessons on Data Science Workflow, NumPy, and Matplotlib including Exercises 6, 7 and 8.</p>
+</section>
+<section id="data-preparation">
+<h1>2. Data Preparation<a class="headerlink" href="#data-preparation" title="Link to this heading">#</a></h1>
+<section id="data-collection-8-points">
+<h2>2.1 Data Collection (8 points)<a class="headerlink" href="#data-collection-8-points" title="Link to this heading">#</a></h2>
+<p>Retrieve data from the <a class="reference external" href="https://aqs.epa.gov/aqsweb/airdata/download_files.html#Daily">Pre-Generated Data Files - Daily Data</a> for PM2.5, PM10, Wind, and Temperature for the years 2018 and 2019 within the Miami Core Based Statistical Area (CBSA).</p>
+<p>Instructions (2 points):</p>
+<ul class="simple">
+<li><p>Download and unzip the file using Python libraries</p></li>
+<li><p>Filter the data by CBSA region</p></li>
+<li><p>Retain relevant columns</p></li>
+<li><p>Save the filtered data for each parameter and each year to a CSV file</p></li>
+</ul>
+<p>For help check Pandas lesson and Exercise 6, and use language models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#ChatGPT 3.5 Turbo Code</span>
+
+<span class="c1"># 1. Define Attributes dictionary for air quality data</span>
+
+
+<span class="c1"># 2. Define region and CBSA_Name_Value</span>
+<span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Miami&#39;</span>
+<span class="n">CBSA_Name_Value</span> <span class="o">=</span> <span class="s1">&#39;Miami-Fort Lauderdale-West Palm Beach, FL&#39;</span>
+
+<span class="c1"># 3. Initialize download_count</span>
+<span class="n">download_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># 4. Loop through each year and download files</span>
+
+        <span class="c1"># 5. Show download progress</span>
+
+        <span class="c1"># Download file</span>
+     
+        <span class="c1"># 6. Unzip file</span>
+     
+        <span class="c1"># 7. Read csv file</span>
+       
+        <span class="c1"># 8. Delete zip file if exists</span>
+      
+        <span class="c1"># 9. Delete csv file if exists</span>
+        
+        <span class="c1"># 10. Handle warning in raw_data</span>
+     
+        <span class="c1"># 11. Update &#39;Unit&#39; in Attributes</span>
+       
+        <span class="c1"># 12. Filter by CBSA_Name_Value</span>
+      
+        <span class="c1"># 13. Keep required columns</span>
+    
+        <span class="c1"># 14. Convert &#39;Date Local&#39; to datetime and set as index</span>
+     
+        <span class="c1"># 15. Update &#39;Records&#39; in Attributes</span>
+         
+        <span class="c1"># 16. Save raw_data</span>
+   
+
+<span class="c1"># 17. Create DataFrame from Attributes</span>
+
+<span class="c1"># 18. Save df_Attributes</span>
+
+<span class="c1"># 19. Display df_Attributes</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-integration-8-points">
+<h2>2.2 Data integration (8 points)<a class="headerlink" href="#data-integration-8-points" title="Link to this heading">#</a></h2>
+<p>Create a unified dataset from multiple CSV files.</p>
+<p>Instructions (2 points each):</p>
+<ul class="simple">
+<li><p>Create a DataFrame with a daily index covering the study period and containing values for each parameter</p></li>
+<li><p>Resample the ‘Arithmetic Mean’ column to determine the maximum daily value</p></li>
+<li><p>Resample the ‘Arithmetic Mean’ column to identify the maximum daily value for the ‘Units of Measure’ of ‘Knots’ for wind</p></li>
+<li><p>Save the combined dataset to a CSV file named ‘data_Miami.csv’</p></li>
+</ul>
+<p>For help check Pandas lesson and Exercise 6, and use language models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Miami&#39;</span>
+
+<span class="c1"># Read &#39;Data/L2_Structured/Attributes.csv&#39; as `df_Attributes` DataFrame</span>
+
+<span class="c1"># Create `data` DataFrame with daily index from 2019-01-01 to 2021-12-31 </span>
+<span class="c1"># and with columns such that the column labels are the &#39;FileID&#39; column in `df_Attributes`</span>
+
+<span class="c1"># Loop  for 2018 and 2019</span>
+    <span class="c1"># Loop for each value in &#39;FileID&#39;</span>
+        <span class="c1"># Read f&#39;Data/L2_Structured/daily_{fileID}_{year}_{region}.csv&#39; as `raw_data` DataFrame</span>
+            <span class="c1"># Set column &#39;Date Local&#39; as datetime index</span>
+                <span class="c1"># Resample the column &#39;Arithmetic Mean&#39; in `raw_data` with .max() as `resampled_arithmetic_mean`</span>
+               
+            <span class="c1"># Resample the column &#39;Arithmetic Mean&#39; in `raw_data` with .max() as `resampled_arithmetic_mean`</span>
+          
+            <span class="c1"># Copy the values of resampled_arithmetic_mean for each fileID into its corresponding column in `data`</span>
+            <span class="c1"># with the same fileID. Dates must match.</span>
+
+<span class="c1"># Save `data` DataFrame as &#39;data_{region}.csv&#39; at this path &#39;Data/L3_Integrated&#39; and create folder if it does not exist</span>
+
+<span class="c1"># Display `data` DataFrame using `display()`</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-transformation-4-points">
+<h2>2.3 Data transformation (4 points)<a class="headerlink" href="#data-transformation-4-points" title="Link to this heading">#</a></h2>
+<p>Convert data into a format suitable form for analysis.</p>
+<p>Instructions (2 points each):</p>
+<ul class="simple">
+<li><p>Combine ‘PM2.5 FRM/FEM Mass’ and ‘PM2.5 non FRM/FEM Mass’ for both samplers into one ‘PM2.5’ set</p></li>
+<li><p>Rename column labels from FileIDs to parameter names for clarity (e.g., ‘81102’ to ‘PM10’)</p></li>
+</ul>
+<p>For help check Pandas lesson and Exercise 6, and use language models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">df_Attributes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">display</span><span class="p">(</span><span class="n">df_Attributes</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;df_Attributes&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Miami&#39;</span>
+
+<span class="c1"># 1. Read &#39;data_{}.csv&#39; as `data` DataFrame with datetime index from &#39;Data/L3_Integrated&#39;</span>
+
+<span class="c1"># 2. In `data`, create column &#39;PM2.5&#39; which is mean of columns &#39;88101&#39;, &#39;88502&#39;</span>
+
+<span class="c1"># 3. Create a new DataFrame `aqi_data` as a copy of `data` which shall include specific columns</span>
+
+
+<span class="c1"># 4. Rename columns labels in `aqi_data` DataFrame</span>
+
+
+<span class="c1"># 5. Get a NumPy representation of `aqi_data` DataFrame using `.values` method</span>
+
+<span class="c1"># 6. Save the `aqi_data` DataFrame as &#39;aqi_data_{region}.csv&#39; in &#39;Data/L4_Transformed&#39; and create folder if it does not exist</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-cleaning-8-points">
+<h2>2.4 Data cleaning (8 points)<a class="headerlink" href="#data-cleaning-8-points" title="Link to this heading">#</a></h2>
+<p>Remove rows with NaNs.</p>
+<p>Instructions (4 points each)</p>
+<ul class="simple">
+<li><p>Read data as NumPy array</p></li>
+<li><p>Clean data by removing NaN rows</p></li>
+</ul>
+<p>For help check NumPy lesson and Exercise 7, and use language models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the data from the CSV file into NumPy array</span>
+<span class="c1"># Columns: [datetime-empty], &#39;PM2.5&#39;, PM10, &#39;WIND&#39;, &#39;TEMP&#39;]</span>
+
+<span class="c1">#Clean data by removing rows with NaN</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original data shape(data) (dates) (values): (730, 5) (730,) (730, 4)
+Cleaned data shape(data) (dates) (values): (712, 5) (712,) (712, 4)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="additional-information">
+<h2>2.5 Additional information<a class="headerlink" href="#additional-information" title="Link to this heading">#</a></h2>
+<p>Use this additional information in your analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Air quality parameter information</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PM2.5&#39;</span><span class="p">,</span> <span class="s1">&#39;PM10&#39;</span><span class="p">,</span><span class="s1">&#39;WIND&#39;</span><span class="p">,</span> <span class="s1">&#39;TEMP&#39;</span><span class="p">]</span>
+<span class="n">units</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;µg/m³&#39;</span><span class="p">,</span> <span class="s1">&#39;µg/m³&#39;</span><span class="p">,</span> <span class="s1">&#39;Knots&#39;</span><span class="p">,</span> <span class="s1">&#39;°F&#39;</span><span class="p">]</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">[</span>        
+    <span class="mi">34</span> <span class="p">,</span> <span class="c1"># Healthly limit for PM2.5 in µg/m³</span>
+    <span class="mi">155</span> <span class="p">,</span> <span class="c1"># Healthly limit for PM10 in µg/m³</span>
+    <span class="mi">64</span><span class="p">,</span>  <span class="c1"># Hurricane wind speed in knots</span>
+    <span class="mi">105</span>  <span class="c1"># Heat wave temperature in °F</span>
+<span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="data-analysis">
+<h1>3. Data analysis<a class="headerlink" href="#data-analysis" title="Link to this heading">#</a></h1>
+<section id="summary-statistics-10-points">
+<h2>3.1 Summary statistics (10 points)<a class="headerlink" href="#summary-statistics-10-points" title="Link to this heading">#</a></h2>
+<p>Show summary statistics of your data.</p>
+<p>Instructions (5 points each)</p>
+<ul class="simple">
+<li><p>Calculate the minimum, mean, median, and maximum values for each parameter</p></li>
+<li><p>Display the results in a tabular format that includes the parameter name, unit, limit, minimum value, mean value, median value, and maximum value. Hint: You can use a DataFrame for this task. If you need assistance with creating a pandas DataFrame, you can refer to online resources or use a language model</p></li>
+</ul>
+<p>For help check NumPy lesson and Exercise 7, and use language models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate mean concentrations </span>
+
+<span class="c1"># Create a DataFrame</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unit</th>
+      <th>Limit</th>
+      <th>Min</th>
+      <th>Mean</th>
+      <th>Median</th>
+      <th>Max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>PM2.5</th>
+      <td>µg/m³</td>
+      <td>34</td>
+      <td>4.3</td>
+      <td>9.5</td>
+      <td>8.7</td>
+      <td>34.5</td>
+    </tr>
+    <tr>
+      <th>PM10</th>
+      <td>µg/m³</td>
+      <td>50</td>
+      <td>7.0</td>
+      <td>23.3</td>
+      <td>21.0</td>
+      <td>136.0</td>
+    </tr>
+    <tr>
+      <th>WIND</th>
+      <td>Knots</td>
+      <td>64</td>
+      <td>1.9</td>
+      <td>5.6</td>
+      <td>5.5</td>
+      <td>14.2</td>
+    </tr>
+    <tr>
+      <th>TEMP</th>
+      <td>°F</td>
+      <td>105</td>
+      <td>52.3</td>
+      <td>75.9</td>
+      <td>77.3</td>
+      <td>85.3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="line-plot-10-points">
+<h2>3.2 Line Plot (10 points)<a class="headerlink" href="#line-plot-10-points" title="Link to this heading">#</a></h2>
+<p>Create line plot using Matplotlib for each of the four parameters and include appropriate labels and annotations.</p>
+<p>Instructions (2 points each)</p>
+<ul class="simple">
+<li><p>Create a 4x1 subplot grid to visualize the four parameters individually</p></li>
+<li><p>If any parameter value exceeds the health limit, display a vertical line indicating the limit</p></li>
+<li><p>Ensure a shared x-axis for all subplots</p></li>
+<li><p>Set the x-axis limits from January 1, 2018, to January 1, 2020</p></li>
+<li><p>Include appropriate labels with units and legends for clarity</p></li>
+</ul>
+<p>For help check Matplotlib lesson and Exercise 8, and use language models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Create Figure and Axes objects (6x1) </span>
+<span class="c1"># with figure size 10 inche long by 8 wide inches and shared x-axis</span>
+
+<span class="c1">#Change horizontal spaces between subplot</span>
+    
+    
+    <span class="c1"># Plot times as x-variable and air qualiy parameter as y-variable</span>
+
+    <span class="c1"># Add a horizontal line for healthy limit</span>
+
+    <span class="c1"># Set the x-axis limits using the datetime objects</span>
+    <span class="c1"># Note we need to convert date strings to datetime objects because our NumPy area has datetime</span>
+
+    <span class="c1"># Set y-label</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PM2.5 exceeds healthy limit
+</pre></div>
+</div>
+<img alt="../../_images/c000df963cd2a62b847ad68fbeefa5b9614b73c0a0bf06a7cec0546e292762c6.png" src="../../_images/c000df963cd2a62b847ad68fbeefa5b9614b73c0a0bf06a7cec0546e292762c6.png" />
+</div>
+</div>
+</section>
+<section id="boxplot-10-points">
+<h2>3.3 Boxplot (10 points)<a class="headerlink" href="#boxplot-10-points" title="Link to this heading">#</a></h2>
+<p>Create a boxplot using Matplotlib to visualize the distribution of each parameter, and include appropriate labels and annotations.</p>
+<p>Instructions (2 points each):</p>
+<ul class="simple">
+<li><p>Construct a 2x2 subplot grid to represent each parameter separately</p></li>
+<li><p>If any parameter value exceeds the health limit, show a vertical line with annotation text indicating the limit</p></li>
+<li><p>Adjust the y-axis limits to prevent annotation text from obscuring data</p></li>
+<li><p>Set xticklabel as parameter name</p></li>
+<li><p>Ensure clear labels with units and legends for better understanding</p></li>
+</ul>
+<p>For help check Matplotlib lesson and Exercise 8, and use language models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a figure object and Axes object using subplots() method</span>
+<span class="n">n</span><span class="o">=</span> <span class="mi">2</span> <span class="c1">#Number of rows</span>
+<span class="n">m</span><span class="o">=</span> <span class="mi">2</span> <span class="c1">#Number of columns</span>
+
+<span class="c1"># Increase the horizontal space (wspace)and vertical (hspace) space between subplots</span>
+
+<span class="c1">#Loop for each parameter</span>
+
+    <span class="c1"># Prepare data for pre and post</span>
+    
+    <span class="c1"># Select axex</span>
+
+    <span class="c1"># Plot data </span>
+
+    <span class="c1"># Set y label</span>
+
+    <span class="c1">#Add a horizontal line at the healthy limit if exceeded</span>
+    <span class="c1">## Maximum concentration value in the dataset</span>
+
+    <span class="c1">## Add a horizontal dashed red line at the healthy limit value</span>
+     
+        <span class="c1">### Add legend</span>
+
+        <span class="c1">#y-limit</span>
+
+    <span class="c1"># Set xtick Label</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f60d9ca3b2a74611f31ff7b6b87e2dc559ec918aa8932269b2b0bddcfe0b1c1d.png" src="../../_images/f60d9ca3b2a74611f31ff7b6b87e2dc559ec918aa8932269b2b0bddcfe0b1c1d.png" />
+</div>
+</div>
+</section>
+<section id="correlation-coefficients-12-points">
+<h2>3.4 Correlation Coefficients (12 points)<a class="headerlink" href="#correlation-coefficients-12-points" title="Link to this heading">#</a></h2>
+<p>Analyze the correlation between PM2.5, PM10, wind speed, and temperature by calculating and plotting correlation coefficients</p>
+<p>Instructions (4 points each)</p>
+<ul class="simple">
+<li><p>Conduct statistical analysis to calculate correlation coefficients. Hint: You can use <code class="docutils literal notranslate"><span class="pre">np.corrcoef</span></code> function</p></li>
+<li><p>Plot the correlation coefficients to visualize the relationships between the variables including adding a colorbar. Hint: You can use <code class="docutils literal notranslate"><span class="pre">ax.imshow</span></code> plot.</p></li>
+<li><p>Display to screen the correlation coefficents for each pair of parameters for the four parameters.</p></li>
+</ul>
+<p>While this specific analysis method may not have been covered in class, a key objective of this course is to foster independent learning and problem-solving skills. You can leverage resources such as language models and other online resources to explore new analysis techniques and Python libraries. This approach to learning ensures adaptability and proficiency in tackling diverse data analysis challenges.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate correlation coefficients</span>
+
+<span class="c1"># Create a figure and axes</span>
+
+<span class="c1"># Set the title and labels</span>
+
+
+<span class="c1">#Display results to screen</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ef6f0c66e89c55b02c371e54ab83e6e7bd0f2a76d5d0283389e24773060c4dee.png" src="../../_images/ef6f0c66e89c55b02c371e54ab83e6e7bd0f2a76d5d0283389e24773060c4dee.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation coefficient between PM2.5 and PM10: 0.55
+Correlation coefficient between PM2.5 and WIND: -0.18
+Correlation coefficient between PM2.5 and TEMP: 0.10
+Correlation coefficient between PM10 and WIND: 0.19
+Correlation coefficient between PM10 and TEMP: 0.07
+Correlation coefficient between WIND and TEMP: -0.32
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="discussion-10-points">
+<h2>3.5 Discussion (10 points)<a class="headerlink" href="#discussion-10-points" title="Link to this heading">#</a></h2>
+<p>Critically discuss the correlation coefficients calculated and the relationships observed between PM2.5, PM10, wind speed, and temperature.</p>
+<p>Instructions (2 points each):</p>
+<ul class="simple">
+<li><p>Discuss correlation coefficients for PM2.5, PM10, wind speed, and temperature, showing understanding of the statistical method used</p></li>
+<li><p>Explain observed correlations, discussing expected and unexpected relationships with references to relevant studies</p></li>
+<li><p>Discuss analysis limitations and suggest areas for further analysis to enhance understanding of these relationships in air quality assessment</p></li>
+<li><p>Ensure a well-organized, coherent response within 150-300 words</p></li>
+<li><p>Use appropriate citations to support arguments</p></li>
+</ul>
+<p>The learning objective of this question is to help you to enhance your critical thinking in data analysis, use of references to support your arguments, and clarity in presenting findings. This shall help you to prepare for your final project.</p>
+<p>Add discussion here.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters\8. Matplotlib for Visualization"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="exercise8_solution.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Exercise 8 Matplotlib: Air quality data visualization</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/climate.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lessons 24 : Climate Data - CMIP6 and Remote Sensing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Problem statement</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">2. Data Preparation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-collection-8-points">2.1 Data Collection (8 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-integration-8-points">2.2 Data integration (8 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transformation-4-points">2.3 Data transformation (4 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-8-points">2.4 Data cleaning (8 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-information">2.5 Additional information</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis">3. Data analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics-10-points">3.1 Summary statistics (10 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#line-plot-10-points">3.2 Line Plot (10 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-10-points">3.3 Boxplot (10 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-coefficients-12-points">3.4 Correlation Coefficients (12 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-10-points">3.5 Discussion (10 points)</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed Elshall & Thalia Valle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

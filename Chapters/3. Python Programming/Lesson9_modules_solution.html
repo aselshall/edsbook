@@ -1,0 +1,1441 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Objectives &#8212; Environmental Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/3. Python Programming/Lesson9_modules_solution';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Objectives" href="Exercise3_solution.html" />
+    <link rel="prev" title="Objectives" href="Lesson8_functions_solution.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Environmental Data Science - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Environmental Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    EGN 4930 / EGN 5932C Special Topic: Environmental Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0. Good Coding Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP1_VariableName.html">GCP1 - Selecting “good” variable names</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP2_DescribingCode.html">Describing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP3_ReadableCode.html">Readable Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP4_WritingScripts.html">Writing Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP5_Assertions.html">Assertions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson2.html">Lesson 2 Getting Started</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Excercise1.html">Exercise 1 - Installing Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson3_variables_solution.html">Objectives</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson4_list_solution.html">Objectives</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson5_formatting_solution.html">Objectives</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Exercise2_solution.html">Exercise 2 - Becoming a millionaire</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/HW1.html">Problem 1 - Happiness rating</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Python Programming</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Lesson6_Loops_solution.html">Objectives</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lesson7_conditional_statements_solution.html">Objectives</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lesson8_functions_solution.html">Objectives</a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Objectives</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Exercise3_solution.html">Objectives</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="HW2.html">Problem 1 - For-loop and indexing</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 4. Pandas for Tabular Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../4.%20Pandas%20for%20Tabular%20Data/Lesson10_pandas_solution.html">Lessons 10 - 14 - Pandas Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4.%20Pandas%20for%20Tabular%20Data/Exercise4_solution.html">Dataset</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../4.%20Pandas%20for%20Tabular%20Data/HW3.html">Homework 3</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. AI Coding Assistance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../5.%20AI%20Coding%20Assistance/JupyterAI.html">OpenAI API key for Jupyter AI extension (Optional)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Data Science Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Workflow.html">Lessons 16 - Data Science Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Exercise6_solution.html">1. Problem definition</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. NumPy for Scientific Computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing/numpy_solution.html">Lessons 18-19 - NumPy Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing/exercise7_solution.html">Exercise 7 - NumPy - Air quality data analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8. Matplotlib for Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization/matplotlib.html">Lesson 20 - 21 - Matplotlib Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization/exercise8_solution.html">Exercise 8 Matplotlib - Air quality data visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization/HW4.html">1. Problem statement</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/climate.html">Lesson 24 - Climate Data - CMIP6 and Remote Sensing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/xarray_solution.html">Lesson 25-27 - Xarray basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/cartopy_solution.html">Lesson 28 - CartoPy basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/Exercise9.html">Exercise 9 - Sea surface height and red tides (Optional, Advanced)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/HW5.html">Install and import libraries</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">10. Google Earth Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/10.0-%20Intro%20to%20GEE.html">Lesson 30 - Intro to Google Earth Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/10.1-%20JavaScript%20API%20vs.%20Python%20API.html">Lesson 31 - JavaScript API vs. Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html">Lesson 32 - Using Google Earth Engine in a Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/geemap1.html">Exercise 10 -  GeeMap and Sentinel-2 Data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Chapters/3. Python Programming/Lesson9_modules_solution.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapters/3. Python Programming/Lesson9_modules_solution.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/3. Python Programming/Lesson9_modules_solution.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Objectives</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Objectives</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#an-introduction-to-script-files">1. An introduction to script files</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-general-concept-of-a-py-script-file">1.1 The general concept of a <code class="docutils literal notranslate"><span class="pre">.py</span></code> script file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">1.2 Getting started</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#renaming-our-python-file">1.3 Renaming our Python file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-functions-in-a-script-file">1.4 Saving functions in a script file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-functions-from-a-script-file">1.5 Calling functions from a script file</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-sure-we-re-in-the-right-working-directory">1.5.1 Making sure we’re in the right working directory</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confirming-we-are-in-the-correct-directory">Confirming we are in the correct directory</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-our-script-functions">1.5.2 Importing our script functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-our-script-functions">1.5.3 Using our script functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-multiple-functions">1.5.4 Importing multiple functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-all-functions-from-a-script">1.5.5 Importing all functions from a script</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example-temperature-calculator-optional">2. Example: Temperature calculator (<em>optional</em>)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-the-function">2.1 Making the function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-docstring">2.2 Adding a docstring</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-temp-calculator-function">2.3 Using the temp_calculator function</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modules-packages-and-libraries">3. Modules, packages and libraries?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-modules">3.1 Loading modules</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-whole-module">3.1.1 Loading whole module</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-functions">Built-in functions</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-whole-module-with-renaming">3.1.2 Loading whole module with renaming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-a-single-function">3.1.4 Importing a single function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-a-submodule">3.1.5 Importing a submodule</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-module-functions">3.2 Using module functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-should-i-not-do">3.3 What should I not do?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-from-x-import">3.3.1 Using <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">X</span> <span class="pre">import</span> <span class="pre">*</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-names-when-renaming-on-import">3.3.2 Poor names when renaming on import</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-modules-along-the-way-instead-of-on-the-top">3.3.3 Importing modules along the way instead of on the top</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-packages">4. Installing packages</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1 style="color:green; text-align:center;">Lesson 9: Script Files and Modules</h1> 
+<p>This lesson is modified from <a class="reference external" href="https://geo-python-site.readthedocs.io/en/latest/notebooks/L4/script-files.html">Using script files</a> and <a class="reference external" href="https://geo-python-site.readthedocs.io/en/latest/notebooks/L4/modules.html">loading and using modules</a>
+from <a class="reference external" href="https://geo-python-site.readthedocs.io/en/latest/index.html">geo-python</a>.</p>
+<p><a class="reference external" href="https://mybinder.org/v2/gh/aselshall/eds/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+<hr class="docutils" />
+<section id="objectives">
+<h1>Objectives<a class="headerlink" href="#objectives" title="Link to this heading">#</a></h1>
+<p>By the end of this lesson, you will be able to</p>
+<ul class="simple">
+<li><p>save functions to a script file for future use</p></li>
+<li><p>be able to import and use a module</p></li>
+<li><p>install and import new packages (a module or collection of modules)</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+<section id="an-introduction-to-script-files">
+<h1>1. An introduction to script files<a class="headerlink" href="#an-introduction-to-script-files" title="Link to this heading">#</a></h1>
+<p>Up to this point we have been keeping our python code and markdown comments in a single jupyter notebook document.
+This is great, but there are some cases, like when you have long python code blocks or a set of functions used in many notebooks, in which you may want to have python code in a separate document to make sure your jupyter notebook is easy to read (and use).
+An alternative to typing in all of the commands you would like to run is the list them in a python <code class="docutils literal notranslate"><span class="pre">script</span></code> file.
+A python script file is simply a file containing a list of the commands you would like to run, normally with one command per line, and formatted in the same way as if you were to type them in.
+Python script files traditionally use the <code class="docutils literal notranslate"><span class="pre">.py</span></code> file extension in their names.</p>
+<section id="the-general-concept-of-a-py-script-file">
+<h2>1.1 The general concept of a <code class="docutils literal notranslate"><span class="pre">.py</span></code> script file<a class="headerlink" href="#the-general-concept-of-a-py-script-file" title="Link to this heading">#</a></h2>
+<p>Because a python script file is simply a list of commands that you might otherwise type into a python cell in a jupyter notebook or a python console, we can quite easily create a basic script file and test things out.</p>
+</section>
+<section id="getting-started">
+<h2>1.2 Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
+<p>First, we need to create a new text file by clicking on <strong>File</strong> -&gt; <strong>New</strong> -&gt; <strong>Python File</strong> in the JupyterLab menu bar.</p>
+<p><img alt="image.png" src="Chapters/3. Python Programming/attachment:a31d3e22-70ce-444f-a35d-6147940d27db.png" /></p>
+<p>Creating a new Python file (Source: <a class="reference external" href="https://geo-python-site.readthedocs.io/en/2023/notebooks/L4/script-files.html">Geopython</a>)</p>
+<p>This will create a new tab in your JupyterLab window that should look something like that below, a blank slate.</p>
+<p><img alt="image.png" src="Chapters/3. Python Programming/attachment:ccea7d45-c990-4127-959b-1d7c512d08a9.png" /></p>
+<p>Our new Python file in JupyterLab (Source: <a class="reference external" href="https://geo-python-site.readthedocs.io/en/2023/notebooks/L4/script-files.html">Geopython</a>)</p>
+<p>Start by copying and pasting the text below into your new text file editor panel.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">celsius_to_fahr</span><span class="p">(</span><span class="n">temp_celsius</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span> <span class="o">*</span> <span class="n">temp_celsius</span> <span class="o">+</span> <span class="mi">32</span>
+</pre></div>
+</div>
+</section>
+<section id="renaming-our-python-file">
+<h2>1.3 Renaming our Python file<a class="headerlink" href="#renaming-our-python-file" title="Link to this heading">#</a></h2>
+<p>Python scripts are just regular text files with the <code class="docutils literal notranslate"><span class="pre">.py</span></code> file extension that will identify them as source code for Python in JupyterLab.
+By default, new Python files will be called <code class="docutils literal notranslate"><span class="pre">untitled.py</span></code>.
+You can rename the file by right clicking on the tab titled <code class="docutils literal notranslate"><span class="pre">untitled.py</span></code> and renaming it as <code class="docutils literal notranslate"><span class="pre">temp_converter.py</span></code>.</p>
+<p><img alt="image.png" src="Chapters/3. Python Programming/attachment:6627a87c-56f5-4f30-a71a-30c192a17c0f.png" /></p>
+<p>Renaming a Python file in JupyterLab (Source: <a class="reference external" href="https://geo-python-site.readthedocs.io/en/2023/notebooks/L4/script-files.html">Geopython</a>)</p>
+<p><img alt="image.png" src="Chapters/3. Python Programming/attachment:da69c358-e58f-4c73-bee0-b6e72a0541f0.png" /></p>
+<p>Changing the file name in JupyterLab (Source: <a class="reference external" href="https://geo-python-site.readthedocs.io/en/2023/notebooks/L4/script-files.html">Geopython</a>)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Be sure to save your <code class="docutils literal notranslate"><span class="pre">temp_converter.py</span></code> file after making your changes.</p>
+</div>
+<p>We’ll return later to some best practices for writing script files, but for now let’s continue with how to use our functions saved in the Python file we just created.</p>
+</section>
+<section id="saving-functions-in-a-script-file">
+<h2>1.4 Saving functions in a script file<a class="headerlink" href="#saving-functions-in-a-script-file" title="Link to this heading">#</a></h2>
+<p>Functions such as the ones we just created can also be saved in a script file and called from Jupyter notebooks.
+In fact, quite often it is useful to create a dedicated function library for functions that you use frequently, when doing data analysis, for example.
+Basically this is done by listing useful functions in a single <code class="docutils literal notranslate"><span class="pre">.py</span></code> file from which you can then import and use them whenever needed.</p>
+<p>Basically, we’ve just seen how to save some functions to a script file.
+Let’s now add the other functions we had been using to our script.
+Simply copy and paste the text below into your <code class="docutils literal notranslate"><span class="pre">temp_converter.py</span></code> file leaving two blank lines between each function, as suggested in the <a class="reference external" href="https://pep8.org/#blank-lines">PEP 8 guidelines</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">kelvins_to_celsius</span><span class="p">(</span><span class="n">temp_kelvins</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">temp_kelvins</span> <span class="o">-</span> <span class="mf">273.15</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">kelvins_to_fahr</span><span class="p">(</span><span class="n">temp_kelvins</span><span class="p">):</span>
+    <span class="n">temp_celsius</span> <span class="o">=</span> <span class="n">kelvins_to_celsius</span><span class="p">(</span><span class="n">temp_kelvins</span><span class="p">)</span>
+    <span class="n">temp_fahr</span> <span class="o">=</span> <span class="n">celsius_to_fahr</span><span class="p">(</span><span class="n">temp_celsius</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">temp_fahr</span>
+</pre></div>
+</div>
+<p>Don’t forget to save your changes!</p>
+</section>
+<section id="calling-functions-from-a-script-file">
+<h2>1.5 Calling functions from a script file<a class="headerlink" href="#calling-functions-from-a-script-file" title="Link to this heading">#</a></h2>
+<p>Now that we have saved our temperature conversion functions into a script file we can start using them.</p>
+<section id="making-sure-we-re-in-the-right-working-directory">
+<h3>1.5.1 Making sure we’re in the right working directory<a class="headerlink" href="#making-sure-we-re-in-the-right-working-directory" title="Link to this heading">#</a></h3>
+<p>Hopefully you have saved your <code class="docutils literal notranslate"><span class="pre">temp_converter.py</span></code> file in the same location as this Jupyter notebook (<code class="docutils literal notranslate"><span class="pre">script-files.ipynb</span></code>).
+If so, that’s good, but we need to do one more thing to be able to start working with it.
+We need to change the working directory in JupyterLab to be the one where the <code class="docutils literal notranslate"><span class="pre">temp_converter.py</span></code> exists.</p>
+<p>First, we can check where we are working currently using an IPython magic command called <code class="docutils literal notranslate"><span class="pre">%ls</span></code>. <code class="docutils literal notranslate"><span class="pre">%ls</span></code> allows us to see the files located in the directory where we are currently working. You can run the <code class="docutils literal notranslate"><span class="pre">%ls</span></code> command in the cell below to see which files are in the current working directory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">ls</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Volume in drive C has no label.
+ Volume Serial Number is CA43-BF54
+
+ Directory of C:\Users\aelshall\OneDrive - Florida Gulf Coast University\Data\Teaching\ENG4930_EnvDataSc\edsbook\Chapters\3. Python Programming
+
+04/29/2025  11:28 AM    &lt;DIR&gt;          .
+04/29/2025  11:28 AM    &lt;DIR&gt;          ..
+04/29/2025  11:25 AM    &lt;DIR&gt;          .ipynb_checkpoints
+04/29/2025  11:25 AM    &lt;DIR&gt;          __pycache__
+01/29/2024  07:14 PM             1,611 Ex3.py
+04/29/2025  11:24 AM            23,376 Exercise3_solution.ipynb
+02/11/2024  05:01 PM            13,269 HW2.ipynb
+04/29/2025  11:24 AM           230,538 Lesson6_Loops_solution.ipynb
+04/29/2025  11:25 AM            17,938 Lesson7_conditional_statements_solution.ipynb
+04/29/2025  11:28 AM           102,298 Lesson8_functions_solution.ipynb
+04/29/2025  11:27 AM           353,731 Lesson9_modules_solution.ipynb
+01/22/2024  01:58 PM             1,349 temp_converter.py
+               8 File(s)        744,110 bytes
+               4 Dir(s)  27,394,834,432 bytes free
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-Note notranslate"><div class="highlight"><pre><span></span>In python and jupyter notebooks, the &quot;%&quot; symbol is used to indicate magic commands, which are special commands that are not a part of the python language itself but are specific to the IPython environment used by jupyter. These commands provide additional functionality and are prefixed with a &quot;%&quot; character. These magic commands can be quite handy for performing various tasks and managing the Jupyter environment. You can find a list of available magic commands by running %lsmagic in a jupyter cell.
+</pre></div>
+</div>
+<p>If your output from the <code class="docutils literal notranslate"><span class="pre">%ls</span></code> command is the directory where you jupyter notebook is, then you are all set to continue. Otherwise, you will need to change directories to the one containing the <code class="docutils literal notranslate"><span class="pre">temp_converter.py</span></code> file.
+You can do this using <code class="docutils literal notranslate"><span class="pre">%cd</span></code> like this example:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">cd</span> my-work/notebooks/
+</pre></div>
+</div>
+<p>Replace the above path to the path where your “Lesson9_script-files.ipynb” and “temp_converter.py” are.</p>
+<section id="confirming-we-are-in-the-correct-directory">
+<h4>Confirming we are in the correct directory<a class="headerlink" href="#confirming-we-are-in-the-correct-directory" title="Link to this heading">#</a></h4>
+<p>At this point we can run the <code class="docutils literal notranslate"><span class="pre">%ls</span></code> command once more to make sure we’re in the correct directory. You should see the <code class="docutils literal notranslate"><span class="pre">temp_converter.py</span></code> file in the list of files and directories that are output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">ls</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Volume in drive C has no label.
+ Volume Serial Number is CA43-BF54
+
+ Directory of C:\Users\aelshall\OneDrive - Florida Gulf Coast University\Data\Teaching\ENG4930_EnvDataSc\edsbook\Chapters\3. Python Programming
+
+04/29/2025  11:28 AM    &lt;DIR&gt;          .
+04/29/2025  11:28 AM    &lt;DIR&gt;          ..
+04/29/2025  11:25 AM    &lt;DIR&gt;          .ipynb_checkpoints
+04/29/2025  11:25 AM    &lt;DIR&gt;          __pycache__
+01/29/2024  07:14 PM             1,611 Ex3.py
+04/29/2025  11:24 AM            23,376 Exercise3_solution.ipynb
+02/11/2024  05:01 PM            13,269 HW2.ipynb
+04/29/2025  11:24 AM           230,538 Lesson6_Loops_solution.ipynb
+04/29/2025  11:25 AM            17,938 Lesson7_conditional_statements_solution.ipynb
+04/29/2025  11:28 AM           102,298 Lesson8_functions_solution.ipynb
+04/29/2025  11:27 AM           353,731 Lesson9_modules_solution.ipynb
+01/22/2024  01:58 PM             1,349 temp_converter.py
+               8 File(s)        744,110 bytes
+               4 Dir(s)  27,394,834,432 bytes free
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="importing-our-script-functions">
+<h3>1.5.2 Importing our script functions<a class="headerlink" href="#importing-our-script-functions" title="Link to this heading">#</a></h3>
+<p>Let’s now import our <code class="docutils literal notranslate"><span class="pre">celsius_to_fahr()</span></code> function from the other script by adding a specific <code class="docutils literal notranslate"><span class="pre">import</span></code> statement in the Python cell below: <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">temp_converter</span> <span class="pre">import</span> <span class="pre">celsius_to_fahr</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">temp_converter</span><span class="w"> </span><span class="kn">import</span> <span class="n">celsius_to_fahr</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-our-script-functions">
+<h3>1.5.3 Using our script functions<a class="headerlink" href="#using-our-script-functions" title="Link to this heading">#</a></h3>
+<p>Let’s also use the function so that we can see that it is working. We can print the temperature in Fahrenheit at which water freezes using our <code class="docutils literal notranslate"><span class="pre">celsius_to_fahr()</span></code> function in the cell below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The freezing point of water in Fahrenheit is </span><span class="si">{</span><span class="n">celsius_to_fahr</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The freezing point of water in Fahrenheit is 32.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>You should get following output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">freezing</span> <span class="n">point</span> <span class="n">of</span> <span class="n">water</span> <span class="ow">in</span> <span class="n">Fahrenheit</span> <span class="ow">is</span> <span class="mf">32.0</span>
+</pre></div>
+</div>
+</section>
+<section id="importing-multiple-functions">
+<h3>1.5.4 Importing multiple functions<a class="headerlink" href="#importing-multiple-functions" title="Link to this heading">#</a></h3>
+<p>It is also possible to import more functions at the same time by listing and separating them with a comma.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">my_script</span><span class="w"> </span><span class="kn">import</span> <span class="n">func1</span><span class="p">,</span> <span class="n">func2</span><span class="p">,</span> <span class="n">func3</span>
+</pre></div>
+</div>
+<p>Here is an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">temp_converter</span><span class="w"> </span><span class="kn">import</span> <span class="n">celsius_to_fahr</span><span class="p">,</span> <span class="n">kelvins_to_fahr</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="importing-all-functions-from-a-script">
+<h3>1.5.5 Importing all functions from a script<a class="headerlink" href="#importing-all-functions-from-a-script" title="Link to this heading">#</a></h3>
+<p>Sometimes it is useful to import the whole script and all of its functions at once. Let’s use a different <code class="docutils literal notranslate"><span class="pre">import</span></code> statement and test that all functions work. This time we can type <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">temp_converter</span> <span class="pre">as</span> <span class="pre">tc</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">temp_converter</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Just like the examples we have seen earlier with the <code class="docutils literal notranslate"><span class="pre">math</span></code> library, such as using <code class="docutils literal notranslate"><span class="pre">math.sin()</span></code>, we can now use our functions such as <code class="docutils literal notranslate"><span class="pre">tc.celsius_to_fahr()</span></code>. In the cells below, test our functions as they were used above by printing the freezing point of water in Fahrenheit, absolute zero in Celsius, and absolute zero in Fahrenheit.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span><span class="o">=</span><span class="n">tc</span><span class="o">.</span><span class="n">celsius_to_fahr</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The freezing point of water in Fahrenheit is </span><span class="si">{</span><span class="n">temp</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The freezing point of water in Fahrenheit is 32.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span><span class="o">=</span><span class="n">tc</span><span class="o">.</span><span class="n">kelvins_to_celsius</span><span class="p">(</span><span class="n">temp_kelvins</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Absolute zero in Celsius is </span><span class="si">{</span><span class="n">temp</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Absolute zero in Celsius is -273.15
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp</span><span class="o">=</span><span class="n">tc</span><span class="o">.</span><span class="n">kelvins_to_fahr</span><span class="p">(</span><span class="n">temp_kelvins</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Absolute zero in Fahrenheit is </span><span class="si">{</span><span class="n">temp</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Absolute zero in Fahrenheit is -459.66999999999996
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tc</span><span class="o">.</span><span class="n">add_power</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5, 8)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note</strong> : When you add the two new functions <code class="docutils literal notranslate"><span class="pre">kelvins_to_celsius</span></code> and  <code class="docutils literal notranslate"><span class="pre">kelvins_to_fahr</span></code>, and you try to call <code class="docutils literal notranslate"><span class="pre">kelvins_to_celsius()</span></code>, for example, you will get an error:</p>
+<div class="highlight-error notranslate"><div class="highlight"><pre><span></span>module &#39;temp_converter&#39; has no attribute &#39;kelvins_to_celsius&#39;.
+</pre></div>
+</div>
+<p>Why? In Jupyter Notebooks or IPython environments, when you import a module, the imported module is cached in memory. If you make changes to the module (like adding a new function), simply re-importing the module may not reflect the changes immediately. This is because the kernel retains the previous version of the module in memory. Restarting the kernel is a way to clear the memory and reload all the modules, ensuring that any changes made to the module are applied. To do this, go to <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> menu and select <code class="docutils literal notranslate"><span class="pre">Restart</span> <span class="pre">kernel</span></code> and you are good to go.</p>
+</section>
+</section>
+</section>
+<section id="example-temperature-calculator-optional">
+<h1>2. Example: Temperature calculator (<em>optional</em>)<a class="headerlink" href="#example-temperature-calculator-optional" title="Link to this heading">#</a></h1>
+<p>So far we have learned how to define functions with one parameter and with multiple parameters, and with one output or multiple outputs.
+Let’s now make a simple <code class="docutils literal notranslate"><span class="pre">temp_calculator</span></code> function that accepts temperatures in Kelvins and returns values in either degrees Celsius or degrees Fahrenheit.
+The new function will have two parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">temp_k</span></code> : The parameter for passing temperature in Kelvins</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">convert_to</span></code> : The parameter that determines whether to output should be in Celsius or in Fahrenheit (using the letters <code class="docutils literal notranslate"><span class="pre">C</span></code> or <code class="docutils literal notranslate"><span class="pre">F</span></code> accordingly)</p></li>
+</ul>
+<section id="making-the-function">
+<h2>2.1 Making the function<a class="headerlink" href="#making-the-function" title="Link to this heading">#</a></h2>
+<p>Let’s start defining our function by giving it a name and setting the parameters.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">temp_calculator</span><span class="p">(</span><span class="n">temp_k</span><span class="p">,</span> <span class="n">convert_to</span><span class="p">):</span>
+    
+    <span class="c1"># Check if user wants the temperature in Celsius</span>
+    <span class="k">if</span> <span class="n">convert_to</span> <span class="o">==</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span>
+        
+        <span class="c1"># Convert the value to Celsius </span>
+        <span class="n">converted_temp</span> <span class="o">=</span> <span class="n">kelvins_to_celsius</span><span class="p">(</span><span class="n">temp_kelvins</span><span class="o">=</span><span class="n">temp_k</span><span class="p">)</span>
+    
+    <span class="k">elif</span> <span class="n">convert_to</span> <span class="o">==</span> <span class="s2">&quot;F&quot;</span><span class="p">:</span>
+       
+        <span class="c1"># Convert the value to Fahrenheit </span>
+        <span class="n">converted_temp</span> <span class="o">=</span> <span class="n">kelvins_to_fahr</span><span class="p">(</span><span class="n">temp_kelvins</span><span class="o">=</span><span class="n">temp_k</span><span class="p">)</span>
+   
+    
+    <span class="c1"># Return the result</span>
+    <span class="k">return</span> <span class="n">converted_temp</span>
+</pre></div>
+</div>
+</section>
+<section id="adding-a-docstring">
+<h2>2.2 Adding a docstring<a class="headerlink" href="#adding-a-docstring" title="Link to this heading">#</a></h2>
+<p>Since we want to be good programmers, we should add a short docstring at the beginning of our function that tells what the function does and how the parameters work.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">temp_calculator</span><span class="p">(</span><span class="n">temp_k</span><span class="p">,</span> <span class="n">convert_to</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function for converting temperature in Kelvins to Celsius or Fahrenheit.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    temp_k: numerical</span>
+<span class="sd">        Temperature in Kelvins</span>
+<span class="sd">    convert_to: str</span>
+<span class="sd">        Target temperature that can be either Celsius (&#39;C&#39;) or Fahrenheit (&#39;F&#39;). Supported values: &#39;C&#39; | &#39;F&#39;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    converted_temp: float</span>
+<span class="sd">        Converted temperature.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Check if user wants the temperature in Celsius</span>
+    <span class="k">if</span> <span class="n">convert_to</span> <span class="o">==</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span>
+        
+        <span class="c1"># Convert the value to Celsius using the dedicated function for the task that we imported from another script</span>
+        <span class="n">converted_temp</span> <span class="o">=</span> <span class="n">kelvins_to_celsius</span><span class="p">(</span><span class="n">temp_kelvins</span><span class="o">=</span><span class="n">temp_k</span><span class="p">)</span>
+    
+    <span class="k">elif</span> <span class="n">convert_to</span> <span class="o">==</span> <span class="s2">&quot;F&quot;</span><span class="p">:</span>
+        
+        <span class="c1"># Convert the value to Fahrenheit using the dedicated function for the task that we imported from another script</span>
+        <span class="n">converted_temp</span> <span class="o">=</span> <span class="n">kelvins_to_fahr</span><span class="p">(</span><span class="n">temp_kelvins</span><span class="o">=</span><span class="n">temp_k</span><span class="p">)</span>
+   
+    <span class="c1"># Return the result</span>
+    <span class="k">return</span> <span class="n">converted_temp</span>
+</pre></div>
+</div>
+<p>You can copy this to a file and rename it “temp_converter.py”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">tc</span><span class="o">.</span><span class="n">temp_calculator</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on function temp_calculator in module temp_converter:
+
+temp_calculator(temp_k, convert_to)
+    Function for converting temperature in Kelvins to Celsius or Fahrenheit.
+
+    Parameters
+    ----------
+    temp_k: &lt;numerical&gt;
+        Temperature in Kelvins
+    convert_to: &lt;str&gt;
+        Target temperature that can be either Celsius (&#39;C&#39;) or Fahrenheit (&#39;F&#39;). Supported values: &#39;C&#39; | &#39;F&#39;
+
+    Returns
+    -------
+    &lt;float&gt;
+        Converted temperature.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-the-temp-calculator-function">
+<h2>2.3 Using the temp_calculator function<a class="headerlink" href="#using-the-temp-calculator-function" title="Link to this heading">#</a></h2>
+<p>Add this function to your “temp_converter.py”, and do not forget to restart the kernel in order not to get an error.</p>
+<p>Now, let’s use it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">temp_converter</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temp_kelvin</span> <span class="o">=</span> <span class="mi">30</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature_c</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">temp_calculator</span><span class="p">(</span><span class="n">temp_k</span><span class="o">=</span><span class="n">temp_kelvin</span><span class="p">,</span> <span class="n">convert_to</span><span class="o">=</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature </span><span class="si">{</span><span class="n">temp_kelvin</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> in Kelvins is </span><span class="si">{</span><span class="n">temperature_c</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> in Celsius&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Temperature 30.00 in Kelvins is -243.15 in Celsius
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="modules-packages-and-libraries">
+<h1>3. Modules, packages and libraries?<a class="headerlink" href="#modules-packages-and-libraries" title="Link to this heading">#</a></h1>
+<p>Python <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html#modules">module</a> refers to a piece of python code that is designed to execute a spesific task. Technically, modules are simply python script files (file extension<code class="docutils literal notranslate"><span class="pre">.py</span></code>) that contain function definitions and other statements. Python <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html#packages">packages</a> are a way of organizing modules into larger entities. The words “module”, “package” and “library” are often used interchangeably.</p>
+<section id="loading-modules">
+<h2>3.1 Loading modules<a class="headerlink" href="#loading-modules" title="Link to this heading">#</a></h2>
+<p>Python modules can be loaded in a number of different ways.</p>
+<section id="loading-whole-module">
+<h3>3.1.1 Loading whole module<a class="headerlink" href="#loading-whole-module" title="Link to this heading">#</a></h3>
+<p>Python modules can be loaded in a number of different ways.</p>
+<p>Let’s start simple with the math module.
+Here, we’ll load the math module using the <code class="docutils literal notranslate"><span class="pre">import</span></code> statement and try out some of the functions in the module, such as the square root function <code class="docutils literal notranslate"><span class="pre">sqrt</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">81</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we have loaded the math module by typing <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">math</span></code>, which tells Python to read in the functions in the math module and make them available for use.
+In our example, we see that we can use a function within the math library by typing the name of the module first, a period, and then the name of function we would like to use afterward (e.g., <code class="docutils literal notranslate"><span class="pre">math.sqrt()</span></code>).</p>
+<section id="built-in-functions">
+<h4>Built-in functions<a class="headerlink" href="#built-in-functions" title="Link to this heading">#</a></h4>
+<p><a class="reference external" href="https://docs.python.org/3/library/functions.html">Built-in functions</a> such as <code class="docutils literal notranslate"><span class="pre">print()</span></code> are always available without importing anything:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello world!
+</pre></div>
+</div>
+</div>
+</div>
+<p>Technically, the built-in functions belong to a module called <code class="docutils literal notranslate"><span class="pre">builtins</span></code>.</p>
+</section>
+</section>
+<section id="loading-whole-module-with-renaming">
+<h3>3.1.2 Loading whole module with renaming<a class="headerlink" href="#loading-whole-module-with-renaming" title="Link to this heading">#</a></h3>
+<p>We can also rename modules when they are imported.
+This can be helpful when using modules with longer names.
+Let’s import the <code class="docutils literal notranslate"><span class="pre">math</span></code> module but rename it to <code class="docutils literal notranslate"><span class="pre">m</span></code> using the format <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">module</span> <span class="pre">as</span> <span class="pre">name</span></code>.
+Then we can using the <code class="docutils literal notranslate"><span class="pre">sqrt</span></code> function from the math library and check the type of our module named <code class="docutils literal notranslate"><span class="pre">m</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">m</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">49</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, we imported the <code class="docutils literal notranslate"><span class="pre">math</span></code> module to be usable with the name <code class="docutils literal notranslate"><span class="pre">m</span></code> instead of <code class="docutils literal notranslate"><span class="pre">math</span></code>. We will see other examples later in the course where using an alternate name is rather useful. For example, next week we will start using the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> library for data analysis. It is customary to import pandas as <code class="docutils literal notranslate"><span class="pre">pd</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="importing-a-single-function">
+<h3>3.1.4 Importing a single function<a class="headerlink" href="#importing-a-single-function" title="Link to this heading">#</a></h3>
+<p>It is also possible to import only a single function from a module, rather than the entire module.
+This is sometimes useful when needing only a small piece of a large module.
+We can do this using the form <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">module</span> <span class="pre">import</span> <span class="pre">function</span></code>.
+Let’s import the <code class="docutils literal notranslate"><span class="pre">sqrt</span></code> function from the <code class="docutils literal notranslate"><span class="pre">math</span></code> module using this form.
+Again, we can test using our resulting function afterward.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">sqrt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sqrt</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Though this can be useful, it has the drawback that <strong>the imported function could conflict with other built-in or imported function names</strong>, and you lose the information about which module contains the imported function.
+You should only do this when you truly need to.</p>
+</section>
+<section id="importing-a-submodule">
+<h3>3.1.5 Importing a submodule<a class="headerlink" href="#importing-a-submodule" title="Link to this heading">#</a></h3>
+<p>Some modules have submodules that can also be imported without importing the entire module.
+We may see examples of this later when making data plots using the pyplot sub-module of the <a class="reference external" href="http://matplotlib.org/">Matplotlib module</a>.
+In case you’re curious, here is an example.</p>
+<p><strong>Note</strong>: When importing <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> you may get the following error</p>
+<div class="highlight-error notranslate"><div class="highlight"><pre><span></span>ModuleNotFoundError: No module named &#39;matplotlib&#39;
+</pre></div>
+</div>
+<p>because you still did not install it. You need to first <a class="reference external" href="https://matplotlib.org/stable/users/getting_started/">install matplotlib</a>. Using pip install, you can type the flowing in a new code cell</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">matplotlib</span>
+</pre></div>
+</div>
+<p>that will install the package for you. It is not a small package so installation can take minutes. Do not forget to restart the kernel before using your new package. For more infromation: <a class="reference internal" href="#4.-Installing-packages"><span class="xref myst">4. Installing packages</span></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot a simple x y line graph with default settings</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x285a77b7440&gt;]
+</pre></div>
+</div>
+<img alt="../../_images/04a781c8511bd45d7c02d6f1d908373c5175b7959e6ed05c46d80ea1293ff8f4.png" src="../../_images/04a781c8511bd45d7c02d6f1d908373c5175b7959e6ed05c46d80ea1293ff8f4.png" />
+</div>
+</div>
+<p>You can read more about the plotting function in <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html">matplotlib pyplot documentation</a>. We will introduce matplotlib in detail later.</p>
+</section>
+</section>
+<section id="using-module-functions">
+<h2>3.2 Using module functions<a class="headerlink" href="#using-module-functions" title="Link to this heading">#</a></h2>
+<p>As we see above, the easiest way to use a module is to import it an then use its functions by typing <code class="docutils literal notranslate"><span class="pre">modulename.functionname()</span></code> and providing the necessary arguments.
+Yes, it is that simple.</p>
+<p>However, there are times you may not know the names of all of the functions in a given module, or which are part of a module.
+You can view the list of functions that are part of a module by using the <code class="docutils literal notranslate"><span class="pre">dir()</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">math</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;__doc__&#39;, &#39;__loader__&#39;, &#39;__name__&#39;, &#39;__package__&#39;, &#39;__spec__&#39;, &#39;acos&#39;, &#39;acosh&#39;, &#39;asin&#39;, &#39;asinh&#39;, &#39;atan&#39;, &#39;atan2&#39;, &#39;atanh&#39;, &#39;cbrt&#39;, &#39;ceil&#39;, &#39;comb&#39;, &#39;copysign&#39;, &#39;cos&#39;, &#39;cosh&#39;, &#39;degrees&#39;, &#39;dist&#39;, &#39;e&#39;, &#39;erf&#39;, &#39;erfc&#39;, &#39;exp&#39;, &#39;exp2&#39;, &#39;expm1&#39;, &#39;fabs&#39;, &#39;factorial&#39;, &#39;floor&#39;, &#39;fmod&#39;, &#39;frexp&#39;, &#39;fsum&#39;, &#39;gamma&#39;, &#39;gcd&#39;, &#39;hypot&#39;, &#39;inf&#39;, &#39;isclose&#39;, &#39;isfinite&#39;, &#39;isinf&#39;, &#39;isnan&#39;, &#39;isqrt&#39;, &#39;lcm&#39;, &#39;ldexp&#39;, &#39;lgamma&#39;, &#39;log&#39;, &#39;log10&#39;, &#39;log1p&#39;, &#39;log2&#39;, &#39;modf&#39;, &#39;nan&#39;, &#39;nextafter&#39;, &#39;perm&#39;, &#39;pi&#39;, &#39;pow&#39;, &#39;prod&#39;, &#39;radians&#39;, &#39;remainder&#39;, &#39;sin&#39;, &#39;sinh&#39;, &#39;sqrt&#39;, &#39;sumprod&#39;, &#39;tan&#39;, &#39;tanh&#39;, &#39;tau&#39;, &#39;trunc&#39;, &#39;ulp&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also browse the available modules by typing in modulename. and then pressing the <kbd>Tab</kbd> key:</p>
+<p><img alt="image.png" src="Chapters/3. Python Programming/attachment:d6559090-5d12-4494-a884-b8accb4dbc3d.png" /></p>
+<p>So that’s helpful, but what about when you don’t know what a given function does?
+The easiest solution is to use the <code class="docutils literal notranslate"><span class="pre">help()</span></code> function (after importing the module).
+Let’s check the help for the <code class="docutils literal notranslate"><span class="pre">math.sin</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on built-in function sin in module math:
+
+sin(x, /)
+    Return the sine of x (measured in radians).
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="what-should-i-not-do">
+<h2>3.3 What should I not do?<a class="headerlink" href="#what-should-i-not-do" title="Link to this heading">#</a></h2>
+<p>Here are a few things to avoid.</p>
+<section id="using-from-x-import">
+<h3>3.3.1 Using <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">X</span> <span class="pre">import</span> <span class="pre">*</span></code><a class="headerlink" href="#using-from-x-import" title="Link to this heading">#</a></h3>
+<p>Don’t use <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">X</span> <span class="pre">import</span> <span class="pre">*</span></code>.
+This may be easier to understand by way of an example, but assuming <code class="docutils literal notranslate"><span class="pre">X</span></code> above is a Python module, <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">X</span> <span class="pre">import</span> <span class="pre">*</span></code> will import all of the functions in module X.
+Though you might think this is helpful, it is much better to simply <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">X</span></code> or <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">X</span> <span class="pre">as</span> <span class="pre">Y</span></code> to keep the connection between the functions and their module.
+It is also much more likely you will encounter conflicting names when using <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">X</span> <span class="pre">import</span> <span class="pre">*</span></code>.</p>
+</section>
+<section id="poor-names-when-renaming-on-import">
+<h3>3.3.2 Poor names when renaming on import<a class="headerlink" href="#poor-names-when-renaming-on-import" title="Link to this heading">#</a></h3>
+<p>When importing popular Python packages, there are some conventional short names that are commonly used across the Python community. These conventions are not strict rules, but following them can improve code readability and make your code more consistent with the broader Python ecosystem. Here are some common short names for popular python packages:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sklearn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+</pre></div>
+</div>
+<p>If you want to make the module name shorter on import, pick a reasonable abbreviation.
+For instance, <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib</span> <span class="pre">as</span> <span class="pre">m</span></code> could be confusing, especially if you’re also using <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">math</span> <span class="pre">as</span> <span class="pre">m</span></code> in other Jupyter notebooks or script files.
+Similarly, <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib</span> <span class="pre">as</span> <span class="pre">math</span></code> is perfectly OK syntax in python, but bound to cause a world of trouble.
+Remember, people need to be able to read and understand the code you write, keep it simple and logical.</p>
+</section>
+<section id="importing-modules-along-the-way-instead-of-on-the-top">
+<h3>3.3.3 Importing modules along the way instead of on the top<a class="headerlink" href="#importing-modules-along-the-way-instead-of-on-the-top" title="Link to this heading">#</a></h3>
+<p>What does PEP 8 say about imports? According to good coding practices described in <a href="https://www.python.org/dev/peps/pep-0008/#imports">PEP 8</a>, we should always import modules at the top of the file. In this lesson, we are demonstrating how to import different modules along the way, but in general it would be better to import requried modules as the very first thing. PEP 8 refers more to traditional script files, but we can apply the guideline to Jupyter Notebook files by placing our imports the first code cell in the Jupyter Notebook.</p>
+</section>
+</section>
+</section>
+<section id="installing-packages">
+<h1>4. Installing packages<a class="headerlink" href="#installing-packages" title="Link to this heading">#</a></h1>
+<p>It’s also good to be aware of <a class="reference external" href="https://pypi.org/project/pip/">pip</a>, the package installer for python. <a class="reference external" href="https://mamba.readthedocs.io/en/latest/index.html">Mamba</a> is another package installer for python that provides package management system. For example, with Mamba you can list installed package names and versions using the <code class="docutils literal notranslate"><span class="pre">mamba</span> <span class="pre">list</span></code> command. Pip and Mamba are often used for similar purposes, but the key difference is that pip is used for installing packages written in python, while Mamba handles packages that might also contain code written in other languages.</p>
+<div class="admonition-checking-all-available-modules-in-a-jupyter-notebook admonition">
+<p class="admonition-title">Checking all available modules in a Jupyter Notebook</p>
+<p>In a Jupyter Notebook, you can type in <code class="docutils literal notranslate"><span class="pre">help(&quot;modules&quot;)</span></code> to check the complete list of installed packages in Python. However, the output is a bit clumsy and hard to read…</p>
+</div>
+<p>You can try <code class="docutils literal notranslate"><span class="pre">help(&quot;modules&quot;)</span></code> below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List all available modules. </span>
+<span class="c1"># Note: when running this command, you might first get several warnings related to deprecated packages etc.</span>
+<span class="n">help</span><span class="p">(</span><span class="s2">&quot;modules&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Please wait a moment while I gather a list of all available modules...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># 2025-04-30 16:13:21,584 INFO faiss.loader loader.py:113 -- Loading faiss with AVX512 support.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># 2025-04-30 16:13:21,585 INFO faiss.loader loader.py:118 -- Could not load library with AVX512 support due to:
+ModuleNotFoundError(&quot;No module named &#39;faiss.swigfaiss_avx512&#39;&quot;)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># 2025-04-30 16:13:21,585 INFO faiss.loader loader.py:125 -- Loading faiss with AVX2 support.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># 2025-04-30 16:13:21,897 INFO faiss.loader loader.py:127 -- Successfully loaded faiss with AVX2 support.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># 2025-04-30 16:13:21,906 INFO faiss __init__.py:185 -- Failed to load GPU Faiss: name &#39;GpuIndexIVFFlat&#39; is not defined. Will not load constructor refs for GPU indexes.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters\3. Python Programming"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Lesson8_functions_solution.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Objectives</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Exercise3_solution.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Objectives</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Objectives</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#an-introduction-to-script-files">1. An introduction to script files</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-general-concept-of-a-py-script-file">1.1 The general concept of a <code class="docutils literal notranslate"><span class="pre">.py</span></code> script file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">1.2 Getting started</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#renaming-our-python-file">1.3 Renaming our Python file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-functions-in-a-script-file">1.4 Saving functions in a script file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-functions-from-a-script-file">1.5 Calling functions from a script file</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-sure-we-re-in-the-right-working-directory">1.5.1 Making sure we’re in the right working directory</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confirming-we-are-in-the-correct-directory">Confirming we are in the correct directory</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-our-script-functions">1.5.2 Importing our script functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-our-script-functions">1.5.3 Using our script functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-multiple-functions">1.5.4 Importing multiple functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-all-functions-from-a-script">1.5.5 Importing all functions from a script</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example-temperature-calculator-optional">2. Example: Temperature calculator (<em>optional</em>)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-the-function">2.1 Making the function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-docstring">2.2 Adding a docstring</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-temp-calculator-function">2.3 Using the temp_calculator function</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modules-packages-and-libraries">3. Modules, packages and libraries?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-modules">3.1 Loading modules</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-whole-module">3.1.1 Loading whole module</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-functions">Built-in functions</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-whole-module-with-renaming">3.1.2 Loading whole module with renaming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-a-single-function">3.1.4 Importing a single function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-a-submodule">3.1.5 Importing a submodule</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-module-functions">3.2 Using module functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-should-i-not-do">3.3 What should I not do?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-from-x-import">3.3.1 Using <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">X</span> <span class="pre">import</span> <span class="pre">*</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-names-when-renaming-on-import">3.3.2 Poor names when renaming on import</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-modules-along-the-way-instead-of-on-the-top">3.3.3 Importing modules along the way instead of on the top</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-packages">4. Installing packages</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed Elshall & Thalia Valle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

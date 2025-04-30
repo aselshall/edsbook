@@ -1,0 +1,916 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Problem 1 - For-loop and indexing &#8212; Environmental Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/3. Python Programming/HW2';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lessons 10 - 14 : Pandas Primer" href="../4.%20Pandas%20for%20Tabular%20Data/Lesson10_pandas_solution.html" />
+    <link rel="prev" title="Objectives" href="Exercise3_solution.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Environmental Data Science - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Environmental Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    EGN 4930 / EGN 5932C Special Topic: Environmental Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0. Good Coding Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP1_VariableName.html">GCP1 - Selecting “good” variable names</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP2_DescribingCode.html">Describing Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP3_ReadableCode.html">Readable Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP4_WritingScripts.html">Writing Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Good%20Coding%20Practices/GCP5_Assertions.html">Assertions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson2.html">Lesson 2 Getting Started</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Excercise1.html">Exercise 1 - Installing Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Python Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson3_variables_solution.html">Objectives</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson4_list_solution.html">Objectives</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Lesson5_formatting_solution.html">Objectives</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/Exercise2_solution.html">Exercise 2 - Becoming a millionaire</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2.%20Python%20Basics/HW1.html">Problem 1 - Happiness rating</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Python Programming</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Lesson6_Loops_solution.html">Objectives</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lesson7_conditional_statements_solution.html">Objectives</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lesson8_functions_solution.html">Objectives</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lesson9_modules_solution.html">Objectives</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Exercise3_solution.html">Objectives</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Problem 1 - For-loop and indexing</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 4. Pandas for Tabular Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../4.%20Pandas%20for%20Tabular%20Data/Lesson10_pandas_solution.html">Lessons 10 - 14 - Pandas Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4.%20Pandas%20for%20Tabular%20Data/Exercise4_solution.html">Dataset</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../4.%20Pandas%20for%20Tabular%20Data/HW3.html">Homework 3</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. AI Coding Assistance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../5.%20AI%20Coding%20Assistance/JupyterAI.html">OpenAI API key for Jupyter AI extension (Optional)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Data Science Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Workflow.html">Lessons 16 - Data Science Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6.%20Data%20Science%20Workflow/Exercise6_solution.html">1. Problem definition</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. NumPy for Scientific Computing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing/numpy_solution.html">Lessons 18-19 - NumPy Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7.%20NumPy%20for%20Scientific%20Computing/exercise7_solution.html">Exercise 7 - NumPy - Air quality data analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">8. Matplotlib for Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization/matplotlib.html">Lesson 20 - 21 - Matplotlib Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization/exercise8_solution.html">Exercise 8 Matplotlib - Air quality data visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8.%20Matplotlib%20for%20Visualization/HW4.html">1. Problem statement</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text"> 9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/climate.html">Lesson 24 - Climate Data - CMIP6 and Remote Sensing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/xarray_solution.html">Lesson 25-27 - Xarray basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/cartopy_solution.html">Lesson 28 - CartoPy basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/Exercise9.html">Exercise 9 - Sea surface height and red tides (Optional, Advanced)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../9.%20Xarray%20and%20CartoPy%20for%20Labeled%20and%20Gridded%20N-dimensional%20Arrays/HW5.html">Install and import libraries</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">10. Google Earth Engine</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/10.0-%20Intro%20to%20GEE.html">Lesson 30 - Intro to Google Earth Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/10.1-%20JavaScript%20API%20vs.%20Python%20API.html">Lesson 31 - JavaScript API vs. Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/10.2-%20Using%20Google%20Earth%20Engine%20in%20a%20Jupyter%20Notebook.html">Lesson 32 - Using Google Earth Engine in a Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10.%20Google%20Earth%20Engine/geemap1.html">Exercise 10 -  GeeMap and Sentinel-2 Data</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Chapters/3. Python Programming/HW2.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapters/3. Python Programming/HW2.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/3. Python Programming/HW2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Problem 1 - For-loop and indexing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Problem 1 - For-loop and indexing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-if-condition">Problem 2  - If condition</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-for-loop-and-if-condition">Problem 3 - For loop and if condition</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-functions">Problem 4 - Functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-script-files">Problem 5 - Script files</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1 style="color:green; text-align:center;"> Homework 2 Python Programming </h1>  
+<p><strong>Instructions:</strong></p>
+<ul class="simple">
+<li><p>LLM Not Permitted (Check syllabus for details)</p></li>
+<li><p>Here is how you can find <a class="reference external" href="https://github.com/aselshall/eds/blob/main/L/L1/find_help_python.md">python help</a></p></li>
+<li><p>Answer all questions in one notebook</p></li>
+<li><p>Rename notebook file name to <code class="docutils literal notranslate"><span class="pre">HW1_YourFirstName_YourLastName</span></code></p></li>
+<li><p>Submit your notebook and other required files to Canvas by the due date on Canvas</p></li>
+<li><p>100 points (20 points each)</p></li>
+</ul>
+<section id="problem-1-for-loop-and-indexing">
+<h1>Problem 1 - For-loop and indexing<a class="headerlink" href="#problem-1-for-loop-and-indexing" title="Link to this heading">#</a></h1>
+<p>Calcuate daily streamflow concentrations of a contaminant over a week, 7-day period. The contaminant’s concentration is measured in milligrams per liter (mg/L). You are given the following information:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Initial</span> <span class="n">concentration</span><span class="p">:</span> <span class="mf">0.5</span> <span class="n">mg</span><span class="o">/</span><span class="n">L</span>
+<span class="n">Daily</span> <span class="n">increase</span><span class="p">:</span> <span class="mf">0.02</span> <span class="n">mg</span><span class="o">/</span><span class="n">L</span>
+<span class="n">Degradation</span> <span class="n">rate</span><span class="p">:</span> <span class="mi">10</span><span class="o">%</span> <span class="n">per</span> <span class="n">day</span> 
+</pre></div>
+</div>
+<p>This means that after the daily increase of 0.02 mg/L, 10% of the contaminant is removed from the stream each day. Note that your initial concentration is your initial condition at time zero.</p>
+<p>Tasks:</p>
+<ul class="simple">
+<li><p>Create a list called <code class="docutils literal notranslate"><span class="pre">concentrations</span></code> that you can use to store the daily concentrations</p></li>
+<li><p>Use a for-loop to calculate the 7-day period:</p>
+<ul>
+<li><p>Calculate the concentration for each day</p></li>
+<li><p>Append the calculated concentration to the <code class="docutils literal notranslate"><span class="pre">concentrations</span></code> list</p></li>
+</ul>
+</li>
+<li><p>Use f-strings and print the following information</p>
+<ul>
+<li><p>calculated concentration for each day with two decimal places</p></li>
+<li><p>minimum concentration over the one week period with two decimal places</p></li>
+</ul>
+</li>
+</ul>
+<p>Output:<br />
+Your output should look something like this</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Day</span> <span class="mi">0</span><span class="p">:</span> <span class="mf">0.50</span> <span class="n">mg</span><span class="o">/</span><span class="n">L</span>
+<span class="n">Day</span> <span class="mi">1</span><span class="p">:</span> <span class="mf">0.47</span> <span class="n">mg</span><span class="o">/</span><span class="n">L</span>
+<span class="n">Day</span> <span class="mi">2</span><span class="p">:</span> <span class="mf">0.44</span> <span class="n">mg</span><span class="o">/</span><span class="n">L</span>
+<span class="o">...</span>
+<span class="n">Day</span> <span class="mi">7</span><span class="p">:</span> <span class="mf">0.33</span> <span class="n">mg</span><span class="o">/</span><span class="n">L</span>
+<span class="n">The</span> <span class="n">minimum</span> <span class="n">concentration</span> <span class="ow">is</span> <span class="mf">0.33</span> <span class="n">mg</span><span class="o">/</span><span class="n">L</span>
+</pre></div>
+</div>
+<p>Note the formatting of the outputs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initial values</span>
+<span class="n">initial_concentration</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># mg/L</span>
+<span class="n">daily_increase</span> <span class="o">=</span> <span class="mf">0.02</span>  <span class="c1"># mg/L</span>
+<span class="n">degradation_rate</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># 10%</span>
+
+<span class="c1">#Creating a list of concentrations</span>
+
+<span class="c1">#Calculate the concentrations for the analysis periods</span>
+
+<span class="c1">#Minimum concentration</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-2-if-condition">
+<h1>Problem 2  - If condition<a class="headerlink" href="#problem-2-if-condition" title="Link to this heading">#</a></h1>
+<p>You are analyzing a big dataset about water quality in a river based on  nutrient levels (total nitrogen and total phosphorus), oxygen availability for aquatic life (dissolved oxygen), and bacterial contamination (fecal coliform bacteria). High nutrient levels and low dissolved oxygen levels indicate ecosystem imbalance and stress. High nutrient levels of nitrogen and phosphorus lead to algal blooms and eutrophication, depleting oxygen in the water. Dissolved oxygen is also necessary for fish, macroinvertebrates, and other aquatic life to breathe. Presence of fecal coliform bacteria indicates contamination from human or animal waste. This poses health risks to humans and animals when using the water for recreation or drinking.</p>
+<p>This is an index for nutrients based on total nitrogen, total phosphorus, and dissolved oxygen.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nutrient_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">total_nitrogen</span> <span class="n">x</span> <span class="mf">0.3</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">total_phosphorus</span> <span class="n">x</span> <span class="mf">0.7</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="n">dissolved_oxygen</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">total_nitrogen</span></code>, <code class="docutils literal notranslate"><span class="pre">total_phosphorus</span></code>, and <code class="docutils literal notranslate"><span class="pre">dissolved_oxygen</span></code> are measured in mg/L</p></li>
+<li><p>Weights of 0.3 and 0.7 are applied to nitrogen and phosphorus based on their relative impacts</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dissolved_oxygen</span></code> is inverted on a scale of 10 to account for low DO indicating poor quality</p></li>
+</ul>
+<p>This is an overall water quality classification with just two parameters, nutirmt index and fecal coliform:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Good</span> <span class="n">Water</span> <span class="n">Quality</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">Nutrient</span> <span class="n">Index</span><span class="p">:</span> <span class="o">&lt;</span><span class="mf">2.5</span>
+<span class="o">-</span> <span class="n">Fecal</span> <span class="n">Coliform</span><span class="p">:</span> <span class="o">&lt;</span><span class="mi">200</span> <span class="n">MPN</span><span class="o">/</span><span class="mi">100</span><span class="n">mL</span>
+
+<span class="n">Moderate</span> <span class="n">Water</span> <span class="n">Quality</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">Nutrient</span> <span class="n">Index</span><span class="p">:</span> <span class="mf">2.5</span> <span class="o">-</span><span class="mf">3.5</span>
+<span class="o">-</span> <span class="n">Fecal</span> <span class="n">Coliform</span><span class="p">:</span> <span class="mi">200</span><span class="o">-</span><span class="mi">1000</span> <span class="n">MPN</span><span class="o">/</span><span class="mi">100</span><span class="n">mL</span>
+
+<span class="n">Poor</span> <span class="n">Water</span> <span class="n">Quality</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">Nutrient</span> <span class="n">Index</span><span class="p">:</span> <span class="o">&gt;</span><span class="mf">3.5</span>
+<span class="o">-</span> <span class="n">Fecal</span> <span class="n">Coliform</span><span class="p">:</span> <span class="o">&gt;</span><span class="mi">1000</span> <span class="n">MPN</span><span class="o">/</span><span class="mi">100</span><span class="n">mL</span>
+</pre></div>
+</div>
+<p>Using if-condition statements, write a python code that takes the above four water quality parameters and outputs:</p>
+<ul class="simple">
+<li><p>classificaion of nutrient index (good, moderate, or bad)</p></li>
+<li><p>classification of the overall water quality (good, moderate, or bad)</p></li>
+</ul>
+<p>Here is a sample input and output that your code can produce:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Input</span><span class="p">:</span> <span class="n">total_nitrogen</span> <span class="o">=</span> <span class="mf">1.2</span>  
+<span class="n">Input</span><span class="p">:</span> <span class="n">total_phosphorus</span> <span class="o">=</span> <span class="mf">0.01</span>  
+<span class="n">Input</span><span class="p">:</span> <span class="n">dissolved_oxygen</span> <span class="o">=</span> <span class="mf">4.5</span>   
+<span class="n">Input</span><span class="p">:</span> <span class="n">fecal_coliform</span> <span class="o">=</span> <span class="mi">1200</span>
+  
+<span class="n">Output</span><span class="p">:</span> <span class="n">Given</span> <span class="n">a</span> <span class="n">total</span> <span class="n">nitrogen</span> <span class="n">of</span> <span class="mf">1.2</span> <span class="n">mg</span><span class="o">/</span><span class="n">L</span><span class="p">,</span>  <span class="n">total</span> <span class="n">phosphorus</span> <span class="n">of</span> <span class="mf">0.01</span> <span class="n">mg</span><span class="o">/</span><span class="n">L</span><span class="p">,</span>  <span class="ow">and</span> <span class="n">dissolved</span> <span class="n">oxygen</span> <span class="n">of</span> <span class="mf">4.5</span> <span class="n">mg</span><span class="o">/</span><span class="n">L</span><span class="p">,</span> <span class="n">the</span> <span class="n">nutrient</span> <span class="n">index</span> <span class="ow">is</span> <span class="mf">2.35</span> <span class="n">indicating</span> <span class="n">moderate</span> <span class="n">water</span> <span class="n">quality</span> <span class="k">with</span> <span class="n">respect</span> <span class="n">to</span> <span class="n">nutrient</span> <span class="n">index</span><span class="o">.</span>
+  
+<span class="n">Output</span><span class="p">:</span> <span class="n">Given</span> <span class="n">a</span> <span class="n">nutrient</span> <span class="n">index</span> <span class="n">of</span> <span class="mf">2.35</span> <span class="ow">and</span> <span class="n">fecal</span> <span class="n">coliform</span> <span class="n">concentration</span> <span class="n">of</span> <span class="mi">1200</span><span class="p">,</span> <span class="n">the</span> <span class="n">overall</span> <span class="n">water</span> <span class="n">quality</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">river</span> <span class="ow">is</span> <span class="n">poor</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Your code should produce the same outputs with the same format, but your numbers and water quality classifications will be different for each new sample. Solvle the problem for the water quality data sample given below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># water quality data sample</span>
+<span class="n">total_nitrogen</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">total_phosphorus</span> <span class="o">=</span> <span class="mf">0.044</span>
+<span class="n">dissolved_oxygen</span> <span class="o">=</span> <span class="mf">5.3</span>
+<span class="n">fecal_coliform</span> <span class="o">=</span> <span class="mi">800</span>
+
+<span class="c1"># Calculate nutrient index</span>
+
+<span class="c1"># Classif water quality based on nutrient index</span>
+
+<span class="c1"># Print results of nutrient index</span>
+
+<span class="c1"># Classify overall water quality</span>
+
+<span class="c1"># Print results of overall water quality </span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-3-for-loop-and-if-condition">
+<h1>Problem 3 - For loop and if condition<a class="headerlink" href="#problem-3-for-loop-and-if-condition" title="Link to this heading">#</a></h1>
+<p>You have collected a series of water quality measurements from a local stream. Each measurement includes dissolved oxygen (DO), pH, and turbidity values.  Using for-loop and if condition, write a python code that counts the number of samples the has any parameter that exceeds the critical measurment.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Critical</span> <span class="n">measurement</span> <span class="k">for</span> <span class="n">each</span> <span class="n">parameter</span><span class="p">:</span>
+<span class="n">DO</span><span class="o">&lt;</span> <span class="mi">4</span> <span class="n">mg</span><span class="o">/</span><span class="n">L</span>
+<span class="n">pH</span><span class="o">&lt;</span> <span class="mf">6.5</span>
+<span class="n">pH</span><span class="o">&gt;</span> <span class="mf">8.5</span>
+<span class="n">Turbidity</span> <span class="o">&gt;</span> <span class="mi">20</span> <span class="n">NTU</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Print messages indicating the number of critical measurements found.
+You answer should look something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Number</span> <span class="n">of</span> <span class="n">samples</span> <span class="k">with</span> <span class="n">critical</span> <span class="n">measurements</span><span class="p">:</span>  <span class="mi">3</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># DO, pH, and Turbidity measurements for four samples.</span>
+<span class="n">measurements</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mf">6.2</span><span class="p">,</span> <span class="mf">8.6</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>  <span class="c1"># DO, pH, and Turbidity measurements Sample # 1</span>
+    <span class="p">[</span><span class="mf">3.8</span><span class="p">,</span> <span class="mf">6.9</span><span class="p">,</span> <span class="mi">22</span><span class="p">],</span>  <span class="c1"># DO, pH, and Turbidity measurements Sample # 2</span>
+    <span class="p">[</span><span class="mf">5.1</span><span class="p">,</span> <span class="mf">6.1</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>  <span class="c1"># DO, pH, and Turbidity measurements Sample # 3</span>
+    <span class="p">[</span><span class="mf">6.2</span><span class="p">,</span> <span class="mf">7.1</span><span class="p">,</span> <span class="mi">17</span><span class="p">],</span>  <span class="c1"># DO, pH, and Turbidity measurements Sample # 4</span>
+<span class="p">]</span>
+
+<span class="c1"># Counter for critical measurements</span>
+
+<span class="c1"># Loop through each measurement</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-4-functions">
+<h1>Problem 4 - Functions<a class="headerlink" href="#problem-4-functions" title="Link to this heading">#</a></h1>
+<p>You want to analyze rainfall data from a series of sensors located at different points in a river basin. The data is represented as a list of lists, where each inner list contains measurements from a sensor for a day. Each sensor records rainfall in millimeters (mm).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rainfall_data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">12.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>  <span class="c1"># Sensor 1 data for 7 days</span>
+    <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">],</span>   <span class="c1"># Sensor 2 data for 7 days</span>
+    <span class="c1"># ... more sensors</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Create the function <code class="docutils literal notranslate"><span class="pre">rainfall_analysis</span></code> that takes a sensor measurements as input and outputs for each sensor the:</p>
+<ul class="simple">
+<li><p>average rainfall over the observed period</p></li>
+<li><p>day with the highest rainfall</p></li>
+<li><p>number of days with no rainfall</p></li>
+</ul>
+<p>In other words, your function will have one input (a list) and three outputs (floats).</p>
+<p>Use print funnction with f-formatting to make your output look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Station</span> <span class="c1"># 1 recorded average rainfall of 2.23 mm with 4 dry days and max rainfall was recorded on Wednesday</span>
+<span class="n">Station</span> <span class="c1"># 2 recorded average rainfall of 1.30 mm with 4 dry days and max rainfall was recorded on Sunday</span>
+<span class="n">Station</span> <span class="c1"># 3 recorded average rainfall of 2.87 mm with 2 dry days and max rainfall was recorded on Saturday</span>
+<span class="n">Station</span> <span class="c1"># 4 recorded average rainfall of 2.16 mm with 1 dry days and max rainfall was recorded on Sunday</span>
+<span class="n">Station</span> <span class="c1"># 5 recorded average rainfall of 0.64 mm with 6 dry days and max rainfall was recorded on Monday </span>
+</pre></div>
+</div>
+<p>Hint: This problem will help reinforce your understanding of defining and calling a function, for-loops, if-conditions, and some of the list methods such as <code class="docutils literal notranslate"><span class="pre">list.index()</span></code>, and python functions that you learned. These are what you need to solve this problem.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dataset for five sensors starting from Monday for each sensor</span>
+<span class="n">rainfall_data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">12.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>            <span class="c1"># Sensor 1 data for 7 days</span>
+    <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="mf">13.1</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">],</span>      <span class="c1"># ... </span>
+    <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>              <span class="c1"># Sensor 5 data for 7 days</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># rainfall analysis function</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#rainfall analysis </span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="problem-5-script-files">
+<h2>Problem 5 - Script files<a class="headerlink" href="#problem-5-script-files" title="Link to this heading">#</a></h2>
+<p>Resolve <a class="reference internal" href="#Problem-4---Functions"><span class="xref myst">Problem 4</span></a> but using a script file.</p>
+<ol class="arabic simple">
+<li><p>Create a new script file and rename is to “YourFirstName_YourLastName_HW2_P5.py”</p></li>
+<li><p>Write three functions to calculate:</p>
+<ul class="simple">
+<li><p>average rainfal <code class="docutils literal notranslate"><span class="pre">averageRainfall</span></code></p></li>
+<li><p>highest rainfall per day `</p></li>
+<li><p>Number of days with no rainfall</p></li>
+</ul>
+</li>
+<li><p>Add your three functions to your script file</p></li>
+<li><p>Add a docstring to one of your three functions</p></li>
+<li><p>Import your three functions and resolve <a class="reference internal" href="#Problem-4---Functions"><span class="xref myst">Problem 4</span></a></p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">help()</span></code> to show the docstring of your function</p></li>
+</ol>
+<p>When you submit your homework on Canvas do not forget to submit your script file along with this file. Also, make sure that your function names do not match any of your variable names.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#rainfall analysis </span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters\3. Python Programming"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Exercise3_solution.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Objectives</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../4.%20Pandas%20for%20Tabular%20Data/Lesson10_pandas_solution.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lessons 10 - 14 : Pandas Primer</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Problem 1 - For-loop and indexing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-if-condition">Problem 2  - If condition</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-for-loop-and-if-condition">Problem 3 - For loop and if condition</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-functions">Problem 4 - Functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-script-files">Problem 5 - Script files</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ahmed Elshall & Thalia Valle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -4,6 +4,10 @@
 
 Welcome to the Environmental Data Science Book! This book was created to simplify and group course content in one place. It will be updated as required to ensure you have the latest information and resources.
 
+## Course Syllabus
+
+[Link](https://aselshall.github.io/eds): Course syllabus inlucding link to project assignment and past student projects
+
 ## About the Author
 
 **Ahmed S. Elshall, PhD**  
