@@ -646,7 +646,7 @@ If you have an Earth Engine account with your university email but have not used
                     --jp-layout-color3: var(--colab-primary-surface-color, white);
                 }
             </style>
-            </div><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "abec315005c746e8b68e326c1f3a9845"}</script></div>
+            </div><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "b7c27559d64840a8acee238608977d6b"}</script></div>
 </div>
 <p>To learn how to use Google Earth engine (gee) and geemap package, please check the <a class="reference external" href="https://www.youtube.com/&#64;giswqs">geemap developer’s YouTube channel</a>. As a start please check the playlist of <a class="reference external" href="https://www.youtube.com/playlist?list=PLAxJ4-o7ZoPeeJZL-_3kcZ2WLYF5x87eX">Earth Engine and Geemap Workshops</a>. You need to have an idea about GEE and geemap before you do this exercise.</p>
 </section>
@@ -762,7 +762,7 @@ Bofore starting this exercise you need to set up Google Earth Engine (GEE) and i
                     --jp-layout-color3: var(--colab-primary-surface-color, white);
                 }
             </style>
-            </div><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "ddae42c4885d434bbb617a17f42f9cb7"}</script></div>
+            </div><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "575876c19a1141f0935ea495ae86b9ba"}</script></div>
 </div>
 </section>
 <section id="import-and-process-sentinel-2-data">
@@ -902,7 +902,7 @@ COPERNICUS/S2_HARMONIZED provides harmonized Sentinel-2 surface reflectance imag
                     --jp-layout-color3: var(--colab-primary-surface-color, white);
                 }
             </style>
-            </div><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "ca2044c445d34808af57c8a7c46666dc"}</script></div>
+            </div><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "df221e9ec6954b98867a067c1ef6f22d"}</script></div>
 </div>
 </section>
 <section id="define-and-calcuate-indices-for-each-image">
@@ -1143,31 +1143,6 @@ Sometime the below function will take overever to run. In that case restart kern
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            </div><img alt="../../_images/8bb6085ca7068cdf3f43f7723dc6a480df6bb55039577cc68b2b890a7efe4231.png" src="../../_images/8bb6085ca7068cdf3f43f7723dc6a480df6bb55039577cc68b2b890a7efe4231.png" />
-</div>
 </div>
 </section>
 </section>
@@ -1190,41 +1165,6 @@ Sometime the below function will take overever to run. In that case restart kern
 <span class="c1"># Print Correlation Matrix</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;heat_map.png&#39;</span><span class="p">)</span>  <span class="c1"># Save the figure</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Correlation Matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">corr_matrix</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            </div><img alt="../../_images/16a701441629ef9cbd814de933313ea7207a004d29c6b0a9393c3586415b991d.png" src="../../_images/16a701441629ef9cbd814de933313ea7207a004d29c6b0a9393c3586415b991d.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation Matrix:
-                NDCI  Turbidity       WVI
-NDCI       1.000000  -0.540212  0.576418
-Turbidity -0.540212   1.000000 -0.920885
-WVI        0.576418  -0.920885  1.000000
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
 </pre></div>
 </div>
 </div>
@@ -1264,31 +1204,6 @@ WVI        0.576418  -0.920885  1.000000
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            </div><img alt="../../_images/f7c31780f6f1aae526abf4592581d2275498ad3688fcd529374992d660587f67.png" src="../../_images/f7c31780f6f1aae526abf4592581d2275498ad3688fcd529374992d660587f67.png" />
 </div>
 </div>
 <p><strong>Interpretation:</strong></p>
@@ -1331,30 +1246,6 @@ WVI        0.576418  -0.920885  1.000000
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1383,33 +1274,6 @@ WVI        0.576418  -0.920885  1.000000
 <span class="n">plot_seasonal_decomposition</span><span class="p">(</span><span class="n">result_wvi</span><span class="p">,</span> <span class="s1">&#39;WVI Seasonal Decomposition&#39;</span><span class="p">,</span> <span class="s1">&#39;WVI_seasonal_decomposition_custom.png&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            </div><img alt="../../_images/e1f1465f846e9904d068b20f94a917b137f305965b267a12e212e4d818d0b934.png" src="../../_images/e1f1465f846e9904d068b20f94a917b137f305965b267a12e212e4d818d0b934.png" />
-<img alt="../../_images/2428f87cc49787eb5849b0cf48f8e2e6e915f3b97a90691edaef6c79854f83b4.png" src="../../_images/2428f87cc49787eb5849b0cf48f8e2e6e915f3b97a90691edaef6c79854f83b4.png" />
-<img alt="../../_images/3836e028d85c7148057a6982ba1b3126daa18c5517fe1f1632470ed60d91e494.png" src="../../_images/3836e028d85c7148057a6982ba1b3126daa18c5517fe1f1632470ed60d91e494.png" />
 </div>
 </div>
 <p><strong>NDCI (Normalized difference chlorophyll index)</strong></p>
@@ -1451,58 +1315,6 @@ WVI        0.576418  -0.920885  1.000000
 <span class="c1"># Fit the regression model</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:                    WVI   R-squared:                       0.868
-Model:                            OLS   Adj. R-squared:                  0.867
-Method:                 Least Squares   F-statistic:                     1146.
-Date:                Wed, 30 Apr 2025   Prob (F-statistic):          7.38e-154
-Time:                        11:57:22   Log-Likelihood:                 759.22
-No. Observations:                 351   AIC:                            -1512.
-Df Residuals:                     348   BIC:                            -1501.
-Df Model:                           2                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P&gt;|t|      [0.025      0.975]
-------------------------------------------------------------------------------
-const          0.3390      0.005     63.266      0.000       0.328       0.350
-NDCI           0.2882      0.048      5.992      0.000       0.194       0.383
-Turbidity     -0.1209      0.003    -36.614      0.000      -0.127      -0.114
-==============================================================================
-Omnibus:                        7.932   Durbin-Watson:                   1.622
-Prob(Omnibus):                  0.019   Jarque-Bera (JB):                8.312
-Skew:                          -0.288   Prob(JB):                       0.0157
-Kurtosis:                       3.487   Cond. No.                         34.3
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 </pre></div>
 </div>
 </div>
@@ -1566,33 +1378,6 @@ We see here the same story that we saw above. The regression model shows that WV
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            </div><img alt="../../_images/a5cfa2797d383506c3c99127f8345e135be3a55dce2e076eb6ced8b86d0e8f62.png" src="../../_images/a5cfa2797d383506c3c99127f8345e135be3a55dce2e076eb6ced8b86d0e8f62.png" />
-<img alt="../../_images/42ff9a8f7f4905803fd3b3fd7ede87b287924690d0d1c9903f6132c4c04bbb99.png" src="../../_images/42ff9a8f7f4905803fd3b3fd7ede87b287924690d0d1c9903f6132c4c04bbb99.png" />
-<img alt="../../_images/31b38352d5c71f5ff075c3d1741f4793fd6c140969875b6de6f954da09547eb2.png" src="../../_images/31b38352d5c71f5ff075c3d1741f4793fd6c140969875b6de6f954da09547eb2.png" />
 </div>
 </div>
 <p>The coef. plot visually confirms the statistical significance and direction of the relationships between the predictors (NDCI and Turbidity) and the response variable (WVI) supporting the conclusions drawn from the regression summary.</p>

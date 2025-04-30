@@ -36,7 +36,7 @@ ds2.to_netcdf('Data/ds/tos_sos.nc')
 [32m---> [39m[32m56[39m     value = [38;5;28;43mself[39;49m[43m.[49m[43m_cache[49m[43m[[49m[43mkey[49m[43m][49m
 [32m     57[39m     [38;5;28mself[39m._cache.move_to_end(key)
 
-[31mKeyError[39m: [<class 'netCDF4._netCDF4.Dataset'>, ('C:\\Users\\aelshall\\OneDrive - Florida Gulf Coast University\\Data\\Teaching\\ENG4930_EnvDataSc\\edsbook\\Chapters\\9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays\\Data\\ds\\zos.nc',), 'a', (('clobber', True), ('diskless', False), ('format', 'NETCDF4'), ('persist', False)), 'd438fa0c-4828-45ab-9b6f-b6a450893077']
+[31mKeyError[39m: [<class 'netCDF4._netCDF4.Dataset'>, ('C:\\Users\\aelshall\\OneDrive - Florida Gulf Coast University\\Data\\Teaching\\ENG4930_EnvDataSc\\edsbook\\Chapters\\9. Xarray and CartoPy for Labeled and Gridded N-dimensional Arrays\\Data\\ds\\zos.nc',), 'a', (('clobber', True), ('diskless', False), ('format', 'NETCDF4'), ('persist', False)), 'eef2fcca-beb8-4c1d-adb4-fd8cdafa4a64']
 
 During handling of the above exception, another exception occurred:
 

@@ -59,6 +59,9 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="application/vnd.jupyter.widget-state+json">{"state": {"d0c9685057084cdaabd2b4b9675ed757": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "500px"}}}, "version_major": 2, "version_minor": 0}</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script crossorigin="anonymous" data-jupyter-widgets-cdn="https://cdn.jsdelivr.net/npm/" src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@1.0.6/dist/embed-amd.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/11. Machine Learning/MachineLearning';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -1967,44 +1970,85 @@ The method of varying one feature at a time is simple but lacks capturing featur
 <p>We can now visualize the NDCI probability as a function of TN and TPconcentrations using a Random Forest Regression model. The code achieves this by training a Random Forest Regressor model on the given dataset, predicting NDCI probabilities for various combinations of TN and TP values, normalizing these probabilities, and  plotting a contour of how NDCI probability varies with changes in TN and TP levels. This can help us to understand how nutrient concentrations (TN, TP) can affect chlorophyll content (NDCI).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the features and the target variable</span>
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TN&#39;</span><span class="p">,</span> <span class="s1">&#39;TP&#39;</span><span class="p">,</span> <span class="s1">&#39;Turbidity&#39;</span><span class="p">]</span>
-<span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;NDCI&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Run</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1">#Change to True to run this code</span>
+<span class="k">if</span> <span class="n">Run</span><span class="p">:</span>
+    <span class="c1"># Define the features and the target variable</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TN&#39;</span><span class="p">,</span> <span class="s1">&#39;TP&#39;</span><span class="p">,</span> <span class="s1">&#39;Turbidity&#39;</span><span class="p">]</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;NDCI&#39;</span>
+    
+    <span class="c1"># Separate the features (X) and the target variable (y)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">results_df</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">results_df</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>
+    
+    <span class="c1"># Split the data into training and testing sets</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    
+    <span class="c1"># Initialize the Random Forest Regressor model</span>
+    <span class="c1">#model= LinearRegression()</span>
+    <span class="c1">#model= DecisionTreeRegressor(random_state=42)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    
+    <span class="c1"># Define a grid of values for TN and TP</span>
+    <span class="n">tn_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;TN&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;TN&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">tp_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;TP&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;TP&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
+    
+    <span class="c1"># Create a meshgrid of TN and TP values</span>
+    <span class="n">TN</span><span class="p">,</span> <span class="n">TP</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">tn_values</span><span class="p">,</span> <span class="n">tp_values</span><span class="p">)</span>
+    <span class="n">turbidity_mean</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;Turbidity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    
+    <span class="c1"># Predict NDCI probabilities for each combination of TN and TP</span>
+    <span class="n">NDCI_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">TN</span><span class="p">)</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">TN</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">TN</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">sample</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;TN&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">TN</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]],</span> <span class="s1">&#39;TP&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">TP</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]],</span> <span class="s1">&#39;Turbidity&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">turbidity_mean</span><span class="p">]})</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">sample</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+            <span class="n">NDCI_prob</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">pred</span>
+    
+    <span class="c1"># Normalize the NDCI probabilities to [0, 1]</span>
+    <span class="n">NDCI_prob</span> <span class="o">=</span> <span class="p">(</span><span class="n">NDCI_prob</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">predictions</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">predictions</span><span class="p">))</span>
+    
+    <span class="c1"># Save TN, TP, NDCI_prob arrays</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;TN.npy&#39;</span><span class="p">,</span> <span class="n">TN</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;TP.npy&#39;</span><span class="p">,</span> <span class="n">TP</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;NDCI_prob.npy&#39;</span><span class="p">,</span> <span class="n">NDCI_prob</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <style>
+                .geemap-dark {
+                    --jp-widgets-color: white;
+                    --jp-widgets-label-color: white;
+                    --jp-ui-font-color1: white;
+                    --jp-layout-color2: #454545;
+                    background-color: #383838;
+                }
 
-<span class="c1"># Separate the features (X) and the target variable (y)</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">results_df</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">results_df</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>
+                .geemap-dark .jupyter-button {
+                    --jp-layout-color3: #383838;
+                }
 
-<span class="c1"># Split the data into training and testing sets</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+                .geemap-colab {
+                    background-color: var(--colab-primary-surface-color, white);
+                }
 
-<span class="c1"># Initialize the Random Forest Regressor model</span>
-<span class="c1">#model= LinearRegression()</span>
-<span class="c1">#model= DecisionTreeRegressor(random_state=42)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="c1"># Define a grid of values for TN and TP</span>
-<span class="n">tn_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;TN&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;TN&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">tp_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;TP&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;TP&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
-
-<span class="c1"># Create a meshgrid of TN and TP values</span>
-<span class="n">TN</span><span class="p">,</span> <span class="n">TP</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">tn_values</span><span class="p">,</span> <span class="n">tp_values</span><span class="p">)</span>
-<span class="n">turbidity_mean</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;Turbidity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-
-<span class="c1"># Predict NDCI probabilities for each combination of TN and TP</span>
-<span class="n">NDCI_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">TN</span><span class="p">)</span>
-<span class="n">predictions</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">TN</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">TN</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-        <span class="n">sample</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;TN&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">TN</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]],</span> <span class="s1">&#39;TP&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">TP</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]],</span> <span class="s1">&#39;Turbidity&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">turbidity_mean</span><span class="p">]})</span>
-        <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">sample</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
-        <span class="n">NDCI_prob</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">pred</span>
-
-<span class="c1"># Normalize the NDCI probabilities to [0, 1]</span>
-<span class="n">NDCI_prob</span> <span class="o">=</span> <span class="p">(</span><span class="n">NDCI_prob</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">predictions</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">predictions</span><span class="p">))</span>
+                .geemap-colab .jupyter-button {
+                    --jp-layout-color3: var(--colab-primary-surface-color, white);
+                }
+            </style>
+            </div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load TN, TP, NDCI_prob arrays</span>
+<span class="n">TN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;TN.npy&#39;</span><span class="p">)</span>
+<span class="n">TP</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;TP.npy&#39;</span><span class="p">)</span>
+<span class="n">NDCI_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;NDCI_prob.npy&#39;</span><span class="p">)</span>
 
 <span class="c1"># Plot the contour plot</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -2040,78 +2084,7 @@ The method of varying one feature at a time is simple but lacks capturing featur
                     --jp-layout-color3: var(--colab-primary-surface-color, white);
                 }
             </style>
-            </div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">line</span> <span class="mi">33</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">TN</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span>     <span class="n">sample</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;TN&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">TN</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]],</span> <span class="s1">&#39;TP&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">TP</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]],</span> <span class="s1">&#39;Turbidity&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">turbidity_mean</span><span class="p">]})</span>
-<span class="ne">---&gt; </span><span class="mi">33</span>     <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">sample</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="n">predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span>     <span class="n">NDCI_prob</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">pred</span>
-
-<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\sklearn\ensemble\_forest.py:1079,</span> in <span class="ni">ForestRegressor.predict</span><span class="nt">(self, X)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1077</span> <span class="c1"># Parallel loop</span>
-<span class="g g-Whitespace">   </span><span class="mi">1078</span> <span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
-<span class="ne">-&gt; </span><span class="mi">1079</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">,</span> <span class="n">require</span><span class="o">=</span><span class="s2">&quot;sharedmem&quot;</span><span class="p">)(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1080</span>     <span class="n">delayed</span><span class="p">(</span><span class="n">_accumulate_prediction</span><span class="p">)(</span><span class="n">e</span><span class="o">.</span><span class="n">predict</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="n">y_hat</span><span class="p">],</span> <span class="n">lock</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1081</span>     <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimators_</span>
-<span class="g g-Whitespace">   </span><span class="mi">1082</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1084</span> <span class="n">y_hat</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">estimators_</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1086</span> <span class="k">return</span> <span class="n">y_hat</span>
-
-<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\sklearn\utils\parallel.py:77,</span> in <span class="ni">Parallel.__call__</span><span class="nt">(self, iterable)</span>
-<span class="g g-Whitespace">     </span><span class="mi">72</span> <span class="n">config</span> <span class="o">=</span> <span class="n">get_config</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">73</span> <span class="n">iterable_with_config</span> <span class="o">=</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">74</span>     <span class="p">(</span><span class="n">_with_config</span><span class="p">(</span><span class="n">delayed_func</span><span class="p">,</span> <span class="n">config</span><span class="p">),</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">75</span>     <span class="k">for</span> <span class="n">delayed_func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">iterable</span>
-<span class="g g-Whitespace">     </span><span class="mi">76</span> <span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">77</span> <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">iterable_with_config</span><span class="p">)</span>
-
-<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\joblib\parallel.py:1918,</span> in <span class="ni">Parallel.__call__</span><span class="nt">(self, iterable)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1916</span>     <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_sequential_output</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1917</span>     <span class="nb">next</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1918</span>     <span class="k">return</span> <span class="n">output</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_generator</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1920</span> <span class="c1"># Let&#39;s create an ID that uniquely identifies the current call. If the</span>
-<span class="g g-Whitespace">   </span><span class="mi">1921</span> <span class="c1"># call is interrupted early and that the same instance is immediately</span>
-<span class="g g-Whitespace">   </span><span class="mi">1922</span> <span class="c1"># re-used, this id will be used to prevent workers that were</span>
-<span class="g g-Whitespace">   </span><span class="mi">1923</span> <span class="c1"># concurrently finalizing a task from the previous call to run the</span>
-<span class="g g-Whitespace">   </span><span class="mi">1924</span> <span class="c1"># callback.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1925</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
-
-<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\joblib\parallel.py:1847,</span> in <span class="ni">Parallel._get_sequential_output</span><span class="nt">(self, iterable)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1845</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_dispatched_batches</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="g g-Whitespace">   </span><span class="mi">1846</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_dispatched_tasks</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="ne">-&gt; </span><span class="mi">1847</span> <span class="n">res</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1848</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_completed_tasks</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="g g-Whitespace">   </span><span class="mi">1849</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_progress</span><span class="p">()</span>
-
-<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\sklearn\utils\parallel.py:139,</span> in <span class="ni">_FuncWrapper.__call__</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">137</span>     <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="g g-Whitespace">    </span><span class="mi">138</span> <span class="k">with</span> <span class="n">config_context</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">139</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\sklearn\ensemble\_forest.py:731,</span> in <span class="ni">_accumulate_prediction</span><span class="nt">(predict, X, out, lock)</span>
-<span class="g g-Whitespace">    </span><span class="mi">724</span> <span class="k">def</span><span class="w"> </span><span class="nf">_accumulate_prediction</span><span class="p">(</span><span class="n">predict</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">lock</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">725</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">726</span><span class="sd">     This is a utility function for joblib&#39;s Parallel.</span>
-<span class="g g-Whitespace">    </span><span class="mi">727</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">728</span><span class="sd">     It can&#39;t go locally in ForestClassifier or ForestRegressor, because joblib</span>
-<span class="g g-Whitespace">    </span><span class="mi">729</span><span class="sd">     complains that it cannot pickle it when placed there.</span>
-<span class="g g-Whitespace">    </span><span class="mi">730</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">731</span>     <span class="n">prediction</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">check_input</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">732</span>     <span class="k">with</span> <span class="n">lock</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">733</span>         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-
-<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\sklearn\tree\_classes.py:531,</span> in <span class="ni">BaseDecisionTree.predict</span><span class="nt">(self, X, check_input)</span>
-<span class="g g-Whitespace">    </span><span class="mi">529</span> <span class="n">check_is_fitted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">530</span> <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_X_predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">check_input</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">531</span> <span class="n">proba</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">532</span> <span class="n">n_samples</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">534</span> <span class="c1"># Classification</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
-</pre></div>
-</div>
+            </div><img alt="../../_images/0fbd9b603179968c267a4f19c25c37eda73bb172f4c40dc6a7a1deb7792769a7.png" src="../../_images/0fbd9b603179968c267a4f19c25c37eda73bb172f4c40dc6a7a1deb7792769a7.png" />
 </div>
 </div>
 </section>
