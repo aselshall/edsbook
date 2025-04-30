@@ -8,45 +8,45 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Lesson 20 - 21: Matplotlib Basics &#8212; Environmental Data Science</title>
+    <title>Lessons 20 - 21: Matplotlib Basics &#8212; Environmental Data Science</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -71,27 +71,23 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -113,8 +109,13 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -138,6 +139,8 @@
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="../../intro.html">
   
@@ -159,7 +162,7 @@
 
  <script>
  document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
     <span class="search-button__default-text">Search</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -260,7 +263,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -269,14 +272,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -301,14 +304,14 @@
       
       <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Chapters/8. Matplotlib for Visualization  8. Matplotlib for Visualization/matplotlib.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch onBinder"
+   title="Launch on Binder"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img src="../../_static/images/logo_binder.svg">
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
   </span>
 <span class="btn__text-container">Binder</span>
 </a>
@@ -432,10 +435,10 @@
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
@@ -443,14 +446,14 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -461,7 +464,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Lesson 20 - 21: Matplotlib Basics</h1>
+    <h1>Lessons 20 - 21: Matplotlib Basics</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -526,8 +529,8 @@ document.write(`
                 <article class="bd-article">
                   
   <p><img alt="Matplotlib logo" src="https://matplotlib.org/stable/_images/sphx_glr_logos2_003.png" /></p>
-<section class="tex2jax_ignore mathjax_ignore" id="lesson-20-21-matplotlib-basics">
-<h1>Lesson 20 - 21: Matplotlib Basics<a class="headerlink" href="#lesson-20-21-matplotlib-basics" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="lessons-20-21-matplotlib-basics">
+<h1>Lessons 20 - 21: Matplotlib Basics<a class="headerlink" href="#lessons-20-21-matplotlib-basics" title="Link to this heading">#</a></h1>
 <p>This lesson is modified from <a class="reference external" href="https://foundations.projectpythia.org/core/matplotlib.html">Matplotlib Basics</a> by <a class="reference external" href="https://projectpythia.org">Project Pythia</a>.</p>
 <p><a class="reference external" href="https://mybinder.org/v2/gh/aselshall/eds/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
 <hr class="docutils" />
@@ -590,9 +593,9 @@ document.write(`
 <p>Importing <code class="docutils literal notranslate"><span class="pre">pyplot</span></code> from Matplotlib simplifies figure creation with a MATLAB-like interface. Renaming <code class="docutils literal notranslate"><span class="pre">pyplot</span></code> as <code class="docutils literal notranslate"><span class="pre">plt</span></code> is the common convention for brevity.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 </pre></div>
 </div>
 </div>
@@ -627,24 +630,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Read the data from the CSV file into a Pandas DataFrame</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># Columns: [datetime, &#39;PM2.5&#39;, &#39;PM10&#39;,  &#39;NO2&#39;, &#39;SO2&#39;,  &#39;CO&#39;, &#39;O3&#39;]</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Load the array from file</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">pre_dates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data/pre_dates.npy&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">pre_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data/pre_values.npy&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">pre_aqi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data/pre_aqi.npy&#39;</span><span class="p">)</span>
-
-<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\numpy\lib\npyio.py:427,</span> in <span class="ni">load</span><span class="nt">(file, mmap_mode, allow_pickle, fix_imports, encoding, max_header_size)</span>
-<span class="g g-Whitespace">    </span><span class="mi">425</span>     <span class="n">own_fid</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="g g-Whitespace">    </span><span class="mi">426</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">427</span>     <span class="n">fid</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">enter_context</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os_fspath</span><span class="p">(</span><span class="n">file</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">428</span>     <span class="n">own_fid</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="g g-Whitespace">    </span><span class="mi">430</span> <span class="c1"># Code to distinguish from NumPy binary files and pickles.</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;data/pre_dates.npy&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pre_dates: datetime64[us] (358,)
+2019-04-01T00:00:00.000000 2020-03-31T00:00:00.000000
+pre_values: float64 (358, 6)
+pre_aqi: float64 (358, 6)
+post_dates: datetime64[us] (358,)
+2019-04-01T00:00:00.000000 2021-03-31T00:00:00.000000
+post_values: float64 (358, 6)
+post_aqi: float64 (358, 6)
 </pre></div>
 </div>
 </div>
@@ -750,11 +743,17 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a figure object and Axes object using subplots() method</span>
-
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 
 <span class="c1"># Plot time  [day] as x-variable and PM2.5 [&#39;µg/m³] as y-variable</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">,</span> <span class="c1">#time  [day]</span>
+        <span class="n">pre_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>  <span class="c1">#PM2.5 [&#39;µg/m³]</span>
+       <span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/065af3ed4774966a28650c00fac73bdee2ffc02e8d98fdc769496d072c4f0ee8.png" src="../../_images/065af3ed4774966a28650c00fac73bdee2ffc02e8d98fdc769496d072c4f0ee8.png" />
 </div>
 </div>
 <div class="admonition alert alert-info">
@@ -776,17 +775,23 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a figure</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
 <span class="c1"># Plot times as x-variable and air quality parameters as y-variable</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">,</span><span class="n">pre_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span> <span class="c1">#PM 2.5</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">,</span><span class="n">pre_values</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="p">);</span>  <span class="c1">#PM 10</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/8c26d1ef9574a6410e66e97ae6070d93cb1a6c2c37e2c3f4ed5805d2eb927415.png" src="../../_images/8c26d1ef9574a6410e66e97ae6070d93cb1a6c2c37e2c3f4ed5805d2eb927415.png" />
 </div>
 </div>
 </section>
 <section id="subplot-function">
 <h3>5.3 Subplot function<a class="headerlink" href="#subplot-function" title="Link to this heading">#</a></h3>
 <p>You might have noticed that we called the <code class="docutils literal notranslate"><span class="pre">subplots</span></code> function with the keyword argument <code class="docutils literal notranslate"><span class="pre">figsize</span></code>. Here are some of the keyword arguments that you can use when you call <code class="docutils literal notranslate"><span class="pre">subplots</span></code> or <code class="docutils literal notranslate"><span class="pre">.add_subplot()</span></code> method:</p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Keyword</p></th>
 <th class="head"><p>Description</p></th>
@@ -883,17 +888,22 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 <p>These are just a few common keyword arguments used with these two methods to customize and configure subplots in a figure.</p>
 <p>Let us try one of these keyowrds. Let us try to remove the ticks of x-axis of the upper plot, since both plots share the same axis. We can use the <code class="docutils literal notranslate"><span class="pre">sharex</span></code> argument.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a figure</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Plot times as x-variable and air quality parameters as y-variable</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">,</span><span class="n">pre_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span> <span class="c1">#PM 2.5</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">,</span><span class="n">pre_values</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="p">);</span>  <span class="c1">#PM 10</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/40226439f7e91e8812315e3a23ff6e1fb3c8b6f0660136195415875e998e08dc.png" src="../../_images/40226439f7e91e8812315e3a23ff6e1fb3c8b6f0660136195415875e998e08dc.png" />
 </div>
 </div>
 </section>
@@ -907,11 +917,15 @@ document.write(`
 
 <span class="c1"># Plot times as x-variable and air quality parameters as y-variable for PM2.5</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">,</span><span class="n">pre_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span> <span class="c1">#PM 2.5</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">post_dates</span><span class="p">,</span><span class="n">post_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span> <span class="c1">#PM 2.5</span>
 
 <span class="c1"># Plot times as x-variable and air quality parameters as y-variable for PM10</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pre_dates</span><span class="p">,</span><span class="n">pre_values</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="p">);</span>  <span class="c1">#PM 10</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/17eb9437a93b6bbae199f875c153c4eee2830e59a8b1b8b5d635f647a8889943.png" src="../../_images/17eb9437a93b6bbae199f875c153c4eee2830e59a8b1b8b5d635f647a8889943.png" />
 </div>
 </div>
 </section>
@@ -929,12 +943,15 @@ document.write(`
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">units</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">) &#39;</span><span class="p">)</span>
 
 <span class="c1"># Add some labels to x-axis</span>
-
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
 
 <span class="c1"># Prompt the notebook to re-display the figure after we modify it</span>
 <span class="n">fig</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/249754a8d59996c4aaef8968bd2fd2d2565f5e2a4abd371021bb3c9323279749.png" src="../../_images/249754a8d59996c4aaef8968bd2fd2d2565f5e2a4abd371021bb3c9323279749.png" />
 </div>
 </div>
 <div class="admonition alert alert-info">
@@ -942,7 +959,7 @@ document.write(`
     If you have Figure object stored in a variable named <code>fig</code>, you can display it using <code>plt.show(fig)</code>, or simply by placing the variable name <code>fig</code> at the end of the code. This prompts the notebook to re-display the figure after modifications have been made to it rather than recreating the figure from scratch. 
 </div><p>The <code class="docutils literal notranslate"><span class="pre">set_xlabel</span></code> and <code class="docutils literal notranslate"><span class="pre">set_ylabel</span></code> are methods in <code class="docutils literal notranslate"><span class="pre">Axes</span></code> object. Here are a few others for creating and modifying plots using Axes objects.</p>
 <p><strong>Labels and Title</strong></p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Method</p></th>
 <th class="head"><p>Description</p></th>
@@ -960,8 +977,9 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 <p><strong>Legends and Grid</strong></p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Method</p></th>
 <th class="head"><p>Description</p></th>
@@ -976,8 +994,9 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 <p><strong>Axis Limits and Ticks</strong></p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Method</p></th>
 <th class="head"><p>Description</p></th>
@@ -1007,8 +1026,9 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 <p><strong>Annotation and Lines</strong></p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Method</p></th>
 <th class="head"><p>Description</p></th>
@@ -1035,8 +1055,9 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 <p><strong>Plotting and Visualization</strong></p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Method</p></th>
 <th class="head"><p>Description</p></th>
@@ -1069,6 +1090,7 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 <p>For more details on the keyword arguments each method can take, use help functions like <code class="docutils literal notranslate"><span class="pre">ax[1].set_ylabel?</span></code> or <code class="docutils literal notranslate"><span class="pre">help(ax[1].set_label)</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1097,15 +1119,21 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Add title and increase title font size to 16</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;PM2.5 Pre and Post Lockdown&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;PM10 Pre Lockdown&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 
 <span class="c1">#Add horizontal line</span>
 <span class="n">max_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">pre_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">post_values</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
-
-
+<span class="k">if</span> <span class="n">max_value</span> <span class="o">&gt;=</span> <span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">)</span>
+    
 <span class="c1">#Display updated figure</span>
 <span class="n">fig</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2472a6c836f30898cf703c4f5d63b977099daf4a11ef6004e11d2faf2fe27f7c.png" src="../../_images/2472a6c836f30898cf703c4f5d63b977099daf4a11ef6004e11d2faf2fe27f7c.png" />
 </div>
 </div>
 </section>
@@ -1175,9 +1203,12 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/25ec623fdac2fb547930355d4b1283caaa4741730da9459ff6348a67cf923f2f.png" src="../../_images/25ec623fdac2fb547930355d4b1283caaa4741730da9459ff6348a67cf923f2f.png" />
+</div>
 </div>
 <p>Here are some keyword arguments of the <code class="docutils literal notranslate"><span class="pre">.plot</span></code> function in Matplotlib:</p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Keyword</p></th>
 <th class="head"><p>Description</p></th>
@@ -1273,6 +1304,7 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 <section id="id1">
 <h4>Test your understanding<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
 <p>For the code below add <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> keywords to cutomize your post PM2.5 plot</p>
@@ -1295,9 +1327,9 @@ document.write(`
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">post_dates</span><span class="p">,</span>     <span class="c1">#time</span>
            <span class="n">post_values</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span>     <span class="c1">#PM2.5</span>
            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PM2.5 Pre&#39;</span><span class="p">,</span> <span class="c1">#Legend label</span>
-
-
-
+           <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>        <span class="c1">#Line color</span>
+           <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">,</span>   <span class="c1">#Line style</span>
+            <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span>        <span class="c1">#Change linewidth</span>
           <span class="p">);</span> <span class="c1">#post</span>
 
 <span class="c1"># Plot time versus PM 10 with label and color blue for pre and red for post </span>
@@ -1324,6 +1356,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ce0dd32f1bcc643502eefb696a8f85c1c052f05dc5e0e64f5146d20ad4bff164.png" src="../../_images/ce0dd32f1bcc643502eefb696a8f85c1c052f05dc5e0e64f5146d20ad4bff164.png" />
+</div>
 </div>
 </section>
 </section>
@@ -1341,10 +1376,13 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/571bb9c2f16f3eb0fec8a8cc039fd57719366da54d4193e304dfed76f9e82f9a.png" src="../../_images/571bb9c2f16f3eb0fec8a8cc039fd57719366da54d4193e304dfed76f9e82f9a.png" />
+</div>
 </div>
 <p>There other methods associated with <code class="docutils literal notranslate"><span class="pre">Figure</span></code> objects as follows.</p>
 <p><strong>Adjusting Layout</strong></p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Method</p></th>
 <th class="head"><p>Description</p></th>
@@ -1362,8 +1400,9 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 <p><strong>Saving and Displaying</strong></p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Method</p></th>
 <th class="head"><p>Description</p></th>
@@ -1381,6 +1420,7 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 <p>These examples demonstrate further functionalities for adjusting layout and saving/displaying figures.</p>
 </section>
 <section id="customizing-colors">
@@ -1434,6 +1474,12 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PM2.5 exceeds healthy limit 35
+</pre></div>
+</div>
+<img alt="../../_images/935767ae9c25f6844d05fef15d957496230d68aef20f5bf0a8aab4e334cf3aa4.png" src="../../_images/935767ae9c25f6844d05fef15d957496230d68aef20f5bf0a8aab4e334cf3aa4.png" />
+</div>
 </div>
 </section>
 <section id="scatterplot-optional">
@@ -1455,6 +1501,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/8d272e4ca2ade9316805eeaa3555108d31d29e7cb082030a8eee9196ed534b83.png" src="../../_images/8d272e4ca2ade9316805eeaa3555108d31d29e7cb082030a8eee9196ed534b83.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1470,6 +1519,9 @@ document.write(`
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b358f5afa127849a34d78ba1861e6460dc3e90b00883d5da5ecc5a15756471ef.png" src="../../_images/b358f5afa127849a34d78ba1861e6460dc3e90b00883d5da5ecc5a15756471ef.png" />
 </div>
 </div>
 <div class="admonition alert alert-info">
@@ -1506,6 +1558,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7a418f0aa87dcc1dfe460fc9a12774ebce6902e100a7ba603d51cb37ec925338.png" src="../../_images/7a418f0aa87dcc1dfe460fc9a12774ebce6902e100a7ba603d51cb37ec925338.png" />
+</div>
 </div>
 </section>
 <section id="displaying-images-optional">
@@ -1534,6 +1589,13 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X: (240, 240)
+Y: (240, 240)
+Z: (240, 240)
+</pre></div>
+</div>
+</div>
 </div>
 <p>We can now pass this fake data to <code class="docutils literal notranslate"><span class="pre">imshow</span></code> to create a heat map of the distribution:</p>
 <div class="cell docutils container">
@@ -1551,6 +1613,9 @@ document.write(`
 <span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5d501e6249efdb401733c8db478989ef0e0cbc82e20a9cb24a75a5d3c399d476.png" src="../../_images/5d501e6249efdb401733c8db478989ef0e0cbc82e20a9cb24a75a5d3c399d476.png" />
 </div>
 </div>
 </section>
@@ -1571,6 +1636,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/867d3b28f0d9c08db2eea07805ee857d204e9eb351542519d008fe09f0573b09.png" src="../../_images/867d3b28f0d9c08db2eea07805ee857d204e9eb351542519d008fe09f0573b09.png" />
+</div>
 </div>
 <p>After creating contours, we can label the lines using the <code class="docutils literal notranslate"><span class="pre">clabel</span></code> method, like this:</p>
 <div class="cell docutils container">
@@ -1586,6 +1654,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4a5005cc2a7d4774475876bdef195ccb91337ceb99a3e23a99c85b232deeab63.png" src="../../_images/4a5005cc2a7d4774475876bdef195ccb91337ceb99a3e23a99c85b232deeab63.png" />
+</div>
 </div>
 <p>As described above, the <code class="docutils literal notranslate"><span class="pre">contourf</span></code> (contour fill) method creates filled contours around data, like this:</p>
 <div class="cell docutils container">
@@ -1597,6 +1668,9 @@ document.write(`
 <span class="n">c</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/328af5ba10fa390a06791875f032236f1c46954de70b99088eadd5f13451dddd.png" src="../../_images/328af5ba10fa390a06791875f032236f1c46954de70b99088eadd5f13451dddd.png" />
 </div>
 </div>
 <p>As a final example, let’s create a heatmap figure with contours using the <code class="docutils literal notranslate"><span class="pre">contour</span></code> and <code class="docutils literal notranslate"><span class="pre">imshow</span></code> methods.  First, we use <code class="docutils literal notranslate"><span class="pre">imshow</span></code> to create the heatmap, specifying a colormap using the <code class="docutils literal notranslate"><span class="pre">cmap</span></code> keyword argument.  We then call <code class="docutils literal notranslate"><span class="pre">contour</span></code>, specifying black contours and an interval of 0.5.  Here is the example code, and resulting figure:</p>
@@ -1627,6 +1701,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/3da4e059c11b50ef72b7fc8a7891030b459a4db33c9afc37841acbac6bc9bcd0.png" src="../../_images/3da4e059c11b50ef72b7fc8a7891030b459a4db33c9afc37841acbac6bc9bcd0.png" />
+</div>
 </div>
 </section>
 <section id="heatmap-plot-optional">
@@ -1652,6 +1729,9 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ab2537f5e0852765a199841f0930bba44c3c76e1152e8d854df6a7acf585a2ba.png" src="../../_images/ab2537f5e0852765a199841f0930bba44c3c76e1152e8d854df6a7acf585a2ba.png" />
 </div>
 </div>
 </section>
@@ -1680,6 +1760,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b8c5388e1682813a55493936b2492ae8e562c4cbf5b3e5a7980d13acd6fe304f.png" src="../../_images/b8c5388e1682813a55493936b2492ae8e562c4cbf5b3e5a7980d13acd6fe304f.png" />
+</div>
 </div>
 <p>In the provided code, the expression <code class="docutils literal notranslate"><span class="pre">ax[index</span> <span class="pre">//</span> <span class="pre">3,</span> <span class="pre">index</span> <span class="pre">%</span> <span class="pre">3]</span></code> is used to access each subplot within a 2x3 grid of subplots. The <code class="docutils literal notranslate"><span class="pre">//</span></code> and <code class="docutils literal notranslate"><span class="pre">%</span></code> operations compute the row and column indices in the grid, making element access and traversal easier during iteration.</p>
 <ul class="simple">
@@ -1691,6 +1774,20 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">index</span> <span class="o">//</span> <span class="mi">3</span><span class="p">,</span> <span class="n">index</span> <span class="o">%</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 0
+0 1
+0 2
+1 0
+1 1
+1 2
+2 0
+2 1
+2 2
+3 0
 </pre></div>
 </div>
 </div>
@@ -1730,6 +1827,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/54bcfbf97bc7c2acf7c92291ce23077974081cb1fe30ae0aef29439c51dcb175.png" src="../../_images/54bcfbf97bc7c2acf7c92291ce23077974081cb1fe30ae0aef29439c51dcb175.png" />
+</div>
 </div>
 <p>In the above code:</p>
 <ul class="simple">
@@ -1756,6 +1856,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/54bcfbf97bc7c2acf7c92291ce23077974081cb1fe30ae0aef29439c51dcb175.png" src="../../_images/54bcfbf97bc7c2acf7c92291ce23077974081cb1fe30ae0aef29439c51dcb175.png" />
+</div>
 </div>
 <p>The same example with the implicit “pyplot” interface<code class="docutils literal notranslate"><span class="pre">plt.plot()</span></code>:</p>
 <div class="cell docutils container">
@@ -1769,6 +1872,9 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/54bcfbf97bc7c2acf7c92291ce23077974081cb1fe30ae0aef29439c51dcb175.png" src="../../_images/54bcfbf97bc7c2acf7c92291ce23077974081cb1fe30ae0aef29439c51dcb175.png" />
 </div>
 </div>
 <p>Note how the methods names for these two interfaces are different (e.g., <code class="docutils literal notranslate"><span class="pre">ax.set_ylabel</span></code> vs. <code class="docutils literal notranslate"><span class="pre">plt.ylabel</span></code>).</p>
@@ -1829,7 +1935,7 @@ document.write(`
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -1957,8 +2063,8 @@ By Ahmed Elshall & Thalia Valle
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
