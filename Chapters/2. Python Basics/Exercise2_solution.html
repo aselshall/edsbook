@@ -192,7 +192,8 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson2.html">Objectives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson2.html">Lesson 2 Getting Started</a></li>
+
 
 <li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Excercise1.html">Exercise 1 - Installing Python</a></li>
 </ul>
@@ -509,23 +510,23 @@ document.write(`
 <p><a class="reference external" href="https://mybinder.org/v2/gh/aselshall/eds/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
 <section id="a-low-effort-way-to-become-a-millionaire">
 <h2>A low-effort way to become a millionaire<a class="headerlink" href="#a-low-effort-way-to-become-a-millionaire" title="Link to this heading">#</a></h2>
-<p>According to <a class="reference external" href="https://www.newtraderu.com/2023/05/07/3-low-effort-ways-to-become-a-millionaire/">New Trader U: 3 Low-Effort Ways To Become A Millionaire</a>, Standard and Poor’s 500 index fund (S&amp;P 500) tracks the stock performance of 500 of the largest companies listed on stock exchanges in the US. The average historical rate an investor can expect long-term on S&amp;P 500 is 8% annual compounded growth. The formula is:
-$<span class="math notranslate nohighlight">\(
+<p>According to <a class="reference external" href="https://www.newtraderu.com/2023/05/07/3-low-effort-ways-to-become-a-millionaire/">New Trader U: 3 Low-Effort Ways To Become A Millionaire</a>, Standard and Poor’s 500 index fund (S&amp;P 500) tracks the stock performance of 500 of the largest companies listed on stock exchanges in the US. The average historical rate an investor can expect long-term on S&amp;P 500 is 8% annual compounded growth. The formula is:</p>
+<p><span class="math notranslate nohighlight">\(
 FV = PM * \frac{[(1 + r)^{nt} – 1]}{r} 
-\)</span><span class="math notranslate nohighlight">\(
-Where:      
-FV:  Future value of the investment (e.g., \\\)</span>1,000,000)<br />
-PM: Monthly investment amount (e.g., \$300)<br />
+\)</span></p>
+<p>Where:<br />
+FV:  Future value of the investment (e.g., 1,000,000)<br />
+PM: Monthly investment amount (e.g., 300)<br />
 r:   Monthly interest rate (e.g. 0.64%)<br />
 n:   Number of times the interest is compounded per year (i.e., 12 for monthly compounding)<br />
 t:   Number of years (e.g., 20 years)</p>
 <p>To convert annual interest rate of 8% to monthly interest rate you can use this formula <span class="math notranslate nohighlight">\( r = (1 + 0.08)^{1/n} – 1  \)</span></p>
-<p>For example,  for FV= \<span class="math notranslate nohighlight">\(1,000,000 and t = 40 years, then PM ≈ \\\)</span>310.5. Note while there is wide variance in monthly and annual returns, long-term destination will likely lead to being a millionaire based on historical performance of past 100 years.</p>
+<p>For example,  for FV= 1,000,000 and t = 40 years, then PM ≈ 310.5. Note while there is wide variance in monthly and annual returns, long-term destination will likely lead to being a millionaire based on historical performance of past 100 years.</p>
 <section id="exercise-1">
 <h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Link to this heading">#</a></h3>
-<p>Write a code to check that if you invisted about <span class="math notranslate nohighlight">\(310.5 you will be a millionaire in 40 years.  
-Display your answer as &quot;For a monthly invistment of \\\)</span> 310.5 for 40 years, the future value will be \<span class="math notranslate nohighlight">\( 1.0 million&quot;  
-Note that \\\)</span> 1.0 is rounded and the actual value is 1.0001451368328833.<br />
+<p>Write a code to check that if you invisted about 310.5 you will be a millionaire in 40 years.<br />
+Display your answer as “For a monthly invistment of 310.5 for 40 years, the future value will be 1.0 million”<br />
+Note that 1.0 is rounded and the actual value is 1.0001451368328833.<br />
 How to round a number in python? Check online</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -562,11 +563,11 @@ The actual value is 1.0001451368328833 million
 <section id="exercise-2">
 <h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h3>
 <p>(2) Write a code to check how much do you need to invest monthly to become a millionaire in 25 years?<br />
-Display your answer as “For a future value of \<span class="math notranslate nohighlight">\( 1.0 million in 25 years, you need to invist \\\)</span> 1100.0 per month”<br />
-Note that \<span class="math notranslate nohighlight">\( 1100.0 is rounded and the actual value is 1100.120953605599.
-\)</span><span class="math notranslate nohighlight">\(
+Display your answer as “For a future value of 1.0 million in 25 years, you need to invist 1100.0 per month”<br />
+Note that 1100.0 is rounded and the actual value is 1100.120953605599.</p>
+<p><span class="math notranslate nohighlight">\(
 FV = PM * \frac{[(1 + r)^{nt} – 1]}{r} 
-\)</span>$</p>
+\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find PM given t of 25 years and FV of $1,000,000</span>
@@ -602,13 +603,13 @@ The actual value is 1100.120953605599 per month
 </section>
 <section id="exercise-3">
 <h3>Exercise 3<a class="headerlink" href="#exercise-3" title="Link to this heading">#</a></h3>
-<p>Write a code to find out that if you will invest <span class="math notranslate nohighlight">\(1000 per month, after how many years will you become a millionaire?  
-Display your answer as &quot;If you invisited \\\)</span> 1000.0 per month, you will become a milloire in 26.1 years”</p>
+<p>Write a code to find out that if you will invest 1000 per month, after how many years will you become a millionaire?<br />
+Display your answer as “If you invisited 1000.0 per month, you will become a milloire in 26.1 years”</p>
 <p>Note you need to import <em>math</em> module to solve the exponential equation using logarithms.<br />
-We did not learn logarithms, but we learned how to find functions in the documentation of the <a class="reference external" href="https://docs.python.org/3/library/math.html"><em>math</em></a> module
-$<span class="math notranslate nohighlight">\(
+We did not learn logarithms, but we learned how to find functions in the documentation of the <a class="reference external" href="https://docs.python.org/3/library/math.html"><em>math</em></a> module</p>
+<p><span class="math notranslate nohighlight">\(
 FV = PM * \frac{[(1 + r)^{nt} – 1]}{r} 
-\)</span>$</p>
+\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find t given PM $1,000 per month and FV of $1,000,000</span>

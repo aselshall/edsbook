@@ -192,7 +192,8 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson2.html">Objectives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson2.html">Lesson 2 Getting Started</a></li>
+
 
 <li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Excercise1.html">Exercise 1 - Installing Python</a></li>
 </ul>
@@ -534,21 +535,21 @@ document.write(`
 <section id="problem-2-becoming-a-millionare">
 <h2>Problem 2 - Becoming a millionare<a class="headerlink" href="#problem-2-becoming-a-millionare" title="Link to this heading">#</a></h2>
 <p><strong>The objectives</strong> of this problems are to show that you can perform math operations in python and use math functions (e.g., <code class="docutils literal notranslate"><span class="pre">log</span></code>) that you did not learn in class.</p>
-<p>According to <a class="reference external" href="https://www.newtraderu.com/2023/05/07/3-low-effort-ways-to-become-a-millionaire/">New Trader U: 3 Low-Effort Ways To Become A Millionaire</a>, Standard and Poor’s 500 index fund (S&amp;P 500) tracks the stock performance of 500 of the largest companies listed on stock exchanges in the US. The average historical rate an investor can expect long-term on S&amp;P 500 is 8% annual compounded growth. The formula is:
-$<span class="math notranslate nohighlight">\(
+<p>According to <a class="reference external" href="https://www.newtraderu.com/2023/05/07/3-low-effort-ways-to-become-a-millionaire/">New Trader U: 3 Low-Effort Ways To Become A Millionaire</a>, Standard and Poor’s 500 index fund (S&amp;P 500) tracks the stock performance of 500 of the largest companies listed on stock exchanges in the US. The average historical rate an investor can expect long-term on S&amp;P 500 is 8% annual compounded growth. The formula is:</p>
+<p><span class="math notranslate nohighlight">\(
 FV = PM * \frac{[(1 + r)^{nt} – 1]}{r} 
-\)</span><span class="math notranslate nohighlight">\(
-Where:      
-FV:  Future value of the investment (e.g., \\\)</span>1,000,000)<br />
-PM: Monthly investment amount (e.g., \$300)<br />
+\)</span></p>
+<p>Where:<br />
+FV:  Future value of the investment (e.g., 1,000,000)<br />
+PM: Monthly investment amount (e.g., 300)<br />
 r:   Monthly interest rate<br />
 n:   Number of times the interest is compounded per year (i.e., 12 for monthly compounding)<br />
 t:   Number of years (e.g., 20 years)</p>
 <p>To convert annual interest rate of 8% to monthly interest rate you can use this formula <span class="math notranslate nohighlight">\( r = (1 + 0.08)^{1/n} – 1  \)</span></p>
-<p>For example,  for FV= \<span class="math notranslate nohighlight">\(1,000,000 and t = 40 years, then PM ≈ \\\)</span>310.5. Note while there is wide variance in monthly and annual returns, long-term destination will likely lead to being a millionaire based on historical performance of past 100 years.</p>
+<p>For example,  for FV= 1,000,000 and t = 40 years, then PM ≈ 310.5. Note while there is wide variance in monthly and annual returns, long-term destination will likely lead to being a millionaire based on historical performance of past 100 years.</p>
 <p><strong>Answer these two questions:</strong><br />
-<strong>(1)</strong> Write a code to check how much do you need to invest monthly to become a millionaire in 25 years? Display your answer as “For a future value of \<span class="math notranslate nohighlight">\( 1.0 million in 25 years, you need to invist \\\)</span> 1100.0 per month”. Note that $ 1100.0 is rounded and the actual value is 1100.120953605599.</p>
-<p><strong>(2)</strong> Write a code to find out that if you will invest \<span class="math notranslate nohighlight">\(1000 per month, after how many years will you become a millionaire? Display your answer as &quot;If you invisited \\\)</span>1000.0 per month, you will become a milloire in 25.5 years”. <strong>Note</strong> you need to import <a class="reference external" href="https://docs.python.org/3/library/math.html">math</a> module to solve the exponential equation using logarithms. We did not learn logarithms, but we learned how to find functions in the documentation of the math module.</p>
+<strong>(1)</strong> Write a code to check how much do you need to invest monthly to become a millionaire in 25 years? Display your answer as “For a future value of 1.0 million in 25 years, you need to invist 1100.0 per month”. Note that 1100.0 is rounded and the actual value is 1100.120953605599.</p>
+<p><strong>(2)</strong> Write a code to find out that if you will invest 1000 per month, after how many years will you become a millionaire? Display your answer as “If you invisited 1000.0 per month, you will become a milloire in 25.5 years”. <strong>Note</strong> you need to import <a class="reference external" href="https://docs.python.org/3/library/math.html">math</a> module to solve the exponential equation using logarithms. We did not learn logarithms, but we learned how to find functions in the documentation of the math module.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
@@ -620,8 +621,8 @@ t:   Number of years (e.g., 20 years)</p>
 </pre></div>
 </div>
 <p><strong>Write a python code to perform the following:</strong><br />
-(1) Calculate this ratio:<br />
-$<span class="math notranslate nohighlight">\(\text{PM2.5 Ratio} = \frac{\text{PM2.5 Concentration}}{\text{PM2.5 Permissible Limit}}\)</span>$</p>
+(1) Calculate this ratio:</p>
+<p><span class="math notranslate nohighlight">\(\text{PM2.5 Ratio} = \frac{\text{PM2.5 Concentration}}{\text{PM2.5 Permissible Limit}}\)</span></p>
 <p>(2) Print this ratio using f-formatting as follows:</p>
 <p>“A PM2.5 concentration of 2.15E-1 µg/m³ is approximately 2.15% of the permissible limit.”</p>
 <p><strong>Note</strong>  The concentration format has 2 decimal places in scientific notation, and the ratio format is in percentage with 2 decimal places.

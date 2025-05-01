@@ -1,17 +1,4 @@
 Traceback (most recent call last):
-  File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\site-packages\nbclient\client.py", line 782, in _async_poll_for_reply
-    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\site-packages\jupyter_core\utils\__init__.py", line 198, in ensure_async
-    result = await obj
-             ^^^^^^^^^
-  File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\site-packages\jupyter_client\channels.py", line 313, in get_msg
-    raise Empty
-_queue.Empty
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
   File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
     executenb(
   File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\site-packages\nbclient\client.py", line 1319, in execute
@@ -25,20 +12,115 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^
   File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\site-packages\nbclient\client.py", line 709, in async_execute
     await self.async_execute_cell(
-  File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\site-packages\nbclient\client.py", line 1005, in async_execute_cell
-    exec_reply = await self.task_poll_for_reply
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\site-packages\nbclient\client.py", line 806, in _async_poll_for_reply
-    error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
-                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\site-packages\nbclient\client.py", line 856, in _async_handle_timeout
-    raise CellTimeoutError.error_from_timeout_and_cell(
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
-The message was: Cell execution timed out.
-Here is a preview of the cell contents:
--------------------
-['#ChatGPT 3.5 Turbo Code', '', 'import pandas as pd', 'import os', 'import zipfile']
-...
-['# 18. Save df_Attributes', "df_Attributes.to_csv(os.path.join(save_folder, 'Attributes.csv'))", '', '# 19. Display df_Attributes', 'display(df_Attributes)']
--------------------
+  File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\aelshall\AppData\Local\miniconda3\Lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+Download = False #Change to true if you want to download the data
+
+Download: 
+    #ChatGPT 3.5 Turbo Code    
+    import pandas as pd
+    import os
+    import zipfile
+    from urllib.request import urlretrieve
+    
+    # 1. Define Attributes dictionary for air quality data
+    Attributes = {
+        'Category': ['Criteria Gases', 'Criteria Gases', 'Criteria Gases', 'Criteria Gases',
+                     'Particulates', 'Particulates', 'Particulates', 'Particulates',
+                     'Meteorological', 'Meteorological', 'Meteorological', 'Meteorological',
+                     'Toxics, Precursors, and Lead', 'Toxics, Precursors, and Lead',
+                     'Toxics, Precursors, and Lead', 'Toxics, Precursors, and Lead'],
+        'Parameter': ['Ozone', 'SO2', 'CO', 'NO2', 'PM2.5 FRM/FEM Mass', 'PM2.5 non FRM/FEM Mass',
+                      'PM10 Mass', 'PMc Mass', 'Winds', 'Temperature', 'Barometric Pressure',
+                      'RH and Dewpoint', 'HAPs', 'VOCs', 'NONOxNOy', 'Lead'],
+        'FileID': [44201, 42401, 42101, 42602, 88101, 88502, 81102, 86101, 'WIND', 'TEMP',
+                   'PRESS', 'RH_DP', 'HAPS', 'VOCS', 'NONOxNOy', 'LEAD'],
+        'Unit': ['na', 'na', 'na', 'na', 'na', 'na', 'na', 'na', 'na', 'na', 'na', 'na', 'na', 'na', 'na', 'na'],
+        'Records': [0] * 16
+    }
+    
+    # 2. Define region and CBSA_Name_Value
+    region = 'Miami'
+    CBSA_Name_Value = 'Miami-Fort Lauderdale-West Palm Beach, FL'
+    
+    # 3. Initialize download_count
+    download_count = 0
+    
+    # 4. Loop through each year and download files
+    for year in range(2019, 2022):
+        for i, file_id in enumerate(Attributes['FileID']):
+            filename = f'daily_{file_id}_{year}.zip'
+            base_url = 'https://aqs.epa.gov/aqsweb/airdata/'
+            download_from = base_url + filename
+            
+            # 5. Show download progress
+            download_count += 1
+            print(f"Download {download_count}: {year} : {Attributes['Parameter'][i]} : {filename}")
+            
+            # Download file
+            urlretrieve(download_from, filename)
+            
+            # 6. Unzip file
+            with zipfile.ZipFile(filename, 'r') as zip_ref:
+                zip_ref.extractall()
+            
+            # 7. Read csv file
+            raw_data = pd.read_csv(f'daily_{file_id}_{year}.csv', low_memory=False)
+            
+            # 8. Delete zip file if exists
+            if os.path.exists(filename):
+                os.remove(filename)
+            
+            # 9. Delete csv file if exists
+            if os.path.exists(f'daily_{file_id}_{year}.csv'):
+                os.remove(f'daily_{file_id}_{year}.csv')
+            
+            # 10. Handle warning in raw_data
+            pd.set_option('mode.chained_assignment', None)
+            
+            # 11. Update 'Unit' in Attributes
+            Attributes['Unit'][i] = raw_data['Units of Measure'][0] if len(raw_data) > 0 else 'empty_file'
+            
+            # 12. Filter by CBSA_Name_Value
+            raw_data = raw_data[raw_data['CBSA Name'] == CBSA_Name_Value]
+            
+            # 13. Keep required columns
+            raw_data = raw_data[['County Code', 'Parameter Name', 'Date Local', 'Units of Measure',
+                                 'Arithmetic Mean', 'CBSA Name']]
+            
+            # 14. Convert 'Date Local' to datetime and set as index
+            raw_data['Date Local'] = pd.to_datetime(raw_data['Date Local'])
+            raw_data.set_index('Date Local', inplace=True)
+            raw_data.sort_index(inplace=True)
+            
+            # 15. Update 'Records' in Attributes
+            Attributes['Records'][i] += len(raw_data)
+            
+            # 16. Save raw_data
+            save_folder = os.path.join('Data', 'L2_Structured')
+            if not os.path.exists(save_folder):
+                os.makedirs(save_folder)
+            raw_data.to_csv(os.path.join(save_folder, f'daily_{file_id}_{year}_{region}.csv'))
+            
+    
+    # 17. Create DataFrame from Attributes
+    df_Attributes = pd.DataFrame(Attributes)
+    
+    # 18. Save df_Attributes
+    df_Attributes.to_csv(os.path.join(save_folder, 'Attributes.csv'))
+    
+    # 19. Display df_Attributes
+    display(df_Attributes)
+------------------
+
+
+  [36mCell[39m[36m [39m[32mIn[1][39m[32m, line 3[39m
+[31m    [39m[31mDownload:[39m
+              ^
+[31mSyntaxError[39m[31m:[39m invalid syntax
+
 

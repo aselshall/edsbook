@@ -4,27 +4,18 @@
 
 Welcome to the Environmental Data Science Book! This book was created to simplify and group course content in one place. It will be updated as required to ensure you have the latest information and resources.
 
-## Course Syllabus
+## Important Links:
 
-Course syllabus inlucding link to project assignment and past student projects: [Link](https://aselshall.github.io/eds)
+- Syllabus: [Link](https://aselshall.github.io/eds)
+- Term Project: [Link](https://aselshall.github.io/eds/HW/project)
+- Past Student Projects: [Link](https://aselshall.github.io/eds/HW/project#5-student-projects)
+- Course Flyer: [Link](https://aselshall.github.io/eds/Environmental%20Data%20Science%20Flyer.pdf)
 
 ## About the Author
 
-**Ahmed S. Elshall, PhD**  
+Ahmed S. Elshall, PhD
 Assistant Professor  
 Department of Bioengineering, Civil Engineering, and Environmental Engineering  
 U.A. Whitaker College of Engineering  
 Joint Appointment with The Water School  
-
-**Office**: Holmes Hall 423 (inside 416)  
-**Office Hours**:  
-- **Tuesday and Thursday**: 8:00 am – 12:00 pm  
-- **Tuesday and Thursday**: 3:00 pm - 4:00 pm  
-- And by appointment  
-
-**Research Website**: [aelshall.weebly.com](https://aelshall.weebly.com)
-
-## Table of Contents
-
-```{tableofcontents}
-```
+[aelshall.weebly.com](https://aelshall.weebly.com)

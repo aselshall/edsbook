@@ -190,7 +190,8 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson2.html">Objectives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson2.html">Lesson 2 Getting Started</a></li>
+
 
 <li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Excercise1.html">Exercise 1 - Installing Python</a></li>
 </ul>
@@ -640,11 +641,11 @@ document.write(`
 <h2>3. Basic terminologies<a class="headerlink" href="#basic-terminologies" title="Link to this heading">#</a></h2>
 <p>The Pandas <a class="reference external" href="https://Pandas.pydata.org/docs/user_guide/dsintro.html#dataframe"><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></a> and The Pandas <a class="reference external" href="https://Pandas.pydata.org/docs/user_guide/dsintro.html#series"><code class="docutils literal notranslate"><span class="pre">Series</span></code></a> are <strong>labeled</strong> data structures.</p>
 <p>The Pandas <a class="reference external" href="https://Pandas.pydata.org/docs/user_guide/dsintro.html#dataframe"><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></a> (a 2-dimensional data structure) is used for storing and mainpulating table-like data (data with rows and columns) in Python. You can think of a Pandas DataFrame as a programmable spreadsheet.</p>
-<p><img alt="dataframe schematic" src="https://github.com/Pandas-dev/Pandas/raw/main/doc/source/_static/schemas/01_table_dataframe.svg" /><br />
-The first column in dark gray, referred to as an <code class="docutils literal notranslate"><span class="pre">index</span></code>, contains information characterizing each row.<br />
+<p><img alt="dataframe schematic" src="https://raw.githubusercontent.com/aselshall/edsbook/refs/heads/master/figures/Lesson10_1.svg" /></p>
+<p>The first column in dark gray, referred to as an <code class="docutils literal notranslate"><span class="pre">index</span></code>, contains information characterizing each row.<br />
 The first row in dark gray, referred to as <code class="docutils literal notranslate"><span class="pre">header</span></code>, contains the column lablels</p>
 <p>The Pandas <a class="reference external" href="https://Pandas.pydata.org/docs/user_guide/dsintro.html#series"><code class="docutils literal notranslate"><span class="pre">Series</span></code></a> (a 1-dimensional data structure) is used for storing and manipulating a sequence of values. Pandas Series is kind of like a list, but more clever. One row or one column in a Pandas DataFrame is actually a Pandas Series.</p>
-<p><img alt="Pandas Series" src="https://github.com/Pandas-dev/Pandas/raw/main/doc/source/_static/schemas/01_table_series.svg" /></p>
+<p><img alt="Pandas Series" src="https://raw.githubusercontent.com/aselshall/edsbook/refs/heads/master/figures/Lesson10_2.svg" /></p>
 </section>
 <section id="learning-pandas-by-an-example">
 <h2>4. Learning Pandas by an example<a class="headerlink" href="#learning-pandas-by-an-example" title="Link to this heading">#</a></h2>
@@ -2928,7 +2929,7 @@ Name: PRCP, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\aelshall\AppData\Local\Temp\ipykernel_18252\152910108.py:2: FutureWarning: &#39;Y&#39; is deprecated and will be removed in a future version, please use &#39;YE&#39; instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\aelshall\AppData\Local\Temp\ipykernel_3728\152910108.py:2: FutureWarning: &#39;Y&#39; is deprecated and will be removed in a future version, please use &#39;YE&#39; instead.
   one_station.resample(&quot;Y&quot;).min()
 </pre></div>
 </div>
@@ -3203,7 +3204,7 @@ Name: PRCP, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\aelshall\AppData\Local\Temp\ipykernel_18252\1940048899.py:5: FutureWarning: &#39;Y&#39; is deprecated and will be removed in a future version, please use &#39;YE&#39; instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\aelshall\AppData\Local\Temp\ipykernel_3728\1940048899.py:5: FutureWarning: &#39;Y&#39; is deprecated and will be removed in a future version, please use &#39;YE&#39; instead.
   two_stations[columns_to_keep].resample(&#39;Y&#39;).mean()
 </pre></div>
 </div>
@@ -3288,7 +3289,7 @@ Name: PRCP, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\aelshall\AppData\Local\Temp\ipykernel_18252\579840131.py:6: FutureWarning: &#39;Y&#39; is deprecated and will be removed in a future version, please use &#39;YE&#39; instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\aelshall\AppData\Local\Temp\ipykernel_3728\579840131.py:6: FutureWarning: &#39;Y&#39; is deprecated and will be removed in a future version, please use &#39;YE&#39; instead.
   two_stations.groupby([&#39;STATION&#39;])[columns_to_keep].resample(&#39;Y&#39;).mean()
 </pre></div>
 </div>
@@ -3401,7 +3402,7 @@ Name: PRCP, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\aelshall\AppData\Local\Temp\ipykernel_18252\1860762282.py:6: FutureWarning: &#39;Y&#39; is deprecated and will be removed in a future version, please use &#39;YE&#39; instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\aelshall\AppData\Local\Temp\ipykernel_3728\1860762282.py:6: FutureWarning: &#39;Y&#39; is deprecated and will be removed in a future version, please use &#39;YE&#39; instead.
   two_stations.groupby([&#39;NAME&#39;])[columns_to_keep].resample(&#39;Y&#39;).mean()
 </pre></div>
 </div>
