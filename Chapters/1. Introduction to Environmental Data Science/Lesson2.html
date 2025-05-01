@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Lesson 2 Getting Started &#8212; Environmental Data Science</title>
+    <title>Objectives &#8212; Environmental Data Science</title>
   
   
   
@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Installing Python and JupyterLab" href="Excercise1.html" />
-    <link rel="prev" title="Introduction to Environmental Data Science with Python" href="Lesson1.html" />
+    <link rel="prev" title="Lesson 1 Introduction to Environmental Data Science with Python" href="Lesson1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -192,8 +192,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Lesson1.html">Lesson 1 - Introduction to Environmental Data Science</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lesson 2 Getting Started</a></li>
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Objectives</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="Excercise1.html">Exercise 1 - Installing Python</a></li>
 </ul>
@@ -477,7 +476,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Lesson 2 Getting Started</h1>
+    <h1>Objectives</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -487,8 +486,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lesson 2 Getting Started</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Objectives</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-glimpse-of-python">1. A glimpse of Python</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-jupyter-notebook">1.1 Getting started with Jupyter Notebook</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#math-operations">1.2 Math operations</a><ul class="nav section-nav flex-column">
@@ -516,10 +514,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="lesson-2-getting-started">
-<h1>Lesson 2 Getting Started<a class="headerlink" href="#lesson-2-getting-started" title="Link to this heading">#</a></h1>
+  <h1 style="color:green; text-align:center;">Lesson 2 Getting Started</h1>
 <p>This lesson is modified from <a class="reference external" href="https://geo-python-site.readthedocs.io/en/latest/notebooks/L1/a-taste-of-python.html">A taste of Python</a> from <a class="reference external" href="https://geo-python-site.readthedocs.io/en/latest/index.html">geo-python</a>.</p>
-</section>
 <section class="tex2jax_ignore mathjax_ignore" id="objectives">
 <h1>Objectives<a class="headerlink" href="#objectives" title="Link to this heading">#</a></h1>
 <p>By the end of this lesson, you will be able to</p>
@@ -595,15 +591,72 @@ document.write(`
 <p>Try to do the following calcluation
 $<span class="math notranslate nohighlight">\(9 - \frac{5^3}{5 \times 25}\)</span>$
 Ans: 8</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">9</span><span class="o">-</span><span class="mi">5</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="mi">25</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.0
+</pre></div>
+</div>
+</div>
+</div>
 <p>For anything more advanced such as <code class="docutils literal notranslate"><span class="pre">sin(30°)</span></code>, we need to use some functions in a <code class="docutils literal notranslate"><span class="pre">module</span></code> or <code class="docutils literal notranslate"><span class="pre">library</span></code>.</p>
 <section id="functions">
 <h3>1.3.1 Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h3>
 <p>You can use Python for more advanced math by using a <code class="docutils literal notranslate"><span class="pre">function</span></code>.</p>
 <p>Functions are pieces of code that perform a single action such as printing information to the screen (e.g., the <code class="docutils literal notranslate"><span class="pre">print()</span></code> function). Functions exist for a huge number of operations in Python.</p>
 <p>For example, try out the <code class="docutils literal notranslate"><span class="pre">print()</span></code> function to display <code class="docutils literal notranslate"><span class="pre">Hi</span></code> on screen</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hi&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hi
+</pre></div>
+</div>
+</div>
+</div>
 <p>Another example, try <code class="docutils literal notranslate"><span class="pre">min()</span></code> or <code class="docutils literal notranslate"><span class="pre">max()</span></code> function to return the minimum or maximum of this list [4, 1, 8]</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span> <span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+8
+</pre></div>
+</div>
+</div>
+</div>
 <p>Let’s try out a few simple examples using functions to find the sine or square root of a value.<br />
 You can type <code class="docutils literal notranslate"><span class="pre">sin(3)</span></code> or <code class="docutils literal notranslate"><span class="pre">sqrt(4)</span></code> into the cells below to test this out.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sin</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">sin</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;sin&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
 <p>Wait, what? Python can’t calculate square roots or do basic trigonometry? Of course it can, but we need one more step.</p>
 <p>For a specialized <code class="docutils literal notranslate"><span class="pre">sin(30°)</span></code>, we need to load a specialized <code class="docutils literal notranslate"><span class="pre">module</span></code> or <code class="docutils literal notranslate"><span class="pre">library</span></code>.</p>
 </section>
@@ -614,25 +667,116 @@ A <code class="docutils literal notranslate"><span class="pre">module</span></co
 A <code class="docutils literal notranslate"><span class="pre">function</span></code> is a reusable piece of code that performs a single action.  .</p>
 <p>For example, to evaluate <code class="docutils literal notranslate"><span class="pre">sin(90°)</span></code>, we need to load a specialized <code class="docutils literal notranslate"><span class="pre">module</span></code> or <code class="docutils literal notranslate"><span class="pre">library</span></code>.</p>
 <p>For math operations, one module is called <a class="reference external" href="https://docs.python.org/3/library/math.html"><em>math</em></a> and it can be loaded by typing <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">math</span></code>. Try that below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>Now that we have access to functions in the math module, we can use it by typing the module name, a period (dot), and the the name of the function we want to use. For example, try to find out the square root of 4 using <code class="docutils literal notranslate"><span class="pre">math.sqrt(4)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
+</pre></div>
+</div>
+</div>
+</div>
 <p>Try another example. the function math.sin(x) returns the sine of x radians.</p>
 <p>Now find <code class="docutils literal notranslate"><span class="pre">sin(1.5)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9974949866040544
+</pre></div>
+</div>
+</div>
+</div>
 <p>Note that modules may also contain constants such as <code class="docutils literal notranslate"><span class="pre">math.pi</span></code>.<br />
 Type this in the cell below to see the value of the contant <code class="docutils literal notranslate"><span class="pre">math.pi</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">pi</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.141592653589793
+</pre></div>
+</div>
+</div>
+</div>
 <section id="check-your-understanding">
 <h4>Check your understanding<a class="headerlink" href="#check-your-understanding" title="Link to this heading">#</a></h4>
 <p>Use the empty Python cell below to calculate the sine of pi `sin(π)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2246467991473532e-16
+</pre></div>
+</div>
+</div>
+</div>
 <p>Now, how to find <code class="docutils literal notranslate"><span class="pre">sin(90°)</span></code> ?</p>
 <p>You need to not only the <code class="docutils literal notranslate"><span class="pre">sin()</span></code> function, but also a function that converts from degrees to radians.</p>
 <p>Check the documentation of the <a class="reference external" href="https://docs.python.org/3/library/math.html">math</a> module to find the function the converts from degrees to radians.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mi">90</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="combining-functions">
 <h3>1.3.3 Combining functions<a class="headerlink" href="#combining-functions" title="Link to this heading">#</a></h3>
 <p>Functions can also be combined. You have done this already above.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">print()</span></code> function displays values within the parentheses as text on the screen. Below, try printing the value of the square root of four.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
+</pre></div>
+</div>
+</div>
+</div>
 <p>You can also combine text with other calculated values using the <code class="docutils literal notranslate"><span class="pre">print()</span></code> function.</p>
 <p>For example, <code class="docutils literal notranslate"><span class="pre">print('Two</span> <span class="pre">plus</span> <span class="pre">two</span> <span class="pre">is',</span> <span class="pre">2+2)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;2 + 2 = &#39;</span> <span class="p">,</span> <span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 + 2 =  4
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="jupter-lab-and-jupter-notebook">
@@ -685,7 +829,7 @@ Type this in the cell below to see the value of the contant <code class="docutil
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Introduction to Environmental Data Science with Python</p>
+        <p class="prev-next-title">Lesson 1 Introduction to Environmental Data Science with Python</p>
       </div>
     </a>
     <a class="right-next"
@@ -713,8 +857,7 @@ Type this in the cell below to see the value of the contant <code class="docutil
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lesson 2 Getting Started</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Objectives</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-glimpse-of-python">1. A glimpse of Python</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-jupyter-notebook">1.1 Getting started with Jupyter Notebook</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#math-operations">1.2 Math operations</a><ul class="nav section-nav flex-column">

@@ -192,8 +192,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson2.html">Lesson 2 Getting Started</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson2.html">Objectives</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Excercise1.html">Exercise 1 - Installing Python</a></li>
 </ul>
@@ -994,20 +993,19 @@ Two test cases
 </div>
 <div class="cell_output docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">find_min</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">lst</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     
     <span class="n">min_val</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    
-    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="n">min_val</span><span class="p">:</span>
-            <span class="n">min_val</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="n">min_val</span><span class="p">:</span>
+            <span class="n">min_val</span> <span class="o">=</span> <span class="n">num</span>
     
     <span class="k">return</span> <span class="n">min_val</span>
 
-<span class="c1"># Test cases</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">find_min</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>  <span class="c1"># Output: 1</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">find_min</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]))</span>  <span class="c1"># Output: -8</span>
+<span class="c1"># Test Cases</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">find_min</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>  <span class="c1"># Output: 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">find_min</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">]))</span>  <span class="c1"># Output: -10</span>
 </pre></div>
 </div>
 </div>
@@ -1257,7 +1255,7 @@ Generate 3d solute transport equation
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle 
-\frac{\partial C}{\partial t} + \nabla \cdot (qC) = \nabla \cdot (D \nabla C) + R
+\frac{\partial C}{\partial t} = D \nabla^2 C - \nabla \cdot (\mathbf{v}C) + S
 \]</div>
 </div>
 </div>
@@ -1269,17 +1267,14 @@ Generate 3d solute transport equation in compact form with explaintation
 </div>
 </div>
 <div class="cell_output docutils container">
-<p>The 3D solute transport equation in compact form is given by:</p>
-<p>[
-\frac{\partial C}{\partial t} + \nabla \cdot (qC) = \nabla \cdot (D \nabla C) + R
-]</p>
+<p>The three-dimensional solute transport equation in compact form can be expressed as:</p>
+<p>∂C/∂t = D∇²C - ∇·(𝐯C) + S</p>
 <p>where:</p>
 <ul class="simple">
-<li><p>( C ) represents the concentration of the solute,</p></li>
-<li><p>( t ) is time,</p></li>
-<li><p>( q ) is the velocity vector field,</p></li>
-<li><p>( D ) is the dispersion tensor,</p></li>
-<li><p>( R ) denotes any source or sink terms affecting the solute concentration.</p></li>
+<li><p>∂C/∂t represents the rate of change of solute concentration C with respect to time t.</p></li>
+<li><p>D∇²C denotes the diffusion term, where D is the diffusion coefficient and ∇² represents the Laplacian operator acting on C.</p></li>
+<li><p>∇·(𝐯C) represents the advection term, where 𝐯 is the velocity vector field and ∇· denotes the divergence operator acting on the product of 𝐯 and C.</p></li>
+<li><p>S represents any applicable source or sink terms influencing the solute concentration.</p></li>
 </ul>
 </div>
 </div>
@@ -1291,8 +1286,8 @@ Markdown code for 3d solute transport equation in LaTeX surrounded by `$$`. Do n
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>$$
-\frac{\partial C}{\partial t} + \nabla \cdot (qC) = \nabla \cdot (D \nabla C) + R
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$
+\frac{\partial C}{\partial t} = D \nabla^2 C - \nabla \cdot (\mathbf{v}C) + S
 $$
 </pre></div>
 </div>
@@ -1583,42 +1578,42 @@ Using list variable Err[] is not advisable for codes with intricate formatting, 
   <tbody>
     <tr>
       <th>2020-01-01</th>
-      <td>87</td>
-      <td>70</td>
-      <td>0.355485</td>
-      <td>10</td>
+      <td>73</td>
+      <td>92</td>
+      <td>1.467407</td>
+      <td>11</td>
       <td>SWF Airport</td>
     </tr>
     <tr>
       <th>2020-01-02</th>
-      <td>63</td>
-      <td>81</td>
-      <td>0.440135</td>
-      <td>6</td>
-      <td>SWF Airport</td>
-    </tr>
-    <tr>
-      <th>2020-01-03</th>
-      <td>74</td>
-      <td>89</td>
-      <td>1.773750</td>
-      <td>14</td>
+      <td>83</td>
+      <td>86</td>
+      <td>1.750122</td>
+      <td>11</td>
       <td>Field Airport</td>
     </tr>
     <tr>
-      <th>2020-01-04</th>
-      <td>86</td>
+      <th>2020-01-03</th>
       <td>76</td>
-      <td>1.058576</td>
-      <td>14</td>
+      <td>95</td>
+      <td>1.810813</td>
+      <td>10</td>
+      <td>SWF Airport</td>
+    </tr>
+    <tr>
+      <th>2020-01-04</th>
+      <td>85</td>
+      <td>85</td>
+      <td>1.602690</td>
+      <td>8</td>
       <td>SWF Airport</td>
     </tr>
     <tr>
       <th>2020-01-05</th>
-      <td>59</td>
-      <td>90</td>
-      <td>0.293006</td>
-      <td>7</td>
+      <td>68</td>
+      <td>75</td>
+      <td>0.587129</td>
+      <td>14</td>
       <td>SWF Airport</td>
     </tr>
     <tr>
@@ -1631,43 +1626,43 @@ Using list variable Err[] is not advisable for codes with intricate formatting, 
     </tr>
     <tr>
       <th>2023-12-27</th>
-      <td>82</td>
-      <td>71</td>
-      <td>0.000758</td>
-      <td>10</td>
-      <td>Field Airport</td>
-    </tr>
-    <tr>
-      <th>2023-12-28</th>
-      <td>53</td>
-      <td>79</td>
-      <td>0.402337</td>
-      <td>7</td>
-      <td>Field Airport</td>
-    </tr>
-    <tr>
-      <th>2023-12-29</th>
       <td>73</td>
-      <td>71</td>
-      <td>1.443934</td>
-      <td>13</td>
+      <td>82</td>
+      <td>1.333986</td>
+      <td>12</td>
       <td>SWF Airport</td>
     </tr>
     <tr>
+      <th>2023-12-28</th>
+      <td>51</td>
+      <td>92</td>
+      <td>1.580167</td>
+      <td>9</td>
+      <td>SWF Airport</td>
+    </tr>
+    <tr>
+      <th>2023-12-29</th>
+      <td>75</td>
+      <td>92</td>
+      <td>1.765550</td>
+      <td>13</td>
+      <td>Field Airport</td>
+    </tr>
+    <tr>
       <th>2023-12-30</th>
-      <td>84</td>
-      <td>99</td>
-      <td>0.330947</td>
-      <td>14</td>
+      <td>71</td>
+      <td>80</td>
+      <td>0.022376</td>
+      <td>11</td>
       <td>Field Airport</td>
     </tr>
     <tr>
       <th>2023-12-31</th>
-      <td>61</td>
-      <td>97</td>
-      <td>0.554560</td>
-      <td>9</td>
-      <td>Field Airport</td>
+      <td>76</td>
+      <td>71</td>
+      <td>1.031562</td>
+      <td>7</td>
+      <td>SWF Airport</td>
     </tr>
   </tbody>
 </table>
@@ -1711,67 +1706,67 @@ Using list variable Err[] is not advisable for codes with intricate formatting, 
   </thead>
   <tbody>
     <tr>
-      <th>2020-11-09</th>
-      <td>72</td>
-      <td>82</td>
-      <td>1.976601</td>
-      <td>11</td>
-      <td>Field Airport</td>
-    </tr>
-    <tr>
-      <th>2020-01-11</th>
-      <td>56</td>
-      <td>95</td>
-      <td>1.987582</td>
-      <td>9</td>
-      <td>SWF Airport</td>
-    </tr>
-    <tr>
-      <th>2021-10-16</th>
-      <td>79</td>
-      <td>74</td>
-      <td>1.966239</td>
-      <td>11</td>
-      <td>Field Airport</td>
-    </tr>
-    <tr>
-      <th>2021-04-10</th>
-      <td>67</td>
-      <td>78</td>
-      <td>1.999293</td>
-      <td>13</td>
-      <td>SWF Airport</td>
-    </tr>
-    <tr>
-      <th>2022-01-28</th>
-      <td>50</td>
+      <th>2020-05-07</th>
       <td>80</td>
-      <td>1.985770</td>
-      <td>11</td>
+      <td>70</td>
+      <td>1.990025</td>
+      <td>10</td>
       <td>Field Airport</td>
     </tr>
     <tr>
-      <th>2022-11-30</th>
-      <td>86</td>
-      <td>71</td>
-      <td>1.996500</td>
+      <th>2020-02-23</th>
+      <td>55</td>
+      <td>99</td>
+      <td>1.995918</td>
       <td>13</td>
       <td>SWF Airport</td>
     </tr>
     <tr>
-      <th>2023-07-14</th>
-      <td>69</td>
-      <td>86</td>
-      <td>1.997448</td>
-      <td>12</td>
+      <th>2021-07-20</th>
+      <td>65</td>
+      <td>93</td>
+      <td>1.995958</td>
+      <td>9</td>
       <td>Field Airport</td>
     </tr>
     <tr>
-      <th>2023-02-06</th>
-      <td>70</td>
-      <td>82</td>
-      <td>1.976444</td>
+      <th>2021-03-12</th>
+      <td>54</td>
+      <td>96</td>
+      <td>1.997906</td>
       <td>13</td>
+      <td>SWF Airport</td>
+    </tr>
+    <tr>
+      <th>2022-09-28</th>
+      <td>75</td>
+      <td>83</td>
+      <td>1.978268</td>
+      <td>9</td>
+      <td>Field Airport</td>
+    </tr>
+    <tr>
+      <th>2022-05-12</th>
+      <td>54</td>
+      <td>71</td>
+      <td>1.980648</td>
+      <td>13</td>
+      <td>SWF Airport</td>
+    </tr>
+    <tr>
+      <th>2023-07-05</th>
+      <td>56</td>
+      <td>85</td>
+      <td>1.998840</td>
+      <td>9</td>
+      <td>Field Airport</td>
+    </tr>
+    <tr>
+      <th>2023-07-12</th>
+      <td>59</td>
+      <td>73</td>
+      <td>1.983403</td>
+      <td>10</td>
       <td>SWF Airport</td>
     </tr>
   </tbody>
@@ -1888,67 +1883,67 @@ Find and display the rows of the days that has the maximum precipitation in the 
   </thead>
   <tbody>
     <tr>
-      <th>2020-07-22</th>
-      <td>52</td>
-      <td>82</td>
-      <td>4.997343</td>
-      <td>16.181016</td>
+      <th>2020-08-16</th>
+      <td>65</td>
+      <td>77</td>
+      <td>4.985536</td>
+      <td>16.413711</td>
       <td>Field Airport</td>
     </tr>
     <tr>
-      <th>2020-11-29</th>
-      <td>60</td>
-      <td>99</td>
-      <td>4.940473</td>
-      <td>7.204597</td>
+      <th>2020-07-09</th>
+      <td>83</td>
+      <td>72</td>
+      <td>4.996444</td>
+      <td>14.892398</td>
       <td>SWF Airport</td>
     </tr>
     <tr>
-      <th>2021-07-30</th>
+      <th>2021-09-13</th>
+      <td>51</td>
       <td>86</td>
-      <td>98</td>
-      <td>4.997348</td>
-      <td>8.942943</td>
+      <td>4.955965</td>
+      <td>12.098134</td>
       <td>Field Airport</td>
     </tr>
     <tr>
-      <th>2021-02-22</th>
-      <td>73</td>
-      <td>79</td>
-      <td>4.972381</td>
-      <td>6.774554</td>
-      <td>SWF Airport</td>
-    </tr>
-    <tr>
-      <th>2022-08-08</th>
-      <td>59</td>
-      <td>70</td>
-      <td>4.968580</td>
-      <td>19.927798</td>
-      <td>Field Airport</td>
-    </tr>
-    <tr>
-      <th>2022-08-23</th>
-      <td>53</td>
-      <td>85</td>
-      <td>4.935612</td>
-      <td>15.143034</td>
-      <td>SWF Airport</td>
-    </tr>
-    <tr>
-      <th>2023-11-06</th>
-      <td>81</td>
+      <th>2021-05-15</th>
+      <td>60</td>
       <td>95</td>
-      <td>4.984876</td>
-      <td>10.465355</td>
+      <td>4.991837</td>
+      <td>8.023276</td>
+      <td>SWF Airport</td>
+    </tr>
+    <tr>
+      <th>2022-02-11</th>
+      <td>78</td>
+      <td>72</td>
+      <td>4.897091</td>
+      <td>19.096778</td>
       <td>Field Airport</td>
     </tr>
     <tr>
-      <th>2023-02-23</th>
-      <td>81</td>
-      <td>93</td>
-      <td>4.915223</td>
-      <td>11.001926</td>
+      <th>2022-08-27</th>
+      <td>62</td>
+      <td>87</td>
+      <td>4.920494</td>
+      <td>8.753119</td>
+      <td>SWF Airport</td>
+    </tr>
+    <tr>
+      <th>2023-11-05</th>
+      <td>51</td>
+      <td>94</td>
+      <td>4.945980</td>
+      <td>9.243745</td>
+      <td>Field Airport</td>
+    </tr>
+    <tr>
+      <th>2023-06-09</th>
+      <td>53</td>
+      <td>97</td>
+      <td>4.979384</td>
+      <td>9.671897</td>
       <td>SWF Airport</td>
     </tr>
   </tbody>
@@ -1980,17 +1975,17 @@ Find and display the rows of the days that has the maximum precipitation in the 
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            TMIN  TMAX      PRCP       AWDS        STATION
-2020-01-01    78    80  0.323491   8.399223    SWF Airport
-2020-01-02    68    97  0.498479   7.481196    SWF Airport
-2020-01-03    79    88  1.861229  13.610530    SWF Airport
-2020-01-04    67    92  0.657495   9.477845  Field Airport
-2020-01-05    71    85  1.351211   7.442330  Field Airport
+2020-01-01    59    91  0.874548   5.039511    SWF Airport
+2020-01-02    50    86  1.471087  12.187734    SWF Airport
+2020-01-03    63    85  1.912304  12.016910  Field Airport
+2020-01-04    61    86  0.985461  13.356284  Field Airport
+2020-01-05    52    89  0.453742  10.126657    SWF Airport
 ...          ...   ...       ...        ...            ...
-2023-12-27    51    85  0.212619   6.880620    SWF Airport
-2023-12-28    61    83  0.812780   7.038284    SWF Airport
-2023-12-29    75    83  0.681157   7.044065  Field Airport
-2023-12-30    58    83  0.671364   7.804394    SWF Airport
-2023-12-31    69    89  0.845758  10.644078    SWF Airport
+2023-12-27    55    91  1.545003  10.645042    SWF Airport
+2023-12-28    65    94  1.497892   7.371207  Field Airport
+2023-12-29    78    87  1.318733   8.629336  Field Airport
+2023-12-30    78    86  1.439757  11.975286  Field Airport
+2023-12-31    56    99  0.605416  14.239015  Field Airport
 
 [1461 rows x 5 columns]
 </pre></div>
@@ -1999,14 +1994,14 @@ Find and display the rows of the days that has the maximum precipitation in the 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            TMIN  TMAX      PRCP       AWDS        STATION
-2020-07-14    55    84  1.972742  13.366724  Field Airport
-2020-05-03    61    91  1.989587  14.680182    SWF Airport
-2021-07-08    69    81  1.980571   7.592841  Field Airport
-2021-02-01    52    99  1.998901  11.225688    SWF Airport
-2022-04-05    71    86  1.995788  10.289072  Field Airport
-2022-02-18    52    99  1.998586   7.915159    SWF Airport
-2023-09-26    57    86  1.991132  12.456412  Field Airport
-2023-05-27    64    94  1.998283  11.592157    SWF Airport
+2020-06-17    71    94  1.979642   8.182037  Field Airport
+2020-12-14    74    93  1.962056   6.417403    SWF Airport
+2021-04-29    75    93  1.952201  11.339533  Field Airport
+2021-02-12    59    93  1.999335   7.226470    SWF Airport
+2022-07-07    77    85  1.983555  13.130226  Field Airport
+2022-09-19    51    94  1.978823   6.965070    SWF Airport
+2023-08-30    64    92  1.999184  10.643654  Field Airport
+2023-11-18    57    85  1.970538  13.475436    SWF Airport
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -2043,56 +2038,56 @@ Find and display the rows of the days that has the maximum precipitation in the 
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            TMIN  TMAX      PRCP  AWDS        STATION
-2020-02-14    78    75  1.997946     7  Field Airport
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            TMIN  TMAX     PRCP  AWDS      STATION
-2020-04-30    79    78  1.99529    11  SWF Airport
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            TMIN  TMAX      PRCP  AWDS        STATION
-2021-02-11    51    73  1.997394     5  Field Airport
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            TMIN  TMAX     PRCP  AWDS      STATION
-2021-03-27    85    98  1.99469     7  SWF Airport
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            TMIN  TMAX      PRCP  AWDS        STATION
-2022-03-23    84    82  1.958489     9  Field Airport
+2020-01-20    74    82  1.973604     6  Field Airport
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            TMIN  TMAX      PRCP  AWDS      STATION
-2022-05-26    60    86  1.986777    12  SWF Airport
+2020-05-16    54    76  1.998518     7  SWF Airport
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            TMIN  TMAX      PRCP  AWDS        STATION
-2023-05-24    60    72  1.972578    10  Field Airport
+2021-10-16    52    73  1.998336     6  Field Airport
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            TMIN  TMAX      PRCP  AWDS      STATION
-2023-08-16    87    81  1.985119     5  SWF Airport
+2021-03-03    80    83  1.994547     5  SWF Airport
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            TMIN  TMAX      PRCP  AWDS        STATION
+2022-02-23    66    79  1.998885     9  Field Airport
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            TMIN  TMAX      PRCP  AWDS      STATION
+2022-06-24    63    70  1.998152    14  SWF Airport
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            TMIN  TMAX      PRCP  AWDS        STATION
+2023-11-25    82    84  1.997551     9  Field Airport
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            TMIN  TMAX      PRCP  AWDS      STATION
+2023-06-10    79    88  1.997881     8  SWF Airport
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -2164,67 +2159,67 @@ Find and display the rows of the days that has the maximum precipitation in the 
   </thead>
   <tbody>
     <tr>
-      <th>2020-07-22</th>
-      <td>65</td>
-      <td>73</td>
-      <td>1.987484</td>
-      <td>13</td>
-      <td>Field Airport</td>
-    </tr>
-    <tr>
-      <th>2020-03-16</th>
-      <td>63</td>
-      <td>76</td>
-      <td>1.984334</td>
-      <td>10</td>
-      <td>SWF Airport</td>
-    </tr>
-    <tr>
-      <th>2021-04-12</th>
-      <td>83</td>
-      <td>82</td>
-      <td>1.995120</td>
-      <td>7</td>
-      <td>Field Airport</td>
-    </tr>
-    <tr>
-      <th>2021-01-29</th>
-      <td>70</td>
-      <td>73</td>
-      <td>1.993908</td>
-      <td>7</td>
-      <td>SWF Airport</td>
-    </tr>
-    <tr>
-      <th>2022-01-05</th>
-      <td>79</td>
-      <td>78</td>
-      <td>1.998089</td>
-      <td>11</td>
-      <td>Field Airport</td>
-    </tr>
-    <tr>
-      <th>2022-07-13</th>
+      <th>2020-05-14</th>
+      <td>77</td>
       <td>74</td>
-      <td>81</td>
-      <td>1.998104</td>
-      <td>7</td>
+      <td>1.997811</td>
+      <td>5</td>
+      <td>Field Airport</td>
+    </tr>
+    <tr>
+      <th>2020-08-11</th>
+      <td>58</td>
+      <td>83</td>
+      <td>1.999535</td>
+      <td>11</td>
       <td>SWF Airport</td>
     </tr>
     <tr>
-      <th>2023-06-14</th>
-      <td>70</td>
-      <td>82</td>
-      <td>1.993994</td>
+      <th>2021-01-30</th>
+      <td>74</td>
+      <td>77</td>
+      <td>1.992912</td>
       <td>6</td>
       <td>Field Airport</td>
     </tr>
     <tr>
-      <th>2023-12-28</th>
+      <th>2021-05-05</th>
+      <td>89</td>
+      <td>74</td>
+      <td>1.995944</td>
+      <td>6</td>
+      <td>SWF Airport</td>
+    </tr>
+    <tr>
+      <th>2022-09-18</th>
+      <td>68</td>
       <td>78</td>
-      <td>79</td>
-      <td>1.975859</td>
-      <td>11</td>
+      <td>1.998877</td>
+      <td>5</td>
+      <td>Field Airport</td>
+    </tr>
+    <tr>
+      <th>2022-10-30</th>
+      <td>84</td>
+      <td>83</td>
+      <td>1.996742</td>
+      <td>7</td>
+      <td>SWF Airport</td>
+    </tr>
+    <tr>
+      <th>2023-12-01</th>
+      <td>59</td>
+      <td>97</td>
+      <td>1.996182</td>
+      <td>14</td>
+      <td>Field Airport</td>
+    </tr>
+    <tr>
+      <th>2023-06-18</th>
+      <td>64</td>
+      <td>93</td>
+      <td>1.984644</td>
+      <td>7</td>
       <td>SWF Airport</td>
     </tr>
   </tbody>

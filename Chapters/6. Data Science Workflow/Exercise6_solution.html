@@ -190,8 +190,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introduction to Environmental Data Science with Python</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson1.html">Lesson 1 - Introduction to Environmental Data Science</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson2.html">Lesson 2 Getting Started</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Lesson2.html">Objectives</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../1.%20Introduction%20to%20Environmental%20Data%20Science/Excercise1.html">Exercise 1 - Installing Python</a></li>
 </ul>
@@ -886,36 +885,85 @@ For example, ‘daily_44201_2023.zip’ contains ‘daily_44201_2023.csv’</p>
 <span class="g g-Whitespace">    </span><span class="mi">625</span> <span class="k">with</span> <span class="n">parser</span><span class="p">:</span>
 <span class="ne">--&gt; </span><span class="mi">626</span>     <span class="k">return</span> <span class="n">parser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nrows</span><span class="p">)</span>
 
-<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\pandas\io\parsers\readers.py:1923,</span> in <span class="ni">TextFileReader.read</span><span class="nt">(self, nrows)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1916</span> <span class="n">nrows</span> <span class="o">=</span> <span class="n">validate_integer</span><span class="p">(</span><span class="s2">&quot;nrows&quot;</span><span class="p">,</span> <span class="n">nrows</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1917</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1918</span>     <span class="c1"># error: &quot;ParserBase&quot; has no attribute &quot;read&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1919</span>     <span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1920</span>         <span class="n">index</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1921</span>         <span class="n">columns</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1922</span>         <span class="n">col_dict</span><span class="p">,</span>
-<span class="ne">-&gt; </span><span class="mi">1923</span>     <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>  <span class="c1"># type: ignore[attr-defined]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1924</span>         <span class="n">nrows</span>
-<span class="g g-Whitespace">   </span><span class="mi">1925</span>     <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1926</span> <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1927</span>     <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\pandas\io\parsers\readers.py:1968,</span> in <span class="ni">TextFileReader.read</span><span class="nt">(self, nrows)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1965</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1966</span>         <span class="n">new_col_dict</span> <span class="o">=</span> <span class="n">col_dict</span>
+<span class="ne">-&gt; </span><span class="mi">1968</span>     <span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1969</span>         <span class="n">new_col_dict</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1970</span>         <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1971</span>         <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1972</span>         <span class="n">copy</span><span class="o">=</span><span class="ow">not</span> <span class="n">using_copy_on_write</span><span class="p">(),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1973</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1975</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_currow</span> <span class="o">+=</span> <span class="n">new_rows</span>
+<span class="g g-Whitespace">   </span><span class="mi">1976</span> <span class="k">return</span> <span class="n">df</span>
 
-<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\pandas\io\parsers\c_parser_wrapper.py:239,</span> in <span class="ni">CParserWrapper.read</span><span class="nt">(self, nrows)</span>
-<span class="g g-Whitespace">    </span><span class="mi">236</span>         <span class="n">data</span> <span class="o">=</span> <span class="n">_concatenate_chunks</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">238</span>     <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">239</span>         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nrows</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">240</span> <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">241</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_first_chunk</span><span class="p">:</span>
+<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\pandas\core\frame.py:778,</span> in <span class="ni">DataFrame.__init__</span><span class="nt">(self, data, index, columns, dtype, copy)</span>
+<span class="g g-Whitespace">    </span><span class="mi">772</span>     <span class="n">mgr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_mgr</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">773</span>         <span class="n">data</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="n">columns</span><span class="p">},</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span>
+<span class="g g-Whitespace">    </span><span class="mi">774</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">776</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">777</span>     <span class="c1"># GH#38939 de facto copy defaults to False only in non-dict cases</span>
+<span class="ne">--&gt; </span><span class="mi">778</span>     <span class="n">mgr</span> <span class="o">=</span> <span class="n">dict_to_mgr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="n">manager</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">779</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ma</span><span class="o">.</span><span class="n">MaskedArray</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">780</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.ma</span><span class="w"> </span><span class="kn">import</span> <span class="n">mrecords</span>
 
-<span class="nn">File parsers.pyx:820,</span> in <span class="ni">pandas._libs.parsers.TextReader.read</span><span class="nt">()</span>
+<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\pandas\core\internals\construction.py:503,</span> in <span class="ni">dict_to_mgr</span><span class="nt">(data, index, columns, dtype, typ, copy)</span>
+<span class="g g-Whitespace">    </span><span class="mi">499</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">500</span>         <span class="c1"># dtype check to exclude e.g. range objects, scalars</span>
+<span class="g g-Whitespace">    </span><span class="mi">501</span>         <span class="n">arrays</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;dtype&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">]</span>
+<span class="ne">--&gt; </span><span class="mi">503</span> <span class="k">return</span> <span class="n">arrays_to_mgr</span><span class="p">(</span><span class="n">arrays</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="n">typ</span><span class="p">,</span> <span class="n">consolidate</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
 
-<span class="nn">File parsers.pyx:914,</span> in <span class="ni">pandas._libs.parsers.TextReader._read_rows</span><span class="nt">()</span>
+<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\pandas\core\internals\construction.py:119,</span> in <span class="ni">arrays_to_mgr</span><span class="nt">(arrays, columns, index, dtype, verify_integrity, typ, consolidate)</span>
+<span class="g g-Whitespace">    </span><span class="mi">116</span>         <span class="n">index</span> <span class="o">=</span> <span class="n">ensure_index</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span>     <span class="c1"># don&#39;t force copy because getting jammed in an ndarray anyway</span>
+<span class="ne">--&gt; </span><span class="mi">119</span>     <span class="n">arrays</span><span class="p">,</span> <span class="n">refs</span> <span class="o">=</span> <span class="n">_homogenize</span><span class="p">(</span><span class="n">arrays</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">120</span>     <span class="c1"># _homogenize ensures</span>
+<span class="g g-Whitespace">    </span><span class="mi">121</span>     <span class="c1">#  - all(len(x) == len(index) for x in arrays)</span>
+<span class="g g-Whitespace">    </span><span class="mi">122</span>     <span class="c1">#  - all(x.ndim == 1 for x in arrays)</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>    <span class="mi">125</span> 
+<span class="g g-Whitespace">    </span><span class="mi">126</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">127</span>     <span class="n">index</span> <span class="o">=</span> <span class="n">ensure_index</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 
-<span class="nn">File parsers.pyx:891,</span> in <span class="ni">pandas._libs.parsers.TextReader._check_tokenize_status</span><span class="nt">()</span>
+<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\pandas\core\internals\construction.py:629,</span> in <span class="ni">_homogenize</span><span class="nt">(data, index, dtype)</span>
+<span class="g g-Whitespace">    </span><span class="mi">626</span>         <span class="n">val</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">627</span>     <span class="n">val</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">fast_multiget</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">oindex</span><span class="o">.</span><span class="n">_values</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">629</span> <span class="n">val</span> <span class="o">=</span> <span class="n">sanitize_array</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">630</span> <span class="n">com</span><span class="o">.</span><span class="n">require_length_match</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">631</span> <span class="n">refs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 
-<span class="nn">File parsers.pyx:2053,</span> in <span class="ni">pandas._libs.parsers.raise_parser_error</span><span class="nt">()</span>
+<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\pandas\core\construction.py:606,</span> in <span class="ni">sanitize_array</span><span class="nt">(data, index, dtype, copy, allow_2d)</span>
+<span class="g g-Whitespace">    </span><span class="mi">604</span> <span class="n">subarr</span> <span class="o">=</span> <span class="n">data</span>
+<span class="g g-Whitespace">    </span><span class="mi">605</span> <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="nb">object</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">606</span>     <span class="n">subarr</span> <span class="o">=</span> <span class="n">maybe_infer_to_datetimelike</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">607</span>     <span class="k">if</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">608</span>         <span class="n">object_index</span>
+<span class="g g-Whitespace">    </span><span class="mi">609</span>         <span class="ow">and</span> <span class="n">using_pyarrow_string_dtype</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">610</span>         <span class="ow">and</span> <span class="n">is_string_dtype</span><span class="p">(</span><span class="n">subarr</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">611</span>     <span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">612</span>         <span class="c1"># Avoid inference when string option is set</span>
+<span class="g g-Whitespace">    </span><span class="mi">613</span>         <span class="n">subarr</span> <span class="o">=</span> <span class="n">data</span>
 
-<span class="nn">File &lt;frozen codecs&gt;:331,</span> in <span class="ni">getstate</span><span class="nt">(self)</span>
+<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\pandas\core\dtypes\cast.py:1189,</span> in <span class="ni">maybe_infer_to_datetimelike</span><span class="nt">(value)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1184</span>     <span class="k">return</span> <span class="n">value</span>
+<span class="g g-Whitespace">   </span><span class="mi">1186</span> <span class="c1"># error: Incompatible return value type (got &quot;Union[ExtensionArray,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1187</span> <span class="c1"># ndarray[Any, Any]]&quot;, expected &quot;Union[ndarray[Any, Any], DatetimeArray,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1188</span> <span class="c1"># TimedeltaArray, PeriodArray, IntervalArray]&quot;)</span>
+<span class="ne">-&gt; </span><span class="mi">1189</span> <span class="k">return</span> <span class="n">lib</span><span class="o">.</span><span class="n">maybe_convert_objects</span><span class="p">(</span>  <span class="c1"># type: ignore[return-value]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1190</span>     <span class="n">value</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1191</span>     <span class="c1"># Here we do not convert numeric dtypes, as if we wanted that,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1192</span>     <span class="c1">#  numpy would have done it for us.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1193</span>     <span class="n">convert_numeric</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1194</span>     <span class="n">convert_non_numeric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1195</span>     <span class="n">dtype_if_all_nat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s2">&quot;M8[ns]&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1196</span> <span class="p">)</span>
+
+<span class="nn">File lib.pyx:2543,</span> in <span class="ni">pandas._libs.lib.maybe_convert_objects</span><span class="nt">()</span>
+
+<span class="nn">File ~\AppData\Local\miniconda3\Lib\site-packages\numpy\_core\numeric.py:366,</span> in <span class="ni">full</span><span class="nt">(shape, fill_value, dtype, order, device, like)</span>
+<span class="g g-Whitespace">    </span><span class="mi">364</span>     <span class="n">dtype</span> <span class="o">=</span> <span class="n">fill_value</span><span class="o">.</span><span class="n">dtype</span>
+<span class="g g-Whitespace">    </span><span class="mi">365</span> <span class="n">a</span> <span class="o">=</span> <span class="n">empty</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">366</span> <span class="n">multiarray</span><span class="o">.</span><span class="n">copyto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">fill_value</span><span class="p">,</span> <span class="n">casting</span><span class="o">=</span><span class="s1">&#39;unsafe&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">367</span> <span class="k">return</span> <span class="n">a</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
